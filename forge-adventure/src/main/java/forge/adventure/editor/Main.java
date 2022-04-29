@@ -1,4 +1,4 @@
-package forge.adventure.editor;
+package main.java.forge.adventure.editor;
 
 import forge.GuiMobile;
 import forge.adventure.util.Config;

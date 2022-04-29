@@ -1,4 +1,4 @@
-package forge.adventure;
+package main.java.forge.adventure;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;

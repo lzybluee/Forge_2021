@@ -1,4 +1,4 @@
-package forge.adventure.editor;
+package main.java.forge.adventure.editor;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
