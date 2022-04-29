@@ -3,6 +3,6 @@ Name:DC, Revised Edition
 Type:Historic
 Subtype:Vintage
 Effective:1994-04-01
-Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ
+Sets:LEA, LEB, 2ED, ARN, ATQ
 Restricted:Ali from Cairo, Ancestral Recall, Berserk, Black Lotus, Braingeyser, Channel, Copy Artifact, Demonic Tutor, Dingus Egg, Gauntlet of Might, Mox Emerald, Mox Jet, Mox Pearl, Mox Ruby, Mox Sapphire, Regrowth, Sol Ring, Timetwister, Time Walk, Wheel of Fortune
 Banned:Contract from Below, Darkpact, Demonic Attorney, Jeweled Bird, Shahrazad, Time Vault
