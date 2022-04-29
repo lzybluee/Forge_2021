@@ -100,6 +100,12 @@ public class CardPool extends ItemPool<PaperCard> {
             paperCard = StaticData.instance().getCommonCards().getCard(cardName);
             selectedDbName = "Common";
         }
+        if(paperCard == null) {
+            paperCard = StaticData.instance().getCommonCards().getCard(cardName, null, -1);
+        }
+        if(paperCard == null) {
+            paperCard = StaticData.instance().getVariantCards().getCard(cardName, null, -1);
+        }
         if (paperCard == null) {
             // after all still null
             System.err.println("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". \n");

@@ -404,6 +404,9 @@ public class PhaseHandler implements java.io.Serializable {
                                 discarded.add(c);
                             }
                         }
+                        if(discarded.size() > 0) {
+                            game.getAction().reveal(discarded, playerTurn, true);
+                        }
                         table.triggerChangesZoneAll(game, null);
 
                         if (!discarded.isEmpty()) {

@@ -288,6 +288,10 @@ public class DiscardEffect extends SpellAbilityEffect {
             discardedMap.put(p, toBeDiscarded);
         }
 
+        for(Player p : discardedMap.keySet()) {
+            p.getGame().getAction().reveal(discardedMap.get(p), p, !mode.equals("Random"));
+        }
+
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());

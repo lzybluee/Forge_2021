@@ -341,6 +341,10 @@ public class AbilityManaPart implements java.io.Serializable {
                 return true;
             }
 
+            if (sa.isAbility() && restriction.startsWith("Activated") && sa.isTrigger()) {
+                continue;
+            }
+
             // the payment is for a resolving SA, currently no other restrictions would allow that
             if (getSourceCard().getGame().getStack().getInstanceFromSpellAbility(sa.getRootAbility()) != null) {
                 return false;

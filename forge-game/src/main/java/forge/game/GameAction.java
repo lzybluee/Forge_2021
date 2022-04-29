@@ -58,6 +58,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
+import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardStatsChanged;
@@ -65,6 +66,7 @@ import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventScry;
+import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
@@ -1452,6 +1454,10 @@ public class GameAction {
 
         game.getTracker().unfreeze();
 
+        for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            c.updateController();
+        }
+
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
@@ -1482,6 +1488,11 @@ public class GameAction {
 
         // Run all commands that are queued to run after state based actions are checked
         game.runSBACheckedCommands();
+
+        for(Player p : game.getPlayers()) {
+            p.updateFlashbackForView();
+            p.getGame().fireEvent(new GameEventZone(ZoneType.Flashback, p, EventValueChangeType.ComplexUpdate, null));
+        }
     }
 
     private boolean stateBasedAction_Saga(Card c, CardCollection sacrificeList) {
