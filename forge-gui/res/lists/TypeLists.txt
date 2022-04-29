@@ -354,7 +354,6 @@ Koth
 Liliana
 Lolth
 Lukka
-Minsc
 Mordenkainen
 Nahiri
 Narset
