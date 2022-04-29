@@ -3,7 +3,7 @@ Name:Random Standard
 Name:Random Pioneer
 Name:Random Modern
 Name:Random Commander
-Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU, AKR
+Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
 Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E
@@ -26,13 +26,13 @@ Name:The Three Kingdoms|Dir:1999-05 Portal Three Kingdoms|Sets:PTK
 Name:Theros: The Hero's Path|Dir:2014-05 Theros|Sets:THS, BNG, JOU
 Name:Eldraine: Throne of Eldraine|Dir:2019-09 Throne of Eldraine|Sets:ELD
 Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
-Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
+Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, PTK
 Name:Invasion|Dir:Invasion|Sets:INV, PLS, APC
 Name:Tempest|Dir:Tempest|Sets:TMP, STH, EXO
 Name:Random Core Set|Sets:LEA, LEB, 2ED, 3ED, 4ED, 5ED, 6ED, 7ED, 8ED, 9ED, 10E, M10, M11, M12, M13, M14, M15, ORI, M19, M20, M21
 Name:Ixalan|Sets:XLN, RIX
 Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
-Name:Kaladesh|Sets:AER, KLD, MPS, KLR
-Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, ZNR, CMR, KHM
+Name:Kaladesh|Sets:AER, KLD, MPS
+Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, ZNR, CMR, KHM
 Name:Tarkir|Sets:KTK, FRF, DTK
 Name:Alara|Sets:ALA, CFX, ARB
