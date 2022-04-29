@@ -5,9 +5,9 @@ Name=Commander
 Code2=COM
 Alias=CMD
 MciCode=cmd
-Type=Commander
+Type=Expansion
 BoosterBox=0
-ScryfallCode=cmd
+ScryfallCode=CMD
 
 [cards]
 39 C Aethersnipe @Zoltan Boros & Gabor Szikszai

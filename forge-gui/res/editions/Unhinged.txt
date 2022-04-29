@@ -33,7 +33,7 @@ ScryfallCode=UNH
 20 C Standing Army @Randy Gallegos
 21 R Staying Power @Richard Sardinha
 22 C Wordmail @Ron Spencer
-23 U _ @Ron Spears
+23 U _____ @Ron Spears
 24 R Ambiguity @Stephen Daniele
 25 C Artful Looter @Heather “Erica Gassalasca-Jape” Hudson
 26 R Avatar of Me @Greg Hildebrandt
@@ -53,7 +53,7 @@ ScryfallCode=UNH
 40 U Mouth to Mouth @Alan Pollack
 41 R Now I Know My ABC's @Tony Szczudlo
 42 C Number Crunch @Stephen Daniele
-43 U Question Elemental? @Edward P. Beard, Jr.
+43 U Question Elemental @Edward P. Beard, Jr.
 44 R Richard Garfield, Ph.D. @Dave Dorman
 45 C Smart Ass @Trevor Hairsine
 46 U Spell Counter @Doug Chaffee

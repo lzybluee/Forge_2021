@@ -289,45 +289,6 @@ ScryfallCode=WAR
 273 R Jace's Ruse @Clint Cearley
 274 C Simic Guildgate @Adam Paquette
 275 M Tezzeret, Master of the Bridge @Chase Stone
-1★ R Karn, the Great Creator @Naochika Morishita
-2★ R Ugin, the Ineffable @Maekawa Yuichi
-13★ M Gideon Blackblade @Tada
-32★ U Teyo, the Shieldmage @Foo Midori
-37★ U The Wanderer @Norikatsu Miyoshi
-54★ R Jace, Wielder of Mysteries @Toshiaki Takayama
-56★ U Kasmina, Enigmatic Mentor @Mid
-61★ U Narset, Parter of Veils @Foo Midori
-83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru
-97★ M Liliana, Dreadhorde General @Yoshitaka Amano
-100★ U Ob Nixilis, the Hate-Twisted @Sansyu
-119★ R Chandra, Fire Artisan @Ryota-H
-135★ U Jaya, Venerated Firemage @Maekawa Yuichi
-143★ R Sarkhan the Masterless @Lack
-146★ U Tibalt, Rakish Instigator @Clover.K
-150★ U Arlinn, Voice of the Pack @D-suzuki
-164★ U Jiang Yanggu, Wildcrafter @Daisuke Izuka
-169★ R Nissa, Who Shakes the World @Hitowa
-180★ R Vivien, Champion of the Wilds @Hisashi Momose
-184★ R Ajani, the Greathearted @Miho Midorikawa
-191★ R Domri, Anarch of Bolas @Raita Kazama
-207★ M Nicol Bolas, Dragon-God @Kaida Yuji
-211★ R Ral, Storm Conduit @Naochika Morishita
-217★ R Sorin, Vengeful Bloodlord @Yukie Tajima
-220★ R Tamiyo, Collector of Tales @Fuzichoco
-221★ R Teferi, Time Raveler @Shishizaru
-227★ U Angrath, Captain of Chaos @Sansyu
-228★ U Ashiok, Dream Render @Hozan Shinomaru
-229★ U Dovin, Hand of Control @Nablange
-230★ U Huatli, the Sun's Heart @Masuda Mikio
-231★ U Kaya, Bane of the Dead @Mid
-232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi
-233★ U Nahiri, Storm of Stone @Yukie Tajima
-234★ U Saheeli, Sublime Artificer @Hisashi Momose
-235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
-236★ U Vraska, Swarm's Eminence @Ryota Murayama
-
-[rebalanced]
-A221 R A-Teferi, Time Raveler @Chris Rallis
 
 [tokens]
 all_2_2_citizen

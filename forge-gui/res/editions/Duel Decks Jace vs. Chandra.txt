@@ -69,8 +69,6 @@ ScryfallCode=DD2
 60 L Mountain @Christopher Moeller
 61 L Mountain @Greg Staples
 62 L Mountain @Mark Tedin
-1★ M Jace Beleren @Yoshino Himori
-34★ M Chandra Nalaar @Yoshino Himori
 
 [tokens]
 r_3_1_elemental_shaman_haste

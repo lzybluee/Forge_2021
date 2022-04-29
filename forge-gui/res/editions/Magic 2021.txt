@@ -1,6 +1,6 @@
 [metadata]
 Code=M21
-Date=2020-07-03
+Date=2021-12-31
 Name=Core Set 2021
 Type=Core
 BoosterCovers=3
@@ -287,58 +287,8 @@ ScryfallCode=M21
 273 L Forest @Steven Belledin
 274 L Forest @Jonas De Ro
 
-[alternate art]
-275 M Teferi, Master of Time @Yongjae Choi
-276 M Teferi, Master of Time @Yongjae Choi
-277 M Teferi, Master of Time @Yongjae Choi
-
 [buy a box]
 278 M Rin and Seri, Inseparable @Leesha Hannigan
-
-[borderless]
-279 M Ugin, the Spirit Dragon @Ryan Pancoast
-280 M Basri Ket @Jehan Choo
-281 M Teferi, Master of Time @Chris Rallis
-282 M Liliana, Waker of the Dead @Magali Villeneuve
-283 M Chandra, Heart of Fire @Jason Rainville
-284 M Garruk, Unleashed @Cristi Balanescu
-
-[showcase]
-285 M Ugin, the Spirit Dragon @Raymond Swanland
-286 M Basri Ket @Kieran Yanner
-287 C Basri's Acolyte @Leesha Hannigan
-288 R Basri's Lieutenant @Matt Stewart
-289 U Basri's Solidarity @Paul Scott Canavan
-290 M Teferi, Master of Time @Yongjae Choi
-291 M Teferi, Master of Time @Yongjae Choi
-292 M Teferi, Master of Time @Yongjae Choi
-293 M Teferi, Master of Time @Yongjae Choi
-294 R Teferi's Ageless Insight @Kieran Yanner
-295 C Teferi's Protege @Bram Sels
-296 U Teferi's Tutelage @Ilse Gort
-297 M Liliana, Waker of the Dead @Anna Steinbauer
-298 U Liliana's Devotee @Colin Boyer
-299 R Liliana's Standard Bearer @Josh Hass
-300 C Liliana's Steward @Jason A. Engle
-301 M Chandra, Heart of Fire @Josu Hernaiz
-302 R Chandra's Incinerator @Craig J Spearing
-303 C Chandra's Magmutt @Kimonas Theodossiou
-304 U Chandra's Pyreling @Josu Hernaiz
-305 M Garruk, Unleashed @Lie Setiawan
-306 C Garruk's Gorehorn @Svetlin Velinov
-307 R Garruk's Harbinger @Lie Setiawan
-308 U Garruk's Uprising @Wisnu Tan
-309 L Plains @Jonas De Ro
-310 L Island @Jonas De Ro
-311 L Swamp @Jonas De Ro
-312 L Mountain @Jonas De Ro
-313 L Forest @Jonas De Ro
-314 R Containment Priest @Jesper Ejsing
-315 M Grim Tutor @Antonio José Manzanedo
-316 M Massacre Wurm @Kekai Kotaki
-317 R Cultivate @Billy Christian
-318 R Scavenging Ooze @Sam Rowan
-319 R Solemn Simulacrum @Joseph Meehan
 
 [precon product]
 320 M Basri, Devoted Paladin @Jason Rainville
@@ -361,68 +311,6 @@ ScryfallCode=M21
 337 R Garruk's Warsteed @Ilse Gort
 338 U Predatory Wurm @Jason A. Engle
 339 C Wildwood Patrol @Dan Scott
-
-[extended art]
-340 M Baneslayer Angel @Greg Staples
-341 R Glorious Anthem @Raymond Swanland
-342 R Idol of Endurance @Kim Sokol
-343 M Mangara, the Diplomat @Howard Lyon
-344 R Nine Lives @Paul Scott Canavan
-345 R Pack Leader @Rudy Siswanto
-346 R Runed Halo @Steve Prescott
-347 R Speaker of the Heavens @Randy Vargas
-348 R Barrin, Tolarian Archmage @Ryan Pancoast
-349 M Discontinuity @Volkan Baǵa
-350 R Ghostly Pilferer @Craig J Spearing
-351 R Pursued Whale @Jonathan Kuo
-352 R See the Truth @Ekaterina Burmak
-353 R Shacklegeist @Igor Kieryluk
-354 R Stormwing Entity @Caroline Gariba
-355 R Sublime Epiphany @Lindsey Look
-356 R Demonic Embrace @Sidharth Chaturvedi
-357 R Hooded Blightfang @Uriah Voth
-358 R Kaervek, the Spiteful @Daarken
-359 R Necromentia @Mila Pesic
-360 R Peer into the Abyss @Izzy
-361 R Thieves' Guild Enforcer @Evyn Fong
-362 R Vito, Thorn of the Dusk Rose @Lie Setiawan
-363 R Brash Taunter @Svetlin Velinov
-364 R Conspicuous Snoop @Zoltan Boros
-365 R Double Vision @Heonhwa Choe
-366 M Fiery Emancipation @Alexander Forssberg
-367 R Gadrak, the Crown-Scourge @Daarken
-368 R Subira, Tulzidi Caravanner @Leesha Hannigan
-369 M Terror of the Peaks @Andrey Kuzinskiy
-370 R Transmogrify @Craig J Spearing
-371 R Volcanic Salvo @Torstein Nordstrand
-372 R Azusa, Lost but Seeking @Winona Nelson
-373 M Elder Gargaroth @Nicholas Gregory
-374 R Feline Sovereign @Dan Scott
-375 R Heroic Intervention @James Ryman
-376 R Jolrael, Mwonvuli Recluse @Izzy
-377 R Primal Might @Randy Vargas
-378 R Sporeweb Weaver @Slawomir Maniak
-379 R Niambi, Esteemed Speaker @Eric Deschamps
-380 R Radha, Heart of Keld @Chris Rahn
-381 R Sanctum of All @Johannes Voss
-382 M Chromatic Orrery @Volkan Baǵa
-383 R Mazemind Tome @Randy Gallegos
-384 R Sparkhunter Masticore @Randy Vargas
-385 R Animal Sanctuary @Alayna Danner
-386 R Fabled Passage @Howard Lyon
-387 R Temple of Epiphany @Adam Paquette
-388 R Temple of Malady @Titus Lunter
-389 R Temple of Mystery @Piotr Dura
-390 R Temple of Silence @Adam Paquette
-391 R Temple of Triumph @Piotr Dura
-
-[promo]
-392 R Pack Leader @Ilse Gort
-393 U Selfless Savior @Ralph Horsley
-394 C Frantic Inventory @Aaron Miller
-395 U Eliminate @Chris Cold
-396 U Heartfire Immolator @Donato Giancola
-397 C Llanowar Visionary @Cristi Balanescu
 
 [Lands]
 6 Bloodfell Caves|M21

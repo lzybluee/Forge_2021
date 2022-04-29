@@ -268,24 +268,6 @@ ScryfallCode=THB
 253 L Mountain @Sam Burley
 254 L Forest @Sam Burley
 
-[borderless]
-255 M Elspeth, Sun's Nemesis @Chuck Lukacs
-256 M Ashiok, Nightmare Muse @Chuck Lukacs
-257 M Calix, Destiny's Hand @Chuck Lukacs
-
-[showcase]
-258 U Daxos, Blessed by the Sun @Jason A. Engle
-259 M Heliod, Sun-Crowned @Jason A. Engle
-260 U Callaphe, Beloved of the Sea @Jason A. Engle
-261 M Thassa, Deep-Dwelling @Jason A. Engle
-262 M Erebos, Bleak-Hearted @Jason A. Engle
-263 U Tymaret, Chosen from Death @Jason A. Engle
-264 U Anax, Hardened in the Forge @Jason A. Engle
-265 M Purphoros, Bronze-Blooded @Jason A. Engle
-266 M Nylea, Keen-Eyed @Jason A. Engle
-267 U Renata, Called to the Hunt @Jason A. Engle
-268 M Klothys, God of Destiny @Jason A. Engle
-
 [buy a box]
 269 M Athreos, Shroud-Veiled @Igor Kieryluk
 
@@ -318,70 +300,6 @@ ScryfallCode=THB
 295 R Terror of Mount Velus @Billy Christian
 296 R Ironscale Hydra @Brian Valeza
 297 R Treeshaker Chimera @Vincent Proce
-
-[extended art]
-298 R Archon of Sun's Grace @Matt Stewart
-299 R Eidolon of Obstruction @Jason Rainville
-300 R Heliod's Intervention @Daarken
-301 R Idyllic Tutor @Jaime Jones
-302 R Shatter the Sky @Bayard Wu
-303 R Taranika, Akroan Veteran @Eric Deschamps
-304 R Ashiok's Erasure @Zezhou Chen
-305 R Nadir Kraken @Dan Scott
-306 R Protean Thaumaturge @Izzy
-307 R Thassa's Intervention @Zack Stella
-308 R Thassa's Oracle @Jesper Ejsing
-309 R Thryx, the Sudden Storm @Mathias Kollros
-310 R Wavebreak Hippocamp @Caio Monteiro
-311 R Aphemia, the Cacophony @Lucas Graciano
-312 R Eat to Extinction @Vincent Proce
-313 R Erebos's Intervention @Mathias Kollros
-314 R Gravebreaker Lamia @Lius Lasahido
-315 R Nightmare Shepherd @Tyler Jacobson
-316 R Treacherous Blessing @Marco Teixeira
-317 R Woe Strider @John Thacker
-318 M Ox of Agonas @Lie Setiawan
-319 R Phoenix of Ash @Svetlin Velinov
-320 R Purphoros's Intervention @Aleksi Briclot
-321 R Storm Herald @Aleksi Briclot
-322 R Storm's Wrath @Yeong-Hao Han
-323 R Tectonic Giant @Slawomir Maniak
-324 R Underworld Breach @Lie Setiawan
-325 R Arasta of the Endless Web @Sam Rowan
-326 R Dryad of the Ilysian Grove @Scott Murphy
-327 R Mantle of the Wolf @Simon Dominic
-328 R Nessian Boar @Zoltan Boros
-329 R Nylea's Intervention @Zezhou Chen
-330 M Nyxbloom Ancient @Filip Burburan
-331 R Setessan Champion @Emrah Elmasli
-332 R Allure of the Unknown @Seb McKinnon
-333 R Atris, Oracle of Half-Truths @Bastien L. Deharme
-334 R Bronzehide Lion @Alayna Danner
-335 R Dalakos, Crafter of Wonders @Ryan Pancoast
-336 R Dream Trawler @Jesper Ejsing
-337 R Enigmatic Incarnation @PINDURSKI
-338 R Gallia of the Endless Dance @Johannes Voss
-339 R Haktos the Unscarred @Ryan Pancoast
-340 M Kroxa, Titan of Death's Hunger @Vincent Proce
-341 R Kunoros, Hound of Athreos @Zezhou Chen
-342 M Polukranos, Unchained @Chris Rahn
-343 M Uro, Titan of Nature's Wrath @Vincent Proce
-344 R Nyx Lotus @Raoul Vitale
-345 R Shadowspear @Yeong-Hao Han
-346 R Labyrinth of Skophos @Jonas De Ro
-347 R Temple of Abandon @Adam Paquette
-348 R Temple of Deceit @Jonas De Ro
-349 R Temple of Enlightenment @Piotr Dura
-350 R Temple of Malice @Jonas De Ro
-351 R Temple of Plenty @Chris Ostrowski
-
-[promo]
-352 R Arasta of the Endless Web @Jesper Ejsing
-353 U Alseid of Life's Bounty @Magali Villeneuve
-354 C Thirst for Meaning @Brian Valeza
-355 U Gray Merchant of Asphodel @Scott Murphy
-356 C Thrill of Possibility @Izzy
-357 U Wolfwillow Haven @Jakub Kasper
 
 [Commons]
 Captivating Unicorn|THB|1

@@ -299,100 +299,6 @@ ScryfallCode=KHM
 284 C Snow-Covered Forest @Adam Paquette
 285 C Snow-Covered Forest @Omar Rayyan
 
-[borderless]
-286 M Valki, God of Lies @Grzegorz Rutkowski
-287 M Tyvar Kell @Johannes Voss
-288 M Kaya the Inexorable @Livia Prima
-289 M Niko Aris @Sara Winters
-290 R Barkchannel Pathway @Grady Frederick
-291 R Blightstep Pathway @Johannes Voss
-292 R Darkbore Pathway @Alayna Danner
-293 R Hengegate Pathway @Alayna Danner
-294 M Starnheim Unleashed @Rudy Siswanto
-295 M Alrund's Epiphany @Volkan Baǵa
-296 M Haunting Voyage @Randy Vargas
-297 M Quakebringer @Randy Vargas
-298 M Battle Mammoth @Nicholas Gregory
-
-[showcase]
-299 M Halvar, God of Battle @Milivoj Ćeran
-300 R Reidane, God of the Worthy @Andy Brase
-301 R Sigrid, God-Favored @Dibujante Nocturno
-302 M Alrund, God of the Cosmos @Richard Luong
-303 R Cosima, God of the Voyage @Andy Brase
-304 U Inga Rune-Eyes @Nico Delort
-305 M Orvar, the All-Form @DZO
-306 R Egon, God of Death @Jeff Miracola
-307 R Tergrid, God of Fright @Richard Luong
-308 M Valki, God of Lies @Jeff Miracola
-309 R Varragoth, Bloodsky Sire @Ian Miller
-310 R Arni Brokenbrow @Milivoj Ćeran
-311 R Birgi, God of Storytelling @Richard Luong
-312 R Magda, Brazen Outlaw @DZO
-313 M Toralf, God of Fury @Matt Stikker
-314 M Esika, God of the Tree @Collin Estrada
-315 R Esika's Chariot @WolfSkullJack
-316 U Fynn, the Fangbearer @rishxxv
-317 R Jorn, God of Winter @WolfSkullJack
-318 R Kolvori, God of Kinship @Dibujante Nocturno
-319 R Toski, Bearer of Secrets @Andy Brase
-320 M Vorinclex, Monstrous Raider @Richard Luong
-321 U Aegar, the Freezing Flame @WolfSkullJack
-322 U Firja, Judge of Valor @GodMachine
-323 U Harald, King of Skemfar @Collin Estrada
-324 U Kardur, Doomscourge @Jeff Miracola
-325 U Koll, the Forgemaster @Nico Delort
-326 M Koma, Cosmos Serpent @rishxxv
-327 U Maja, Bretagard Protector @Richard Luong
-328 U Moritte of the Frost @Poison Project
-329 U Narfi, Betrayer King @Christopher Lovell
-330 R Sarulf, Realm Eater @Dibujante Nocturno
-331 U Svella, Ice Shaper @DZO
-332 U Vega, the Watcher @DZO
-333 M Vorinclex, Monstrous Raider @Daarken
-
-[extended art]
-334 R Doomskar @Piotr Dura
-335 R Glorious Protector @PINDURSKI
-336 R Rally the Ranks @Lie Setiawan
-337 M Resplendent Marshal @Ryan Pancoast
-338 R Righteous Valkyrie @Chris Rahn
-339 R Runeforge Champion @Andrey Kuzinskiy
-340 R Search for Glory @Kieran Yanner
-341 R Ascendant Spirit @Lie Setiawan
-342 R Cosmos Charger @Nils Hamm
-343 R Cyclone Summoner @Andrey Kuzinskiy
-344 R Graven Lore @Svetlin Velinov
-345 R Icebreaker Kraken @Chris Cold
-346 R Mystic Reflection @YW Tang
-347 R Reflections of Littjara @Aaron Miller
-348 R Blood on the Snow @Martina Fackova
-349 M Burning-Rune Demon @Andrew Mar
-350 R Crippling Fear @Nestor Ossandon Leal
-351 R Draugr Necromancer @David Rapoza
-352 R Dream Devourer @David Rapoza
-353 M Eradicator Valkyrie @Tyler Jacobson
-354 R Rise of the Dread Marn @Titus Lunter
-355 R Skemfar Avenger @Randy Vargas
-356 R Calamity Bearer @Simon Dominic
-357 R Dragonkin Berserker @Lie Setiawan
-358 M Goldspan Dragon @Andrew Mar
-359 R Reckless Crew @Izzy
-360 R Tibalt's Trickery @Anna Podedworna
-361 R Tundra Fumarole @Simon Dominic
-362 R Blessing of Frost @Mila Pesic
-363 R Elvish Warmaster @Alexander Mokhov
-364 R In Search of Greatness @Ilse Gort
-365 R Old-Growth Troll @Jesper Ejsing
-366 R Realmwalker @Zack Stella
-367 R Immersturm Predator @Nicholas Gregory
-368 R Cosmos Elixir @Volkan Baǵa
-369 R Maskwood Nexus @Jason A. Engle
-370 R Pyre of Heroes @Piotr Dura
-371 R Faceless Haven @Titus Lunter
-372 R Tyrite Sanctum @Volkan Baǵa
-373 R The World Tree @Anastasia Ovchinnikova
-
 [precon product]
 374 R Valkyrie Harbinger @Tran Nguyen
 375 R Surtland Elementalist @Nicholas Gregory
@@ -414,33 +320,6 @@ ScryfallCode=KHM
 391 U Elven Ambush @Chris Seaman
 392 U Gladewalker Ritualist @Irina Nordsol
 393 U Rampage of the Valkyries @Billy Christian
-394 L Plains @Piotr Dura
-395 L Island @Johannes Voss
-396 L Swamp @Piotr Dura
-397 L Mountain @Sam Burley
-398 L Forest @Sam Burley
-
-[buy a box]
-399 R Realmwalker @Igor Kieryluk
-
-[promo]
-400 R Reflections of Littjara @Cristi Balanescu
-401 U Usher of the Fallen @Anastasia Ovchinnikova
-402 C Strategic Planning @Donato Giancola
-403 U Poison the Cup @Colin Boyer
-404 C Frost Bite @Caio Monteiro
-405 C Masked Vandal @Jason A. Engle
-
-[rebalanced]
-A40 M A-Alrund, God of the Cosmos @Kieran Yanner
-A41 M A-Alrund's Epiphany @Kieran Yanner
-A51 R A-Cosmos Charger @Nils Hamm
-A139 M A-Goldspan Dragon @Andrew Mar
-A169 R A-Esika's Chariot @Raoul Vitale
-A224 U A-Narfi, Betrayer King @Daarken
-A233 U A-Vega, the Watcher @Paul Scott Canavan
-A237 R A-Cosmos Elixir @Volkan Baǵa
-A255 R A-Faceless Haven @Titus Lunter
 
 [Snow Lands]
 5 Snow-Covered Plains|KHM|1

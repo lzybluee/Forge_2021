@@ -284,43 +284,6 @@ ScryfallCode=ELD
 268 L Forest @Scott Murphy
 269 L Forest @Adam Paquette
 
-[borderless]
-270 M Garruk, Cursed Huntsman @Dmitry Burmak
-271 M Oko, Thief of Crowns @Wesley Burt
-272 M The Royal Scions @Howard Lyon
-
-[showcase]
-273 C Ardenvale Tactician @Aaron Miller
-274 C Faerie Guidemother @Chuck Lukacs
-275 R Giant Killer @Shawn Wood
-276 C Lonesome Unicorn @Alayna Danner
-277 M Realm-Cloaked Giant @Alayna Danner
-278 U Shepherd of the Flock @Craig J Spearing
-279 C Silverflame Squire @Josu Hernaiz
-280 U Animating Faerie @Chris Seaman
-281 M Brazen Borrower @Iris Compiet
-282 R Fae of Wishes @Wylie Beckert
-283 U Hypnotic Sprite @Ravenna Tran
-284 C Merfolk Secretkeeper @Allen Williams
-285 C Queen of Ice @Allen Williams
-286 U Foulmire Knight @Rebecca On
-287 R Murderous Rider @Ravenna Tran
-288 U Order of Midnight @Seb McKinnon
-289 C Reaper of Night @Olena Richards
-290 C Smitten Swordmaster @Shawn Wood
-291 R Bonecrusher Giant @John Severin Brassell
-292 U Embereth Shieldbreaker @Jeremy Wilson
-293 C Merchant of the Vale @John Severin Brassell
-294 C Rimrock Knight @Josu Hernaiz
-295 U Beanstalk Giant @Nick Southam
-296 C Curious Pair @Josu Hernaiz
-297 U Flaxen Intruder @Omar Rayyan
-298 C Garenbrig Carver @Craig J Spearing
-299 R Lovestruck Beast @Tyler Walpole
-300 C Rosethorn Acolyte @Wylie Beckert
-301 C Tuinvale Treefolk @James Arnold
-302 U Oakhame Ranger @Omar Rayyan
-
 [buy a box]
 303 M Kenrith, the Returned King @Kieran Yanner
 
@@ -355,77 +318,6 @@ ScryfallCode=ELD
 331 C Arcane Signet @Dan Scott
 332 R Tome of Legends @Mila Pesic
 333 C Command Tower @Evan Shipard
-
-[extended art]
-334 R Acclaimed Contender @David Gaillet
-335 R Charming Prince @Randy Vargas
-336 M The Circle of Loyalty @Bastien L. Deharme
-337 R Happily Ever After @Matt Stewart
-338 M Harmonious Archon @Anastasia Ovchinnikova
-339 R Hushbringer @Bastien L. Deharme
-340 R Linden, the Steadfast Queen @Ryan Pancoast
-341 R Worthy Knight @Yongjae Choi
-342 R Emry, Lurker of the Loch @Livia Prima
-343 R Folio of Fancies @Colin Boyer
-344 R Gadwick, the Wizened @Colin Boyer
-345 M The Magic Mirror @Anastasia Ovchinnikova
-346 R Midnight Clock @Alexander Forssberg
-347 R Mirrormade @Volkan Baǵa
-348 R Stolen by the Fae @Ryan Alexander Lee
-349 R Vantress Gargoyle @Cristi Balanescu
-350 R Ayara, First of Locthwain @Ryan Pancoast
-351 R Blacklance Paragon @Victor Adame Minguez
-352 M The Cauldron of Eternity @Tomasz Jedruszek
-353 R Clackbridge Troll @Svetlin Velinov
-354 R Oathsworn Knight @Svetlin Velinov
-355 R Piper of the Swarm @Irina Nordsol
-356 M Rankle, Master of Pranks @Dmitry Burmak
-357 R Wishclaw Talisman @Daarken
-358 R Witch's Vengeance @Titus Lunter
-359 M Embercleave @Joe Slucher
-360 R Fervent Champion @Steve Argyle
-361 R Fires of Invention @Stanton Feng
-362 R Irencrag Feat @Yongjae Choi
-363 R Irencrag Pyromancer @Jason Rainville
-364 R Opportunistic Dragon @Chris Rahn
-365 M Robber of the Rich @Paul Scott Canavan
-366 R Sundering Stroke @Stanton Feng
-367 R Torbran, Thane of Red Fell @Grzegorz Rutkowski
-368 R Feasting Troll King @Nicholas Gregory
-369 R Gilded Goose @Lindsey Look
-370 M The Great Henge @Adam Paquette
-371 R Once Upon a Time @Matt Stewart
-372 M Questing Beast @Igor Kieryluk
-373 R Return of the Wildspeaker @Chris Rallis
-374 R Wicked Wolf @Tomasz Jedruszek
-375 R Wildborn Preserver @Lius Lasahido
-376 R Yorvo, Lord of Garenbrig @Zack Stella
-377 R Dance of the Manse @Yeong-Hao Han
-378 R Doom Foretold @Daniel Ljunggren
-379 R Escape to the Wilds @Chris Ostrowski
-380 R Faeburrow Elder @Raoul Vitale
-381 R Lochmere Serpent @Sam Burley
-382 M Outlaws' Merriment @Suzanne Helmigh
-383 R Stormfist Crusader @Chris Rallis
-384 R Sorcerous Spyglass @Aaron Miller
-385 R Stonecoil Serpent @Mark Poole
-386 R Castle Ardenvale @Volkan Baǵa
-387 R Castle Embereth @Jaime Jones
-388 R Castle Garenbrig @Adam Paquette
-389 R Castle Locthwain @Titus Lunter
-390 R Castle Vantress @John Avon
-391 R Fabled Passage @Howard Lyon
-
-[promo]
-392 R Piper of the Swarm @Jesper Ejsing
-393 U Glass Casket @Anastasia Ovchinnikova
-394 U Slaying Fire @Heonhwa Choe
-395 U Kenrith's Transformation @Kimonas Theodossiou
-396 U Improbable Alliance @Zoltan Boros
-397 U Inspiring Veteran @Scott Murphy
-
-[rebalanced]
-A125 R A-Fires of Invention @Stanton Feng
 
 [tokens]
 w_0_1_goat

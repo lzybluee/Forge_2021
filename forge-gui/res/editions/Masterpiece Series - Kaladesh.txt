@@ -5,7 +5,7 @@ Date=2016-09-30
 Name=Masterpiece Series - Kaladesh
 MciCode=mps
 Type=Collector_Edition
-ScryfallCode=mps
+ScryfallCode=MPS
 
 [cards]
 1 M Cataclysmic Gearhulk @Jason Rainville

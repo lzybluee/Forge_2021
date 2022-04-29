@@ -2,7 +2,7 @@
 Code=2XM
 Date=2020-08-07
 Name=Double Masters
-Type=Reprint
+Type=Boxed_Set
 BoosterCovers=3
 Booster=8 Common, 3 Uncommon, 2 RareMythic, 2 fromSheet("2XM Foils")
 Foil=NotSupported
@@ -342,59 +342,6 @@ ScryfallCode=2XM
 329 C Urza's Mine @Brian Snõddy
 330 C Urza's Power Plant @Brian Snõddy
 331 C Urza's Tower @Brian Snõddy
-332 R Wooded Bastion @Christopher Moeller
-333 M Karn Liberated @Mark Tedin
-334 M Jace, the Mind Sculptor @Jason Chan
-335 M Avacyn, Angel of Hope @Randy Vargas
-336 R Council's Judgment @Jeff Simpson
-337 R Stoneforge Mystic @Dan Dos Santos
-338 R Brainstorm @Ron Spencer
-339 R Cyclonic Rift @Chuck Lukacs
-340 M Force of Will @Scott M. Fischer
-341 R Phyrexian Metamorph @Thomas M. Baxa
-342 M Dark Confidant @Mark Zug
-343 R Fatal Push @Eric Velhagen
-344 R Thoughtseize @Chuck Lukacs
-345 R Toxic Deluge @Richard Kane Ferguson
-346 R Blood Moon @Jim Pavelec
-347 R Goblin Guide @Mark Zug
-348 M Sneak Attack @Mark Zug
-349 R Crop Rotation @Mark Poole
-350 M Doubling Season @Ron Spencer
-351 R Exploration @Mark Poole
-352 R Noble Hierarch @Greg Staples
-353 M Atraxa, Praetors' Voice @Kev Walker
-354 M Kaalia of the Vast @Scott M. Fischer
-355 R Meddling Mage @Jeff Simpson
-356 M Batterskull @rk post
-357 M Blightsteel Colossus @Wayne Reynolds
-358 M Chrome Mox @Franz Vohwinkel
-359 R Expedition Map @Scott Murphy
-360 R Lightning Greaves @Mark Zug
-361 M Mana Crypt @Ron Spencer
-362 M Mox Opal @Martina Pilcerova
-363 M Sword of Body and Mind @Steve Prescott
-364 M Sword of Feast and Famine @Thomas M. Baxa
-365 M Sword of Fire and Ice @Dan Dos Santos
-366 M Sword of Light and Shadow @Kev Walker
-367 M Sword of War and Peace @Franz Vohwinkel
-368 M Wurmcoil Engine @Carl Critchlow
-369 R Academy Ruins @John Avon
-370 R Urza's Mine @Mark Tedin
-371 R Urza's Power Plant @Mark Tedin
-372 R Urza's Tower @Mark Tedin
-373 L Plains @John Avon
-374 L Plains @Noah Bradley
-375 L Island @John Avon
-376 L Island @Noah Bradley
-377 L Swamp @John Avon
-378 L Swamp @Noah Bradley
-379 L Mountain @John Avon
-380 L Mountain @Noah Bradley
-381 L Forest @John Avon
-382 L Forest @Noah Bradley
-383 R Wrath of God @Thomas M. Baxa
-384 R Chord of Calling @Scott M. Fischer
 
 [Foils]
 # Commons

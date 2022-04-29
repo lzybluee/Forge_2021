@@ -27,7 +27,7 @@ ScryfallCode=UGL
 14 R Bureaucracy @Mark Zug
 15 U Censorship @Matthew D. Wilson
 16 U Checks and Balances @David A. Cherry
-17 R Chicken à la King @Mark Zug
+17 R Chicken a la King @Mark Zug
 18 C Clambassadors @Randy Elliott
 19 C Clam-I-Am @Randy Elliott
 20 C Clam Session @Randy Elliott
@@ -106,6 +106,6 @@ w_1_1_pegasus_flying
 w_1_1_soldier
 b_2_2_zombie
 r_1_1_goblin
-r_4_4_giant_chicken
+r_4_4_giant_bird
 g_0_1_sheep
 g_1_1_squirrel
