@@ -7,20 +7,20 @@ Difficulty=hard
 Description=Idi Amin plays a slightly modified version of Paul Ferker's 'Aggression' deck from the PT Paris 1997.
 Deck Type=constructed
 [main]
-2 Dwarven Miner|MIR
-4 Fireblast|VIS
-3 Goblin Soothsayer|MIR
-3 Goblin Tinkerer|MIR
-4 Hammer of Bogardan|MIR
-4 Incinerate|MIR
-4 Kaervek's Torch|MIR
-4 Keeper of Kookus|VIS
-19 Mountain|MIR
-4 Quicksand|VIS
-1 Searing Spear Askari|MIR
-4 Suq'Ata Lancer|VIS
-1 Talruum Minotaur|MIR
-3 Viashino Sandstalker|VIS
+2 Dwarven Miner
+4 Fireblast
+3 Goblin Soothsayer
+3 Goblin Tinkerer
+4 Hammer of Bogardan
+4 Incinerate
+4 Kaervek's Torch
+4 Keeper of Kookus
+19 Mountain
+4 Quicksand
+1 Searing Spear Askari
+4 Suq'Ata Lancer
+1 Talruum Minotaur
+3 Viashino Sandstalker
 [sideboard]
 [planes]
 [schemes]

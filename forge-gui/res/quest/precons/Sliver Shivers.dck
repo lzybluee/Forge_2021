@@ -10,23 +10,23 @@ Deck Type=constructed
 Set=LGN
 Image=sliver_shivers.jpg
 [main]
-7 Forest|ONS
-5 Island|ONS
-9 Plains|ONS
-1 Brood Sliver|LGN
-1 Essence Sliver|LGN
-3 Mistform Dreamer|ONS
-4 Plated Sliver|LGN
-4 Quick Sliver|LGN
-1 Root Sliver|LGN
-3 Shifting Sliver|LGN
-3 Ward Sliver|LGN
-1 Crown of Vigor|ONS
-4 Pacifism|ONS
-2 Akroma's Blessing|ONS
-2 Mage's Guile|ONS
-2 Tribal Unity|ONS
-2 Lonely Sandbar|ONS
-4 Secluded Steppe|ONS
-2 Explosive Vegetation|ONS
+7 Forest
+5 Island
+9 Plains
+1 Brood Sliver
+1 Essence Sliver
+3 Mistform Dreamer
+4 Plated Sliver
+4 Quick Sliver
+1 Root Sliver
+3 Shifting Sliver
+3 Ward Sliver
+1 Crown of Vigor
+4 Pacifism
+2 Akroma's Blessing
+2 Mage's Guile
+2 Tribal Unity
+2 Lonely Sandbar
+4 Secluded Steppe
+2 Explosive Vegetation
 [sideboard]

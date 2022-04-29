@@ -7,20 +7,20 @@ Description=“If there can be no victory, then I will fight forever.”
 Icon=Koth.jpg
 Deck Type=constructed
 [Main]
-4 Electrostatic Bolt|MRD
-4 Goblin Wardriver|MBS
-1 Hellkite Igniter|MBS
-2 Hero of Oxid Ridge|MBS
-1 Hoard-Smelter Dragon|SOM
-4 Iron Myr|SOM
-3 Koth of the Hammer|SOM
-1 Moltensteel Dragon|NPH
-24 Mountain|SOM|1
-4 Oxidda Golem|DST
-3 Oxidda Scrapmelter|SOM
-4 Shatter|LEA
-1 Tormentor Exarch|NPH
-2 Urabrask the Hidden|NPH
-1 Vulshok Battlemaster|MRD
-1 Vulshok Refugee|NPH
+4 Electrostatic Bolt
+4 Goblin Wardriver
+1 Hellkite Igniter
+2 Hero of Oxid Ridge
+1 Hoard-Smelter Dragon
+4 Iron Myr
+3 Koth of the Hammer
+1 Moltensteel Dragon
+24 Mountain
+4 Oxidda Golem
+3 Oxidda Scrapmelter
+4 Shatter
+1 Tormentor Exarch
+2 Urabrask the Hidden
+1 Vulshok Battlemaster
+1 Vulshok Refugee
 [sideboard]

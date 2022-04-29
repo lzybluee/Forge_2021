@@ -12,31 +12,31 @@ Set=FUT
 Image=suspended_sentence.jpg
 
 [main]
-10 Island|TSP
-9 Swamp|TSP
-3 Terramorphic Expanse|TSP
-2 Zoetic Cavern|FUT
+10 Island
+9 Swamp
+3 Terramorphic Expanse
+2 Zoetic Cavern
 
-2 Timebender|PLC
-2 Dream Stalker|TSP
-1 Unblinking Bleb|FUT
-4 Infiltrator il-Kor|FUT
-1 Riftwing Cloudskate|TSP
-2 Augur of Skulls|FUT
-1 Deathspore Thallid|TSP
-1 Deadly Grub|PLC
-1 Shimian Specter|FUT
-1 Nihilith|FUT
+2 Timebender
+2 Dream Stalker
+1 Unblinking Bleb
+4 Infiltrator il-Kor
+1 Riftwing Cloudskate
+2 Augur of Skulls
+1 Deathspore Thallid
+1 Deadly Grub
+1 Shimian Specter
+1 Nihilith
 
-2 Clockspinning|TSP
-3 Paradox Haze|TSP
-3 Reality Acid|PLC
-2 Reality Strobe|FUT
-1 Lost Hours|FUT
-3 Ichor Slick|FUT
-2 Festering March|FUT
-1 Death Rattle|FUT
-2 Mindstab|TSP
-1 Phthisis|TSP
+2 Clockspinning
+3 Paradox Haze
+3 Reality Acid
+2 Reality Strobe
+1 Lost Hours
+3 Ichor Slick
+2 Festering March
+1 Death Rattle
+2 Mindstab
+1 Phthisis
 
 [sideboard]

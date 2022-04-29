@@ -15,5 +15,5 @@ Description="Let him be imprisoned while his possessions wander free." -Suq'Ata 
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [main]
-40 Boomerang|MIR
-20 Island|MIR|1
+40 Boomerang
+20 Island

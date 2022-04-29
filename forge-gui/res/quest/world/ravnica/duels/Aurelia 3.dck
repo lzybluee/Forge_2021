@@ -7,21 +7,21 @@ Difficulty=hard
 Description=Ein, Zwei, Polizei
 Deck Type=constructed
 [main]
-4 Ash Zealot|RTR
-4 Boros Charm|GTC
-4 Boros Elite|GTC
-4 Boros Guildgate|GTC
-2 Boros Reckoner|GTC
-2 Demonfire|DIS
-3 Firemane Avenger|GTC
-3 Flame-Kin Zealot|RAV
-4 Lightning Helix|RAV
-8 Mountain|RTR
-8 Plains|RTR
-4 Precinct Captain|RTR
-4 Sacred Foundry|GTC
-4 Seal of Fire|DIS
-3 Wojek Halberdiers|GTC
+4 Ash Zealot
+4 Boros Charm
+4 Boros Elite
+4 Boros Guildgate
+2 Boros Reckoner
+2 Demonfire
+3 Firemane Avenger
+3 Flame-Kin Zealot
+4 Lightning Helix
+8 Mountain
+8 Plains
+4 Precinct Captain
+4 Sacred Foundry
+4 Seal of Fire
+3 Wojek Halberdiers
 [sideboard]
 [planes]
 [schemes]

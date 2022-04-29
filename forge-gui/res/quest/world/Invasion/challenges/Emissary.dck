@@ -16,8 +16,8 @@ Description=The emissaries are being sent to meet you!
 Deck Type=constructed
 Name=Emissary
 [Main]
-10 Benalish Emissary|INV
-10 Shivan Emissary|INV
-10 Tolarian Emissary|INV
-10 Urborg Emissary|INV
-10 Verduran Emissary|INV
+10 Benalish Emissary
+10 Shivan Emissary
+10 Tolarian Emissary
+10 Urborg Emissary
+10 Verduran Emissary

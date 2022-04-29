@@ -7,24 +7,24 @@ Difficulty=medium
 Description=Lucipher
 Deck Type=constructed
 [main]
-2 Cyclonic Rift|RTR
-2 Daggerdrome Imp|RTR
-4 Last Gasp|RAV
-4 Dimir Guildgate|GTC
-4 Dimir Infiltrator|RAV
-8 Island|RTR
-2 Last Thoughts|GTC
-2 Muddle the Mixture|RAV
-4 Cloudfin Raptor|GTC
-2 Remand|RAV
-4 Shadow Slice|GTC
-2 Stolen Identity|GTC
-2 Surveilling Sprite|RAV
-8 Swamp|RTR
-2 Thrill-Kill Assassin|RTR
-2 Undercity Plague|GTC
-4 Watery Grave|GTC
-2 Deathcult Rogue|GTC
+2 Cyclonic Rift
+2 Daggerdrome Imp
+4 Last Gasp
+4 Dimir Guildgate
+4 Dimir Infiltrator
+8 Island
+2 Last Thoughts
+2 Muddle the Mixture
+4 Cloudfin Raptor
+2 Remand
+4 Shadow Slice
+2 Stolen Identity
+2 Surveilling Sprite
+8 Swamp
+2 Thrill-Kill Assassin
+2 Undercity Plague
+4 Watery Grave
+2 Deathcult Rogue
 [sideboard]
 [planes]
 [schemes]

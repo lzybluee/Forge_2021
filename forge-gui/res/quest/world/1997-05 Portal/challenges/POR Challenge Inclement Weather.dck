@@ -15,7 +15,7 @@ Description=
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [Main]
-15 Earthquake|POR
-15 Forest|POR|2
-15 Hurricane|POR
-15 Mountain|POR|4
+15 Earthquake
+15 Forest
+15 Hurricane
+15 Mountain

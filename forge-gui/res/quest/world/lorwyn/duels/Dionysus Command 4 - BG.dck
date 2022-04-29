@@ -9,24 +9,24 @@ Description=[B/G] Elves aggro/disrupt.
 Deck Type=constructed
 
 [Main]
-4 Swamp|LRW
-5 Forest|LRW
-4 Treetop Village|10E
-3 Mutavault|MOR
-4 Gilt-Leaf Palace|LRW
-4 Llanowar Wastes|10E
+4 Swamp
+5 Forest
+4 Treetop Village
+3 Mutavault
+4 Gilt-Leaf Palace
+4 Llanowar Wastes
 
-2 Chameleon Colossus|MOR
-2 Civic Wayfinder|10E
-2 Garruk Wildspeaker|LRW
-4 Imperious Perfect|LRW
-4 Llanowar Elves|10E
-4 Nameless Inversion|LRW
-4 Profane Command|LRW
-2 Troll Ascetic|10E
-4 Terror|10E
-4 Thoughtseize|LRW
-4 Wren's Run Vanquisher|LRW
+2 Chameleon Colossus
+2 Civic Wayfinder
+2 Garruk Wildspeaker
+4 Imperious Perfect
+4 Llanowar Elves
+4 Nameless Inversion
+4 Profane Command
+2 Troll Ascetic
+4 Terror
+4 Thoughtseize
+4 Wren's Run Vanquisher
 
 [sideboard]
 [planes]

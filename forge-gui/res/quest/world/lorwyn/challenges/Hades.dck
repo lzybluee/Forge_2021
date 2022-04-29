@@ -4,7 +4,7 @@ OpponentName=Hades
 AILife=40
 Repeat=true
 Wins=40
-Card Reward=33% duplicate card;3 rares;33% 1 black rare;33% 1 green rare; 33% Grave Pact|10E
+Card Reward=33% duplicate card;3 rares;33% 1 black rare;33% 1 green rare; 33% Grave Pact
 Credit Reward=500
 HumanExtras=
 AIExtras=Grave Pact
@@ -18,25 +18,25 @@ Icon=Hades.jpg
 Deck Type=constructed
 
 [Main]
-6 Swamp|SHM
-4 Terramorphic Expanse|10E
-6 Forest|SHM
-4 Twilight Mire|EVE
-4 Llanowar Wastes|10E
+6 Swamp
+4 Terramorphic Expanse
+6 Forest
+4 Twilight Mire
+4 Llanowar Wastes
 
-2 Beacon of Unrest|10E
-3 Cankerous Thirst|EVE
-4 Creakwood Liege|EVE
-2 Deity of Scars|EVE
-1 Doomgape|EVE
-2 Gift of the Deity|EVE
-2 Gleeful Sabotage|SHM
-3 Hurricane|10E
-4 Odious Trow|EVE
-4 Quirion Dryad|10E
-1 Sapling of Colfenor|EVE
-4 Stalker Hag|EVE
-4 Troll Ascetic|10E
+2 Beacon of Unrest
+3 Cankerous Thirst
+4 Creakwood Liege
+2 Deity of Scars
+1 Doomgape
+2 Gift of the Deity
+2 Gleeful Sabotage
+3 Hurricane
+4 Odious Trow
+4 Quirion Dryad
+1 Sapling of Colfenor
+4 Stalker Hag
+4 Troll Ascetic
 
 [sideboard]
 [planes]

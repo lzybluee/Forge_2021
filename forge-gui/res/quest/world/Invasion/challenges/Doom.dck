@@ -17,6 +17,6 @@ Description=Something is wrong with this religion!
 Deck Type=constructed
 Name=Doom
 [Main]
-25 Obliterate|INV
-31 Mountain|INV
-4 Collapsing Borders|INV
+25 Obliterate
+31 Mountain
+4 Collapsing Borders

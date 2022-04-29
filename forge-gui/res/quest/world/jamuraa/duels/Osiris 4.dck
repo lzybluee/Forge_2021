@@ -6,28 +6,28 @@ Icon=Osiris.jpg
 Difficulty=very hard
 Description=Team Clean's version of the 'Forgotten Orb' deck.
 Deck Type=constructed
-Card Reward=14% duplicate card;8% Winter Orb|2ED
+Card Reward=14% duplicate card;8% Winter Orb
 [main]
-2 Arcane Denial|ALL
-4 Black Knight|5ED
-1 City of Brass|5ED
-2 Serrated Arrows|HML
-3 Erg Raiders|ARN
-4 Fallen Askari|VIS
-3 Island|MIR
-3 Knight of Stromgald|ICE
-4 Man-o'-War|VIS
-4 Memory Lapse|MIR
-3 Nekrataal|VIS
-2 Phyrexian War Beast|ALL
-2 Quicksand|VIS
-1 Shadow Guildmage|MIR
-3 Skulking Ghost|MIR
-10 Swamp|MIR
-4 Underground River|ICE
-2 Undiscovered Paradise|VIS
-1 Vampiric Tutor|VIS
-3 Winter Orb|LEB
+2 Arcane Denial
+4 Black Knight
+1 City of Brass
+2 Serrated Arrows
+3 Erg Raiders
+4 Fallen Askari
+3 Island
+3 Knight of Stromgald
+4 Man-o'-War
+4 Memory Lapse
+3 Nekrataal
+2 Phyrexian War Beast
+2 Quicksand
+1 Shadow Guildmage
+3 Skulking Ghost
+10 Swamp
+4 Underground River
+2 Undiscovered Paradise
+1 Vampiric Tutor
+3 Winter Orb
 [sideboard]
 [planes]
 [schemes]

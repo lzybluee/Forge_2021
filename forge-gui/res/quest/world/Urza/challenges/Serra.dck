@@ -16,14 +16,14 @@ Description=Can you invade the realm of light using Phyrexian forces?
 Icon=Dungeon Crawling White.jpg
 Deck Type=constructed
 [main]
-10 Voice of Grace|USG
-2 Radiant, Archangel|ULG
-26 Plains|USG
+10 Voice of Grace
+2 Radiant, Archangel
+26 Plains
 10 Voice of All
 2 Serra Angel
 4 Absolute Law
 4 Absolute Grace
-4 Voice of Duty|UDS
-4 Voice of Reason|UDS
-4 Voice of Law|USG
+4 Voice of Duty
+4 Voice of Reason
+4 Voice of Law
 [sideboard]

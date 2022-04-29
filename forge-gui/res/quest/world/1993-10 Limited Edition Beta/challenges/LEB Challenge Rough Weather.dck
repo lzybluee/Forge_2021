@@ -15,7 +15,7 @@ Description=Weather forecast: earthquakes and hurricanes.
 Icon=Rough Weather.jpg
 Deck Type=constructed
 [main]
-15 Earthquake|LEB
-15 Forest|LEB|1
-15 Hurricane|LEB
-15 Mountain|LEB|2
+15 Earthquake
+15 Forest
+15 Hurricane
+15 Mountain

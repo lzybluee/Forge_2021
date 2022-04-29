@@ -7,21 +7,21 @@ Difficulty=medium
 Description=Dead? Undead? Make up your mind!
 Deck Type=constructed
 [main]
-3 Bloodbond March|RAV
-4 Darkblast|RAV
-3 Dimir House Guard|RAV
-4 Elves of Deep Shadow|RAV
-8 Forest|RTR
-2 Golgari Grave-Troll|RAV
-4 Golgari Guildgate|RTR
-4 Grisly Salvage|RTR
-1 Jarad's Orders|RTR
-3 Jarad, Golgari Lich Lord|RTR
-4 Lotleth Troll|RTR
-4 Overgrown Tomb|RTR
-4 Slitherhead|RTR
-4 Stinkweed Imp|RAV
-8 Swamp|RTR
+3 Bloodbond March
+4 Darkblast
+3 Dimir House Guard
+4 Elves of Deep Shadow
+8 Forest
+2 Golgari Grave-Troll
+4 Golgari Guildgate
+4 Grisly Salvage
+1 Jarad's Orders
+3 Jarad, Golgari Lich Lord
+4 Lotleth Troll
+4 Overgrown Tomb
+4 Slitherhead
+4 Stinkweed Imp
+8 Swamp
 [sideboard]
 [planes]
 [schemes]

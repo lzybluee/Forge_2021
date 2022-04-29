@@ -6,26 +6,26 @@ Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Ma
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-4 Aqueous Form|THS
-4 Battlewise Hoplite|THS
-4 Eidolon of Countless Battles|BNG
-4 Fabled Hero|THS
-4 Favored Hoplite|THS
-4 Gods Willing|THS
-4 Hero of Iroas|BNG
-5 Island|THS|1
-4 Mana Confluence|JOU
-3 Ordeal of Heliod|THS
-4 Ordeal of Thassa|THS
-8 Plains|THS|1
-4 Stratus Walk|BNG
-4 Temple of Enlightenment|BNG
+4 Aqueous Form
+4 Battlewise Hoplite
+4 Eidolon of Countless Battles
+4 Fabled Hero
+4 Favored Hoplite
+4 Gods Willing
+4 Hero of Iroas
+5 Island
+4 Mana Confluence
+3 Ordeal of Heliod
+4 Ordeal of Thassa
+8 Plains
+4 Stratus Walk
+4 Temple of Enlightenment
 [Sideboard]
-1 Ajani's Presence|JOU
-1 Banishing Light|JOU
-2 Deicide|JOU
-3 Fate Foretold|THS
-4 Glare of Heresy|THS
-1 Ordeal of Heliod|THS
-2 Swan Song|THS
-1 Voyage's End|THS
+1 Ajani's Presence
+1 Banishing Light
+2 Deicide
+3 Fate Foretold
+4 Glare of Heresy
+1 Ordeal of Heliod
+2 Swan Song
+1 Voyage's End

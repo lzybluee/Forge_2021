@@ -8,27 +8,27 @@ Description=Black Talon plays a monoblack mostly-weenie deck.
 Deck Type=constructed
 Card Reward=14% chosen card sets:5ED,MIR,VIS rules:black,creature rarity:C,U desc:a Black Creature
 [main]
-2 Bad Moon|LEB
-3 Black Knight|5ED
-3 Bone Harvest|MIR
-1 Brass Man|ARN
-2 Charcoal Diamond|MIR
-2 Choking Sands|MIR
-2 Serrated Arrows|HML
-1 Pestilence|5ED
-2 Dark Banishing|ICE
-4 Hypnotic Specter|LEB
-2 Insidious Bookworms|ALL
-4 Mishra's Factory|ATQ
-1 Mox Jet|LEB
-2 Nevinyrral's Disk|LEB
-1 Nocturnal Raid|MIR
-4 Phyrexian War Beast|ALL
-2 Rocky Tar Pit|MIR
-3 Sewer Rats|MIR
-2 Sheltered Valley|ALL
-3 Skulking Ghost|MIR
-14 Swamp|MIR
+2 Bad Moon
+3 Black Knight
+3 Bone Harvest
+1 Brass Man
+2 Charcoal Diamond
+2 Choking Sands
+2 Serrated Arrows
+1 Pestilence
+2 Dark Banishing
+4 Hypnotic Specter
+2 Insidious Bookworms
+4 Mishra's Factory
+1 Mox Jet
+2 Nevinyrral's Disk
+1 Nocturnal Raid
+4 Phyrexian War Beast
+2 Rocky Tar Pit
+3 Sewer Rats
+2 Sheltered Valley
+3 Skulking Ghost
+14 Swamp
 [sideboard]
 [planes]
 [schemes]

@@ -4,7 +4,7 @@ OpponentName=Tutankhamon
 AILife=30
 Repeat=true
 Wins=20
-Card Reward=15% duplicate card;2 rares;66% Snake Basket|VIS
+Card Reward=15% duplicate card;2 rares;66% Snake Basket
 Credit Reward=300
 HumanExtras=Mightstone
 AIExtras=Serpent Generator|Pit Scorpion
@@ -16,33 +16,33 @@ Description=You have discovered a legendary Pharaoh's tomb. Reputedly, fabulous 
 Icon=Tutankhamon.jpg
 Deck Type=constructed
 [main]
-1 Ancestral Recall|LEB
-1 Armageddon|LEB
-1 Braingeyser|LEB
-4 City of Brass|ARN
-3 Counterspell|LEB
-3 Disenchant|LEB
-3 Erhnam Djinn|ARN
-1 Desert Twister|ARN
-4 Island|MIR
-3 Mana Drain|LEG
-2 Mana Vault|LEB
-1 Mox Emerald|LEB
-1 Mox Pearl|LEB
-1 Mox Sapphire|LEB
-3 Plains|MIR
-1 Plateau|LEB
-1 Regrowth|LEB
-4 Serendib Efreet|ARN
-1 Sol Ring|LEB
-1 Soldevi Simulacrum|ICE
-3 Strip Mine|ATQ
-4 Swords to Plowshares|LEB
-4 Su-Chi|ATQ
-2 Tropical Island|LEB
-2 Tundra|LEB
-4 Unstable Mutation|TSB
-1 Volcanic Island|LEB
+1 Ancestral Recall
+1 Armageddon
+1 Braingeyser
+4 City of Brass
+3 Counterspell
+3 Disenchant
+3 Erhnam Djinn
+1 Desert Twister
+4 Island
+3 Mana Drain
+2 Mana Vault
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Sapphire
+3 Plains
+1 Plateau
+1 Regrowth
+4 Serendib Efreet
+1 Sol Ring
+1 Soldevi Simulacrum
+3 Strip Mine
+4 Swords to Plowshares
+4 Su-Chi
+2 Tropical Island
+2 Tundra
+4 Unstable Mutation
+1 Volcanic Island
 [sideboard]
 [planes]
 [schemes]

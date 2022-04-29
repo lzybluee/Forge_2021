@@ -15,5 +15,5 @@ Description="You have almost completed your four years, my son. Soon you shall b
 Icon=Dungeon Crawling White.jpg
 Deck Type=constructed
 [main]
-40 Shield Bearer|ICE
-20 Plains|ICE|2
+40 Shield Bearer
+20 Plains

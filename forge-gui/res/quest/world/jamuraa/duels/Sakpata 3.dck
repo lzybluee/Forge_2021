@@ -7,24 +7,24 @@ Difficulty=hard
 Description=Sakpata plays Will's 'Black Ice' deck.
 Deck Type=constructed
 [main]
-4 Black Knight|5ED
-3 Choking Sands|MIR
-2 Pestilence|5ED
-2 Crypt Rats|VIS
-2 Dancing Scimitar|ARN
-3 Drain Life|MIR
-2 Evil Eye of Orms-by-Gore|5ED
-1 Kaervek's Spite|VIS
-4 Knight of Stromgald|ICE
-3 Lake of the Dead|ALL
-4 Nekrataal|VIS
-2 Nevinyrral's Disk|LEB
-2 Phyrexian War Beast|ALL
-4 Quicksand|VIS
-2 Sheltered Valley|ALL
-3 Skulking Ghost|MIR
-14 Swamp|MIR
-3 Winter Orb|LEB
+4 Black Knight
+3 Choking Sands
+2 Pestilence
+2 Crypt Rats
+2 Dancing Scimitar
+3 Drain Life
+2 Evil Eye of Orms-by-Gore
+1 Kaervek's Spite
+4 Knight of Stromgald
+3 Lake of the Dead
+4 Nekrataal
+2 Nevinyrral's Disk
+2 Phyrexian War Beast
+4 Quicksand
+2 Sheltered Valley
+3 Skulking Ghost
+14 Swamp
+3 Winter Orb
 [sideboard]
 [planes]
 [schemes]

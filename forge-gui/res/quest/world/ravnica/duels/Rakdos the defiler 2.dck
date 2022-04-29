@@ -7,19 +7,19 @@ Difficulty=medium
 Description=Blood, Sweat & Tears
 Deck Type=constructed
 [main]
-4 Blood Crypt|RTR
-4 Char|RAV
-4 Dreadbore|RTR
-4 Grave Betrayal|RTR
-4 Mizzium Mortars|RTR
-9 Mountain|RTR
-4 Rakdos Guildgate|RTR
-4 Rakdos's Return|RTR
-9 Swamp|RTR
-4 Underworld Connections|RTR
-4 Wight of Precinct Six|GTC
-4 Mind Rot|RTR
-2 Seal of Fire|DIS
+4 Blood Crypt
+4 Char
+4 Dreadbore
+4 Grave Betrayal
+4 Mizzium Mortars
+9 Mountain
+4 Rakdos Guildgate
+4 Rakdos's Return
+9 Swamp
+4 Underworld Connections
+4 Wight of Precinct Six
+4 Mind Rot
+2 Seal of Fire
 [sideboard]
 [planes]
 [schemes]

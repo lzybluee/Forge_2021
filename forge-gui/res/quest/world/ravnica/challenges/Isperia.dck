@@ -4,7 +4,7 @@ OpponentName=Isperia
 AILife=30
 Repeat=true
 Wins=20
-Card Reward=2 multicolor rares;duplicate card;Hallowed Fountain|DIS
+Card Reward=2 multicolor rares;duplicate card;Hallowed Fountain
 Credit Reward=200
 HumanExtras=Leyline of the Meek|Drowned Rusalka
 AIExtras=Dovescape
@@ -16,23 +16,23 @@ Description=The dove from above
 Icon=Isperia.jpg
 Deck Type=constructed
 [main]
-1 Angel of Serenity|RTR
-4 Azorius Guildgate|RTR
-4 Cyclonic Rift|RTR
-3 Droning Bureaucrats|GPT
-2 Faith's Fetters|RAV
-4 Hallowed Fountain|RTR
-9 Island|RTR
-1 Isperia, Supreme Judge|RTR
-3 Jace, Architect of Thought|RTR
-9 Plains|RTR
-3 Pride of the Clouds|DIS
-4 Sphinx's Revelation|RTR
-4 Supreme Verdict|RTR
-3 Twilight Drover|RAV
-4 Veteran Armorer|RAV
-1 Diluvian Primordial|GTC
-1 Grand Arbiter Augustin IV|DIS
+1 Angel of Serenity
+4 Azorius Guildgate
+4 Cyclonic Rift
+3 Droning Bureaucrats
+2 Faith's Fetters
+4 Hallowed Fountain
+9 Island
+1 Isperia, Supreme Judge
+3 Jace, Architect of Thought
+9 Plains
+3 Pride of the Clouds
+4 Sphinx's Revelation
+4 Supreme Verdict
+3 Twilight Drover
+4 Veteran Armorer
+1 Diluvian Primordial
+1 Grand Arbiter Augustin IV
 [sideboard]
 [planes]
 [schemes]

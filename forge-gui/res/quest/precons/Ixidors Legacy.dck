@@ -12,31 +12,31 @@ Set=PLC
 Image=ixidors_legacy.jpg
 
 [Main]
-1 Aeon Chronicler|PLC
-2 Aquamorph Entity|PLC
-1 Brine Elemental|TSP
-2 Coral Trickster|TSP
-1 Crookclaw Transmuter|TSP
-1 Desert|TSB
-2 Dream Stalker|TSP
-2 Erratic Mutation|PLC
-3 Fathom Seer|TSP
-2 Fledgling Mawcor|TSP
-23 Island|TSP|1
-1 Jodah's Avenger|PLC
-1 Merfolk Thaumaturgist|PLC
-2 Ovinize|PLC
-1 Ovinomancer|TSB
-1 Piracy Charm|PLC
-1 Pongify|PLC
-2 Primal Plasma|PLC
-2 Riptide Pilferer|PLC
-1 Serendib Sorcerer|PLC
-2 Shaper Parasite|PLC
-1 Slipstream Serpent|TSP
-2 Tidewalker|PLC
-2 Unstable Mutation|TSB
-1 Willbender|TSB
+1 Aeon Chronicler
+2 Aquamorph Entity
+1 Brine Elemental
+2 Coral Trickster
+1 Crookclaw Transmuter
+1 Desert
+2 Dream Stalker
+2 Erratic Mutation
+3 Fathom Seer
+2 Fledgling Mawcor
+23 Island
+1 Jodah's Avenger
+1 Merfolk Thaumaturgist
+2 Ovinize
+1 Ovinomancer
+1 Piracy Charm
+1 Pongify
+2 Primal Plasma
+2 Riptide Pilferer
+1 Serendib Sorcerer
+2 Shaper Parasite
+1 Slipstream Serpent
+2 Tidewalker
+2 Unstable Mutation
+1 Willbender
 [Sideboard]
 
 

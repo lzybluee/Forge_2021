@@ -7,22 +7,22 @@ Difficulty=hard
 Description=Red burn/dragon deck.
 Deck Type=constructed
 [main]
-2 Balduvian Hydra|ICE
-1 Detonate|4ED
-2 Disintegrate|4ED
-2 Disrupting Scepter|LEB
-4 Dragon Whelp|4ED
-2 Fireball|4ED
-4 Lightning Bolt|4ED
-1 Mana Vault|LEB
-2 Mishra's Factory|ATQ
-22 Mountain|4ED
-1 Mox Ruby|LEB
-3 Onulet|ATQ
-2 Pyrotechnics|LEG
-2 Shivan Dragon|4ED
-1 Sol Ring|LEB
-3 Strip Mine|ATQ
-2 The Hive|LEB
-4 Wall of Fire|4ED
+2 Balduvian Hydra
+1 Detonate
+2 Disintegrate
+2 Disrupting Scepter
+4 Dragon Whelp
+2 Fireball
+4 Lightning Bolt
+1 Mana Vault
+2 Mishra's Factory
+22 Mountain
+1 Mox Ruby
+3 Onulet
+2 Pyrotechnics
+2 Shivan Dragon
+1 Sol Ring
+3 Strip Mine
+2 The Hive
+4 Wall of Fire
 [sideboard]

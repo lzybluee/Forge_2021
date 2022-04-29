@@ -7,15 +7,15 @@ Description=A custom strategy for the Black/Red color pair.
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [Main]
-4 Blaze|PO2
-4 Brutal Nightstalker|PO2
-2 Foul Spirit|PO2
-4 Hand of Death|PO2
-10 Mountain|PO2|1
-4 Ogre Arsonist|PO2
-4 Predatory Nightstalker|PO2
-4 Ravenous Rats|PO2
-4 Stone Rain|PO2
-14 Swamp|PO2|2
-2 Vampiric Spirit|PO2
-4 Volcanic Hammer|PO2
+4 Blaze
+4 Brutal Nightstalker
+2 Foul Spirit
+4 Hand of Death
+10 Mountain
+4 Ogre Arsonist
+4 Predatory Nightstalker
+4 Ravenous Rats
+4 Stone Rain
+14 Swamp
+2 Vampiric Spirit
+4 Volcanic Hammer

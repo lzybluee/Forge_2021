@@ -4,7 +4,7 @@ OpponentName=Marego
 AILife=30
 Repeat=true
 Wins=25
-Card Reward=2 black rares;duplicate card;Arid Mesa|ZEN
+Card Reward=2 black rares;duplicate card;Arid Mesa
 Credit Reward=200
 HumanExtras=Bloodchief Ascension
 AIExtras=Bloodchief Ascension|Baneful Omen
@@ -16,23 +16,23 @@ Description="Until then, may you find a mirror and spend some time enjoying the 
 Icon=Marego.png
 Deck Type=constructed
 [Main]
-4 Akoum Refuge|ZEN
-2 Arid Mesa|ZEN
-4 Bloodghast|ZEN
-4 Burst Lightning|ZEN
-4 Lavaclaw Reaches|WWK
-4 Mindcrank|NPH
-4 Mountain|LEB
-4 Night's Whisper|5DN
-2 Ob Nixilis, the Fallen|ZEN
-2 Guul Draz Specter|ZEN
-2 Pulse Tracker|WWK
-4 Blightning|ALA
-4 Staggershock|ROE
-6 Swamp|LEB
-2 Vampire Lacerator|ZEN
-4 Vampire Nighthawk|ZEN
-4 Verdant Catacombs|ZEN
+4 Akoum Refuge
+2 Arid Mesa
+4 Bloodghast
+4 Burst Lightning
+4 Lavaclaw Reaches
+4 Mindcrank
+4 Mountain
+4 Night's Whisper
+2 Ob Nixilis, the Fallen
+2 Guul Draz Specter
+2 Pulse Tracker
+4 Blightning
+4 Staggershock
+6 Swamp
+2 Vampire Lacerator
+4 Vampire Nighthawk
+4 Verdant Catacombs
 [sideboard]
 [planes]
 [schemes]

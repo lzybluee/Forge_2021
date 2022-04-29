@@ -15,5 +15,5 @@ Description=Their stench was vile and strong enough, but not nearly as powerful 
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [main]
-40 Bog Rats|DRK
-20 Swamp|LEB|3
+40 Bog Rats
+20 Swamp

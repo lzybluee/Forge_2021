@@ -9,29 +9,29 @@ Description=[R/G] Preconsructed
 Deck Type=constructed
 
 [main]
-14  Forest|SHM
-10  Mountain|SHM
+14  Forest
+10  Mountain
 
-1  Boggart Ram-Gang|SHM
-3  Farhaven Elf|SHM
-2  Juvenile Gloomwidow|SHM
-1  Mossbridge Troll|SHM
-2  Mudbrawler Raiders|SHM
-2  Scuttlemutt|SHM
-2  Scuzzback Scrapper|SHM
-2  Tattermunge Duo|SHM
+1  Boggart Ram-Gang
+3  Farhaven Elf
+2  Juvenile Gloomwidow
+1  Mossbridge Troll
+2  Mudbrawler Raiders
+2  Scuttlemutt
+2  Scuzzback Scrapper
+2  Tattermunge Duo
 
-4  Elsewhere Flask|SHM
-2  Flame Javelin|SHM
-2  Fossil Find|SHM
-1  Gleeful Sabotage|SHM
-3  Howl of the Night Pack|SHM
-1  Illuminated Folio|SHM
-3  Jaws of Stone|SHM
-1  Prismatic Omen|SHM
-2  Puncture Bolt|SHM
-1  Runes of the Deus|SHM
-1  Tower Above|SHM
+4  Elsewhere Flask
+2  Flame Javelin
+2  Fossil Find
+1  Gleeful Sabotage
+3  Howl of the Night Pack
+1  Illuminated Folio
+3  Jaws of Stone
+1  Prismatic Omen
+2  Puncture Bolt
+1  Runes of the Deus
+1  Tower Above
 
 [sideboard]
 [planes]

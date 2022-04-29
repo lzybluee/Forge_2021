@@ -9,23 +9,23 @@ Description=[B/G] Beatdown
 Deck Type=constructed
 
 [Main]
-12 Swamp|SHM
-12 Forest|SHM
+12 Swamp
+12 Forest
 
-4 Cankerous Thirst|EVE
-2 Creakwood Liege|EVE
-2 Desecrator Hag|EVE
-1 Doomgape|EVE
-2 Gift of the Deity|EVE
-2 Gleeful Sabotage|SHM
-2 Noxious Hatchling|EVE
-4 Odious Trow|EVE
-2 Quillspike|EVE
-3 Rendclaw Trow|EVE
-2 Roughshod Mentor|SHM
-2 Soul Reap|EVE
-4 Stalker Hag|EVE
-4 Woodlurker Mimic|EVE
+4 Cankerous Thirst
+2 Creakwood Liege
+2 Desecrator Hag
+1 Doomgape
+2 Gift of the Deity
+2 Gleeful Sabotage
+2 Noxious Hatchling
+4 Odious Trow
+2 Quillspike
+3 Rendclaw Trow
+2 Roughshod Mentor
+2 Soul Reap
+4 Stalker Hag
+4 Woodlurker Mimic
 
 [sideboard]
 [planes]

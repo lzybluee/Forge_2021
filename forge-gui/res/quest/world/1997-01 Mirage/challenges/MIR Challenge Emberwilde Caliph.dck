@@ -15,5 +15,5 @@ Description=The fire breathes while the air burns.
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-30 Island|MIR|4
-30 Mountain|MIR|3
+30 Island
+30 Mountain

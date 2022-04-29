@@ -7,22 +7,22 @@ Difficulty=hard
 Description=Ukulunkulu plays a GW Maro-ErhnieGeddon deck.
 Deck Type=constructed
 [main]
-4 Armageddon|5ED
-2 Disenchant|5ED
-4 Erhnam Djinn|ARN
-10 Forest|MIR
-2 Gaea's Blessing|WTH
-2 Gerrard's Wisdom|WTH
-3 Jolrael's Centaur|MIR
-4 Land Tax|LEG
-4 Maro|MIR
-7 Plains|MIR
-4 Quirion Ranger|VIS
-3 River Boa|VIS
-4 Savannah|LEB
-4 Swords to Plowshares|LEB
-2 Sylvan Library|LEG
-1 Whirling Dervish|LEG
+4 Armageddon
+2 Disenchant
+4 Erhnam Djinn
+10 Forest
+2 Gaea's Blessing
+2 Gerrard's Wisdom
+3 Jolrael's Centaur
+4 Land Tax
+4 Maro
+7 Plains
+4 Quirion Ranger
+3 River Boa
+4 Savannah
+4 Swords to Plowshares
+2 Sylvan Library
+1 Whirling Dervish
 [sideboard]
 [planes]
 [schemes]

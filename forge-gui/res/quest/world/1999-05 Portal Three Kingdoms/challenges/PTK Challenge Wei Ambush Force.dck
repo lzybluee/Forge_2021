@@ -15,6 +15,6 @@ Description="A superior man is modest in speech, but exceeds in his actions."\n-
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [Main]
-10 Desperate Charge|PTK
-20 Swamp|PTK|1
-30 Wei Ambush Force|PTK
+10 Desperate Charge
+20 Swamp
+30 Wei Ambush Force

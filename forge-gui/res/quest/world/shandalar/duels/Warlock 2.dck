@@ -7,17 +7,17 @@ Difficulty=medium
 Description=Black hard-to-block creatures with special abilities.
 Deck Type=constructed
 [main]
-3 Bad Moon|LEB
-4 El-Hajjaj|ARN
-4 Fear|LEB
-2 Frozen Shade|LEB
-4 Hypnotic Specter|2ED
-4 Murk Dwellers|DRK
-1 Nightmare|2ED
-4 Pit Scorpion|LEG
-2 Rod of Ruin|4ED
-23 Swamp|2ED
-4 Terror|2ED
-1 The Fallen|DRK
-4 Unholy Strength|LEB
+3 Bad Moon
+4 El-Hajjaj
+4 Fear
+2 Frozen Shade
+4 Hypnotic Specter
+4 Murk Dwellers
+1 Nightmare
+4 Pit Scorpion
+2 Rod of Ruin
+23 Swamp
+4 Terror
+1 The Fallen
+4 Unholy Strength
 [sideboard]

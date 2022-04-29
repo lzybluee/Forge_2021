@@ -7,15 +7,15 @@ Description=A custom strategy for the Black/Red color pair.
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [Main]
-4 Blaze|PO2
-4 Dakmor Scorpion|PO2
-4 Foul Spirit|PO2
-4 Goblin Piker|PO2
-4 Goblin Raider|PO2
-4 Hand of Death|PO2
-4 Hidden Horror|PO2
-10 Mountain|PO2|1
-4 Stone Rain|PO2
-12 Swamp|PO2|2
-2 Vampiric Spirit|PO2
-4 Volcanic Hammer|PO2
+4 Blaze
+4 Dakmor Scorpion
+4 Foul Spirit
+4 Goblin Piker
+4 Goblin Raider
+4 Hand of Death
+4 Hidden Horror
+10 Mountain
+4 Stone Rain
+12 Swamp
+2 Vampiric Spirit
+4 Volcanic Hammer

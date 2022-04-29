@@ -16,6 +16,6 @@ Description="Folklore has it that to capture a Mountain Goat is a sign of divine
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [main]
-30 Death Spark|ALL
-15 Mountain|ICE|3
-15 Mountain Goat|ICE
+30 Death Spark
+15 Mountain
+15 Mountain Goat

@@ -15,5 +15,5 @@ Description=Everything but.
 Icon=Balance.jpg
 Deck Type=constructed
 [main]
-70 Balance|LEB
-30 Mox Pearl|LEB
+70 Balance
+30 Mox Pearl

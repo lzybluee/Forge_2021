@@ -7,20 +7,20 @@ Difficulty=hard
 Description=Some creatures that really want to eat you
 Deck Type=constructed
 [main]
-4 Birds of Paradise|M12
-3 Deadbridge Goliath|RTR
-3 Desecration Demon|RTR
-4 Dreg Mangler|RTR
-4 Elves of Deep Shadow|RAV
-8 Forest|RTR
-4 Golgari Guildgate|RTR
-4 Abrupt Decay|RTR
-4 Lotleth Troll|RTR
-4 Overgrown Tomb|RTR
-3 Sewer Shambler|RTR
-3 Shambling Shell|RAV
-4 Slitherhead|RTR
-8 Swamp|RTR
+4 Birds of Paradise
+3 Deadbridge Goliath
+3 Desecration Demon
+4 Dreg Mangler
+4 Elves of Deep Shadow
+8 Forest
+4 Golgari Guildgate
+4 Abrupt Decay
+4 Lotleth Troll
+4 Overgrown Tomb
+3 Sewer Shambler
+3 Shambling Shell
+4 Slitherhead
+8 Swamp
 [sideboard]
 [planes]
 [schemes]

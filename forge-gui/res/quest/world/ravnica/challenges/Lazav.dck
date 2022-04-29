@@ -4,7 +4,7 @@ OpponentName=Lazav
 AILife=30
 Repeat=true
 Wins=20
-Card Reward=2 multicolor rares;Watery Grave|RAV
+Card Reward=2 multicolor rares;Watery Grave
 Credit Reward=200
 HumanExtras=Dimir Doppelganger
 AIExtras=Szadek, Lord of Secrets
@@ -16,20 +16,20 @@ Description=Milldly annoying..
 Icon=Lazav.jpg
 Deck Type=constructed
 [main]
-4 Darkblast|RAV
-4 Last Gasp|RAV
-4 Dimir Guildgate|GTC
-4 Glimpse the Unthinkable|RAV
-8 Island|RTR
-2 Mind Grind|GTC
-4 Muddle the Mixture|RAV
-2 Psychic Spiral|RTR
-4 Remand|RAV
-4 Compulsive Research|RAV
-4 Spell Snare|DIS
-8 Swamp|RTR
-4 Watery Grave|GTC
-4 Wight of Precinct Six|GTC
+4 Darkblast
+4 Last Gasp
+4 Dimir Guildgate
+4 Glimpse the Unthinkable
+8 Island
+2 Mind Grind
+4 Muddle the Mixture
+2 Psychic Spiral
+4 Remand
+4 Compulsive Research
+4 Spell Snare
+8 Swamp
+4 Watery Grave
+4 Wight of Precinct Six
 [sideboard]
 [planes]
 [schemes]

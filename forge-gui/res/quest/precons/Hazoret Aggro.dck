@@ -10,25 +10,25 @@ Deck Type=constructed
 Set=RIX
 Image=hazoret_aggro.jpg
 [Main]
-2 Abrade|HOU
-4 Ahn-Crop Crasher|AKH
-4 Bomat Courier|KLD
-1 Chandra, Torch of Defiance|KLD
-4 Fanatical Firebrand|RIX
-1 Glorybringer|AKH
-3 Harsh Mentor|AKH
-1 Hazoret the Fervent|AKH
-3 Kari Zev, Skyship Raider|AER
-4 Lightning Strike|XLN
-2 Magma Spray|AKH
-20 Mountain|RIX
-4 Shock|AER
-3 Soul-Scar Mage|AKH
-4 Sunscorched Desert|AKH
+2 Abrade
+4 Ahn-Crop Crasher
+4 Bomat Courier
+1 Chandra, Torch of Defiance
+4 Fanatical Firebrand
+1 Glorybringer
+3 Harsh Mentor
+1 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+4 Lightning Strike
+2 Magma Spray
+20 Mountain
+4 Shock
+3 Soul-Scar Mage
+4 Sunscorched Desert
 [Sideboard]
-4 Chandra's Defeat|HOU
-2 Kari Zev's Expertise|AER
-2 Key to the City|KLD
-2 Magma Spray|AKH
-2 Pia Nalaar|KLD
-3 Sentinel Totem|XLN
+4 Chandra's Defeat
+2 Kari Zev's Expertise
+2 Key to the City
+2 Magma Spray
+2 Pia Nalaar
+3 Sentinel Totem

@@ -15,5 +15,5 @@ Description=If the presence of evil were obvious, it wouldn't be nearly as dange
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [Main]
-40 Hidden Horror|PO2
-20 Swamp|PO2|1
+40 Hidden Horror
+20 Swamp

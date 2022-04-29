@@ -15,5 +15,5 @@ Description="Layers! Onions have layers. Ogres have layers. Onions have layers. 
 Icon=The Ogres.jpg
 Deck Type=constructed
 [main]
-20 Forest|LEB|1
-40 Ghazban Ogre|ARN
+20 Forest
+40 Ghazban Ogre

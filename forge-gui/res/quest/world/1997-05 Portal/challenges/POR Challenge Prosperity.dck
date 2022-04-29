@@ -15,6 +15,6 @@ Description="Life can never be too good."
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [Main]
-100 Island|POR|1
-100 Prosperity|POR
-100 Command of Unsummoning|POR
+100 Island
+100 Prosperity
+100 Command of Unsummoning

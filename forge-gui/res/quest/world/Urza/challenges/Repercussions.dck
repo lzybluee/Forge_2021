@@ -15,13 +15,13 @@ Description=Summoning creatures is forbidden - if you break the law, there will 
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [main]
-4 Wildfire|USG
-4 Lava Axe|ULG
-4 Arc Lightning|USG
-4 Flame Jet|UDS
-4 Parch|ULG
-4 Shivan Gorge|USG
-4 Steam Blast|USG
-4 Torch Song|USG
-28 Mountain|USG
+4 Wildfire
+4 Lava Axe
+4 Arc Lightning
+4 Flame Jet
+4 Parch
+4 Shivan Gorge
+4 Steam Blast
+4 Torch Song
+28 Mountain
 [sideboard]

@@ -4,7 +4,7 @@ OpponentName=Tisiphone
 AILife=30
 Repeat=true
 Wins=30
-Card Reward=3 rares;33% 1 black rare;33% 1 red rare;33% Ashenmoor Liege|SHM
+Card Reward=3 rares;33% 1 black rare;33% 1 red rare;33% Ashenmoor Liege
 Credit Reward=250
 HumanExtras=
 AIExtras=Liliana Vess
@@ -18,19 +18,19 @@ Icon=Tisiphone.jpg
 Deck Type=constructed
 
 [Main]
-4 Ashenmoor Liege|SHM
-2 Brighthearth Banneret|MOR
-2 Din of the Fireherd|SHM
-4 Fists of the Demigod|SHM
-4 Flamekin Harbinger|LRW
-4 Incandescent Soulstoke|LRW
-4 Kulrath Knight|SHM
-4 Manamorphose|SHM
-18 Mountain|LRW
-4 Primal Beyond|MOR
-4 Scar|SHM
-4 Smokebraider|LRW
-2 Stigma Lasher|EVE
+4 Ashenmoor Liege
+2 Brighthearth Banneret
+2 Din of the Fireherd
+4 Fists of the Demigod
+4 Flamekin Harbinger
+4 Incandescent Soulstoke
+4 Kulrath Knight
+4 Manamorphose
+18 Mountain
+4 Primal Beyond
+4 Scar
+4 Smokebraider
+2 Stigma Lasher
 
 [sideboard]
 [planes]

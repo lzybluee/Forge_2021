@@ -7,19 +7,19 @@ Description=White creature deck with many En-Kor creatures
 Deck Type=constructed
 Name=EnKor2
 [Main]
-2 Disenchant|TMP
-2 Flickering Ward|TMP
-4 Knight of Dawn|TMP
-4 Lancers en-Kor|STH
-1 Nomads en-Kor|STH
-1 Orim, Samite Healer|TMP
-4 Paladin en-Vec|EXO
-6 Plains|TMP|1
-5 Plains|TMP|2
-6 Plains|TMP|3
-7 Plains|TMP|4
-4 Soltari Champion|STH
-2 Soltari Visionary|EXO
-4 Spirit en-Kor|STH
-4 Wall of Essence|STH
-4 Warrior en-Kor|STH
+2 Disenchant
+2 Flickering Ward
+4 Knight of Dawn
+4 Lancers en-Kor
+1 Nomads en-Kor
+1 Orim, Samite Healer
+4 Paladin en-Vec
+6 Plains
+5 Plains
+6 Plains
+7 Plains
+4 Soltari Champion
+2 Soltari Visionary
+4 Spirit en-Kor
+4 Wall of Essence
+4 Warrior en-Kor

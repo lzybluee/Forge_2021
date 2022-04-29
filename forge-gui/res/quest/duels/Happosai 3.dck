@@ -7,9 +7,9 @@ Description=WUB Battle Mastery deck with lots of creatures that profit from Doub
 Icon=Happosai.jpg
 Deck Type=constructed
 [main]
-1 Swamp|ISD
-1 Plains|ISD
-1 Island|ISD
+1 Swamp
+1 Plains
+1 Island
 4 Scrubland
 1 Underground Sea
 1 Tundra

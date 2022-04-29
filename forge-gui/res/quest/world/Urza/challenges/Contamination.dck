@@ -3,7 +3,7 @@ id=16
 AILife=20
 Repeat=true
 Wins=20
-Card Reward=tournament pack USG;chosen card rarity:R sets:USG;50% Contamination|USG
+Card Reward=tournament pack USG;chosen card rarity:R sets:USG;50% Contamination
 Credit Reward=300
 Ticket Reward=true
 HumanExtras=
@@ -16,10 +16,10 @@ Description=The contamination of mana is so strong around here, you can't even c
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [Main]
-24 Swamp|USG
-4 Despondency|USG
-4 Fog of Gnats|ULG
-16 Giant Cockroach|ULG
-4 Mana Leech|USG
-4 Carrion Beetles|USG
-4 Befoul|USG
+24 Swamp
+4 Despondency
+4 Fog of Gnats
+16 Giant Cockroach
+4 Mana Leech
+4 Carrion Beetles
+4 Befoul

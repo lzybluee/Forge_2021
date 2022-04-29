@@ -7,26 +7,26 @@ Difficulty=hard
 Description=Weenies and burn in a freeform 'Sligh'-style deck.
 Deck Type=constructed
 [main]
-1 Black Vise|LEB
-1 Burning Palm Efreet|MIR
-2 Burning Shield Askari|MIR
-1 Dragon Whelp|LEB
-4 Dwarven Miner|MIR
-4 Dwarven Ruins|FEM
-1 Fireball|LEB
-2 Goblin Balloon Brigade|LEB
-4 Incinerate|MIR
-3 Ironclaw Orcs|LEB
-4 Lightning Bolt|LEB
-4 Mishra's Factory|ATQ
-15 Mountain|MIR
-3 Orcish Cannoneers|ICE
-2 Orcish Librarian|ICE
-4 Pillage|ALL
-1 Searing Spear Askari|MIR
-2 Soldier of Fortune|ALL
-1 Strip Mine|ATQ
-1 Wildfire Emissary|MIR
+1 Black Vise
+1 Burning Palm Efreet
+2 Burning Shield Askari
+1 Dragon Whelp
+4 Dwarven Miner
+4 Dwarven Ruins
+1 Fireball
+2 Goblin Balloon Brigade
+4 Incinerate
+3 Ironclaw Orcs
+4 Lightning Bolt
+4 Mishra's Factory
+15 Mountain
+3 Orcish Cannoneers
+2 Orcish Librarian
+4 Pillage
+1 Searing Spear Askari
+2 Soldier of Fortune
+1 Strip Mine
+1 Wildfire Emissary
 [sideboard]
 [planes]
 [schemes]

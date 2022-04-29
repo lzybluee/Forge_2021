@@ -7,28 +7,28 @@ Difficulty=easy
 Description=Abiku plays a RW 'Ride Like the Wind' deck.
 Deck Type=constructed
 [main]
-1 Agility|MIR
-1 Alarum|MIR
-2 Aleatory|MIR
-2 Blistering Barrier|MIR
-3 Burning Shield Askari|MIR
-1 Crimson Roc|MIR
-2 Favorable Destiny|MIR
-3 Femeref Knight|MIR
-1 Iron Tusk Elephant|MIR
-1 Melesse Spirit|MIR
-12 Mountain|MIR
-3 Mtenda Herder|MIR
-12 Plains|MIR
-1 Reverse Damage|LEB
-3 Searing Spear Askari|MIR
-1 Sidar Jabari|MIR
-2 Spitting Earth|MIR
-1 Telim'Tor|MIR
-2 Telim'Tor's Darts|MIR
-1 Vigilant Martyr|MIR
-2 Zhalfirin Commander|MIR
-3 Zhalfirin Knight|MIR
+1 Agility
+1 Alarum
+2 Aleatory
+2 Blistering Barrier
+3 Burning Shield Askari
+1 Crimson Roc
+2 Favorable Destiny
+3 Femeref Knight
+1 Iron Tusk Elephant
+1 Melesse Spirit
+12 Mountain
+3 Mtenda Herder
+12 Plains
+1 Reverse Damage
+3 Searing Spear Askari
+1 Sidar Jabari
+2 Spitting Earth
+1 Telim'Tor
+2 Telim'Tor's Darts
+1 Vigilant Martyr
+2 Zhalfirin Commander
+3 Zhalfirin Knight
 [sideboard]
 [planes]
 [schemes]

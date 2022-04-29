@@ -7,18 +7,18 @@ Description=Mono R Defender deck with Vent Sentinel
 Icon=Redwall.jpg
 Deck Type=constructed
 [main]
-4 Lightning Bolt|M11
-3 Pyroclasm|M11
-4 AEther Membrane|PLC
-20 Mountain|MBS
-3 Goblin Charbelcher|MRD
-4 Terramorphic Expanse|M11
-4 Vent Sentinel|ROE
-1 Meekstone|7ED
-1 Ensnaring Bridge|8ED
-4 Wall of Razors|STH
-4 Ogre Sentry|ROE
-4 Steel Wall|MRD
+4 Lightning Bolt
+3 Pyroclasm
+4 AEther Membrane
+20 Mountain
+3 Goblin Charbelcher
+4 Terramorphic Expanse
+4 Vent Sentinel
+1 Meekstone
+1 Ensnaring Bridge
+4 Wall of Razors
+4 Ogre Sentry
+4 Steel Wall
 1 Wall of Stone
 1 Wall of Diffusion
 1 Wall of Earth

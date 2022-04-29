@@ -10,32 +10,32 @@ Deck Type=constructed
 Set=CSP
 Image=kjeldoran_cunning.jpg
 [main]
-1 Binding Grasp|ICE
-2 Boreal Shelf|CSP
-3 Brainstorm|ICE
-1 Darien, King of Kjeldor|CSP
-1 Disenchant|ICE
-1 Field Marshal|CSP
-4 Island|ICE|1
-4 Island|ICE|2
-3 Island|ICE|3
-1 Jotun Grunt|CSP
-1 Jotun Owl Keeper|CSP
-2 Kjeldoran Elite Guard|ICE
-1 Kjeldoran Gargoyle|CSP
-1 Kjeldoran Home Guard|ALL
-3 Kjeldoran Outrider|CSP
-1 Kjeldoran Pride|ALL|2
-2 Lat-Nam's Legacy|ALL|2
-4 Plains|ICE|1
-4 Plains|ICE|2
-3 Plains|ICE|3
-2 Portent|ICE
-1 Reinforcements|ALL|1
-1 Scars of the Veteran|ALL
-4 Surging Aether|CSP
-4 Surging Sentinels|CSP
-1 Swords to Plowshares|ICE
-2 Wings of Aesthir|ICE
-2 Zuran Spellcaster|ICE
+1 Binding Grasp
+2 Boreal Shelf
+3 Brainstorm
+1 Darien, King of Kjeldor
+1 Disenchant
+1 Field Marshal
+4 Island
+4 Island
+3 Island
+1 Jotun Grunt
+1 Jotun Owl Keeper
+2 Kjeldoran Elite Guard
+1 Kjeldoran Gargoyle
+1 Kjeldoran Home Guard
+3 Kjeldoran Outrider
+1 Kjeldoran Pride
+2 Lat-Nam's Legacy
+4 Plains
+4 Plains
+3 Plains
+2 Portent
+1 Reinforcements
+1 Scars of the Veteran
+4 Surging Aether
+4 Surging Sentinels
+1 Swords to Plowshares
+2 Wings of Aesthir
+2 Zuran Spellcaster
 [sideboard]

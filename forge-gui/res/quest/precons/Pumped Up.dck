@@ -12,28 +12,28 @@ Set=ZEN
 Image=pumped_up.jpg
 
 [main]
-7  Island|ZEN
-10  Mountain|ZEN
-1  Terramorphic Expanse|M10
+7  Island
+10  Mountain
+1  Terramorphic Expanse
 
-1  Aether Figment|ZEN
-1  Canyon Minotaur|M10
-1  Dragon Whelp|M10
-1  Goblin Piker|M10
-1  Hellkite Charger+|ZEN
-2  Molten Ravager|ZEN
-1  Phantom Warrior|M10
-1  Prodigal Pyromancer|M10
-1  Raging Goblin|M10
-2  Torch Slinger|ZEN
-2  Welkin Tern|ZEN
+1  Aether Figment
+1  Canyon Minotaur
+1  Dragon Whelp
+1  Goblin Piker
+1  Hellkite Charger+
+2  Molten Ravager
+1  Phantom Warrior
+1  Prodigal Pyromancer
+1  Raging Goblin
+2  Torch Slinger
+2  Welkin Tern
 
-1  Act of Treason|M10
-2  Burst Lightning|ZEN
-1  Fireball|M10
-1  Into the Roil|ZEN
-1  Rite of Replication|ZEN
-1  Sleep|M10
-2  Spire Barrage|ZEN
+1  Act of Treason
+2  Burst Lightning
+1  Fireball
+1  Into the Roil
+1  Rite of Replication
+1  Sleep
+2  Spire Barrage
 
 [sideboard]

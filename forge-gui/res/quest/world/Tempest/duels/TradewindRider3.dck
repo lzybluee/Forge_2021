@@ -7,19 +7,19 @@ Description=Mono-blue creature deck
 Deck Type=constructed
 Name=TradewindRider3
 [Main]
-4 Cloud Spirit|STH
-4 Counterspell|TMP
-4 Curiosity|EXO
-9 Island|TMP|1
-4 Island|TMP|2
-2 Island|TMP|3
-3 Island|TMP|4
-4 Legacy's Allure|TMP
-4 Rootwater Hunter|TMP
-4 Thalakos Deceiver|STH
-1 Thalakos Scout|EXO
-4 Thalakos Seer|TMP
-4 Time Warp|TMP
-4 Tradewind Rider|TMP
-4 Wasteland|TMP
-1 Wayward Soul|EXO
+4 Cloud Spirit
+4 Counterspell
+4 Curiosity
+9 Island
+4 Island
+2 Island
+3 Island
+4 Legacy's Allure
+4 Rootwater Hunter
+4 Thalakos Deceiver
+1 Thalakos Scout
+4 Thalakos Seer
+4 Time Warp
+4 Tradewind Rider
+4 Wasteland
+1 Wayward Soul

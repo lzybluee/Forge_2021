@@ -7,22 +7,22 @@ Description=Land removal deck
 Deck Type=constructed
 Name=LandRemoval2
 [Main]
-2 Ancient Craving|PO2
-4 Goblin Settler|S99
-4 Lava Flow|POR
-2 Mountain|S99|1
-3 Mountain|S99|2
-4 Mountain|S99|3
-3 Mountain|S99|4
-4 Ogre Arsonist|PO2
-2 Rain of Salt|POR
-4 Rain of Tears|POR
-4 Ravaging Horde|PTK
-2 Ravenous Rats|PO2
-4 Stone Rain|POR
-4 Stream of Acid|S99
-4 Swamp|S99|1
-2 Swamp|S99|2
-3 Swamp|S99|3
-3 Swamp|S99|4
-2 Wei Night Raiders|PTK
+2 Ancient Craving
+4 Goblin Settler
+4 Lava Flow
+2 Mountain
+3 Mountain
+4 Mountain
+3 Mountain
+4 Ogre Arsonist
+2 Rain of Salt
+4 Rain of Tears
+4 Ravaging Horde
+2 Ravenous Rats
+4 Stone Rain
+4 Stream of Acid
+4 Swamp
+2 Swamp
+3 Swamp
+3 Swamp
+2 Wei Night Raiders

@@ -7,25 +7,25 @@ Difficulty=easy
 Description=A Tombstone Stairwell deck with UW weenies.
 Deck Type=constructed
 [main]
-4 Dark Ritual|LEB
-2 Death Speakers|HML
-2 Disenchant|LEB
-3 Ebony Charm|MIR
-3 Fallen Angel|LEG
-1 Hecatomb|ICE
-1 Ihsan's Shade|HML
-1 Jalum Tome|ATQ
-1 Phyrexian Vault|MIR
-7 Plains|LEB
-3 Savannah Lions|LEB
-3 Sengir Vampire|LEB
-3 Sewer Rats|MIR
-3 Skulking Ghost|MIR
-14 Swamp|LEB
-4 Swords to Plowshares|LEB
-3 Tombstone Stairwell|MIR
-3 Vampire Bats|LEG
-1 Zuran Orb|ICE
+4 Dark Ritual
+2 Death Speakers
+2 Disenchant
+3 Ebony Charm
+3 Fallen Angel
+1 Hecatomb
+1 Ihsan's Shade
+1 Jalum Tome
+1 Phyrexian Vault
+7 Plains
+3 Savannah Lions
+3 Sengir Vampire
+3 Sewer Rats
+3 Skulking Ghost
+14 Swamp
+4 Swords to Plowshares
+3 Tombstone Stairwell
+3 Vampire Bats
+1 Zuran Orb
 [sideboard]
 [planes]
 [schemes]

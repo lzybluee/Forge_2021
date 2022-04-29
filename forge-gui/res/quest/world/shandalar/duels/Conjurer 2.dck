@@ -7,19 +7,19 @@ Difficulty=medium
 Description=Blue/Artifact 'poker' deck.
 Deck Type=constructed
 [main]
-2 Aladdin's Ring|ARN
-1 Braingeyser|2ED
-3 Counterspell|2ED
-3 Giant Tortoise|ARN
-2 Grapeshot Catapult|ATQ
-24 Island|2ED
-3 Jayemdae Tome|4ED
-4 Pirate Ship|4ED
-4 Prodigal Sorcerer|4ED
-2 Psychic Purge|LEG
-2 Psionic Blast|2ED
-4 Rod of Ruin|4ED
-2 Triskelion|ATQ
-2 Wall of Air|LEB
-2 Wall of Water|LEB
+2 Aladdin's Ring
+1 Braingeyser
+3 Counterspell
+3 Giant Tortoise
+2 Grapeshot Catapult
+24 Island
+3 Jayemdae Tome
+4 Pirate Ship
+4 Prodigal Sorcerer
+2 Psychic Purge
+2 Psionic Blast
+4 Rod of Ruin
+2 Triskelion
+2 Wall of Air
+2 Wall of Water
 [sideboard]

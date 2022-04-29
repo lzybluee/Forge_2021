@@ -6,17 +6,17 @@ Difficulty=medium
 Description=Green Elves deck.
 Deck Type=constructed
 [main]
-4 Elven Riders|4ED
-4 Elvish Archers|LEB
-22 Forest|4ED
-2 Giant Spider|4ED
-4 Hurricane|4ED
-2 Jayemdae Tome|4ED
-4 Llanowar Elves|4ED
-2 People of the Woods|DRK
-4 Savaen Elves|DRK
-2 Stream of Life|LEB
-4 Untamed Wilds|4ED
-4 War Mammoth|LEB
-2 Winter Blast|LEG
+4 Elven Riders
+4 Elvish Archers
+22 Forest
+2 Giant Spider
+4 Hurricane
+2 Jayemdae Tome
+4 Llanowar Elves
+2 People of the Woods
+4 Savaen Elves
+2 Stream of Life
+4 Untamed Wilds
+4 War Mammoth
+2 Winter Blast
 [sideboard]

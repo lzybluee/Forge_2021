@@ -16,13 +16,13 @@ Description=Typical.
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [Main]
-8 Archetype of Aggression|BNG
-8 Archetype of Courage|BNG
-8 Archetype of Endurance|BNG
-8 Archetype of Finality|BNG
-8 Archetype of Imagination|BNG
-4 Forest|THS|3
-4 Island|THS|3
-4 Mountain|THS|3
-4 Plains|THS|3
-4 Swamp|THS|3
+8 Archetype of Aggression
+8 Archetype of Courage
+8 Archetype of Endurance
+8 Archetype of Finality
+8 Archetype of Imagination
+4 Forest
+4 Island
+4 Mountain
+4 Plains
+4 Swamp

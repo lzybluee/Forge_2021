@@ -7,24 +7,24 @@ Description=White - Red - Black deck with several discard effects and removal.
 Deck Type=constructed
 Name=WhiteBlackRed2
 [Main]
-3 Agonizing Demise|INV
-3 Battlefield Forge|APC
-4 Blazing Specter|INV
-3 Caves of Koilos|APC
-4 Death Grasp|APC
-1 Desolation Angel|APC
-4 Gerrard's Verdict|APC
-2 Ghitu Fire|INV
-2 Mountain|INV|1
-2 Orim's Thunder|APC
-3 Plains|INV|1
-2 Ravenous Rats|INV
-2 Spectral Lynx|APC
-4 Swamp|INV|1
-4 Swamp|INV|3
-1 Swamp|INV|4
-4 Terminate|PLS
-2 Trench Wurm|INV
-4 Urborg Volcano|INV
-4 Vindicate|APC
-2 Yawgmoth's Agenda|INV
+3 Agonizing Demise
+3 Battlefield Forge
+4 Blazing Specter
+3 Caves of Koilos
+4 Death Grasp
+1 Desolation Angel
+4 Gerrard's Verdict
+2 Ghitu Fire
+2 Mountain
+2 Orim's Thunder
+3 Plains
+2 Ravenous Rats
+2 Spectral Lynx
+4 Swamp
+4 Swamp
+1 Swamp
+4 Terminate
+2 Trench Wurm
+4 Urborg Volcano
+4 Vindicate
+2 Yawgmoth's Agenda

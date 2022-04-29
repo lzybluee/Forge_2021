@@ -7,30 +7,30 @@ Difficulty=easy
 Description=Aigamuxa plays a limited GR deck.
 Deck Type=constructed
 [main]
-1 Bad River|MIR
-1 Barishi|WTH
-2 Blood Lust|5ED
-1 Bloodrock Cyclops|WTH
-1 Burning Palm Efreet|MIR
-1 Crimson Roc|MIR
-1 Fireball|5ED
-1 Fireblast|VIS
-1 Flood Plain|MIR
-7 Forest|MIR
-1 Granger Guildmage|MIR
-1 Hill Giant|5ED
-1 Hulking Cyclops|VIS
-1 Jolrael's Centaur|MIR
-9 Mountain|MIR
-1 Natural Order|VIS
-1 Pentagram of the Ages|5ED
-1 River Boa|VIS
-1 Rukh Egg|ARN
-1 Sawtooth Ogre|WTH
-1 Scaled Wurm|5ED
-1 Spitting Earth|MIR
-1 Talruum Minotaur|MIR
-2 Wall of Roots|MIR
+1 Bad River
+1 Barishi
+2 Blood Lust
+1 Bloodrock Cyclops
+1 Burning Palm Efreet
+1 Crimson Roc
+1 Fireball
+1 Fireblast
+1 Flood Plain
+7 Forest
+1 Granger Guildmage
+1 Hill Giant
+1 Hulking Cyclops
+1 Jolrael's Centaur
+9 Mountain
+1 Natural Order
+1 Pentagram of the Ages
+1 River Boa
+1 Rukh Egg
+1 Sawtooth Ogre
+1 Scaled Wurm
+1 Spitting Earth
+1 Talruum Minotaur
+2 Wall of Roots
 [sideboard]
 [planes]
 [schemes]

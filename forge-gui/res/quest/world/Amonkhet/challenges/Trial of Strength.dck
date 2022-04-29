@@ -4,7 +4,7 @@ OpponentName=Rhonas
 AILife=20
 Repeat=true
 Wins=0
-Card Reward=Cartouche of Strength|AKH
+Card Reward=Cartouche of Strength
 Credit Reward=20000
 AIExtras=Rhonas's Monument|Vizier of the Menagerie
 HumanExtras=
@@ -16,76 +16,76 @@ Description="Everything in the trial has teeth. You will overcome them, or you w
 Icon=Rhonas the Indomitable.jpg
 Deck Type=constructed
 [Main]
-1 Aerial Guide|HOU
-1 Ancient Crab|AKH
-1 Angler Drake|AKH
-1 Arachnus Spinner|MM3
-1 Arachnus Web|MM3
-1 Birds of Paradise|CN2
-1 Brindle Shoat|PCA
-1 Broodbirth Viper|C15
-1 Colossapede|AKH
-1 Coveted Peacock|CN2
-1 Crocodile of the Crossing|AKH
-1 Death-Hood Cobra|MM3
-1 Decimator Beetle|AKH
-1 Defiant Greatmaw|AKH
-1 Dense Foliage|WTH
-1 Dragonlair Spider|PCA
-1 Emerald Oryx|M10
-1 Emperor Crocodile|EMA
-1 Endless Swarm|SOK
-1 Enigma Drake|AKH
-10 Forest|AKH|1
-10 Forest|AKH|2
-10 Forest|AKH|3
-10 Forest|AKH|4
-1 Frilled Sandwalla|HOU
-1 Giant Mantis|BFZ
-1 Giant Scorpion|DDR
-1 Giant Spider|AKH
-1 Gilded Cerodon|HOU
-1 Gloomwidow|SOI
-1 Glorybringer|AKH
-1 Graceful Antelope|ODY
-1 Grazing Gladehart|DDP
-1 Hinterland Drake|AER
-1 Honored Hydra|AKH
-1 Hyena Pack|AKH
-1 Loam Larva|OGW
-1 Lorescale Coatl|C15
-1 Majestic Myriarch|HOU
-1 Manglehorn|AKH
-1 Manticore of the Gauntlet|AKH
-1 Mystic Snake|C15
-1 Netcaster Spider|CN2
-1 Nimble Mongoose|EMA
-1 Noose Constrictor|EMN
-1 Obelisk Spider|HOU
-1 Ornery Kudu|AKH
-1 Penumbra Spider|MM3
-1 Pouncing Cheetah|AKH
-1 Prowling Serpopard|AKH
-1 Rampaging Hippo|HOU
-1 Ramunap Hydra|HOU
-1 Regal Caracal|AKH
-3 Rhonas's Monument|AKH
-1 Scaled Behemoth|AKH
-1 Scythe Leopard|DDR
-1 Sentinel Spider|EMA
-1 Shefet Monitor|AKH
-1 Shimmerscale Drake|AKH
-1 Skyswirl Harrier|KLD
-1 Stingerfling Spider|C15
-1 Swift Spinner|EMN
-1 Tenacious Hunter|HOU
-1 Thorned Moloch|HOU
-1 Thresher Lizard|AKH
-1 Thriving Ibex|KLD
-1 Thriving Rhino|KLD
-3 Vizier of the Menagerie|AKH
-1 Wasteland Scorpion|AKH
-1 Watcher in the Web|SOI
-1 Whitemane Lion|EMA
-1 Wind Drake|KLD
-1 Winding Constrictor|AER
+1 Aerial Guide
+1 Ancient Crab
+1 Angler Drake
+1 Arachnus Spinner
+1 Arachnus Web
+1 Birds of Paradise
+1 Brindle Shoat
+1 Broodbirth Viper
+1 Colossapede
+1 Coveted Peacock
+1 Crocodile of the Crossing
+1 Death-Hood Cobra
+1 Decimator Beetle
+1 Defiant Greatmaw
+1 Dense Foliage
+1 Dragonlair Spider
+1 Emerald Oryx
+1 Emperor Crocodile
+1 Endless Swarm
+1 Enigma Drake
+10 Forest
+10 Forest
+10 Forest
+10 Forest
+1 Frilled Sandwalla
+1 Giant Mantis
+1 Giant Scorpion
+1 Giant Spider
+1 Gilded Cerodon
+1 Gloomwidow
+1 Glorybringer
+1 Graceful Antelope
+1 Grazing Gladehart
+1 Hinterland Drake
+1 Honored Hydra
+1 Hyena Pack
+1 Loam Larva
+1 Lorescale Coatl
+1 Majestic Myriarch
+1 Manglehorn
+1 Manticore of the Gauntlet
+1 Mystic Snake
+1 Netcaster Spider
+1 Nimble Mongoose
+1 Noose Constrictor
+1 Obelisk Spider
+1 Ornery Kudu
+1 Penumbra Spider
+1 Pouncing Cheetah
+1 Prowling Serpopard
+1 Rampaging Hippo
+1 Ramunap Hydra
+1 Regal Caracal
+3 Rhonas's Monument
+1 Scaled Behemoth
+1 Scythe Leopard
+1 Sentinel Spider
+1 Shefet Monitor
+1 Shimmerscale Drake
+1 Skyswirl Harrier
+1 Stingerfling Spider
+1 Swift Spinner
+1 Tenacious Hunter
+1 Thorned Moloch
+1 Thresher Lizard
+1 Thriving Ibex
+1 Thriving Rhino
+3 Vizier of the Menagerie
+1 Wasteland Scorpion
+1 Watcher in the Web
+1 Whitemane Lion
+1 Wind Drake
+1 Winding Constrictor

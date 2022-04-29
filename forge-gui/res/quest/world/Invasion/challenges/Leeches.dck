@@ -17,11 +17,11 @@ Description=Sometimes "free" is the most expensive.
 Deck Type=constructed
 Name=Leeches
 [Main]
-6 Plains|INV
-6 Mountain|INV
-6 Swamp|INV
-6 Forest|INV
-6 Island|INV
-9 Draco|PLS
-3 Collective Restraint|INV
-3 Dueling Grounds|INV
+6 Plains
+6 Mountain
+6 Swamp
+6 Forest
+6 Island
+9 Draco
+3 Collective Restraint
+3 Dueling Grounds

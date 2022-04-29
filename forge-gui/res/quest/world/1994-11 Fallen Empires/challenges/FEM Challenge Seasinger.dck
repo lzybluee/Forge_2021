@@ -16,6 +16,6 @@ Description="I know the odds are against us. I know she's a siren. I know she's 
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [main]
-24 Island|LEB|2
-24 Seasinger|FEM
-12 Tidal Influence|FEM
+24 Island
+24 Seasinger
+12 Tidal Influence

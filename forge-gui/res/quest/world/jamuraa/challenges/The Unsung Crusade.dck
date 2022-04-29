@@ -4,7 +4,7 @@ OpponentName=Saladin
 AILife=33
 Repeat=true
 Wins=25
-Card Reward=70% Crusade|2ED;66% 1 white rare;66% 1 white rare;1 rare;25% Royal Assassin|2ED
+Card Reward=70% Crusade|2ED;66% 1 white rare;66% 1 white rare;1 rare;25% Royal Assassin
 Credit Reward=500
 HumanExtras=Crusade
 AIExtras=Crusade|Royal Assassin|Kjeldoran Outpost
@@ -16,28 +16,28 @@ Description=Alas, Saladin's troops have captured The Holy City! Your mission is 
 Icon=Saladin.jpg
 Deck Type=constructed
 [main]
-1 Armageddon|5ED
-2 Control Magic|LEB
-2 Disenchant|5ED
-2 Fireball|LEB
-4 Flood Plain|MIR
-3 Kjeldoran Outpost|ALL
-4 Lightning Bolt|LEB
-4 Mana Drain|LEG
-2 Mishra's Factory|ATQ
-4 Order of Leitbur|FEM
-4 Order of the White Shield|ICE
-2 Plains|MIR
-4 Plateau|LEB
-1 Power Sink|5ED
-4 Savannah Lions|LEB
-2 Serrated Arrows|HML
-2 Swords to Plowshares|LEB
-4 Tithe|VIS
-4 Tundra|LEB
-1 Undiscovered Paradise|VIS
-4 Volcanic Island|LEB
-4 White Knight|5ED
+1 Armageddon
+2 Control Magic
+2 Disenchant
+2 Fireball
+4 Flood Plain
+3 Kjeldoran Outpost
+4 Lightning Bolt
+4 Mana Drain
+2 Mishra's Factory
+4 Order of Leitbur
+4 Order of the White Shield
+2 Plains
+4 Plateau
+1 Power Sink
+4 Savannah Lions
+2 Serrated Arrows
+2 Swords to Plowshares
+4 Tithe
+4 Tundra
+1 Undiscovered Paradise
+4 Volcanic Island
+4 White Knight
 [sideboard]
 [planes]
 [schemes]

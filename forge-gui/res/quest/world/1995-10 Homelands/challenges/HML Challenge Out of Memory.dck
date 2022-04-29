@@ -15,6 +15,6 @@ Description="Um... oh... what was I saying?" -Reveka, Wizard Savant
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [main]
-24 Island|LEB|2
-18 Memory Lapse|HML|1
-18 Memory Lapse|HML|2
+24 Island
+18 Memory Lapse
+18 Memory Lapse

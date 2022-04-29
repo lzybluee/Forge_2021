@@ -6,30 +6,30 @@ Icon=Aziza.jpg
 Difficulty=very hard
 Description=Aziza plays plays a Phelddagrif deck by Lenny Colin and Rod Ho.
 Deck Type=constructed
-Card Reward=15% Phelddagrif|ALL
+Card Reward=15% Phelddagrif
 [main]
-2 Adarkar Wastes|ICE
-4 Air Elemental|5ED
-1 Brainstorm|ICE
-4 Counterspell|5ED
-3 Disenchant|5ED
-2 Dissipate|MIR
-1 Fireball|LEB
-3 Force of Will|ALL
-1 Forest|MIR
-3 Incinerate|MIR
-8 Island|MIR
-2 Kjeldoran Outpost|ALL
-2 Mountain|MIR
-2 Phelddagrif|ALL
-5 Plains|MIR
-2 Quicksand|VIS
-4 Swords to Plowshares|LEB
-2 Sylvan Library|LEG
-4 Thawing Glaciers|ALL
-2 Undiscovered Paradise|VIS
-1 Waterspout Djinn|VIS
-3 Wrath of God|5ED
+2 Adarkar Wastes
+4 Air Elemental
+1 Brainstorm
+4 Counterspell
+3 Disenchant
+2 Dissipate
+1 Fireball
+3 Force of Will
+1 Forest
+3 Incinerate
+8 Island
+2 Kjeldoran Outpost
+2 Mountain
+2 Phelddagrif
+5 Plains
+2 Quicksand
+4 Swords to Plowshares
+2 Sylvan Library
+4 Thawing Glaciers
+2 Undiscovered Paradise
+1 Waterspout Djinn
+3 Wrath of God
 [sideboard]
 [planes]
 [schemes]

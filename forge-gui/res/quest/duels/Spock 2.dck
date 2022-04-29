@@ -7,8 +7,8 @@ Description=BG Elf Kinship deck with Winnower Patrol and Wolf-Skull Shaman
 Icon=Spock.jpg
 Deck Type=constructed
 [main]
-9 Forest|ISD
-1 Swamp|ISD
+9 Forest
+1 Swamp
 4 Gilt-Leaf Palace
 4 Woodland Cemetery
 1 Bayou

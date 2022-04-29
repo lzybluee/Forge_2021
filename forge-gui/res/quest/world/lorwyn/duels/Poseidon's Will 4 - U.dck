@@ -9,20 +9,20 @@ Description=[U] Merfolk aggro.
 Deck Type=constructed
 
 [Main]
-19 Island|LRW
-4 Mutavault|MOR
+19 Island
+4 Mutavault
 
-4 Aquitect's Will|LRW
-4 Cryptic Command|LRW
-2 Mirrorweave|SHM
-4 Ponder|M10
-4 Sage's Dousing|MOR
+4 Aquitect's Will
+4 Cryptic Command
+2 Mirrorweave
+4 Ponder
+4 Sage's Dousing
 
-3 Wistful Selkie|EVE
-4 Cursecatcher|SHM
-4 Merrow Reejerey|LRW
-4 Silvergill Adept|LRW
-4 Stonybrook Banneret|MOR
+3 Wistful Selkie
+4 Cursecatcher
+4 Merrow Reejerey
+4 Silvergill Adept
+4 Stonybrook Banneret
 
 [sideboard]
 [planes]

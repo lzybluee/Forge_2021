@@ -8,20 +8,20 @@ Description=Eshu plays Szlagor's 'Sligh' deck.
 Deck Type=constructed
 Card Reward=14% chosen card sets:5ED,MIR,VIS rules:red,creature rarity:C,U desc:a Red Creature
 [main]
-2 Death Spark|ALL
-3 Disintegrate|LEB
-2 Dwarven Miner|MIR
-3 Dwarven Soldier|FEM
-4 Fireblast|VIS
-3 Hammer of Bogardan|MIR
-4 Incinerate|MIR
-4 Ironclaw Orcs|LEB
-18 Mountain|MIR
-4 Orcish Artillery|LEB
-3 Quicksand|VIS
-4 Suq'Ata Lancer|VIS
-2 Thawing Glaciers|ALL
-4 Viashino Sandstalker|VIS
+2 Death Spark
+3 Disintegrate
+2 Dwarven Miner
+3 Dwarven Soldier
+4 Fireblast
+3 Hammer of Bogardan
+4 Incinerate
+4 Ironclaw Orcs
+18 Mountain
+4 Orcish Artillery
+3 Quicksand
+4 Suq'Ata Lancer
+2 Thawing Glaciers
+4 Viashino Sandstalker
 [sideboard]
 [planes]
 [schemes]

@@ -7,19 +7,19 @@ Difficulty=medium
 Description=Ratata
 Deck Type=constructed
 [main]
-4 Blood Crypt|RTR
-4 Drainpipe Vermin|RTR
-4 Gobhobbler Rats|DIS
-4 Gutter Skulk|GTC
-4 Hellhole Rats|DIS
-8 Mountain|RTR
-4 Ogre Slumlord|GTC
-4 Pack Rat|RTR
-4 Rakdos Guildgate|RTR
-4 Ratcatcher|DIS
-4 Seal of Fire|DIS
-4 Last Gasp|RAV
-8 Swamp|RTR
+4 Blood Crypt
+4 Drainpipe Vermin
+4 Gobhobbler Rats
+4 Gutter Skulk
+4 Hellhole Rats
+8 Mountain
+4 Ogre Slumlord
+4 Pack Rat
+4 Rakdos Guildgate
+4 Ratcatcher
+4 Seal of Fire
+4 Last Gasp
+8 Swamp
 [sideboard]
 [planes]
 [schemes]

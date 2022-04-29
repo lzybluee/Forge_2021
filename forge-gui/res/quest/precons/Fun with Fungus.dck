@@ -12,28 +12,28 @@ Set=TSP
 Image=fun_with_fungus.jpg
 
 [Main]
-1 Assassinate|TSP
-1 Claws of Gix|TSB
-3 Deathspore Thallid|TSP
-1 Dread Return|TSP
-2 Fallen Ideal|TSP
-1 Feebleness|TSP
-13 Forest|TSP|1
-2 Herd Gnarr|TSP
-1 Krosan Grip|TSP
-1 Might of Old Krosa|TSP
-1 Pendelhaven|TSB
-2 Pendelhaven Elder|TSP
-2 Savage Thallid|TSP
-2 Sporesower Thallid|TSP
-2 Sprout|TSP
-2 Strength in Numbers|TSP
-2 Sudden Death|TSP
-10 Swamp|TSP|1
-2 Thallid|TSB
-3 Thallid Germinator|TSP
-3 Thallid Shell-Dweller|TSP
-1 Thelon of Havenwood|TSP
-1 Verdant Embrace|TSP
-1 Wormwood Dryad|TSP
+1 Assassinate
+1 Claws of Gix
+3 Deathspore Thallid
+1 Dread Return
+2 Fallen Ideal
+1 Feebleness
+13 Forest
+2 Herd Gnarr
+1 Krosan Grip
+1 Might of Old Krosa
+1 Pendelhaven
+2 Pendelhaven Elder
+2 Savage Thallid
+2 Sporesower Thallid
+2 Sprout
+2 Strength in Numbers
+2 Sudden Death
+10 Swamp
+2 Thallid
+3 Thallid Germinator
+3 Thallid Shell-Dweller
+1 Thelon of Havenwood
+1 Verdant Embrace
+1 Wormwood Dryad
 [Sideboard]

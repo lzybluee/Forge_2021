@@ -7,21 +7,21 @@ Difficulty=hard
 Description=The Dutch Windmill
 Deck Type=constructed
 [main]
-2 Darkblast|RAV
-4 Dimir Guildgate|GTC
-4 Glimpse the Unthinkable|RAV
-8 Island|RTR
-4 Grisly Spectacle|GTC
-2 Mind Grind|GTC
-4 Muddle the Mixture|RAV
-2 Psychic Spiral|RTR
-4 Remand|RAV
-4 Dimir Infiltrator|RAV
-8 Swamp|RTR
-4 Watery Grave|GTC
-2 Paranoid Delusions|GTC
-4 Wight of Precinct Six|GTC
-4 Compulsive Research|RAV
+2 Darkblast
+4 Dimir Guildgate
+4 Glimpse the Unthinkable
+8 Island
+4 Grisly Spectacle
+2 Mind Grind
+4 Muddle the Mixture
+2 Psychic Spiral
+4 Remand
+4 Dimir Infiltrator
+8 Swamp
+4 Watery Grave
+2 Paranoid Delusions
+4 Wight of Precinct Six
+4 Compulsive Research
 [sideboard]
 [planes]
 [schemes]

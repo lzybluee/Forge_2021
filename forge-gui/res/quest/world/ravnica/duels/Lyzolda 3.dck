@@ -7,23 +7,23 @@ Difficulty=hard
 Description=Burn, burn, yes you're gonna burn
 Deck Type=constructed
 [main]
-4 Ash Zealot|RTR
-4 Blood Crypt|RTR
-4 Char|RAV
-4 Dark Confidant|RAV
-2 Demonfire|DIS
-2 Foundry Street Denizen|GTC
-2 Gore-House Chainwalker|RTR
-4 Hellhole Flailer|RTR
-9 Mountain|RAV
-2 Rakdos Guildgate|RTR
-4 Rakdos Cackler|RTR
-4 Rakdos Shred-Freak|RTR
-4 Seal of Fire|DIS
-3 Skullcrack|GTC
-1 Rakdos Guildmage|DIS
-1 Rix Maadi Guildmage|RTR
-9 Swamp|RTR
+4 Ash Zealot
+4 Blood Crypt
+4 Char
+4 Dark Confidant
+2 Demonfire
+2 Foundry Street Denizen
+2 Gore-House Chainwalker
+4 Hellhole Flailer
+9 Mountain
+2 Rakdos Guildgate
+4 Rakdos Cackler
+4 Rakdos Shred-Freak
+4 Seal of Fire
+3 Skullcrack
+1 Rakdos Guildmage
+1 Rix Maadi Guildmage
+9 Swamp
 [sideboard]
 [planes]
 [schemes]

@@ -7,8 +7,8 @@ Description=WU flying creature deck with Radiant, Archangel, Soulcatcher and Pri
 Icon=Radiant.jpg
 Deck Type=constructed
 [main]
-4 Plains|M12
-3 Island|M12
+4 Plains
+3 Island
 4 Seachrome Coast
 4 Sejiri Refuge
 4 Glacial Fortress

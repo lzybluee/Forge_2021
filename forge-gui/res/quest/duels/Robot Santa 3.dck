@@ -7,7 +7,7 @@ Description=Mono R artifact deck with Whipflare
 Icon=Robot Santa.jpg
 Deck Type=constructed
 [main]
-16 Mountain|SOM
+16 Mountain
 4 Great Furnace
 1 Mox Ruby
 4 Memnite

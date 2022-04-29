@@ -16,5 +16,5 @@ Description="Look to the north; there you will find aid and comfort." -The Book 
 Icon=Northern Paladin.jpg
 Deck Type=constructed
 [main]
-30 Northern Paladin|LEB
-30 Plains|LEB|1
+30 Northern Paladin
+30 Plains

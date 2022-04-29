@@ -15,6 +15,6 @@ Description=Swing your axe as a broom, to sweep away the foe.
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [Main]
-15 Lava Axe|POR
-30 Mountain|POR|1
-15 Pyroclasm|POR
+15 Lava Axe
+30 Mountain
+15 Pyroclasm

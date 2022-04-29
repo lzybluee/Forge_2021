@@ -17,8 +17,8 @@ Description=X? What do you mean by X?
 Deck Type=constructed
 Name=Seismic
 [Main]
-10 Blaze|PO2
-10 Nature's Lore|POR
-10 Rolling Earthquake|PTK
-10 Three Visits|PTK
-20 Forest|PTK
+10 Blaze
+10 Nature's Lore
+10 Rolling Earthquake
+10 Three Visits
+20 Forest

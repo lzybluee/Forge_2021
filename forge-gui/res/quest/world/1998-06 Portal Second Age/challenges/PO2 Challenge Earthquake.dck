@@ -15,5 +15,5 @@ Description="It's snowing still," said Eeyore gloomily. "And freezing." "However
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [Main]
-30 Earthquake|PO2
-30 Mountain|PO2|1
+30 Earthquake
+30 Mountain

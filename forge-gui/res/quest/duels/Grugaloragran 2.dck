@@ -7,18 +7,18 @@ Description=Rakdos Burn deck with cheap direct damage spells, small Haste creatu
 Deck Type=constructed
 Icon=Grugaloragran.jpg
 [main]
-4 Cinder Barrens|M19
-4 Dragonskull Summit|XLN
-4 Fanatical Firebrand|RIX
-4 Ghitu Lavarunner|DOM
-4 Lightning Strike|M19
+4 Cinder Barrens
+4 Dragonskull Summit
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Lightning Strike
 11 Mountain
-4 Risk Factor|GRN
-4 Shock|M19
-4 Sovereign's Bite|M19
+4 Risk Factor
+4 Shock
+4 Sovereign's Bite
 3 Swamp
-4 Sword-Point Diplomacy|XLN
-2 The Flame of Keld|DOM
-4 Viashino Pyromancer|M19
-4 Wizard's Lightning|DOM
+4 Sword-Point Diplomacy
+2 The Flame of Keld
+4 Viashino Pyromancer
+4 Wizard's Lightning
 [sideboard]

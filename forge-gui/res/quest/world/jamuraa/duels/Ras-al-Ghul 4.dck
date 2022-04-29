@@ -8,40 +8,40 @@ Description=Ra's al Ghul plays a T1 'Chinnock Beater' deck.
 Deck Type=constructed
 Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:land rarity:C,U desc:a Land
 [main]
-1 Ancestral Recall|LEB
-1 Balance|LEB
-1 Black Lotus|LEB
-2 City of Brass|5ED
-2 Disenchant|5ED
-2 Dwarven Miner|MIR
-2 Erhnam Djinn|ARN
-2 Gorilla Shaman|ALL
-1 Hammer of Bogardan|MIR
-3 Incinerate|MIR
-1 Library of Alexandria|ARN
-4 Lightning Bolt|LEB
-1 Mox Emerald|LEB
-1 Mox Jet|LEB
-1 Mox Pearl|LEB
-1 Mox Ruby|LEB
-1 Mox Sapphire|LEB
-2 Mystical Tutor|MIR
-1 Plains|MIR
-2 Plateau|LEB
-1 Regrowth|LEB
-2 Savannah|LEB
-2 Savannah Lions|LEB
-2 Serendib Efreet|ARN
-2 Serra Angel|LEB
-4 Strip Mine|ATQ
-2 Taiga|LEB
-1 Time Walk|LEB
-1 Timetwister|LEB
-2 Tropical Island|LEB
-3 Tundra|LEB
-4 Volcanic Island|LEB
-1 Wheel of Fortune|LEB
-1 Zuran Orb|ICE
+1 Ancestral Recall
+1 Balance
+1 Black Lotus
+2 City of Brass
+2 Disenchant
+2 Dwarven Miner
+2 Erhnam Djinn
+2 Gorilla Shaman
+1 Hammer of Bogardan
+3 Incinerate
+1 Library of Alexandria
+4 Lightning Bolt
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+2 Mystical Tutor
+1 Plains
+2 Plateau
+1 Regrowth
+2 Savannah
+2 Savannah Lions
+2 Serendib Efreet
+2 Serra Angel
+4 Strip Mine
+2 Taiga
+1 Time Walk
+1 Timetwister
+2 Tropical Island
+3 Tundra
+4 Volcanic Island
+1 Wheel of Fortune
+1 Zuran Orb
 [sideboard]
 [planes]
 [schemes]

@@ -6,27 +6,27 @@ Icon=Alouroua.jpg
 Difficulty=very hard
 Description=Green stompy, fast mana and big creatures.
 Deck Type=constructed
-Card Reward=12% Lhurgoyf|ICE
+Card Reward=12% Lhurgoyf
 [main]
-1 Crumble|ATQ
-1 Desert Twister|ARN
-2 Elvish Archers|LEB
-4 Erhnam Djinn|ARN
-2 Fallow Earth|MIR
-1 Force of Nature|LEB
-15 Forest|MIR
-4 Llanowar Elves|5ED
-3 Giant Growth|LEB
-2 Hurricane|LEB
-2 Icy Manipulator|LEB
-1 Jayemdae Tome|LEB
-2 Jolrael's Centaur|MIR
-4 Lhurgoyf|ICE
-4 Mishra's Factory|ATQ
-3 Mtenda Lion|MIR
-3 Nature's Lore|ICE
-2 Woolly Spider|ICE
-4 Yavimaya Ants|ALL
+1 Crumble
+1 Desert Twister
+2 Elvish Archers
+4 Erhnam Djinn
+2 Fallow Earth
+1 Force of Nature
+15 Forest
+4 Llanowar Elves
+3 Giant Growth
+2 Hurricane
+2 Icy Manipulator
+1 Jayemdae Tome
+2 Jolrael's Centaur
+4 Lhurgoyf
+4 Mishra's Factory
+3 Mtenda Lion
+3 Nature's Lore
+2 Woolly Spider
+4 Yavimaya Ants
 [sideboard]
 [planes]
 [schemes]

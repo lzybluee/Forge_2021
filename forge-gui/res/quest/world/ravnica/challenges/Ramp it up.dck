@@ -4,7 +4,7 @@ OpponentName=Trostani
 AILife=30
 Repeat=true
 Wins=20
-Card Reward=2 multicolor rares;Temple Garden|RAV
+Card Reward=2 multicolor rares;Temple Garden
 Credit Reward=200
 AIExtras=Loxodon Gatekeeper
 [metadata]
@@ -15,20 +15,20 @@ Description=Always one step behind..
 Icon=Trostani.jpg
 Deck Type=constructed
 [main]
-3 Angel of Serenity|RTR
-3 Armada Wurm|RTR
-4 Birds of Paradise|RAV
-3 Carven Caryatid|RAV
-4 Civic Wayfinder|RAV
-4 Condemn|DIS
-4 Faith's Fetters|RAV
-4 Farseek|RAV
-10 Forest|RTR
-8 Plains|RTR
-4 Selesnya Guildgate|RTR
-4 Temple Garden|RTR
-3 Trostani, Selesnya's Voice|RTR
-2 Worldspine Wurm|RTR
+3 Angel of Serenity
+3 Armada Wurm
+4 Birds of Paradise
+3 Carven Caryatid
+4 Civic Wayfinder
+4 Condemn
+4 Faith's Fetters
+4 Farseek
+10 Forest
+8 Plains
+4 Selesnya Guildgate
+4 Temple Garden
+3 Trostani, Selesnya's Voice
+2 Worldspine Wurm
 [sideboard]
 [planes]
 [schemes]

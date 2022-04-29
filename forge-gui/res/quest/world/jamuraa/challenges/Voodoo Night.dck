@@ -16,24 +16,24 @@ Description=It is a pitch-black night, and an eerie howl echoes in the distance.
 Icon=BaronSamedi.jpg
 Deck Type=constructed
 [main]
-4 Coercion|VIS
-4 Fallen Askari|VIS
-4 Fireblast|VIS
-1 Hammer of Bogardan|MIR
-4 Incinerate|MIR
-1 Kaervek's Spite|VIS
-3 Kaervek's Torch|MIR
-10 Mountain|MIR
-1 Animate Dead|5ED
-2 Quicksand|VIS
-4 Rocky Tar Pit|MIR
-3 Shadow Guildmage|MIR
-1 Snake Basket|VIS
-1 Stupor|MIR
-8 Swamp|MIR
-4 Talruum Minotaur|MIR
-1 Undiscovered Paradise|VIS
-4 Viashino Sandstalker|VIS
+4 Coercion
+4 Fallen Askari
+4 Fireblast
+1 Hammer of Bogardan
+4 Incinerate
+1 Kaervek's Spite
+3 Kaervek's Torch
+10 Mountain
+1 Animate Dead
+2 Quicksand
+4 Rocky Tar Pit
+3 Shadow Guildmage
+1 Snake Basket
+1 Stupor
+8 Swamp
+4 Talruum Minotaur
+1 Undiscovered Paradise
+4 Viashino Sandstalker
 [sideboard]
 [planes]
 [schemes]

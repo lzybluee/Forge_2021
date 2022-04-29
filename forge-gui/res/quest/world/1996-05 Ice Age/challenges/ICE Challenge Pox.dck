@@ -15,5 +15,5 @@ Description="A plague o' both your houses!" -Mercutio, Shakespeare's Romeo and J
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [main]
-30 Pox|ICE
-30 Swamp|ICE|1
+30 Pox
+30 Swamp

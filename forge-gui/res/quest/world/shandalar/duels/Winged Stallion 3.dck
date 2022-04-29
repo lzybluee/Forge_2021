@@ -7,24 +7,24 @@ Difficulty=hard
 Description=UW deck with emphasis on fliers.
 Deck Type=constructed
 [main]
-1 Air Elemental|4ED
-1 Azure Drake|LEG
-2 Dancing Scimitar|ARN
-2 Disenchant|4ED
-1 Holy Armor|LEB
-2 Holy Strength|4ED
-3 Howling Mine|4ED
-10 Island|4ED
-1 Ivory Tower|ATQ
-2 Mana Drain|LEG
-3 Moat|LEG
-2 Osai Vultures|LEG
-1 Phantom Monster|LEB
-2 Phantasmal Forces|LEB
-10 Plains|4ED
-3 Serra Angel|4ED
-4 Swords to Plowshares|LEB
-4 Thunder Spirit|LEG
-4 Tundra|LEB
-2 Unsummon|LEB
+1 Air Elemental
+1 Azure Drake
+2 Dancing Scimitar
+2 Disenchant
+1 Holy Armor
+2 Holy Strength
+3 Howling Mine
+10 Island
+1 Ivory Tower
+2 Mana Drain
+3 Moat
+2 Osai Vultures
+1 Phantom Monster
+2 Phantasmal Forces
+10 Plains
+3 Serra Angel
+4 Swords to Plowshares
+4 Thunder Spirit
+4 Tundra
+2 Unsummon
 [sideboard]

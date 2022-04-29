@@ -7,8 +7,8 @@ Description=UB Processor deck
 Icon=Galacticus.jpg
 Deck Type=constructed
 [main]
-5 Swamp|ISD
-5 Island|ISD
+5 Swamp
+5 Island
 4 Darkslick Shores
 4 Drowned Catacomb
 1 Sunken Hollow
@@ -16,19 +16,19 @@ Deck Type=constructed
 1 Jwar Isle Refuge
 1 Dismal Backwater
 1 Temple of Deceit
-1 Sludge Crawler|BFZ
-4 Mist Intruder|BFZ
-4 Fathom Feeder|BFZ
-4 Benthic Infiltrator|BFZ
-2 Ruination Guide|BFZ
-1 Dominator Drone|BFZ
+1 Sludge Crawler
+4 Mist Intruder
+4 Fathom Feeder
+4 Benthic Infiltrator
+2 Ruination Guide
+1 Dominator Drone
 3 Wasteland Strangler
-3 Murk Strider|BFZ
-2 Mind Raker|BFZ
-1 Blight Herder|BFZ
-1 Ulamog's Reclaimer|BFZ
-1 Ulamog's Despoiler|BFZ
-1 Ruin Processor|BFZ
+3 Murk Strider
+2 Mind Raker
+1 Blight Herder
+1 Ulamog's Reclaimer
+1 Ulamog's Despoiler
+1 Ruin Processor
 1 Spell Shrivel
 4 Complete Disregard
 1 Grave Birthing

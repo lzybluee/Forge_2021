@@ -7,20 +7,20 @@ Difficulty=medium
 Description=BU deck with landwalking/evasion, reworked from the Shandalar version.
 Deck Type=constructed
 [main]
-4 Angry Mob|DRK
-1 Disenchant|4ED
-1 Exorcist|DRK
-3 Flight|4ED
-2 Guardian Angel|LEA
-4 Holy Strength|4ED
-4 Invisibility|LEA
-9 Island|4ED
-3 Karma|LEB
-4 Northern Paladin|LEB
-15 Plains|4ED
-2 Red Ward|LEB
-2 Segovian Leviathan|LEG
-1 Swords to Plowshares|LEB
-4 White Knight|4ED
-1 Witch Hunter|CHR
+4 Angry Mob
+1 Disenchant
+1 Exorcist
+3 Flight
+2 Guardian Angel
+4 Holy Strength
+4 Invisibility
+9 Island
+3 Karma
+4 Northern Paladin
+15 Plains
+2 Red Ward
+2 Segovian Leviathan
+1 Swords to Plowshares
+4 White Knight
+1 Witch Hunter
 [sideboard]

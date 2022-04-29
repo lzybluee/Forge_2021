@@ -7,22 +7,22 @@ Difficulty=medium
 Description=UW deck with emphasis on fliers.
 Deck Type=constructed
 [main]
-1 Air Elemental|4ED
-2 Azure Drake|LEG
-2 Counterspell|2ED
-2 Dancing Scimitar|ARN
-1 Disenchant|2ED
-3 Holy Armor|2ED
-3 Holy Strength|2ED
-3 Howling Mine|4ED
-12 Island|2ED
-3 Osai Vultures|LEG
-2 Phantasmal Forces|LEB
-12 Plains|2ED
-2 Segovian Leviathan|LEG
-1 Serra Angel|2ED
-2 Swords to Plowshares|LEB
-4 Thunder Spirit|LEG
-2 Unsummon|LEB
-3 Zephyr Falcon|LEG
+1 Air Elemental
+2 Azure Drake
+2 Counterspell
+2 Dancing Scimitar
+1 Disenchant
+3 Holy Armor
+3 Holy Strength
+3 Howling Mine
+12 Island
+3 Osai Vultures
+2 Phantasmal Forces
+12 Plains
+2 Segovian Leviathan
+1 Serra Angel
+2 Swords to Plowshares
+4 Thunder Spirit
+2 Unsummon
+3 Zephyr Falcon
 [sideboard]

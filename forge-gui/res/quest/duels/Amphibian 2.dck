@@ -7,8 +7,8 @@ Description=UG Landfall deck
 Icon=Amphibian.jpg
 Deck Type=constructed
 [main]
-5 Forest|ZEN
-5 Island|ZEN
+5 Forest
+5 Island
 1 Prairie Stream
 4 Misty Rainforest
 4 Tropical Island

@@ -7,16 +7,16 @@ Description=Mono W Myr deck
 Icon=Walle.jpg
 Deck Type=constructed
 [main]
-16 Plains|MBS
-4 Master's Call|MBS
-4 Arid Mesa|ZEN
-4 Hovermyr|NPH
-4 Myr Enforcer|MRD
-4 Perilous Myr|SOM
-4 Myr Matrix|DST
-4 Myr Galvanizer|SOM
-4 Gold Myr|SOM
-4 Myrsmith|SOM
-4 Myr Retriever|MRD
-4 Marsh Flats|ZEN
+16 Plains
+4 Master's Call
+4 Arid Mesa
+4 Hovermyr
+4 Myr Enforcer
+4 Perilous Myr
+4 Myr Matrix
+4 Myr Galvanizer
+4 Gold Myr
+4 Myrsmith
+4 Myr Retriever
+4 Marsh Flats
 [sideboard]

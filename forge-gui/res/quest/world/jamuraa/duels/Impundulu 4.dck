@@ -8,23 +8,23 @@ Description=Impundulu plays Max Suver's Type 1.x UR 'Flying Beatdown' deck.
 Deck Type=constructed
 Card Reward=14% chosen card sets:5ED,MIR,VIS rules:blue,creature rarity:C,U desc:a Blue Creature
 [main]
-2 Air Elemental|5ED
-3 Arcane Denial|ALL
-4 Counterspell|5ED
-2 Earthquake|LEB
-3 Flood Plain|MIR
-4 Force of Will|ALL
-2 Icy Manipulator|LEB
-8 Island|MIR
-2 Man-o'-War|VIS
-3 Phyrexian War Beast|ALL
-4 Quicksand|VIS
-4 Sky Diamond|MIR
-4 Soldevi Excavations|ALL
-3 Suq'Ata Firewalker|MIR
-4 Volcanic Island|LEB
-4 Waterspout Djinn|VIS
-4 Winter Orb|LEB
+2 Air Elemental
+3 Arcane Denial
+4 Counterspell
+2 Earthquake
+3 Flood Plain
+4 Force of Will
+2 Icy Manipulator
+8 Island
+2 Man-o'-War
+3 Phyrexian War Beast
+4 Quicksand
+4 Sky Diamond
+4 Soldevi Excavations
+3 Suq'Ata Firewalker
+4 Volcanic Island
+4 Waterspout Djinn
+4 Winter Orb
 [sideboard]
 [planes]
 [schemes]

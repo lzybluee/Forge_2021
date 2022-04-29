@@ -4,7 +4,7 @@ OpponentName=Hazoret
 AILife=40
 Repeat=true
 Wins=0
-Card Reward=3 red rares;Cartouche of Zeal|AKH
+Card Reward=3 red rares;Cartouche of Zeal
 Credit Reward=200
 AIExtras=Hazoret's Favor|Mountain|Hazoret's Monument
 HumanExtras=Mountain
@@ -15,20 +15,20 @@ Difficulty=Hard
 Description=
 Icon=Hazoret the Fervent.jpg
 [Main]
-4 Ahn-Crop Crasher|AKH
-4 Earthshaker Khenra|HOU
-4 Glorybringer|AKH
-1 Hazoret the Fervent|AKH
-4 Hellrider|MM3
-4 Lightning Bolt|MM2
-4 Limits of Solidarity|AKH
-4 Mark of Mutiny|IMA
-2 Mountain|AKH|1
-1 Mountain|AKH|2
-5 Mountain|HOU|1
-5 Mountain|HOU|2
-2 Mountain|HOU|3
-4 Ramunap Ruins|HOU
-4 Sunscorched Desert|AKH
-4 Trial of Zeal|AKH
-4 Zealous Conscripts|MM3
+4 Ahn-Crop Crasher
+4 Earthshaker Khenra
+4 Glorybringer
+1 Hazoret the Fervent
+4 Hellrider
+4 Lightning Bolt
+4 Limits of Solidarity
+4 Mark of Mutiny
+2 Mountain
+1 Mountain
+5 Mountain
+5 Mountain
+2 Mountain
+4 Ramunap Ruins
+4 Sunscorched Desert
+4 Trial of Zeal
+4 Zealous Conscripts

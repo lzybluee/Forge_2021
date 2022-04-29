@@ -7,22 +7,22 @@ Description=Mono G Infect deck
 Icon=Fin Fang Foom.jpg
 Deck Type=constructed
 [main]
-3 Cystbearer|SOM
-2 Carrion Call|SOM
-1 Viridian Claw|MBS
-3 Blightwidow|MBS
-2 Lead the Stampede|MBS
-1 Phyrexian Juggernaut|MBS
-1 Glistener Elf|NPH
-2 Phyrexian Swarmlord|NPH
-1 Spinebiter|NPH
-3 Pistus Strike|MBS
-2 Leyline of Vitality|M11
-2 Plague Myr|MBS
-20 Forest|MBS
-4 Viridian Corrupter|MBS
-4 Blight Mamba|SOM
-3 Rot Wolf|MBS
-2 Naturalize|M11
-4 Verdant Catacombs|ZEN
+3 Cystbearer
+2 Carrion Call
+1 Viridian Claw
+3 Blightwidow
+2 Lead the Stampede
+1 Phyrexian Juggernaut
+1 Glistener Elf
+2 Phyrexian Swarmlord
+1 Spinebiter
+3 Pistus Strike
+2 Leyline of Vitality
+2 Plague Myr
+20 Forest
+4 Viridian Corrupter
+4 Blight Mamba
+3 Rot Wolf
+2 Naturalize
+4 Verdant Catacombs
 [sideboard]

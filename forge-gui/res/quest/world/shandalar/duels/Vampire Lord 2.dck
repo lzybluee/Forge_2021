@@ -7,16 +7,16 @@ Difficulty=medium
 Description=Vampire deck with mana accelerators.
 Deck Type=constructed
 [main]
-4 Animate Dead|LEB
-4 Carrion Ants|LEG
-4 Dark Ritual|2ED
-3 Howling Mine|4ED
-3 Mana Vault|LEB
-4 Sengir Vampire|2ED
-4 Sorceress Queen|ARN
-22 Swamp|2ED
-2 Terror|2ED
-2 Uncle Istvan|DRK
-4 Vampire Bats|LEG
-4 Weakness|2ED
+4 Animate Dead
+4 Carrion Ants
+4 Dark Ritual
+3 Howling Mine
+3 Mana Vault
+4 Sengir Vampire
+4 Sorceress Queen
+22 Swamp
+2 Terror
+2 Uncle Istvan
+4 Vampire Bats
+4 Weakness
 [sideboard]

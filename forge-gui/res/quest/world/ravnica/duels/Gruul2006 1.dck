@@ -7,30 +7,30 @@ Difficulty=easy
 Description=Precon deck
 Deck Type=constructed
 [main]
-1 Battering Wurm|GPT
-3 Beastmaster's Magemark|GPT
-3 Bloodscale Prowler|GPT
-1 Borborygmos|GPT
-2 Dowsing Shaman|PC2
-2 Dryad Sophisticate|GPT
-3 Fencer's Magemark|GPT
-2 Fists of Ironwood|COM
-12 Forest|RTR
-2 Gatherer of Graces|GPT
-1 Gruul Guildmage|GPT
-1 Gruul Nodorog|GPT
-2 Gruul Scrapper|GPT
-1 Indentured Oaf|RAV
-11 Mountain|RTR
-1 Scab-Clan Mauler|GPT
-1 Scorched Rusalka|GPT
-1 Skarrg, the Rage Pits|PC2
-2 Skarrgan Skybreaker|GPT
-2 Sparkmage Apprentice|M10
-3 Streetbreaker Wurm|GPT
-1 Wild Cantor|GPT
-1 Wildsize|GPT
-1 Wurmweaver Coil|GPT
+1 Battering Wurm
+3 Beastmaster's Magemark
+3 Bloodscale Prowler
+1 Borborygmos
+2 Dowsing Shaman
+2 Dryad Sophisticate
+3 Fencer's Magemark
+2 Fists of Ironwood
+12 Forest
+2 Gatherer of Graces
+1 Gruul Guildmage
+1 Gruul Nodorog
+2 Gruul Scrapper
+1 Indentured Oaf
+11 Mountain
+1 Scab-Clan Mauler
+1 Scorched Rusalka
+1 Skarrg, the Rage Pits
+2 Skarrgan Skybreaker
+2 Sparkmage Apprentice
+3 Streetbreaker Wurm
+1 Wild Cantor
+1 Wildsize
+1 Wurmweaver Coil
 [sideboard]
 [planes]
 [schemes]

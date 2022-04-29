@@ -7,17 +7,17 @@ Description=Soltari deck
 Deck Type=constructed
 Name=Soltari3
 [Main]
-2 Disenchant|TMP
-4 Cursed Scroll|TMP
-3 Gerrard's Battle Cry|TMP
-5 Plains|TMP|1
-6 Plains|TMP|2
-6 Plains|TMP|3
-6 Plains|TMP|4
-4 Soltari Champion|STH
-4 Soltari Emissary|TMP
-4 Soltari Foot Soldier|TMP
-4 Soltari Monk|TMP
-4 Soltari Priest|TMP
-4 Soltari Trooper|TMP
-4 Soltari Visionary|EXO
+2 Disenchant
+4 Cursed Scroll
+3 Gerrard's Battle Cry
+5 Plains
+6 Plains
+6 Plains
+6 Plains
+4 Soltari Champion
+4 Soltari Emissary
+4 Soltari Foot Soldier
+4 Soltari Monk
+4 Soltari Priest
+4 Soltari Trooper
+4 Soltari Visionary

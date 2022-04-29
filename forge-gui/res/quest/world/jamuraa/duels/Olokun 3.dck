@@ -7,24 +7,24 @@ Difficulty=hard
 Description=Olokun plays Fertik's monoblue 'Ranger' deck.
 Deck Type=constructed
 [main]
-2 Air Elemental|LEB
-2 Arcane Denial|ALL
-2 Boomerang|MIR
-3 Browse|ALL
-4 Counterspell|5ED
-2 Desertion|VIS
-2 Dissipate|MIR
-2 Fellwar Stone|DRK
-4 Force of Will|ALL
-2 Impulse|VIS
-15 Island|MIR
-4 Quicksand|VIS
-1 Soldevi Excavations|ALL
-4 Suq'Ata Firewalker|MIR
-4 Thawing Glaciers|ALL
-1 Time Elemental|LEG
-4 Wall of Air|LEB
-2 Waterspout Djinn|VIS
+2 Air Elemental
+2 Arcane Denial
+2 Boomerang
+3 Browse
+4 Counterspell
+2 Desertion
+2 Dissipate
+2 Fellwar Stone
+4 Force of Will
+2 Impulse
+15 Island
+4 Quicksand
+1 Soldevi Excavations
+4 Suq'Ata Firewalker
+4 Thawing Glaciers
+1 Time Elemental
+4 Wall of Air
+2 Waterspout Djinn
 [sideboard]
 [planes]
 [schemes]

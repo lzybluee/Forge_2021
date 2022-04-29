@@ -17,22 +17,22 @@ Description=“It is all in my grasp. Every petty dream, every grand scheme, every
 Icon=Memnarch.jpg
 Deck Type=constructed
 [Main]
-1 Acquire|5DN
-24 Island|MRD|1
-2 Lumengrid Warden|MRD
-2 Memnarch|DST
-1 Myr Retriever|MRD
-1 Regress|MRD
-2 Silent Arbiter|5DN
-4 Silver Myr|SOM
-1 Skeleton Shard|MRD
-3 Solemn Simulacrum|MRD
-2 Spire Golem|DST
-3 Steel Wall|MRD
-2 Thirst for Knowledge|MRD
-4 Vedalken Archmage|MRD
-4 Vedalken Shackles|5DN
-2 Duplicant|MRD
-1 Altar of Shadows|MRD
-1 Carry Away|DST
+1 Acquire
+24 Island
+2 Lumengrid Warden
+2 Memnarch
+1 Myr Retriever
+1 Regress
+2 Silent Arbiter
+4 Silver Myr
+1 Skeleton Shard
+3 Solemn Simulacrum
+2 Spire Golem
+3 Steel Wall
+2 Thirst for Knowledge
+4 Vedalken Archmage
+4 Vedalken Shackles
+2 Duplicant
+1 Altar of Shadows
+1 Carry Away
 [sideboard]

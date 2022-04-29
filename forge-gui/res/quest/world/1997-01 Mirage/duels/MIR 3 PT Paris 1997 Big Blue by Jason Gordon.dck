@@ -7,21 +7,21 @@ Description=Played by Jason Gordon at Pro Tour: Paris 1997.
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [Main]
-4 Boomerang|MIR
-4 Cloud Elemental|VIS
-2 Desertion|VIS
-4 Dissipate|MIR
-3 Floodgate|MIR
-3 Impulse|VIS
-21 Island|MIR|3
-4 Man-o'-War|VIS
-4 Memory Lapse|MIR
-4 Quicksand|VIS
-2 Snake Basket|VIS
-4 Waterspout Djinn|VIS
+4 Boomerang
+4 Cloud Elemental
+2 Desertion
+4 Dissipate
+3 Floodgate
+3 Impulse
+21 Island
+4 Man-o'-War
+4 Memory Lapse
+4 Quicksand
+2 Snake Basket
+4 Waterspout Djinn
 [Sideboard]
-3 Disenchant|MIR
-3 Honorable Passage|VIS
-4 Mind Harness|MIR
-2 Plains|MIR|1
-3 Power Sink|MIR
+3 Disenchant
+3 Honorable Passage
+4 Mind Harness
+2 Plains
+3 Power Sink

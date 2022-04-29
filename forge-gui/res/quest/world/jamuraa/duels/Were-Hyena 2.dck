@@ -7,21 +7,21 @@ Difficulty=medium
 Description=Gbadu plays Jason Zila's BU Rat deck.
 Deck Type=constructed
 [main]
-4 Bad River|MIR
-4 Cloud Elemental|VIS
-4 Crypt Rats|VIS
-2 Dissipate|MIR
-4 Drain Life|MIR
-3 Impulse|VIS
-6 Island|MIR
-4 Man-o'-War|VIS
-2 Animate Dead|5ED
-4 Nekrataal|VIS
-4 Power Sink|5ED
-2 Quicksand|VIS
-1 Snake Basket|VIS
-4 Stupor|MIR
-12 Swamp|MIR
+4 Bad River
+4 Cloud Elemental
+4 Crypt Rats
+2 Dissipate
+4 Drain Life
+3 Impulse
+6 Island
+4 Man-o'-War
+2 Animate Dead
+4 Nekrataal
+4 Power Sink
+2 Quicksand
+1 Snake Basket
+4 Stupor
+12 Swamp
 [sideboard]
 [planes]
 [schemes]

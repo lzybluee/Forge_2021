@@ -6,18 +6,18 @@ Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 Name=ELD 3 Sacrifice
 [Main]
-4 Cauldron Familiar|ELD
-4 Chittering Witch|ELD
-4 Claim the Firstborn|ELD
-4 Dwarven Mine|ELD
-4 Elite Headhunter|ELD
-4 Fabled Passage|ELD|1
-6 Mountain|ELD|3
-4 Opportunistic Dragon|ELD|1
-4 Piper of the Swarm|ELD|1
-4 Rankle, Master of Pranks|ELD|1
-4 Redcap Melee|ELD
-4 Sorcerer's Broom|ELD
-10 Swamp|ELD|4
+4 Cauldron Familiar
+4 Chittering Witch
+4 Claim the Firstborn
+4 Dwarven Mine
+4 Elite Headhunter
+4 Fabled Passage
+6 Mountain
+4 Opportunistic Dragon
+4 Piper of the Swarm
+4 Rankle, Master of Pranks
+4 Redcap Melee
+4 Sorcerer's Broom
+10 Swamp
 [Sideboard]
-4 Witch's Oven|ELD
+4 Witch's Oven

@@ -16,6 +16,6 @@ Description=This guys seems to be too obsessed with controlling mana sources!
 Deck Type=constructed
 Name=Limited
 [Main]
-20 Manakin|TMP
-20 Plains|TMP
-20 Swamp|TMP
+20 Manakin
+20 Plains
+20 Swamp

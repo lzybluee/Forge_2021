@@ -9,21 +9,21 @@ Description=[W/R] Aggro.
 Deck Type=constructed
 
 [Main]
-13 Mountain|SHM
-11 Plains|SHM
+13 Mountain
+11 Plains
 
-2 Balefire Liege|EVE
-4 Battlegate Mimic|EVE
-2 Belligerent Hatchling|EVE
-1 Blaze|10E
-4 Double Cleave|EVE
-2 Figure of Destiny|EVE
-3 Hearthfire Hobgoblin|EVE
-4 Hobgoblin Dragoon|EVE
-4 Incinerate|10E
-4 Mogg Fanatic|10E
-4 Rise of the Hobgoblins|EVE
-2 Scourge of the Nobilis|EVE
+2 Balefire Liege
+4 Battlegate Mimic
+2 Belligerent Hatchling
+1 Blaze
+4 Double Cleave
+2 Figure of Destiny
+3 Hearthfire Hobgoblin
+4 Hobgoblin Dragoon
+4 Incinerate
+4 Mogg Fanatic
+4 Rise of the Hobgoblins
+2 Scourge of the Nobilis
 
 [Sideboard]
 [Planes]

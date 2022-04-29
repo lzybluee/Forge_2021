@@ -15,5 +15,5 @@ Description="Introduce a little anarchy. Upset the established order and everyth
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-40 Incinerate|ICE
-20 Mountain|ICE|2
+40 Incinerate
+20 Mountain

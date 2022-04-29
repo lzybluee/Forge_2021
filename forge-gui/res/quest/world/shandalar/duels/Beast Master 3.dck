@@ -7,24 +7,24 @@ Description=Creature-heavy Green aggro deck
 Icon=Beastmaster.jpg
 Deck Type=constructed
 [main]
-4 Aspect of Wolf|LEB
-3 Barbary Apes|LEG
-2 Birds of Paradise|2ED
-2 Desert Twister|4ED
-2 Durkwood Boars|4ED
-21 Forest|2ED
-2 Giant Badger|8ED
-3 Giant Growth|2ED
-2 Giant Spider|2ED
-2 Giant Turtle|LEG
-2 Grizzly Bears|2ED
-1 Hornet Cobra|LEG
-2 Killer Bees|LEG
-2 Land Leeches|DRK
-2 Lurker|DRK
-2 Moss Monster|LEG
-2 Untamed Wilds|4ED
-2 Web|LEB
-1 War Mammoth|2ED
-1 Wyluli Wolf|ARN
+4 Aspect of Wolf
+3 Barbary Apes
+2 Birds of Paradise
+2 Desert Twister
+2 Durkwood Boars
+21 Forest
+2 Giant Badger
+3 Giant Growth
+2 Giant Spider
+2 Giant Turtle
+2 Grizzly Bears
+1 Hornet Cobra
+2 Killer Bees
+2 Land Leeches
+2 Lurker
+2 Moss Monster
+2 Untamed Wilds
+2 Web
+1 War Mammoth
+1 Wyluli Wolf
 [sideboard]

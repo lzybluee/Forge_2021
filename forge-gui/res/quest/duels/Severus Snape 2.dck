@@ -7,8 +7,8 @@ Description=WB Token deck
 Icon=Severus Snape.jpg
 Deck Type=constructed
 [main]
-8 Swamp|M12
-8 Plains|M12
+8 Swamp
+8 Plains
 4 Isolated Chapel
 4 Scoured Barrens
 4 Marsh Flats

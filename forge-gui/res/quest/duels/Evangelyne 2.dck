@@ -7,19 +7,19 @@ Description=Selesnya Stompy ramp deck with Elves and Ghalta, Primal Hunger.
 Deck Type=constructed
 Icon=Evangelyne.jpg
 [main]
-3 Conclave Tribunal|GRN
-4 Emmara, Soul of the Accord|GRN
+3 Conclave Tribunal
+4 Emmara, Soul of the Accord
 13 Forest
-3 Ghalta, Primal Hunger|RIX
-4 Llanowar Elves|M19
-4 Nullhide Ferox|GRN
-4 Pelt Collector|GRN
+3 Ghalta, Primal Hunger
+4 Llanowar Elves
+4 Nullhide Ferox
+4 Pelt Collector
 1 Plains
-1 Shalai, Voice of Plenty|DOM
-4 Steel Leaf Champion|DOM
-4 Sunpetal Grove|XLN
-4 Temple Garden|GRN
-4 Thorn Lieutenant|M19
-3 Thrashing Brontodon|RIX
-4 Venerated Loxodon|GRN
+1 Shalai, Voice of Plenty
+4 Steel Leaf Champion
+4 Sunpetal Grove
+4 Temple Garden
+4 Thorn Lieutenant
+3 Thrashing Brontodon
+4 Venerated Loxodon
 [sideboard]

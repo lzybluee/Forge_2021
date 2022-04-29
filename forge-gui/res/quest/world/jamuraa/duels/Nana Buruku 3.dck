@@ -7,25 +7,25 @@ Difficulty=hard
 Description=Szwedowski's '4-Color Black' deck.
 Deck Type=constructed
 [main]
-4 Arcane Denial|ALL
-3 City of Brass|5ED
-2 Serrated Arrows|HML
-4 Fallen Askari|VIS
-4 Incinerate|MIR
-2 Island|MIR
-4 Man-o'-War|VIS
-3 Mountain|MIR
-4 Nekrataal|VIS
-1 Pyrokinesis|ALL
-3 Quicksand|VIS
-2 Shadow Guildmage|MIR
-4 Skulking Ghost|MIR
-4 Suq'Ata Lancer|VIS
-7 Swamp|MIR
-2 Uktabi Orangutan|VIS
-4 Undiscovered Paradise|VIS
-1 Vampiric Tutor|VIS
-3 Winter Orb|LEB
+4 Arcane Denial
+3 City of Brass
+2 Serrated Arrows
+4 Fallen Askari
+4 Incinerate
+2 Island
+4 Man-o'-War
+3 Mountain
+4 Nekrataal
+1 Pyrokinesis
+3 Quicksand
+2 Shadow Guildmage
+4 Skulking Ghost
+4 Suq'Ata Lancer
+7 Swamp
+2 Uktabi Orangutan
+4 Undiscovered Paradise
+1 Vampiric Tutor
+3 Winter Orb
 [sideboard]
 [planes]
 [schemes]

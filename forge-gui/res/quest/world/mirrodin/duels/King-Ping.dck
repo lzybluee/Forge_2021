@@ -7,17 +7,17 @@ Description=PING, You're dead!
 Icon=King-Ping.jpg
 Deck Type=constructed
 [Main]
-4 Bloodshot Trainee|SOM
-4 Bonesplitter|MRD
-2 Darksteel Axe|SOM
-2 Grafted Exoskeleton|SOM
-2 Grafted Wargear|5DN
-4 Iron Myr|SOM
-3 Lightning Greaves|MRD
-1 Loxodon Warhammer|MRD
-24 Mountain|SOM|1
-4 Plague Myr|MBS
-4 Spikeshot Elder|SOM
-4 Spikeshot Goblin|MRD
-2 Vulshok Sorcerer|5DN
+4 Bloodshot Trainee
+4 Bonesplitter
+2 Darksteel Axe
+2 Grafted Exoskeleton
+2 Grafted Wargear
+4 Iron Myr
+3 Lightning Greaves
+1 Loxodon Warhammer
+24 Mountain
+4 Plague Myr
+4 Spikeshot Elder
+4 Spikeshot Goblin
+2 Vulshok Sorcerer
 [sideboard]

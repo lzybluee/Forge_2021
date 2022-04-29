@@ -7,18 +7,18 @@ Difficulty=easy
 Description=Blue fliers and recycling.
 Deck Type=constructed
 [main]
-2 Counterspell|4ED
-4 Crystal Rod|LEB
-4 Ghost Ship|TSB
-2 Hurkyl's Recall|ATQ
-22 Island|4ED
-1 Mana Drain|LEG
-3 Ornithopter|4ED
-2 Power Sink|4ED
-3 Tetravus|ATQ
-2 Time Elemental|LEG
-3 Triskelion|ATQ
-4 Unstable Mutation|ARN
-4 Unsummon|4ED
-4 Zephyr Falcon|LEG
+2 Counterspell
+4 Crystal Rod
+4 Ghost Ship
+2 Hurkyl's Recall
+22 Island
+1 Mana Drain
+3 Ornithopter
+2 Power Sink
+3 Tetravus
+2 Time Elemental
+3 Triskelion
+4 Unstable Mutation
+4 Unsummon
+4 Zephyr Falcon
 [sideboard]

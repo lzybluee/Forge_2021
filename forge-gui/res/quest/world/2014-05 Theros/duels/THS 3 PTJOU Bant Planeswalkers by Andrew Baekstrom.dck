@@ -6,28 +6,28 @@ Description=Block Constructed deck played at Pro Tour: Journey of the Gods by An
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-2 Ajani, Mentor of Heroes|JOU
-4 Banishing Light|JOU
-4 Courser of Kruphix|BNG
-4 Elspeth, Sun's Champion|THS
-8 Forest|THS|1
-4 Island|THS|1
-3 Kiora's Follower|BNG
-4 Kiora, the Crashing Wave|BNG
-1 Mana Confluence|JOU
-4 Prognostic Sphinx|THS
-2 Reprisal|JOU
-4 Sylvan Caryatid|THS
-4 Temple of Enlightenment|BNG
-4 Temple of Mystery|THS
-4 Temple of Plenty|BNG
-4 Unravel the AEther|BNG
+2 Ajani, Mentor of Heroes
+4 Banishing Light
+4 Courser of Kruphix
+4 Elspeth, Sun's Champion
+8 Forest
+4 Island
+3 Kiora's Follower
+4 Kiora, the Crashing Wave
+1 Mana Confluence
+4 Prognostic Sphinx
+2 Reprisal
+4 Sylvan Caryatid
+4 Temple of Enlightenment
+4 Temple of Mystery
+4 Temple of Plenty
+4 Unravel the AEther
 [Sideboard]
-1 Annul|THS
-2 Arbor Colossus|THS
-2 Deicide|JOU
-2 Dissolve|THS
-2 Glare of Heresy|THS
-1 Perplexing Chimera|BNG
-1 Reprisal|JOU
-4 Sedge Scorpion|THS
+1 Annul
+2 Arbor Colossus
+2 Deicide
+2 Dissolve
+2 Glare of Heresy
+1 Perplexing Chimera
+1 Reprisal
+4 Sedge Scorpion

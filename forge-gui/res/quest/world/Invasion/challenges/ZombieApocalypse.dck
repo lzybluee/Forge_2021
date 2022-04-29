@@ -17,8 +17,8 @@ Description=Well, as cliche as it gets...but not any less dangerous!
 Deck Type=constructed
 Name=ZombieApocalypse
 [Main]
-7 Swamp|INV
-7 Mountain|INV
-20 Shivan Zombie|INV
-10 Lord of the Undead|PLS
-10 Pyre Zombie|INV
+7 Swamp
+7 Mountain
+20 Shivan Zombie
+10 Lord of the Undead
+10 Pyre Zombie

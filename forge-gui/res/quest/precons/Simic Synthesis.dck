@@ -10,32 +10,32 @@ Deck Type=constructed
 Set=GTC
 Image=simic_synthesis.jpg
 [main]
-12  Forest|RTR
-13  Island|RTR
-1  Simic Guildgate|GTC
-2  Adaptive Snapjaw|GTC
-1  Chronomaton|M13
-1  Cloudfin Raptor|GTC
-2  Crocanura|GTC
-1  Crowned Ceratok|GTC
-2  Drakewing Krasis|GTC
-1  Elusive Krasis|GTC
-1  Fathom Mage+|GTC
-1  Frilled Oculus|GTC
-1  Ivy Lane Denizen|GTC
-2  Kraken Hatchling|M13
-1  Leyline Phantom|GTC
-1  Merfolk of the Depths|GTC
-1  Sapphire Drake|GTC
-2  Shambleshark|GTC
-1  Zameck Guildmage|GTC
-2  Bioshift|GTC
-2  Encrust|M13
-2  Forced Adaptation|GTC
-1  Hindervines|GTC
-2  Simic Keyrune|GTC
-1  Sleep|M13
-1  Tower Defense|GTC
-1  Unexpected Results|GTC
-1  Urban Evolution|GTC
+12  Forest
+13  Island
+1  Simic Guildgate
+2  Adaptive Snapjaw
+1  Chronomaton
+1  Cloudfin Raptor
+2  Crocanura
+1  Crowned Ceratok
+2  Drakewing Krasis
+1  Elusive Krasis
+1  Fathom Mage+
+1  Frilled Oculus
+1  Ivy Lane Denizen
+2  Kraken Hatchling
+1  Leyline Phantom
+1  Merfolk of the Depths
+1  Sapphire Drake
+2  Shambleshark
+1  Zameck Guildmage
+2  Bioshift
+2  Encrust
+2  Forced Adaptation
+1  Hindervines
+2  Simic Keyrune
+1  Sleep
+1  Tower Defense
+1  Unexpected Results
+1  Urban Evolution
 [sideboard]

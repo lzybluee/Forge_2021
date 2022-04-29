@@ -7,24 +7,24 @@ Description=Blue - Red - Green deck based on "comes into play" effects.
 Deck Type=constructed
 Name=BlueRedGreen
 [Main]
-2 Fact or Fiction|INV
-4 Fires of Yavimaya|INV
-4 Flametongue Kavu|PLS
-6 Forest|INV|1
-2 Island|INV|1
-2 Island|INV|2
-1 Island|INV|3
-4 Jungle Barrier|APC
-2 Kavu Climber|INV
-3 Mountain|INV|1
-2 Mountain|INV|2
-4 Mystic Snake|APC
-4 Serpentine Kavu|INV
-4 Shivan Oasis|INV
-2 Shivan Reef|APC
-2 Shivan Wurm|PLS
-2 Skizzik|INV
-4 Sunken Hope|PLS
-2 Thornscape Battlemage|PLS
-2 Thunderscape Battlemage|PLS
-2 Yavimaya Coast|APC
+2 Fact or Fiction
+4 Fires of Yavimaya
+4 Flametongue Kavu
+6 Forest
+2 Island
+2 Island
+1 Island
+4 Jungle Barrier
+2 Kavu Climber
+3 Mountain
+2 Mountain
+4 Mystic Snake
+4 Serpentine Kavu
+4 Shivan Oasis
+2 Shivan Reef
+2 Shivan Wurm
+2 Skizzik
+4 Sunken Hope
+2 Thornscape Battlemage
+2 Thunderscape Battlemage
+2 Yavimaya Coast

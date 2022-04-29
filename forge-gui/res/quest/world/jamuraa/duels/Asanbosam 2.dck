@@ -7,32 +7,32 @@ Difficulty=medium
 Description=Asanbosam plays a monoblack 'Night Terrors' deck.
 Deck Type=constructed
 [main]
-1 Blighted Shaman|MIR
-2 Bone Harvest|MIR
-3 Breathstealer|MIR
-2 Charcoal Diamond|MIR
-2 Dark Banishing|ICE
-1 Drain Life|MIR
-2 Dread Specter|MIR
-2 Feral Shadow|MIR
-1 Fetid Horror|MIR
-1 Gravebane Zombie|MIR
-2 Hypnotic Specter|LEB
-2 Junun Efreet|ARN
-1 Kaervek's Hex|MIR
-1 Mox Jet|LEB
-1 Nocturnal Raid|MIR
-1 Phyrexian Vault|MIR
-1 Ravenous Vampire|MIR
-2 Restless Dead|MIR
-1 Shallow Grave|MIR
-2 Skulking Ghost|MIR
-1 Soulshriek|MIR
-1 Spirit of the Night|MIR
-2 Stupor|MIR
-22 Swamp|MIR
-2 Wall of Corpses|MIR
-1 Withering Boon|MIR
+1 Blighted Shaman
+2 Bone Harvest
+3 Breathstealer
+2 Charcoal Diamond
+2 Dark Banishing
+1 Drain Life
+2 Dread Specter
+2 Feral Shadow
+1 Fetid Horror
+1 Gravebane Zombie
+2 Hypnotic Specter
+2 Junun Efreet
+1 Kaervek's Hex
+1 Mox Jet
+1 Nocturnal Raid
+1 Phyrexian Vault
+1 Ravenous Vampire
+2 Restless Dead
+1 Shallow Grave
+2 Skulking Ghost
+1 Soulshriek
+1 Spirit of the Night
+2 Stupor
+22 Swamp
+2 Wall of Corpses
+1 Withering Boon
 [sideboard]
 [planes]
 [schemes]

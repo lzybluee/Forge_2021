@@ -16,14 +16,14 @@ Description=The guild of battlemages challanges you!
 Deck Type=constructed
 Name=Guild
 [Main]
-5 Nightscape Battlemage|PLS
-5 Stormscape Battlemage|PLS
-3 Sunken Hope|PLS
-5 Sunscape Battlemage|PLS
-5 Thornscape Battlemage|PLS
-5 Thunderscape Battlemage|PLS
-5 Swamp|INV
-5 Plains|INV
-5 Island|INV
-5 Forest|INV
-5 Mountain|INV
+5 Nightscape Battlemage
+5 Stormscape Battlemage
+3 Sunken Hope
+5 Sunscape Battlemage
+5 Thornscape Battlemage
+5 Thunderscape Battlemage
+5 Swamp
+5 Plains
+5 Island
+5 Forest
+5 Mountain

@@ -16,20 +16,20 @@ Description=It's Urza!
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [main]
-4 Urza's Blueprints|ULG
-4 Urza's Armor|USG
-4 Urza's Rage|INV
+4 Urza's Blueprints
+4 Urza's Armor
+4 Urza's Rage
 2 Urza's Tower
 10 Mountain
 10 Island
-4 Stroke of Genius|USG
-2 Second Chance|ULG
-4 Beast of Burden|ULG
-2 Dragon Blood|USG
-4 Mantis Engine|UDS
-2 Crawlspace|ULG
-2 Metrognome|USG
-2 Mobile Fort|USG
-1 Tolarian Academy|USG
-3 Scoria Wurm|USG
+4 Stroke of Genius
+2 Second Chance
+4 Beast of Burden
+2 Dragon Blood
+4 Mantis Engine
+2 Crawlspace
+2 Metrognome
+2 Mobile Fort
+1 Tolarian Academy
+3 Scoria Wurm
 [sideboard]

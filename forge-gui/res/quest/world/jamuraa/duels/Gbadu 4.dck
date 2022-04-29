@@ -8,28 +8,28 @@ Description=Gbadu plays a T1 'Budget Zoo' deck.
 Deck Type=constructed
 Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:creature rarity:C desc:a Common Creature
 [main]
-1 Balance|LEB
-1 Black Vise|LEB
-4 City of Brass|5ED
-2 Disenchant|5ED
-3 Erhnam Djinn|ARN
-4 Incinerate|MIR
-4 Kird Ape|ARN
-4 Lightning Bolt|LEB
-4 Plateau|LEB
-1 Regrowth|LEB
-4 River Boa|VIS
-4 Savannah|LEB
-3 Savannah Lions|LEB
-1 Stormbind|ICE
-4 Strip Mine|ATQ
-3 Swords to Plowshares|LEB
-4 Taiga|LEB
-2 Tithe|VIS
-3 Wasteland|TMP
-1 Wheel of Fortune|LEB
-2 Wildfire Emissary|MIR
-1 Zuran Orb|ICE
+1 Balance
+1 Black Vise
+4 City of Brass
+2 Disenchant
+3 Erhnam Djinn
+4 Incinerate
+4 Kird Ape
+4 Lightning Bolt
+4 Plateau
+1 Regrowth
+4 River Boa
+4 Savannah
+3 Savannah Lions
+1 Stormbind
+4 Strip Mine
+3 Swords to Plowshares
+4 Taiga
+2 Tithe
+3 Wasteland
+1 Wheel of Fortune
+2 Wildfire Emissary
+1 Zuran Orb
 [sideboard]
 [planes]
 [schemes]

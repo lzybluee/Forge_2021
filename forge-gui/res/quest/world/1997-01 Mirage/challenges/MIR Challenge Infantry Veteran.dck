@@ -15,5 +15,5 @@ Description="The true dishonor for a soldier is surviving the war." -Telim'Tor
 Icon=Dungeon Crawling White.jpg
 Deck Type=constructed
 [main]
-45 Infantry Veteran|VIS
-15 Plains|MIR|1
+45 Infantry Veteran
+15 Plains

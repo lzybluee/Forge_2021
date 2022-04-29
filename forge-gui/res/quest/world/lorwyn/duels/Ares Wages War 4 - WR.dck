@@ -9,22 +9,22 @@ Description=[W/R] Agressive aggro with burn.
 Deck Type=constructed
 
 [Main]
-13 Mountain|SHM
-11 Plains|SHM
+13 Mountain
+11 Plains
 
-3 Balefire Liege|EVE
-2 Battlegate Mimic|EVE
-3 Blaze|10E
-1 Dolmen Gate|LRW
-2 Double Cleave|EVE
-3 Figure of Destiny|EVE
-4 Hearthfire Hobgoblin|EVE
-3 Hobgoblin Dragoon|EVE
-4 Incinerate|10E
-4 Mogg Fanatic|10E
-2 Raging Goblin|10E
-3 Rise of the Hobgoblins|EVE
-2 Waves of Aggression|EVE
+3 Balefire Liege
+2 Battlegate Mimic
+3 Blaze
+1 Dolmen Gate
+2 Double Cleave
+3 Figure of Destiny
+4 Hearthfire Hobgoblin
+3 Hobgoblin Dragoon
+4 Incinerate
+4 Mogg Fanatic
+2 Raging Goblin
+3 Rise of the Hobgoblins
+2 Waves of Aggression
 
 [Sideboard]
 [Planes]

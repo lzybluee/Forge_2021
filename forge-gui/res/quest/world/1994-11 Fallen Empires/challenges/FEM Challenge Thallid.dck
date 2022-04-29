@@ -15,8 +15,8 @@ Description="Thallids could absorb energy from the forest itself. Even elves wer
 Icon=Dungeon Crawling Green.jpg
 Deck Type=constructed
 [main]
-20 Forest|LEB|1
-10 Thallid|FEM|1
-10 Thallid|FEM|2
-10 Thallid|FEM|3
-10 Thallid|FEM|4
+20 Forest
+10 Thallid
+10 Thallid
+10 Thallid
+10 Thallid

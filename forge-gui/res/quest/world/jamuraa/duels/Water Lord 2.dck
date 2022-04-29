@@ -7,25 +7,25 @@ Difficulty=medium
 Description=Water Lord plays a  modified version of Zila's UR 'BrowseShivan' deck.
 Deck Type=constructed
 [main]
-3 Air Elemental|LEB
-2 Browse|ALL
-2 City of Brass|5ED
-4 Counterspell|5ED
-3 Dissipate|MIR
-2 Earthquake|LEB
-4 Force of Will|ALL
-3 Impulse|VIS
-4 Incinerate|MIR
-11 Island|MIR
-6 Mountain|MIR
-1 Mystical Tutor|MIR
-2 Pyrokinesis|ALL
-4 Quicksand|VIS
-1 Shivan Dragon|LEB
-1 Soldevi Excavations|ALL
-2 Suq'Ata Firewalker|MIR
-2 Thawing Glaciers|ALL
-3 Waterspout Djinn|VIS
+3 Air Elemental
+2 Browse
+2 City of Brass
+4 Counterspell
+3 Dissipate
+2 Earthquake
+4 Force of Will
+3 Impulse
+4 Incinerate
+11 Island
+6 Mountain
+1 Mystical Tutor
+2 Pyrokinesis
+4 Quicksand
+1 Shivan Dragon
+1 Soldevi Excavations
+2 Suq'Ata Firewalker
+2 Thawing Glaciers
+3 Waterspout Djinn
 [sideboard]
 [planes]
 [schemes]

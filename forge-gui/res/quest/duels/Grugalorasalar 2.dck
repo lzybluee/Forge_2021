@@ -7,21 +7,21 @@ Description=Izzet Mirari Conjecture burn deck with many instants and sorceries a
 Deck Type=constructed
 Icon=Grugalorasalar.jpg
 [main]
-4 Banefire|M19
-4 Chandra, Torch of Defiance|KLD
-2 Expansion // Explosion|GRN
-4 Fight with Fire|DOM
+4 Banefire
+4 Chandra, Torch of Defiance
+2 Expansion // Explosion
+4 Fight with Fire
 1 Forest
-4 Frontier Bivouac|KTK
-4 Guttersnipe|M19
+4 Frontier Bivouac
+4 Guttersnipe
 2 Island
-2 Jaya Ballard|DOM
-2 Jaya's Immolating Inferno|DOM
-3 Lightning Strike|M19
+2 Jaya Ballard
+2 Jaya's Immolating Inferno
+3 Lightning Strike
 9 Mountain
-3 Nature's Spiral|DOM
-4 Shock|M19
-4 Sulfur Falls|DOM
-4 The Mirari Conjecture|DOM
-4 Vivid Crag|LRW
+3 Nature's Spiral
+4 Shock
+4 Sulfur Falls
+4 The Mirari Conjecture
+4 Vivid Crag
 [sideboard]

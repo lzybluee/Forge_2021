@@ -7,8 +7,8 @@ Description=GW Aura deck with Hexproof creatures, Daybreak Coronet and Kor Spiri
 Icon=Vic Stone.jpg
 Deck Type=constructed
 [main]
-2 Plains|M12
-2 Forest|M12
+2 Plains
+2 Forest
 3 Razorverge Thicket
 4 Savannah
 1 Misty Rainforest

@@ -15,6 +15,6 @@ Description=The shapeshifter mimics with a twin's esteem and a mirror's cruelty.
 Icon=Clone.jpg
 Deck Type=constructed
 [main]
-20 Clone|LEB
-20 Copy Artifact|LEB
-20 Island|LEB
+20 Clone
+20 Copy Artifact
+20 Island

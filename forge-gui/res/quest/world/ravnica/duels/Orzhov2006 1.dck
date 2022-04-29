@@ -7,28 +7,28 @@ Difficulty=easy
 Description=Precon deck
 Deck Type=constructed
 [main]
-2 Agent of Masks|GPT
-1 Belfry Spirit|GPT
-2 Blind Hunter|GPT
-2 Castigate|GPT
-2 Hissing Miasma|GPT
-2 Infectious Host|RAV
-2 Mortify|COM
-2 Mourning Thrull|GPT
-2 Orzhov Euthanist|GPT
-1 Orzhov Guildmage|COM
-1 Orzhova, the Church of Deals|GPT
-2 Ostiary Thrull|GPT
-2 Pillory of the Sleepless|GPT
-4 Plagued Rusalka|GPT
-11 Plains|RTR
-2 Poisonbelly Ogre|GPT
-2 Shrieking Grotesque|GPT
-1 Skeletal Vampire|GPT
-2 Souls of the Faultless|GPT
-2 Strands of Undeath|RAV
-12 Swamp|RTR
-1 Teysa, Orzhov Scion|GPT
+2 Agent of Masks
+1 Belfry Spirit
+2 Blind Hunter
+2 Castigate
+2 Hissing Miasma
+2 Infectious Host
+2 Mortify
+2 Mourning Thrull
+2 Orzhov Euthanist
+1 Orzhov Guildmage
+1 Orzhova, the Church of Deals
+2 Ostiary Thrull
+2 Pillory of the Sleepless
+4 Plagued Rusalka
+11 Plains
+2 Poisonbelly Ogre
+2 Shrieking Grotesque
+1 Skeletal Vampire
+2 Souls of the Faultless
+2 Strands of Undeath
+12 Swamp
+1 Teysa, Orzhov Scion
 [sideboard]
 [planes]
 [schemes]

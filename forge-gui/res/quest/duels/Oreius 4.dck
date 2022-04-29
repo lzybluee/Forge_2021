@@ -8,8 +8,8 @@ Icon=Oreius.jpg
 Deck Type=constructed
 [main]
 4 Tropical Island
-1 Forest|ODY
-2 Island|ODY
+1 Forest
+2 Island
 4 Misty Rainforest
 3 Scalding Tarn
 2 Flooded Strand
@@ -18,7 +18,7 @@ Deck Type=constructed
 1 Mox Sapphire
 1 Mox Jet
 1 Ancestral Recall
-4 Nimble Mongoose|ODY
+4 Nimble Mongoose
 4 Delver of Secrets
 4 Mental Note
 4 Spell Snare
@@ -28,7 +28,7 @@ Deck Type=constructed
 2 Mulch
 3 Tracker's Instincts
 1 Commune with the Gods
-2 Werebear|ODY
+2 Werebear
 4 Tarmogoyf
 1 Deep Analysis
 3 Fact or Fiction

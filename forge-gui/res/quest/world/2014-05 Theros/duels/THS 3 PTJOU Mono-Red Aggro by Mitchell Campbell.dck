@@ -6,19 +6,19 @@ Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Mi
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-4 Akroan Crusader|THS
-4 Dragon Mantle|THS
-4 Everflame Eidolon|BNG
-4 Firedrinker Satyr|THS
-4 Lightning Strike|THS
-4 Mogis's Warhound|JOU
-20 Mountain|THS|1
-4 Prophetic Flamespeaker|JOU
-4 Satyr Hoplite|JOU
-4 Searing Blood|BNG
-4 Titan's Strength|THS
+4 Akroan Crusader
+4 Dragon Mantle
+4 Everflame Eidolon
+4 Firedrinker Satyr
+4 Lightning Strike
+4 Mogis's Warhound
+20 Mountain
+4 Prophetic Flamespeaker
+4 Satyr Hoplite
+4 Searing Blood
+4 Titan's Strength
 [Sideboard]
-4 Flame-Wreathed Phoenix|BNG
-3 Harness by Force|JOU
-4 Magma Spray|JOU
-4 Satyr Nyx-Smith|BNG
+4 Flame-Wreathed Phoenix
+3 Harness by Force
+4 Magma Spray
+4 Satyr Nyx-Smith

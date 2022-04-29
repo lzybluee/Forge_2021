@@ -7,20 +7,20 @@ Difficulty=hard
 Description=A monogreen Stompy deck.
 Deck Type=constructed
 [main]
-3 Armor of Thorns|MIR
-2 Aspect of Wolf|LEB
-3 Creeping Mold|VIS
-2 Desert Twister|ARN
-24 Forest|MIR
-4 Llanowar Elves|5ED
-3 Ghazban Ogre|ARN
-3 Giant Growth|5ED
-2 Hurricane|5ED
-3 River Boa|VIS
-2 Stampeding Wildebeests|VIS
-4 Uktabi Wildcats|MIR
-3 Whirling Dervish|5ED
-4 Yavimaya Ants|ALL
+3 Armor of Thorns
+2 Aspect of Wolf
+3 Creeping Mold
+2 Desert Twister
+24 Forest
+4 Llanowar Elves
+3 Ghazban Ogre
+3 Giant Growth
+2 Hurricane
+3 River Boa
+2 Stampeding Wildebeests
+4 Uktabi Wildcats
+3 Whirling Dervish
+4 Yavimaya Ants
 [sideboard]
 [planes]
 [schemes]

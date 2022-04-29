@@ -15,6 +15,6 @@ Description=Possession is nine-tenths of the law.
 Icon=Thievery.jpg
 Deck Type=constructed
 [main]
-24 Control Magic|LEB
-24 Island|LEB|1
-12 Steal Artifact|LEB
+24 Control Magic
+24 Island
+12 Steal Artifact

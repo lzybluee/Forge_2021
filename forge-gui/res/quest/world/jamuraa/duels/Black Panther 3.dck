@@ -7,24 +7,24 @@ Difficulty=hard
 Description=Black Panther plays a T1 'African Zoo' deck.
 Deck Type=constructed
 [main]
-4 Armageddon|5ED
-1 Balance|LEB
-4 Disenchant|5ED
-2 Forest|MIR
-2 Kjeldoran Outpost|ALL
-2 Land Tax|LEG
-1 Mox Emerald|LEB
-1 Mox Pearl|LEB
-4 Mtenda Lion|MIR
-4 Order of Leitbur|FEM
-4 Order of the White Shield|ICE
-6 Plains|MIR
-4 River Boa|VIS
-4 Savannah|LEB
-4 Savannah Lions|LEB
-4 Swords to Plowshares|LEB
-4 Tundra|LEB
-1 Zuran Orb|ICE
+4 Armageddon
+1 Balance
+4 Disenchant
+2 Forest
+2 Kjeldoran Outpost
+2 Land Tax
+1 Mox Emerald
+1 Mox Pearl
+4 Mtenda Lion
+4 Order of Leitbur
+4 Order of the White Shield
+6 Plains
+4 River Boa
+4 Savannah
+4 Savannah Lions
+4 Swords to Plowshares
+4 Tundra
+1 Zuran Orb
 [sideboard]
 [planes]
 [schemes]

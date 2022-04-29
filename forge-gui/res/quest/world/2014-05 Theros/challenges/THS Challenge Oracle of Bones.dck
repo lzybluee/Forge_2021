@@ -16,6 +16,6 @@ Description=It's only a gambling problem if you're losing.
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [Main]
-10 Boulderfall|THS
-30 Mountain|THS|1
-20 Oracle of Bones|BNG
+10 Boulderfall
+30 Mountain
+20 Oracle of Bones

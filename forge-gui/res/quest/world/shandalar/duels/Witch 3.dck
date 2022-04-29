@@ -7,18 +7,18 @@ Difficulty=hard
 Description=Black regenerating creatures and The Disk.
 Deck Type=constructed
 [main]
-1 Animate Dead|4ED
-4 Clay Statue|ATQ
+1 Animate Dead
+4 Clay Statue
 1 Mox Jet
-2 Diabolic Machine|DRK
-4 Drudge Skeletons|4ED
-2 Howl from Beyond|LEB
-4 Nevinyrral's Disk|LEB
-3 Scavenging Ghoul|LEB
-25 Swamp|4ED
-3 Throne of Bone|LEB
-4 Unholy Strength|4ED
-3 Walking Dead|LEG
-2 Wall of Bone|4ED
-4 Will-o'-the-Wisp|LEB
+2 Diabolic Machine
+4 Drudge Skeletons
+2 Howl from Beyond
+4 Nevinyrral's Disk
+3 Scavenging Ghoul
+25 Swamp
+3 Throne of Bone
+4 Unholy Strength
+3 Walking Dead
+2 Wall of Bone
+4 Will-o'-the-Wisp
 [sideboard]

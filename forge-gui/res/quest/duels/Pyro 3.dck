@@ -7,11 +7,11 @@ Description=UR deck with Delver of Secrets, Grim Lavamancer and Young Pyromancer
 Icon=Pyro.jpg
 Deck Type=constructed
 [main]
-6 Island|MBS
-3 Mountain|MBS
+6 Island
+3 Mountain
 4 Volcanic Island
 4 Misty Rainforest
-4 Scalding Tarn|ZEN
+4 Scalding Tarn
 4 Delver of Secrets
 4 Grim Lavamancer
 4 Young Pyromancer

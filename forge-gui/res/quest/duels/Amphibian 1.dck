@@ -7,8 +7,8 @@ Description=UG Landfall deck
 Icon=Amphibian.jpg
 Deck Type=constructed
 [main]
-8 Forest|ZEN
-8 Island|ZEN
+8 Forest
+8 Island
 4 Terramorphic Expanse
 4 Evolving Wilds
 4 Khalni Heart Expedition

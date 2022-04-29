@@ -9,28 +9,28 @@ Description=[R/G] Creature Rush/Burn. (Haste)
 Deck Type=constructed
 
 [Main]
-14 Forest|SHM
-10 Mountain|SHM
+14 Forest
+10 Mountain
 
-3 Boggart Ram-Gang|SHM
-1 Deathrender|LRW
-1 Deus of Calamity|SHM
-1 Dolmen Gate|LRW
-3 Farhaven Elf|SHM
-2 Flame Javelin|SHM
-1 Gleeful Sabotage|SHM
-2 Howl of the Night Pack|SHM
-2 Jaws of Stone|SHM
-2 Juvenile Gloomwidow|SHM
-4 Manamorphose|SHM
-2 Mudbrawler Raiders|SHM
-1 Prismatic Omen|SHM
-1 Runes of the Deus|SHM
-2 Scuttlemutt|SHM
-2 Scuzzback Scrapper|SHM
-4 Shock|10E
-1 Tower Above|SHM
-1 Woodfall Primus|SHM
+3 Boggart Ram-Gang
+1 Deathrender
+1 Deus of Calamity
+1 Dolmen Gate
+3 Farhaven Elf
+2 Flame Javelin
+1 Gleeful Sabotage
+2 Howl of the Night Pack
+2 Jaws of Stone
+2 Juvenile Gloomwidow
+4 Manamorphose
+2 Mudbrawler Raiders
+1 Prismatic Omen
+1 Runes of the Deus
+2 Scuttlemutt
+2 Scuzzback Scrapper
+4 Shock
+1 Tower Above
+1 Woodfall Primus
 
 [sideboard]
 [planes]

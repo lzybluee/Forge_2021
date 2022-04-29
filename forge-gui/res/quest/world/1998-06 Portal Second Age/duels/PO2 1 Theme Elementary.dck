@@ -7,14 +7,14 @@ Description=The dying ask for water because they know it contains life.
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [Main]
-4 Blaze|PO2
-4 Earthquake|PO2
-12 Forest|PO2|1
-4 Hurricane|PO2
-4 Jagged Lightning|PO2
-12 Mountain|PO2|1
-4 Natural Spring|PO2
-4 Stone Rain|PO2
-4 Tremor|PO2
-4 Untamed Wilds|PO2
-4 Wildfire|PO2
+4 Blaze
+4 Earthquake
+12 Forest
+4 Hurricane
+4 Jagged Lightning
+12 Mountain
+4 Natural Spring
+4 Stone Rain
+4 Tremor
+4 Untamed Wilds
+4 Wildfire

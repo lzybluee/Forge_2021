@@ -6,16 +6,16 @@ Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 Name=ELD 1 The Wilds: Maraleaf Forest
 [Main]
-4 Fae of Wishes|ELD|1
-12 Forest|ELD|1
-12 Island|ELD|3
-4 Maraleaf Pixie|ELD
-4 Maraleaf Rider|ELD
-4 Mystical Dispute|ELD
-4 Sage of the Falls|ELD
-4 Thornwood Falls|ELD
-4 Thunderous Snapper|ELD
-4 Wildborn Preserver|ELD|1
-4 Wildwood Tracker|ELD
+4 Fae of Wishes
+12 Forest
+12 Island
+4 Maraleaf Pixie
+4 Maraleaf Rider
+4 Mystical Dispute
+4 Sage of the Falls
+4 Thornwood Falls
+4 Thunderous Snapper
+4 Wildborn Preserver
+4 Wildwood Tracker
 [Sideboard]
-4 Return to Nature|ELD
+4 Return to Nature

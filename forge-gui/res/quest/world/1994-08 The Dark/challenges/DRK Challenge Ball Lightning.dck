@@ -15,5 +15,5 @@ Description=A strange phenomenon.
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [main]
-30 Mountain|LEB|2
-30 Ball Lightning|DRK
+30 Mountain
+30 Ball Lightning

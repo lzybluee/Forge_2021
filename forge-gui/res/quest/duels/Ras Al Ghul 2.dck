@@ -7,8 +7,8 @@ Description=BR Curse deck
 Icon=Ras Al Ghul.jpg
 Deck Type=constructed
 [main]
-10 Swamp|ISD
-3 Mountain|ISD
+10 Swamp
+3 Mountain
 2 Akoum Refuge
 2 Blackcleave Cliffs
 2 Dragonskull Summit

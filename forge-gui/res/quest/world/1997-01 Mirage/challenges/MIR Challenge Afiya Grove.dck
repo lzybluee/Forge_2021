@@ -15,6 +15,6 @@ Description="*sniff* They grow up so fast." -Yawgmoth
 Icon=Dungeon Crawling Green.jpg
 Deck Type=constructed
 [main]
-20 Afiya Grove|MIR
-20 Forest|MIR|4
-20 Phyrexian Walker|VIS
+20 Afiya Grove
+20 Forest
+20 Phyrexian Walker

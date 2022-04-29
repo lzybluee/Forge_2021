@@ -9,22 +9,22 @@ Description=[R/G] Tibal Warrior Aggro.
 Deck Type=constructed
 
 [Main]
-8 Forest|SHM
-8 Mountain|SHM
-4 Mutavault|MOR
-4 Fire-Lit Thicket|SHM
+8 Forest
+8 Mountain
+4 Mutavault
+4 Fire-Lit Thicket
 
-4 Boggart Ram-Gang|SHM
-4 Bramblewood Paragon|MOR
-4 Chameleon Colossus|MOR
-4 Countryside Crusher|MOR
-3 Flame Javelin|SHM
-1 Hurricane|10E
-4 Imperious Perfect|LRW
-2 Lash Out|LRW
-2 Tarfire|LRW
-4 Tattermunge Maniac|SHM
-4 Wren's Run Vanquisher|LRW
+4 Boggart Ram-Gang
+4 Bramblewood Paragon
+4 Chameleon Colossus
+4 Countryside Crusher
+3 Flame Javelin
+1 Hurricane
+4 Imperious Perfect
+2 Lash Out
+2 Tarfire
+4 Tattermunge Maniac
+4 Wren's Run Vanquisher
 
 [Sideboard]
 [Planes]

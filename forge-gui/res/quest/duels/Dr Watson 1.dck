@@ -7,7 +7,7 @@ Description=Mono G Forest deck with land fetch, People of the Woods and Treefolk
 Icon=Dr Watson.jpg
 Deck Type=constructed
 [main]
-24 Forest|M12
+24 Forest
 1 Clear the Land
 1 Cultivate
 1 Deep Reconnaissance

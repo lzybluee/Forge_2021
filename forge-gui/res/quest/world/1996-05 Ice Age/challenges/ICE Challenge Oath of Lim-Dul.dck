@@ -16,5 +16,5 @@ Description="A good Tarpan will serve you, faithful and true. A bad one will kic
 Icon=Dungeon Crawling Green.jpg
 Deck Type=constructed
 [main]
-20 Forest|ICE|2
-40 Tarpan|ICE
+20 Forest
+40 Tarpan

@@ -15,5 +15,5 @@ Description="Our buried kings silently await the revolt of dead peasants." -Tuwi
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-30 Island|MIR|3
-30 Swamp|MIR|4
+30 Island
+30 Swamp

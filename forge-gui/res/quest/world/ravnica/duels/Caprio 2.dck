@@ -7,23 +7,23 @@ Difficulty=medium
 Description=Catch me if you can..
 Deck Type=constructed
 [main]
-4 Compulsive Research|RAV
-4 Cyclonic Rift|RTR
-4 Muddle the Mixture|RAV
-4 Dimir Guildgate|GTC
-1 Duskmantle Seer|GTC
-4 Hunted Horror|RAV
-4 Hunted Phantasm|RAV
-4 Illness in the Ranks|GTC
-8 Island|RTR
-1 Jace, Architect of Thought|RTR
-4 Hatching Plans|GPT
-4 Leyline of Singularity|GPT
-1 Mimeofacture|GPT
-1 Stinkweed Imp|RAV
-1 Dimir House Guard|RAV
-8 Swamp|RTR
-4 Watery Grave|GTC
+4 Compulsive Research
+4 Cyclonic Rift
+4 Muddle the Mixture
+4 Dimir Guildgate
+1 Duskmantle Seer
+4 Hunted Horror
+4 Hunted Phantasm
+4 Illness in the Ranks
+8 Island
+1 Jace, Architect of Thought
+4 Hatching Plans
+4 Leyline of Singularity
+1 Mimeofacture
+1 Stinkweed Imp
+1 Dimir House Guard
+8 Swamp
+4 Watery Grave
 [sideboard]
 [planes]
 [schemes]

@@ -7,8 +7,8 @@ Description=UB Notion Thief deck with Howling Mine and Words of Wisdom
 Icon=Lupin the Third.jpg
 Deck Type=constructed
 [main]
-2 Swamp|M12
-4 Island|M12
+2 Swamp
+4 Island
 4 Underground Sea
 2 Flooded Strand
 4 Polluted Delta

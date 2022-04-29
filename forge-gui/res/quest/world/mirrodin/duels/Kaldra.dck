@@ -7,17 +7,17 @@ Description="Put on the full armor of God, so that you can take your stand again
 Icon=Kaldra.jpg
 Deck Type=constructed
 [Main]
-4 Grand Architect|SOM
-4 Helm of Kaldra|5DN
-24 Island|MRD|1
-2 Lumengrid Warden|MRD
-1 March of the Machines|MRD
-3 Oculus|MBS
-4 Shield of Kaldra|DST
-4 Spined Thopter|NPH
-4 Sword of Kaldra|MRD
-1 Tower of Fortunes|MRD
-1 Vedalken Anatomist|MBS
-4 Vedalken Certarch|SOM
-4 Vedalken Engineer|DST
+4 Grand Architect
+4 Helm of Kaldra
+24 Island
+2 Lumengrid Warden
+1 March of the Machines
+3 Oculus
+4 Shield of Kaldra
+4 Spined Thopter
+4 Sword of Kaldra
+1 Tower of Fortunes
+1 Vedalken Anatomist
+4 Vedalken Certarch
+4 Vedalken Engineer
 [sideboard]

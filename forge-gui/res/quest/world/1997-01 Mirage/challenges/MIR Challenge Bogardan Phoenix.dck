@@ -15,5 +15,5 @@ Description="Phoenixes burst into flame when it is time for them to die and are 
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [main]
-30 Bogardan Phoenix|VIS
-30 Mountain|MIR|4
+30 Bogardan Phoenix
+30 Mountain

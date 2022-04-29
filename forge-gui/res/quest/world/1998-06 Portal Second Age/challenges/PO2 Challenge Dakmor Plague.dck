@@ -15,5 +15,5 @@ Description="A plague a' both your houses!"\n-Mercutio, Shakespeare's Romeo and 
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [Main]
-30 Dakmor Plague|PO2
-30 Swamp|PO2|2
+30 Dakmor Plague
+30 Swamp

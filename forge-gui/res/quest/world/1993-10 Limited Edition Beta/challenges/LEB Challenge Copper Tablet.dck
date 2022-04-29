@@ -15,5 +15,5 @@ Description=You spot an inscription on a tablet.  It reads: "I prepared Explosiv
 Icon=Copper Tablet.jpg
 Deck Type=constructed
 [main]
-40 Copper Tablet|LEB
-20 Mountain|LEB|2
+40 Copper Tablet
+20 Mountain

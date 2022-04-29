@@ -7,15 +7,15 @@ Description=A custom strategy for the Blue/Black color pair.
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [Main]
-4 Air Elemental|PO2
-4 False Summoning|PO2
-4 Foul Spirit|PO2
-4 Hand of Death|PO2
-12 Island|PO2|2
-2 Mystic Denial|PO2
-4 Predatory Nightstalker|PO2
-4 Ravenous Rats|PO2
-4 Sea Drake|PO2
-12 Swamp|PO2|1
-4 Time Ebb|PO2
-2 Vampiric Spirit|PO2
+4 Air Elemental
+4 False Summoning
+4 Foul Spirit
+4 Hand of Death
+12 Island
+2 Mystic Denial
+4 Predatory Nightstalker
+4 Ravenous Rats
+4 Sea Drake
+12 Swamp
+4 Time Ebb
+2 Vampiric Spirit

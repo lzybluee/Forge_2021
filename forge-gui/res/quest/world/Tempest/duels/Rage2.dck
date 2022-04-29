@@ -8,19 +8,19 @@ Description=Red creature based aggro deck
 Deck Type=constructed
 Name=Rage2
 [Main]
-2 Blood Frenzy|TMP
-2 Canyon Wildcat|TMP
-2 Fireslinger|TMP
-2 Giant Strength|TMP
-4 Jackal Pup|TMP
-4 Maniacal Rage|EXO
-4 Mogg Fanatic|TMP
-4 Mogg Maniac|STH
-5 Mountain|TMP|1
-5 Mountain|TMP|2
-6 Mountain|TMP|4
-4 Raging Goblin|EXO
-4 Rathi Dragon|TMP
-4 Wasteland|TMP
-4 Cursed Scroll|TMP
-4 Kindle|TMP
+2 Blood Frenzy
+2 Canyon Wildcat
+2 Fireslinger
+2 Giant Strength
+4 Jackal Pup
+4 Maniacal Rage
+4 Mogg Fanatic
+4 Mogg Maniac
+5 Mountain
+5 Mountain
+6 Mountain
+4 Raging Goblin
+4 Rathi Dragon
+4 Wasteland
+4 Cursed Scroll
+4 Kindle

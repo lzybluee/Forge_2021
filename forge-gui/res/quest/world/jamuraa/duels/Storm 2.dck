@@ -7,17 +7,17 @@ Difficulty=medium
 Description=Storm plays a modified version of Darwin Kastle's 'Sumu' deck from PT Paris 1997.
 Deck Type=constructed
 [main]
-4 Cloud Elemental|VIS
-4 Fireblast|VIS
-4 Goblin Elite Infantry|MIR
-4 Incinerate|MIR
-10 Island|MIR
-4 Kaervek's Torch|MIR
-4 Man-o'-War|VIS
-4 Memory Lapse|MIR
-14 Mountain|MIR
-4 Suq'Ata Lancer|VIS
-4 Waterspout Djinn|VIS
+4 Cloud Elemental
+4 Fireblast
+4 Goblin Elite Infantry
+4 Incinerate
+10 Island
+4 Kaervek's Torch
+4 Man-o'-War
+4 Memory Lapse
+14 Mountain
+4 Suq'Ata Lancer
+4 Waterspout Djinn
 [sideboard]
 [planes]
 [schemes]

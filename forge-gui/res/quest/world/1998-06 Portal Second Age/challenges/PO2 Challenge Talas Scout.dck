@@ -15,5 +15,5 @@ Description="Scouting a battle before you fight it is just good business."\n-Jef
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [Main]
-20 Island|PO2|2
-40 Talas Scout|PO2
+20 Island
+40 Talas Scout

@@ -16,6 +16,6 @@ Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 Name=ELD Challenge: Garruk, Cursed Huntsman
 [Main]
-15 Forest|ELD|2
-30 Garruk, Cursed Huntsman|ELD|2
-15 Swamp|ELD|4
+15 Forest
+30 Garruk, Cursed Huntsman
+15 Swamp

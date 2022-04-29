@@ -9,26 +9,26 @@ Description=Victory or death! Blast the rot-fiends off the face of Mirrodin with
 Set=MBS
 Image=into_the_breach.jpg
 [main]
-1 Contested War Zone|MBS
-2 Darksteel Axe|SOM
-2 Devastating Summons|ROE
-2 Galvanic Blast|SOM
-2 Goblin Bushwhacker|ZEN
-2 Goblin Guide|ZEN
-4 Goblin Wardriver|MBS
-1 Iron Myr|SOM
-4 Kuldotha Rebirth|SOM
-4 Lightning Bolt|M11
-4 Memnite|SOM
-21 Mountain|ISD
-4 Ornithopter|M11
-2 Panic Spellbomb|SOM
-4 Signal Pest|MBS
-1 Spikeshot Elder|SOM
+1 Contested War Zone
+2 Darksteel Axe
+2 Devastating Summons
+2 Galvanic Blast
+2 Goblin Bushwhacker
+2 Goblin Guide
+4 Goblin Wardriver
+1 Iron Myr
+4 Kuldotha Rebirth
+4 Lightning Bolt
+4 Memnite
+21 Mountain
+4 Ornithopter
+2 Panic Spellbomb
+4 Signal Pest
+1 Spikeshot Elder
 [sideboard]
-2 Act of Treason|M12
-4 Goblin Ruinblaster|ZEN
-2 Into the Core|MBS
-1 Leyline of Punishment|M11
-4 Searing Blaze|WWK
-2 Unstable Footing|ZEN
+2 Act of Treason
+4 Goblin Ruinblaster
+2 Into the Core
+1 Leyline of Punishment
+4 Searing Blaze
+2 Unstable Footing

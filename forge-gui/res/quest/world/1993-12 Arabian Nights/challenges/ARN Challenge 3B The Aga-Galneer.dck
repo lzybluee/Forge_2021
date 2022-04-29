@@ -15,5 +15,5 @@ Description=A black cloud lies over the city of Alexandria, covering it in etern
 Icon=Aga Galneer.jpg
 Deck Type=constructed
 [main]
-600 Oubliette|ARN|2
-400 Swamp|LEB|1
+600 Oubliette
+400 Swamp

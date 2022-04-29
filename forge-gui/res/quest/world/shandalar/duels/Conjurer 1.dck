@@ -7,24 +7,24 @@ Difficulty=easy
 Description=Blue/Artifact 'poker' deck.
 Deck Type=constructed
 [main]
-2 Aladdin's Ring|ARN
-2 Counterspell|4ED
-1 Devouring Deep|LEG
-1 Flash Counter|LEG
-3 Giant Tortoise|ARN
-1 Grapeshot Catapult|ATQ
-22 Island|4ED
-3 Jayemdae Tome|4ED
-4 Pirate Ship|4ED
-4 Prodigal Sorcerer|4ED
-1 Psychic Purge|LEG
-1 Reconstruction|ATQ
-1 Remove Soul|LEG
-4 Rod of Ruin|4ED
-2 Steal Artifact|LEB
-1 Tangle Kelp|DRK
-2 Telekinesis|LEG
-1 Venarian Gold|LEG
-2 Wall of Air|LEB
-2 Wall of Water|LEB
+2 Aladdin's Ring
+2 Counterspell
+1 Devouring Deep
+1 Flash Counter
+3 Giant Tortoise
+1 Grapeshot Catapult
+22 Island
+3 Jayemdae Tome
+4 Pirate Ship
+4 Prodigal Sorcerer
+1 Psychic Purge
+1 Reconstruction
+1 Remove Soul
+4 Rod of Ruin
+2 Steal Artifact
+1 Tangle Kelp
+2 Telekinesis
+1 Venarian Gold
+2 Wall of Air
+2 Wall of Water
 [sideboard]

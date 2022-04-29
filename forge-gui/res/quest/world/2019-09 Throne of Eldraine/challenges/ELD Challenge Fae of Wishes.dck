@@ -16,7 +16,7 @@ Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 Name=ELD Challenge: Fae of Wishes
 [Main]
-30 Fae of Wishes|ELD|2
-30 Island|ELD|4
+30 Fae of Wishes
+30 Island
 [Sideboard]
-100 Heraldic Banner|ELD
+100 Heraldic Banner

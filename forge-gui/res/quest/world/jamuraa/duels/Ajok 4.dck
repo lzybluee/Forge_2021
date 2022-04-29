@@ -6,23 +6,23 @@ Icon=Ajok.jpg
 Difficulty=very hard
 Description=UW Counterpost deck.
 Deck Type=constructed
-Card Reward=20% Counterspell|5ED
+Card Reward=20% Counterspell
 [main]
-4 Arcane Denial|ALL
-3 Binding Grasp|5ED
-4 Counterspell|5ED
-2 Desertion|VIS
-2 Disenchant|5ED
-2 Dissipate|MIR
-11 Island|MIR
-4 Kjeldoran Outpost|ALL
-4 Mishra's Factory|ATQ
-2 Nevinyrral's Disk|LEB
-9 Plains|MIR
-4 Suq'Ata Firewalker|MIR
-3 Thawing Glaciers|ALL
-2 Waterspout Djinn|VIS
-4 Wrath of God|LEB
+4 Arcane Denial
+3 Binding Grasp
+4 Counterspell
+2 Desertion
+2 Disenchant
+2 Dissipate
+11 Island
+4 Kjeldoran Outpost
+4 Mishra's Factory
+2 Nevinyrral's Disk
+9 Plains
+4 Suq'Ata Firewalker
+3 Thawing Glaciers
+2 Waterspout Djinn
+4 Wrath of God
 [sideboard]
 [planes]
 [schemes]

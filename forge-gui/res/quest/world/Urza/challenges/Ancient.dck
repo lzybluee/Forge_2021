@@ -16,7 +16,7 @@ Description=Ancient monsters are rampaging - can the walls keep them out?
 Icon=Dungeon Crawling Green.jpg
 Deck Type=constructed
 [main]
-10 Forest|USG
-2 Rancor|ULG
-5 Ancient Silverback|UDS
+10 Forest
+2 Rancor
+5 Ancient Silverback
 [sideboard]

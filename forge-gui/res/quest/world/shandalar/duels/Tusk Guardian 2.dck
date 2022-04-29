@@ -7,20 +7,20 @@ Difficulty=medium
 Description=GW aggro animals.
 Deck Type=constructed
 [main]
-1 Berserk|LEB
-4 Birds of Paradise|2ED
-2 Colossus of Sardia|ATQ
-2 Desert Twister|4ED
-2 Divine Transformation|LEG
-2 Elder Land Wurm|LEG
-2 Emerald Dragonfly|LEG
-2 Force of Nature|LEB
-12 Forest|2ED
-4 Giant Growth|2ED
-4 Holy Strength|2ED
-12 Plains|2ED
-3 Savannah Lions|LEB
-1 Scryb Sprites|LEB
-3 Tundra Wolves|LEG
-4 War Mammoth|LEB
+1 Berserk
+4 Birds of Paradise
+2 Colossus of Sardia
+2 Desert Twister
+2 Divine Transformation
+2 Elder Land Wurm
+2 Emerald Dragonfly
+2 Force of Nature
+12 Forest
+4 Giant Growth
+4 Holy Strength
+12 Plains
+3 Savannah Lions
+1 Scryb Sprites
+3 Tundra Wolves
+4 War Mammoth
 [sideboard]

@@ -16,5 +16,5 @@ Description=The defenders said not a word. Their shields, spears, and stances we
 Icon=Dungeon Crawling Green.jpg
 Deck Type=constructed
 [Main]
-30 Defend the Hearth|THS
-30 Forest|THS|2
+30 Defend the Hearth
+30 Forest

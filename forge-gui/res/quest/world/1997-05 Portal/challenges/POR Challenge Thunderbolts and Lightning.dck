@@ -15,6 +15,6 @@ Description=very, very fright'ning me
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [Main]
-15 Forked Lightning|POR
-30 Mountain|POR|2
-15 Thundermare|POR
+15 Forked Lightning
+30 Mountain
+15 Thundermare

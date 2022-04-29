@@ -6,21 +6,21 @@ Difficulty=medium
 Description=Green animal aggro deck.
 Deck Type=constructed
 [main]
-2 Craw Wurm|4ED
-2 Durkwood Boars|4ED
-20 Forest|4ED
-4 Giant Growth|4ED
-2 Giant Spider|4ED
-3 Grizzly Bears|4ED
-2 Hornet Cobra|LEG
-3 Instill Energy|LEB
-2 Ironroot Treefolk|LEB
-2 Killer Bees|LEG
-3 Ley Druid|LEB
-3 Llanowar Elves|4ED
-4 Mishra's Factory|ATQ
-2 Oasis|ARN
-2 Wall of Wood|LEB
-3 Wanderlust|LEB
-3 Wooden Sphere|LEB
+2 Craw Wurm
+2 Durkwood Boars
+20 Forest
+4 Giant Growth
+2 Giant Spider
+3 Grizzly Bears
+2 Hornet Cobra
+3 Instill Energy
+2 Ironroot Treefolk
+2 Killer Bees
+3 Ley Druid
+3 Llanowar Elves
+4 Mishra's Factory
+2 Oasis
+2 Wall of Wood
+3 Wanderlust
+3 Wooden Sphere
 [sideboard]

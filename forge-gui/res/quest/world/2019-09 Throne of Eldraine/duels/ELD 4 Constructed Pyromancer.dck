@@ -6,20 +6,20 @@ Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 Name=ELD 4 Constructed: Pyromancer
 [Main]
-4 Bonecrusher Giant|ELD|1
-4 Brazen Borrower|ELD|1
-2 Castle Embereth|ELD|1
-4 Fabled Passage|ELD|1
-4 Improbable Alliance|ELD|1
-4 Irencrag Pyromancer|ELD|1
-11 Island|ELD|4
-4 Merchant of the Vale|ELD|1
-7 Mountain|ELD|3
-1 Mystic Sanctuary|ELD
-4 Opt|ELD
-1 Scorching Dragonfire|ELD
-4 The Royal Scions|ELD|1
-4 Thrill of Possibility|ELD
-2 Witching Well|ELD
+4 Bonecrusher Giant
+4 Brazen Borrower
+2 Castle Embereth
+4 Fabled Passage
+4 Improbable Alliance
+4 Irencrag Pyromancer
+11 Island
+4 Merchant of the Vale
+7 Mountain
+1 Mystic Sanctuary
+4 Opt
+1 Scorching Dragonfire
+4 The Royal Scions
+4 Thrill of Possibility
+2 Witching Well
 [Sideboard]
-2 Castle Vantress|ELD|1
+2 Castle Vantress

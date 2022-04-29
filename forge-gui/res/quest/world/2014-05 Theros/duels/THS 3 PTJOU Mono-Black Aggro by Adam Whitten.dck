@@ -6,23 +6,23 @@ Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Ad
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
 [main]
-3 Bile Blight|BNG
-4 Gnarled Scarhide|JOU
-4 Herald of Torment|BNG
-4 Hero's Downfall|THS
-3 Master of the Feast|JOU
-4 Mogis's Marauder|THS
-4 Pain Seer|BNG
-4 Spiteful Returned|BNG
-22 Swamp|THS|1
-4 Thoughtseize|THS
-4 Tormented Hero|THS
+3 Bile Blight
+4 Gnarled Scarhide
+4 Herald of Torment
+4 Hero's Downfall
+3 Master of the Feast
+4 Mogis's Marauder
+4 Pain Seer
+4 Spiteful Returned
+22 Swamp
+4 Thoughtseize
+4 Tormented Hero
 [Sideboard]
-1 Agent of Erebos|JOU
-2 Brain Maggot|JOU
-3 Dark Betrayal|THS
-1 Erebos, God of the Dead|THS
-3 Nighthowler|THS
-3 Pharika's Cure|THS
-1 Silence the Believers|JOU
-1 Whip of Erebos|THS
+1 Agent of Erebos
+2 Brain Maggot
+3 Dark Betrayal
+1 Erebos, God of the Dead
+3 Nighthowler
+3 Pharika's Cure
+1 Silence the Believers
+1 Whip of Erebos

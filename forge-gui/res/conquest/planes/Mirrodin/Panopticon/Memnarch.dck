@@ -1,36 +1,36 @@
 [metadata]
 Name=Memnarch
 [Commander]
-1 Memnarch|ARC
+1 Memnarch
 [Main]
-1 Acquire|5DN
-1 Argent Sphinx|MM2
-1 Argentum Armor|C14
-1 Beacon of Tomorrows|5DN
-1 Blinkmoth Infusion|5DN
-1 Blinkmoth Urn|C16
-1 Blue Sun's Zenith|C15
-1 Broodstar|HOP
-1 Caged Sun|C14
-1 Chief Engineer|C16
-1 Cryptoplasm|MBS
-1 Dissipation Field|SOM
-1 Distant Memories|MBS
-1 Gate to the AEther|MRD
-1 Grand Architect|SOM
-1 Hangarback Walker|ORI
-2 Island|SOM|1
-5 Island|SOM|2
-6 Island|SOM|3
-2 Island|SOM|4
-1 Last Word|DST
-1 Phyrexian Metamorph|NPH
-1 Proteus Staff|MRD
-1 Quicksilver Gargantuan|SOM
-1 Reshape|DST
-1 Shape Anew|SOM
-1 Spellskite|MM2
-1 Steel Overseer|DDF
-1 Thopter Spy Network|ORI
+1 Acquire
+1 Argent Sphinx
+1 Argentum Armor
+1 Beacon of Tomorrows
+1 Blinkmoth Infusion
+1 Blinkmoth Urn
+1 Blue Sun's Zenith
+1 Broodstar
+1 Caged Sun
+1 Chief Engineer
+1 Cryptoplasm
+1 Dissipation Field
+1 Distant Memories
+1 Gate to the AEther
+1 Grand Architect
+1 Hangarback Walker
+2 Island
+5 Island
+6 Island
+2 Island
+1 Last Word
+1 Phyrexian Metamorph
+1 Proteus Staff
+1 Quicksilver Gargantuan
+1 Reshape
+1 Shape Anew
+1 Spellskite
+1 Steel Overseer
+1 Thopter Spy Network
 [Sideboard]
 
