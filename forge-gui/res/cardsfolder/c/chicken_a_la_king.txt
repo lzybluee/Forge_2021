@@ -1,4 +1,4 @@
-Name:Chicken à la King
+Name:Chicken a la King
 ManaCost:1 U U
 Types:Creature Bird Noble
 PT:2/2
