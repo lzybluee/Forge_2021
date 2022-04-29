@@ -4,6 +4,7 @@ import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class HauntEffect extends SpellAbilityEffect {
 
@@ -14,7 +15,7 @@ public class HauntEffect extends SpellAbilityEffect {
         Card card = game.getCardState(host, null);
         if (card == null) {
             return;
-        } else if (sa.usesTargeting() && !card.isToken() && host.equalsWithTimestamp(card)) {
+        } else if (sa.usesTargeting() && !card.isToken() && card.getZone().is(ZoneType.Graveyard)) {
             // haunt target but only if card is no token and still in grave
             final Card copy = game.getAction().exile(card, sa);
             sa.getTargets().getFirstTargetedCard().addHauntedBy(copy);
