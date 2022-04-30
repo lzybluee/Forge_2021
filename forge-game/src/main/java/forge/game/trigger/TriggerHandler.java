@@ -557,10 +557,6 @@ public class TriggerHandler {
             sa.setActivatingPlayer(p);
         }
 
-        if (regtrig.hasParam("RememberController")) {
-            host.addRemembered(sa.getActivatingPlayer());
-        }
-
         if (regtrig.hasParam("RememberTriggeringCard")) {
             Card triggeredCard = ((Card) sa.getTriggeringObject(AbilityKey.Card));
             host.addRemembered(triggeredCard);
@@ -571,6 +567,14 @@ public class TriggerHandler {
         }
 
         sa.setStackDescription(sa.toString());
+
+        if(!sa.getConditions().areMet(sa)) {
+            return;
+        }
+
+        if (regtrig.hasParam("RememberController")) {
+            host.addRemembered(sa.getActivatingPlayer());
+        }
 
         Player decider = null;
         boolean isMandatory = false;

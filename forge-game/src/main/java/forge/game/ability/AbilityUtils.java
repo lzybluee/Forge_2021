@@ -495,6 +495,18 @@ public class AbilityUtils {
                 players.addAll(game.getPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
             }
+            else if (hType.equals("HasPermanentPlayers")) {
+                for(Player p : game.getPlayers()) {
+                    CardCollectionView cards = p.getCardsIn(ZoneType.Battlefield);
+                    for(Card c : cards) {
+                        if(c.isPermanent() && c.canBeTargetedBy(((SpellAbility)ability))) {
+                            players.add(p);
+                            break;
+                        }
+                    }
+                }
+                val = playerXCount(players, calcX[1], card, ability);
+            }
             else if (hType.equals("YourTeam")) {
                 players.addAll(player.getYourTeam());
                 val = playerXCount(players, calcX[1], card, ability);
@@ -2445,6 +2457,10 @@ public class AbilityUtils {
                 }
             }
             return doXMath(differentAttackers.size(), expr, c, ctb);
+        }
+
+        if (sq[0].contains("AttackersActivePlayerDeclared") && game.getPhaseHandler().getPlayerTurn() != null) {
+            return doXMath(game.getPhaseHandler().getPlayerTurn().getCreaturesAttackedThisTurn().size(), expr, c, ctb);
         }
 
         // Count$CardAttackedThisTurn <Valid>
