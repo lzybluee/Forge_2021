@@ -82,35 +82,20 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            // Mobile Forge allows to tap cards underneath the current card even if the current one is tapped
-            if (otherCardsToSelect != null) {
-                for (Card c : otherCardsToSelect) {
-                    for (SpellAbility sa : getAllManaAbilities(c)) {
-                        if (sa.canPlay()) {
-                            delaySelectCards.add(c);
-                            break;
-                        }
+        if (otherCardsToSelect != null) {
+            for (Card c : otherCardsToSelect) {
+                for (SpellAbility sa : getAllManaAbilities(c)) {
+                    if (sa.canPlay()) {
+                        delaySelectCards.add(c);
+                        break;
                     }
                 }
             }
-            if (!getAllManaAbilities(card).isEmpty() && activateManaAbility(card)) {
-                return true;
-            }
-            return activateDelayedCard();
-        } else {
-            List<SpellAbility> manaAbilities = getAllManaAbilities(card);
-            // Desktop Forge floating menu functionality
-            if (manaAbilities.size() == 1) {
-                activateManaAbility(card, manaAbilities.get(0));
-            } else {
-                SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
-                if (spellAbility != null) {
-                    activateManaAbility(card, spellAbility);
-                }
-            }
+        }
+        if (!getAllManaAbilities(card).isEmpty() && activateManaAbility(card, null, triggerEvent)) {
             return true;
         }
+        return activateDelayedCard();
     }
 
     protected List<SpellAbility> getAllManaAbilities(Card card) {
@@ -208,9 +193,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     protected boolean activateManaAbility(final Card card) {
-        return activateManaAbility(card, null);
+        return activateManaAbility(card, null, null);
     }
     protected boolean activateManaAbility(final Card card, SpellAbility chosenAbility) {
+        return activateManaAbility(card, chosenAbility, null);
+    }
+    protected boolean activateManaAbility(final Card card, SpellAbility chosenAbility, final ITriggerEvent triggerEvent) {
         if (locked) {
             System.err.print("Should wait till previous call to playAbility finishes.");
             return false;
@@ -319,8 +307,15 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             }
 
-            ArrayList<SpellAbilityView> choices = new ArrayList<>(abilitiesMap.keySet());
-            chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one(Localizer.getInstance().getMessage("lblChooseManaAbility"),  choices)) : abilitiesMap.get(choices.get(0));
+            List<SpellAbility> choices = new ArrayList<>(abilitiesMap.values());
+            if(choices.size() > 1) {
+                chosen = getController().getAbilityToPlay(card, choices, triggerEvent);
+                if(chosen == null) {
+                    return false;
+                }
+            } else {
+                chosen = choices.get(0);
+            }
         } else {
             chosen = chosenAbility;
         }
