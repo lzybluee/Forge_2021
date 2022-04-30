@@ -88,6 +88,10 @@ public class GameRules {
         return appliedVariants.contains(variant);
     }
 
+    public Set<GameType> getAppliedVariants() {
+        return this.appliedVariants;
+    }
+
     public boolean hasCommander() {
         return appliedVariants.contains(GameType.Commander)
                 || appliedVariants.contains(GameType.Oathbreaker)

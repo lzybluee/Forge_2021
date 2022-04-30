@@ -913,6 +913,10 @@ public class ComputerUtil {
     }
 
     public static boolean canRegenerate(Player ai, final Card card) {
+        return canRegenerate(ai, card, false);
+    }
+
+    public static boolean canRegenerate(Player ai, final Card card, final boolean checkCost) {
         if (!card.canBeShielded()) {
             return false;
         }
@@ -950,6 +954,18 @@ public class ComputerUtil {
                             if (!ComputerUtilCost.checkCreatureSacrificeCost(controller, abCost, c, sa)) {
                                 continue; // Won't play ability
                             }
+                        }
+                    } else if(checkCost) {
+                        final Cost abCost = sa.getPayCosts();
+                        boolean sacrifice = false;
+                        for (final CostPart part : abCost.getCostParts()) {
+                            if (part instanceof CostSacrifice) {
+                                sacrifice = true;
+                                break;
+                            }
+                        }
+                        if(sacrifice) {
+                            continue;
                         }
                     }
 
@@ -1547,6 +1563,20 @@ public class ComputerUtil {
         return damage;
     }
 
+    private static final List<GameObject> getTargetsList(final SpellAbility ability) {
+        final List<GameObject> canBeTargeted = new ArrayList<GameObject>();
+        for (Card c : ability.getTargets().getTargetCards()) {
+            Card current = c.getGame().getCardState(c);
+            if (current != null && current.getTimestamp() != c.getTimestamp()) {
+                continue;
+            }
+            if (c.canBeTargetedBy(ability)) {
+                canBeTargeted.add(c);
+            }
+        }
+        return canBeTargeted;
+    }
+
     /**
      * Overload of predictThreatenedObjects that evaluates the full stack
      */
@@ -1610,8 +1640,10 @@ public class ComputerUtil {
         final Card source = topStack.getHostCard();
         final ApiType threatApi = topStack.getApi();
 
+        boolean useParentTargets = false;
         // Can only Predict things from AFs
         if (threatApi == null) {
+            Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
             return threatened;
         }
 
@@ -1621,21 +1653,23 @@ public class ComputerUtil {
             } else if (topStack.hasParam("ValidCards")) {
                 CardCollectionView battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
                 objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards"), source.getController(), source, topStack);
+            } else if (topStack.hasParam("ChangeType") && topStack.getParam("ChangeType").contains("Card.IsRemembered")) {
+                SpellAbility parent = topStack.getParent();
+                if(parent != null && parent.hasParam("RememberTargets")) {
+                    objects = getTargetsList(parent);
+                    useParentTargets = true;
+                } else {
+                    Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
+                    return threatened;
+                }
             } else {
+                Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets();
-            final List<GameObject> canBeTargeted = new ArrayList<>();
-            for (Object o : objects) {
-                if (o instanceof GameEntity) {
-                    final GameEntity ge = (GameEntity) o;
-                    if (ge.canBeTargetedBy(topStack)) {
-                        canBeTargeted.add(ge);
-                    }
-                }
-            }
+            final List<GameObject> canBeTargeted = getTargetsList(topStack);
             if (canBeTargeted.isEmpty()) {
+                Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
                 return threatened;
             }
             objects = canBeTargeted;
@@ -1666,6 +1700,7 @@ public class ComputerUtil {
             if (saviour != null && saviour.getParam("CounterType").equals("P1P1")) {
                 toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParamOrDefault("CounterNum", "1"), saviour);
             } else {
+                Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
                 return threatened;
             }
         }
@@ -1673,11 +1708,31 @@ public class ComputerUtil {
         // Determine if Defined Objects are "threatened" will be destroyed
         // due to this SA
 
+        int fightDmg = 0;
+        boolean fightDeathtouch = false;
+        if(threatApi == ApiType.Fight && topStack.hasParam("Defined")) {
+            final CardCollection definedCards = AbilityUtils.getDefinedCards(source, topStack.getParam("Defined"), topStack);
+            if(!definedCards.isEmpty()) {
+                Card c = definedCards.get(0);
+                Card current = c.getGame().getCardState(c);
+                if (current != null && current.getTimestamp() == c.getTimestamp()) {
+                    if(topStack.hasParam("FightWithToughness")) {
+                        fightDmg = c.getNetToughness();
+                    } else {
+                        fightDmg = c.getNetPower();
+                    }
+                    if(fightDmg > 0 && current.hasKeyword(Keyword.DEATHTOUCH)) {
+                        fightDeathtouch = true;
+                    }
+                }
+            }
+        }
+
         // Lethal Damage => prevent damage/regeneration/bounce/shroud
-        if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
+        if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll || fightDmg > 0) {
             // If PredictDamage is >= Lethal Damage
-            final int dmg = AbilityUtils.calculateAmount(topStack.getHostCard(),
-                    topStack.getParam("NumDmg"), topStack);
+            final int dmg = (fightDmg > 0 ? fightDmg : AbilityUtils.calculateAmount(topStack.getHostCard(),
+                    topStack.getParam("NumDmg"), topStack));
             final SpellAbility sub = topStack.getSubAbility();
             boolean noRegen = false;
             if (sub != null && sub.getApi() == ApiType.Pump) {
@@ -1709,8 +1764,14 @@ public class ComputerUtil {
                         continue;
                     }
 
+                    boolean hasDeathtouch = false;
+                    final int predictDamage = ComputerUtilCombat.predictDamageTo(c, dmg, source, false);
+                    if(predictDamage > 0 && (source.hasKeyword(Keyword.DEATHTOUCH) || fightDeathtouch)) {
+                        hasDeathtouch = true;
+                    }
+
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false) && !hasDeathtouch;
                         if ((!topStack.usesTargeting() && !grantIndestructible && !canSave)
                                 || (!grantIndestructible && !grantShroud && !canSave)) {
                             continue;
@@ -1718,8 +1779,8 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
-                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
-                        if (!canSave) {
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false) && !hasDeathtouch;
+                        if (!canSave && !grantShroud) {
                             continue;
                         }
                     }
@@ -1735,7 +1796,11 @@ public class ComputerUtil {
                         continue;
                     }
 
-                    if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false)) {
+                    if (saviourApi == ApiType.ChangeZone && threatApi == ApiType.DamageAll && saviour.hasParam("IsCloudshift") && !useParentTargets) {
+                        continue;
+                    }
+
+                    if (predictDamage >= ComputerUtilCombat.getDamageToKill(c, false) || hasDeathtouch) {
                         threatened.add(c);
                     }
                 } else if (o instanceof Player) {
@@ -1794,6 +1859,11 @@ public class ComputerUtil {
                     if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
                         continue;
                     }
+ 
+                    if (saviourApi == ApiType.ChangeZone && threatApi == ApiType.PumpAll && saviour.hasParam("IsCloudshift") && !useParentTargets) {
+                        continue;
+                    }
+
                     threatened.add(c);
                 }
             }
@@ -1804,7 +1874,8 @@ public class ComputerUtil {
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                         || saviourApi == ApiType.Protection || saviourApi == null
-                        || saviorWithSubsApi == ApiType.Pump || saviorWithSubsApi == ApiType.PumpAll)) {
+                        || saviorWithSubsApi == ApiType.Pump || saviorWithSubsApi == ApiType.PumpAll
+                        || (grantShroud && saviourApi != ApiType.Pump && saviourApi != ApiType.PumpAll))) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1838,10 +1909,19 @@ public class ComputerUtil {
                         continue;
                     }
 
+                    if (saviourApi == ApiType.ChangeZone && threatApi == ApiType.DestroyAll && saviour.hasParam("IsCloudshift") && !useParentTargets) {
+                        continue;
+                    }
+
                     // don't use it on creatures that can't be regenerated
                     if (saviourApi == ApiType.Regenerate && !c.canBeShielded()) {
                         continue;
                     }
+
+                    if(grantShroud && saviourApi != ApiType.Pump && saviourApi != ApiType.PumpAll && !topStack.isTargeting(c)) {
+                        continue;
+                    }
+
                     threatened.add(c);
                 }
             }
@@ -1849,7 +1929,7 @@ public class ComputerUtil {
         // Exiling => bounce/shroud
         else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
-                || saviourApi == ApiType.Protection || saviourApi == null)
+                || saviourApi == ApiType.Protection || saviourApi == null || (grantShroud && saviourApi != ApiType.Pump && saviourApi != ApiType.PumpAll))
                 && topStack.hasParam("Destination")
                 && topStack.getParam("Destination").equals("Exile")) {
             for (final Object o : objects) {
@@ -1871,6 +1951,14 @@ public class ComputerUtil {
                         continue;
                     }
 
+                    if (saviourApi == ApiType.ChangeZone && threatApi == ApiType.ChangeZoneAll && saviour.hasParam("IsCloudshift") && !useParentTargets) {
+                        continue;
+                    }
+
+                    if(grantShroud && saviourApi != ApiType.Pump && saviourApi != ApiType.PumpAll && !topStack.isTargeting(c)) {
+                        continue;
+                    }
+
                     threatened.add(c);
                 }
             }
@@ -1879,7 +1967,7 @@ public class ComputerUtil {
         else if ((threatApi == ApiType.GainControl
                     || (threatApi == ApiType.Attach && topStack.hasParam("AILogic") && topStack.getParam("AILogic").equals("GainControl") ))
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
-                || saviourApi == ApiType.Protection || saviourApi == null)) {
+                || saviourApi == ApiType.Protection || saviourApi == null || (grantShroud && saviourApi != ApiType.Pump && saviourApi != ApiType.PumpAll))) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1891,6 +1979,9 @@ public class ComputerUtil {
                         if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
+                    }
+                    if(grantShroud && saviourApi != ApiType.Pump && saviourApi != ApiType.PumpAll && !topStack.isTargeting(c)) {
+                        continue;
                     }
                     threatened.add(c);
                 }
@@ -2936,7 +3027,7 @@ public class ComputerUtil {
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
+                if ((AiPlayDecision.WillPlay == aic.canPlaySa(abTest)) || "Snapcaster".equals(sa.getParam("AILogic")) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
                     targets.add(c);
                 }
             }
@@ -2946,6 +3037,10 @@ public class ComputerUtil {
             if (mandatory && !options.isEmpty()) {
                 targets = options;
             } else {
+                if(!options.isEmpty() && "Snapcaster".equals(sa.getParam("AILogic"))) {
+                    sa.getTargets().add(options.get(0));
+                    return true;
+                }
                 return false;
             }
         }

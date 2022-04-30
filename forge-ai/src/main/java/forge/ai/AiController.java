@@ -1644,6 +1644,16 @@ public class AiController {
         final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         List<SpellAbility> saList = Lists.newArrayList();
 
+        final List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(cards, player);
+
+        boolean hasIgnoreEffects = false;
+        for(SpellAbility sa : abilities) {
+            if(sa.getApi() == ApiType.InternalIgnoreEffect) {
+                hasIgnoreEffects = true;
+                break;
+            }
+        }
+
         SpellAbility top = null;
         if (!game.getStack().isEmpty()) {
             top = game.getStack().peekAbility();
@@ -1651,7 +1661,7 @@ public class AiController {
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
         final boolean mustRespond = top != null && top.hasParam("AIRespondsToOwnAbility");
 
-        if (topOwnedByAI) {
+        if (!hasIgnoreEffects && topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
 
@@ -1797,6 +1807,10 @@ public class AiController {
         Card hostCard = effect.getHostCard();
         if (hostCard.hasAlternateState()) {
             hostCard = game.getCardState(hostCard);
+        }
+
+        if(effect.toString().startsWith("Unleash (") && player.getLife() <= 5) {
+            return false;
         }
 
         if (effect.hasParam("AILogic") && effect.getParam("AILogic").equalsIgnoreCase("ProtectFriendly")) {

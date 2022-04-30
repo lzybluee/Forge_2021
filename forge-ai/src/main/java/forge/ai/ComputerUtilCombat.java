@@ -527,6 +527,14 @@ public class ComputerUtilCombat {
             if (threateningCommanders.contains(attacker)) {
                 return true;
             }
+            Player player = attacker.getController();
+            for(Card c : player.getCardsIn(ZoneType.Command)) {
+                for(Trigger t : c.getTriggers()) {
+                    if(t.hasParam("MustBeBlocked")) {
+                        return true;
+                    }
+                }
+            }
         }
 
         if (!ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < 1) {
@@ -1655,7 +1663,7 @@ public class ComputerUtilCombat {
      */
     public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
         // either indestructible or may regenerate
-        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant, true)) {
             return true;
         }
 
@@ -1664,6 +1672,17 @@ public class ComputerUtilCombat {
             return true;
         }
 
+        return false;
+    }
+
+    static boolean hasDamageDestoryAbility(Card card) {
+        if(card.getType().hasCreatureType("Sliver")) {
+            for(Card c : card.getGame().getCardsIn(ZoneType.Battlefield)) {
+                if(c.getSVar("AllSliverHasDamageDestory").equals("TRUE")) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -1716,7 +1735,7 @@ public class ComputerUtilCombat {
             }
         } // flanking
 
-        if (((attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, attacker)))
+        if (((attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, attacker, true)))
                 && !(blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT)))
                 || (attacker.hasKeyword(Keyword.PERSIST) && !attacker.canReceiveCounters(CounterEnumType.M1M1) && (attacker
                         .getCounters(CounterEnumType.M1M1) == 0))
@@ -1762,8 +1781,12 @@ public class ComputerUtilCombat {
         final int attackerLife = getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
+        if(attackerDamage > 0 && blocker.getSVar("HasDamagedEffect").equals("TRUE")) {
+            return true;
+        }
+
         if (blocker.hasDoubleStrike()) {
-            if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(blocker) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (defenderDamage >= attackerLife) {
@@ -1776,7 +1799,7 @@ public class ComputerUtilCombat {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || blocker.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(blocker) || blocker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1792,12 +1815,12 @@ public class ComputerUtilCombat {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || blocker.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(blocker) || blocker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(blocker) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -1854,7 +1877,7 @@ public class ComputerUtilCombat {
         } // flanking
 
         if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || dontTestRegen
-                || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
+                || ComputerUtil.canRegenerate(blocker.getController(), blocker, true)) {
             return false;
         }
 
@@ -1930,7 +1953,7 @@ public class ComputerUtilCombat {
     		return true;
     	}
 
-        if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, blocker))) && !(attacker
+        if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, blocker, true))) && !(attacker
                 .hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)))
                 || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterEnumType.M1M1) && blocker
                         .getCounters(CounterEnumType.M1M1) == 0)
@@ -1992,11 +2015,15 @@ public class ComputerUtilCombat {
         final int attackerLife = getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
+        if(defenderDamage > 0 && attacker.getSVar("HasDamagedEffect").equals("TRUE")) {
+            return true;
+        }
+
         if (attacker.hasDoubleStrike()) {
             if (attackerDamage >= defenderLife) {
                 return true;
             }
-            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || blocker.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(attacker) || blocker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -2006,7 +2033,7 @@ public class ComputerUtilCombat {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(attacker) || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -2024,12 +2051,12 @@ public class ComputerUtilCombat {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(attacker) || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || blocker.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(attacker) || blocker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -2085,10 +2112,15 @@ public class ComputerUtilCombat {
             if (hasTrample) {
                 int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
+                int lethalDamage = blocker.getLethalDamage();
+                if(attacker.hasKeyword(Keyword.DEATHTOUCH)) {
+                    lethalDamage = 1;
+                }
+
                 if (dmgCanDeal < dmgToKill) {
-                    dmgToKill = Math.min(blocker.getLethalDamage(), dmgCanDeal);
+                    dmgToKill = Math.min(lethalDamage, dmgCanDeal);
                 } else {
-                    dmgToKill = Math.max(blocker.getLethalDamage(), dmgToKill);
+                    dmgToKill = Math.max(lethalDamage, dmgToKill);
                 }
 
                 if (!isAttacking) { // no entity to deliver damage via trample

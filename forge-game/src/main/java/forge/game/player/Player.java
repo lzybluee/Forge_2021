@@ -1788,7 +1788,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean getMaxLandPlaysInfinite() {
-        if (getController().canPlayUnlimitedLands()) {
+        if (getController().canPlayUnlimited()) {
             return true;
         }
         return !adjustLandPlaysInfinite.isEmpty();

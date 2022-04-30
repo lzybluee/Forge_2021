@@ -152,6 +152,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                             && card.getController().equals(combat.getDefenderPlayerByAttacker(c)));
                 }
             });
+            final Card hostCard = sa.getHostCard();
+            if(hostCard != null && hostCard.getZone().is(ZoneType.Hand) && hostCard.getOwner() == ai
+                    && (hostCard.hasKeyword(Keyword.HASTE) || ComputerUtil.hasACardGivingHaste(ai, true) || sa.isDash())) {
+                attackers.add(hostCard);
+            }
             return CombatUtil.canBlockAtLeastOne(card, attackers);
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
             return !ph.getPhase().isBefore(PhaseType.MAIN2) && !card.isUntapped() && ph.isPlayerTurn(ai)

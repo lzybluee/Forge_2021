@@ -56,6 +56,7 @@ import forge.game.GameEntityView;
 import forge.game.GameEntityViewMap;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
+import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.PlanarDice;
 import forge.game.ability.AbilityKey;
@@ -303,7 +304,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<PaperCard> sideboard(final Deck deck, final GameType gameType, String message) {
+    public List<PaperCard> sideboard(final Deck deck, final GameRules gameRules, String message) {
         CardPool sideboard = deck.get(DeckSection.Sideboard);
         if (sideboard == null) {
             // Use an empty cardpool instead of null for 75/0 sideboarding scenario.
@@ -316,15 +317,28 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final int sbSize = sideboard.countAll();
         final int combinedDeckSize = mainSize + sbSize;
 
-        final int deckMinSize = Math.min(mainSize, gameType.getDeckFormat().getMainRange().getMinimum());
-        final Range<Integer> sbRange = gameType.getDeckFormat().getSideRange();
+        int deckMinMainSize = 0;
+        if(gameRules.getAppliedVariants() != null) {
+            for(GameType type : gameRules.getAppliedVariants()) {
+                int min = type.getDeckFormat().getMainRange().getMinimum();
+                if(min > deckMinMainSize) {
+                    deckMinMainSize = min;
+                }
+            }
+        } else {
+            deckMinMainSize = gameRules.getGameType().getDeckFormat().getMainRange().getMinimum();
+        }
+
+        final int deckMinSize = Math.min(mainSize, deckMinMainSize);
+        final Range<Integer> sbRange = gameRules.getGameType().getDeckFormat().getSideRange();
+
         // Limited doesn't have a sideboard max, so let the Main min take care of things.
         final int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximum();
 
         List<PaperCard> newMain = null;
 
         // Skip sideboard loop if there are no sideboarding opportunities
-        if (sbSize == 0 && mainSize == deckMinSize) {
+        if (sbSize == 0 && (mainSize == deckMinSize || (deckMinSize == 0 && (mainSize == 60 || mainSize == 40)))) {
             return null;
         }
 

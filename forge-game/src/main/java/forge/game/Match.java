@@ -268,7 +268,7 @@ public class Match {
                     toChange.get(DeckSection.Sideboard).clear();
                     toChange.get(DeckSection.Sideboard).addAll(sideboard);
                 }
-                List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), player.getName());
+                List<PaperCard> newMain = person.sideboard(toChange, rules, player.getName());
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
