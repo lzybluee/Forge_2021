@@ -209,6 +209,9 @@ public class AbilityUtils {
                 final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
+                    if(type == AbilityKey.Enchanted && c.getTimestamp() != ((Card) crd).getTimestamp()) {
+                        return cards;
+                    }
                 } else if (crd instanceof Iterable) {
                     cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
                 }
@@ -505,7 +508,11 @@ public class AbilityUtils {
                         }
                     }
                 }
-                val = playerXCount(players, calcX[1], card, ability);
+                if(players.size() == game.getPlayers().size()) {
+                    val = playerXCount(players, calcX[1], card, ability);
+                } else {
+                    val = 0;
+                }
             }
             else if (hType.equals("YourTeam")) {
                 players.addAll(player.getYourTeam());
@@ -1335,7 +1342,7 @@ public class AbilityUtils {
                 s = (SpellAbility) o;
                 // if there is no target information in SA but targets are listed in SpellAbilityTargeting cards, copy that
                 // information so it's not lost if the calling code is interested in targets of the triggered SA.
-                if (triggeringType.equals("SpellAbility")) {
+                if (triggeringType.equals("SpellAbility") && s.getApi() != ApiType.Charm) {
                     final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject(AbilityKey.SpellAbilityTargetingCards);
                     if (s.getTargets() != null && s.getTargets().size() == 0) {
                         if (tgtList != null && tgtList.size() > 0) {
@@ -2961,6 +2968,16 @@ public class AbilityUtils {
         }
     }
 
+    private static boolean checkZone(final Spell spell, final Card card, final Player player) {
+        if (spell.toString().startsWith("Fuse (") && !player.getGame().getZoneOf(card).is(ZoneType.Hand, player)) {
+            return false;
+        }
+        if (spell.isAftermath() && !player.getGame().getZoneOf(card).is(ZoneType.Graveyard, player)) {
+            return false;
+        }
+        return true;
+    }
+
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
         List<SpellAbility> sas = new ArrayList<>();
         List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
@@ -2993,8 +3010,14 @@ public class AbilityUtils {
                 }
             } else {
                 final Spell newSA = (Spell) s.copy();
+                if (!checkZone(newSA, tgtCard, controller)) {
+                    continue;
+                }
                 newSA.setActivatingPlayer(controller);
                 SpellAbilityRestriction res = new SpellAbilityRestriction();
+                if (!newSA.meetsCommonRequirements()) {
+                    continue;
+                }
                 // timing restrictions still apply
                 res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
                 res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
@@ -3918,5 +3941,16 @@ public class AbilityUtils {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
         return types.size();
+    }
+
+    public static void clearPayingManaAbilities(SpellAbility sa) {
+        for (final SpellAbility am : sa.getPayingManaAbilities()) {
+            clearPayingManaAbilities(am);
+        }
+        if(sa.getManaPart() != null && sa.getManaPart().getLastManaProduced() != null) {
+            sa.getManaPart().getLastManaProduced().clear();
+        }
+        sa.getPayingManaAbilities().clear();
+        sa.clearManaPaid();
     }
 }

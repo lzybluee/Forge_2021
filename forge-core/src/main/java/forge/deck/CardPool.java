@@ -102,9 +102,11 @@ public class CardPool extends ItemPool<PaperCard> {
         }
         if(paperCard == null) {
             paperCard = StaticData.instance().getCommonCards().getCard(cardName, null, -1);
+            selectedDbName = "Common";
         }
         if(paperCard == null) {
             paperCard = StaticData.instance().getVariantCards().getCard(cardName, null, -1);
+            selectedDbName = "Variant";
         }
         if (paperCard == null) {
             // after all still null

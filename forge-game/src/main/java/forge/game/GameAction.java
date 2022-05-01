@@ -1959,10 +1959,10 @@ public class GameAction {
     }
 
     public void startGame(GameOutcome lastGameOutcome) {
-        startGame(lastGameOutcome, null);
+        startGame(lastGameOutcome, null, null);
     }
-    public void startGame(GameOutcome lastGameOutcome, Runnable startGameHook) {
-        Player first = determineFirstTurnPlayer(lastGameOutcome);
+    public void startGame(GameOutcome lastGameOutcome, Runnable startGameHook, String startPlayer) {
+        Player first = determineFirstTurnPlayer(lastGameOutcome, startPlayer);
 
         GameType gameType = game.getRules().getGameType();
         do {
@@ -2017,7 +2017,7 @@ public class GameAction {
         } while (game.getAge() == GameStage.RestartedByKarn);
     }
 
-    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome) {
+    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, String startPlayer) {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
 
@@ -2050,9 +2050,24 @@ public class GameAction {
         }
 
         boolean isFirstGame = lastGameOutcome == null;
-        if (isFirstGame) {
-            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
-            goesFirst = Aggregates.random(game.getPlayers());
+        if (isFirstGame || lastGameOutcome.getWinCondition() == GameEndReason.Draw) {
+            FCollection<Player> humanPlayers = new FCollection<Player>();
+            FCollection<Player> aiPlayers = new FCollection<Player>();
+            for(Player p : game.getPlayers()) {
+                if(!p.isAI()) {
+                    humanPlayers.add(p);
+                } else {
+                    aiPlayers.add(p);
+                }
+            }
+            if("Human".equals(startPlayer)) {
+                goesFirst = Aggregates.random(humanPlayers);
+            } else if("AI".equals(startPlayer)) {
+                goesFirst = Aggregates.random(aiPlayers);
+            } else {
+                game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
+                goesFirst = Aggregates.random(game.getPlayers());
+            }
         } else {
             for (Player p : game.getPlayers()) {
                 if (!lastGameOutcome.isWinner(p.getRegisteredPlayer())) {
@@ -2065,7 +2080,7 @@ public class GameAction {
         if (goesFirst == null) {
             // This happens in hotseat matches when 2 equal lobbyplayers play.
             // Noone of them has lost, so cannot decide who goes first .
-            goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
+            goesFirst = Aggregates.random(game.getPlayers()); // does not really matter who plays first - it's controlled from the same computer.
         }
 
         for (Player p : game.getPlayers()) {

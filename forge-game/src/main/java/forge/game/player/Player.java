@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
+import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -1660,11 +1661,97 @@ public class Player extends GameEntity implements Comparable<Player> {
         return topCards;
     }
 
+
+    private final void shuffleCards(CardCollection list) {
+        // overdone but wanted to make sure it was really random
+        final Random random = MyRandom.getRandom();
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+
+        int s = list.size();
+        for (int i = 0; i < s; i++) {
+            list.add(random.nextInt(s - 1), list.remove(random.nextInt(s)));
+        }
+
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+    }
+
+    public final void MTGAShuffle(final SpellAbility sa) {
+        if (getCardsIn(ZoneType.Library).size() < getMaxHandSize() * 2 || getMaxHandSize() == 0) {
+            return;
+        }
+
+        int lands = 0;
+        for(Card c : getCardsIn(ZoneType.Library)) {
+            if(c.isLand()) {
+                lands++;
+            }
+        }
+        float deckRadio = (float)lands / getCardsIn(ZoneType.Library).size();
+
+        final CardCollection[] lists = new CardCollection[3];
+        float[] ratios = new float[3];
+
+        for(int i = 0; i < lists.length; i++) {
+            lists[i] = new CardCollection(getCardsIn(ZoneType.Library));
+            shuffleCards(lists[i]);
+
+            lands = 0;
+            for(int j = 0; j < getMaxHandSize(); j++) {
+                if(lists[i].get(j).isLand()) {
+                    lands++;
+                }
+            }
+            float handRatios = (float)lands / getMaxHandSize();
+            System.err.print(String.format("[%d] %.02f(%d)", i + 1, handRatios * 100.0f, lands));
+
+            lands = 0;
+            for(int j = 0; j < getMaxHandSize(); j++) {
+                if(lists[i].get(j + getMaxHandSize()).isLand()) {
+                    lands++;
+                }
+            }
+            float nextHandRatios = (float)lands / getMaxHandSize();
+
+            ratios[i] = (handRatios * 3.0f + nextHandRatios) / 4.0f;
+            System.err.print(String.format("/%.02f(%d)=%.02f ", nextHandRatios * 100.0f, lands, ratios[i] * 100.0f));
+        }
+
+        int index = 0;
+        float min = 1.0f;
+        for(int i = 0; i < lists.length; i++) {
+            if(Math.abs(ratios[i] - deckRadio) < min) {
+                min = Math.abs(ratios[i] - deckRadio);
+                index = i;
+            }
+        }
+
+        System.err.println(String.format("[Deck] %.02f -> Choose [%d]", deckRadio * 100.0f, index + 1));
+        getZone(ZoneType.Library).setCards(lists[index]);
+
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, this);
+        runParams.put(AbilityKey.Source, sa);
+        game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
+
+        // Play the shuffle sound
+        game.fireEvent(new GameEventShuffle(this));
+    }
+
     public final void shuffle(final SpellAbility sa) {
         final CardCollection list = new CardCollection(getCardsIn(ZoneType.Library));
 
-        // Note: Shuffling once is sufficient.
-        Collections.shuffle(list, MyRandom.getRandom());
+        shuffleCards(list);
 
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 

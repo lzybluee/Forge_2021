@@ -27,6 +27,7 @@ public class CombatView extends TrackableObject {
         set(TrackableProperty.BandsWithBlockers, new ConcurrentHashMap<FCollection<CardView>, FCollection<CardView>>());
         set(TrackableProperty.AttackersWithPlannedBlockers, new ConcurrentHashMap<CardView, FCollection<CardView>>());
         set(TrackableProperty.BandsWithPlannedBlockers, new ConcurrentHashMap<FCollection<CardView>, FCollection<CardView>>());
+        set(TrackableProperty.AttackersAreBlocked, new ConcurrentHashMap<FCollection<CardView>, Boolean>());
     }
     private Map<CardView, GameEntityView> getAttackersWithDefenders() {
         return get(TrackableProperty.AttackersWithDefenders);
@@ -45,6 +46,9 @@ public class CombatView extends TrackableObject {
     }
     private Map<FCollection<CardView>, FCollection<CardView>> getBandsWithPlannedBlockers() {
         return get(TrackableProperty.BandsWithPlannedBlockers);
+    }
+    private Map<FCollection<CardView>, Boolean> getAttackersAreBlocked() {
+        return get(TrackableProperty.AttackersAreBlocked);
     }
 
     public int getNumAttackers() {
@@ -87,6 +91,13 @@ public class CombatView extends TrackableObject {
             if (blockers.contains(card)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean isBlocked(final FCollection<CardView> attackingBand) {
+        if(getAttackersAreBlocked().containsKey(attackingBand)) {
+            return getAttackersAreBlocked().get(attackingBand);
         }
         return false;
     }
@@ -160,7 +171,7 @@ public class CombatView extends TrackableObject {
         return views;
     }
 
-    public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
+    public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers, boolean blocked) {
         if (defender == null) { return; }
 
         final FCollection<CardView> attackingBandCopy = new FCollection<>();
@@ -175,6 +186,7 @@ public class CombatView extends TrackableObject {
             plannedBlockersCopy.addAll(plannedBlockers);
         }
 
+        this.getAttackersAreBlocked().put(attackingBandCopy, blocked);
         for (final CardView attacker : attackingBandCopy) {
             this.getAttackersWithDefenders().put(attacker, defender);
             this.getAttackersWithBlockers().put(attacker, blockersCopy);

@@ -72,11 +72,11 @@ public class Match {
     }
 
     public void startGame(final Game game) {
-        startGame(game, null);
+        startGame(game, null, null, false, false);
     }
 
-    public void startGame(final Game game, Runnable startGameHook) {
-        prepareAllZones(game);
+    public void startGame(final Game game, Runnable startGameHook, String startPlayer, boolean skipRestore, boolean mtgaShuffle) {
+        prepareAllZones(game, skipRestore, mtgaShuffle);
         if (rules.useAnte()) {  // Deciding which cards go to ante
             Multimap<Player, Card> list = game.chooseCardsForAnte(rules.getMatchAnteRarity());
             for (Entry<Player, Card> kv : list.entries()) {
@@ -87,7 +87,7 @@ public class Match {
             game.fireEvent(new GameEventAnteCardsSelected(list));
         }
 
-        game.getAction().startGame(this.lastOutcome, startGameHook);
+        game.getAction().startGame(this.lastOutcome, startGameHook, startPlayer);
 
         if (rules.useAnte()) {
             executeAnte(game);
@@ -211,7 +211,7 @@ public class Match {
         library.setCards(newLibrary);
     }
 
-    private void prepareAllZones(final Game game) {
+    private void prepareAllZones(final Game game, boolean skipRestore, boolean mtgaShuffle) {
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         game.getTriggerHandler().clearDelayedTrigger();
@@ -244,6 +244,10 @@ public class Match {
             final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
             PlayerController person = player.getController();
+
+            if (!skipRestore && isFirstGame && rules.getGameType().isSideboardingAllowed()) {
+                psc.restoreDeck();
+            }
 
             if (canSideBoard) {
                 if (sideboardProxy != null && person.isAI()) {
@@ -313,7 +317,11 @@ public class Match {
 
             player.initVariantsZones(psc);
 
-            player.shuffle(null);
+            if(!player.isAI() && mtgaShuffle) {
+                player.MTGAShuffle(null);
+            } else {
+                player.shuffle(null);
+            }
 
             if (isFirstGame) {
                 Map<DeckSection, List<? extends PaperCard>> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);

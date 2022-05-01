@@ -197,4 +197,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         return lkicheck ? source : null;
     }
+
+    public boolean meetsCommonRequirements() {
+        return meetsCommonRequirements(this.mapParams);
+    }
 }

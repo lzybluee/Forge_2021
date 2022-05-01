@@ -194,7 +194,7 @@ public class GameView extends TrackableObject {
                     CardView.getCollection(b.getAttackers()),
                     GameEntityView.get(defender),
                     isBlocked ? CardView.getCollection(blockers) : null,
-                    CardView.getCollection(blockers));
+                    CardView.getCollection(blockers), isBlocked);
         }
         updateCombatView(combatView);
     }
@@ -238,6 +238,19 @@ public class GameView extends TrackableObject {
         for (final RegisteredPlayer rp : getMatch().getPlayers()) {
             if (pv.isLobbyPlayer(rp.getPlayer())) {
                 return rp.getDeck();
+            }
+        }
+        return null;
+    }
+
+    public Deck getOpponentDeck(final String lobbyPlayerName, int opponentIndex) {
+        int index = 0;
+        for (final RegisteredPlayer rp : getMatch().getPlayers()) {
+            if (!rp.getPlayer().getName().equals(lobbyPlayerName)) {
+                if(index == opponentIndex) {
+                    return rp.getDeck();
+                }
+                index++;
             }
         }
         return null;

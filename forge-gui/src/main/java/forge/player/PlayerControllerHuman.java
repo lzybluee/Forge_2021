@@ -2112,17 +2112,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             return;
         }
+        System.out.println("AI can't play these cards well");
         for (Player p : unplayable.keySet()) {
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
-            final List<String> labels = new ArrayList<>();
             for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
-                labels.add("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
+                System.out.println("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
                 for (PaperCard c: removedUnplayableCards.get(s)) {
-                    labels.add(c.toString());
+                    System.out.println(c.toString());
                 }
             }
-            getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
-                    ImmutableList.copyOf(labels));
         }
     }
 
