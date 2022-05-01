@@ -166,7 +166,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String type = discardType;
         final String[] validType = type.split(";");
         hand = CardLists.getValidCards(hand, validType, player, source, ability);
-
+        if (c == 0) {
+            return PaymentDecision.card(new CardCollection());
+        }
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, hand, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTargetTypeCardToDiscard", "%d", cost.getDescriptiveType()));
         inp.setCancelAllowed(!mandatory);
@@ -1015,6 +1017,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), "%d"));
         inp.setCancelAllowed(!mandatory);
+        if(c > 0) {
+            inp.showAndWait();
+        }
         inp.showAndWait();
         if (inp.hasCancelled()) {
             return null;
@@ -1125,7 +1130,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(!mandatory);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToTap", cost.getDescriptiveType(), "%d"));
-        inp.showAndWait();
+        if(c > 0) {
+            inp.showAndWait();
+        }
         if (inp.hasCancelled()) {
             return null;
         }
@@ -1144,7 +1151,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(true);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToUntap", cost.getDescriptiveType(), "%d"));
-        inp.showAndWait();
+        if(c > 0) {
+            inp.showAndWait();
+        }
         if (inp.hasCancelled() || inp.getSelected().size() != c) {
             return null;
         }

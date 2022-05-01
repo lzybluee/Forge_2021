@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -112,7 +113,11 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     final IPaperCard pc = achievement.getPaperCard();
                     if (pc != null) {
                         preventMouseOut = true;
-                        CardZoomer.SINGLETON_INSTANCE.setCard(CardView.getCardForUi(pc).getCurrentState(), true);
+                        final Card card = Card.getCardForUi(pc);
+                        final CardView view = card.getView();
+                        CardZoomer.SINGLETON_INSTANCE.setCard(view.getCurrentState(),
+                                card.isDoubleFaced() || card.isFlipCard() || card.isMeldable());
+                        CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom();
                     }
                 }
             }
@@ -236,6 +241,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
         trophyCase.setMinimumSize(new Dimension(trophyCase.getMinimumSize().width, (FSkinProp.IMG_TROPHY_CASE_TOP.getHeight() + trophyCase.shelfCount * FSkinProp.IMG_TROPHY_SHELF.getHeight())));
         trophyCase.setPreferredSize(trophyCase.getMinimumSize());
+        scroller.scrollToTop();
         scroller.revalidate();
         scroller.repaint();
     }

@@ -51,8 +51,13 @@ public final class GameMenu {
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
         menu.add(getMenuItem_AutoYields());
+        menu.add(getMenuItem_SkipAutoPay());
+        menu.add(getMenuItem_SkipRestoreDeck());
+        menu.add(getMenuItem_MTGAShuffle());
+        menu.add(getMenuItem_StartPlayer());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
+        menu.add(getMenuItem_ViewOpponentDeckList());
         menu.addSeparator();
         menu.add(getMenuItem_GameSoundEffects());
         return menu;
@@ -233,6 +238,13 @@ public final class GameMenu {
         return menuItem;
     }
 
+    private SkinnedMenuItem getMenuItem_ViewOpponentDeckList() {
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem("Opponent Deck List");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_DECKLIST) : null));
+        menuItem.addActionListener(getViewOpponentDeckListAction());
+        return menuItem;
+    }
+
     private ActionListener getViewDeckListAction() {
         return new ActionListener() {
             @Override
@@ -240,5 +252,109 @@ public final class GameMenu {
                 matchUI.viewDeckList();
             }
         };
+    }
+
+    private ActionListener getViewOpponentDeckListAction() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                matchUI.viewOpponentDeckList();
+            }
+        };
+    }
+    
+    private static SkinnedCheckBoxMenuItem getMenuItem_SkipRestoreDeck() {
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem("Keep Sideboard");
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SKIP_RESTORE_DECK));
+        menuItem.addActionListener(getSkipRestoreDeck());
+        return menuItem;
+    }
+    private static ActionListener getSkipRestoreDeck() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                toggleSkipRestoreDeck();
+            }
+        };
+    }
+    private static void toggleSkipRestoreDeck() {
+        final boolean skipRestoreDeck = !prefs.getPrefBoolean(FPref.UI_SKIP_RESTORE_DECK);
+        prefs.setPref(FPref.UI_SKIP_RESTORE_DECK, skipRestoreDeck);
+        prefs.save();
+    }
+
+    private static SkinnedCheckBoxMenuItem getMenuItem_MTGAShuffle() {
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem("MTGA Shuffle");
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_MTGA_SHUFFLE));
+        menuItem.addActionListener(getMTGAShuffle());
+        return menuItem;
+    }
+    private static ActionListener getMTGAShuffle() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                toggleMTGAShuffle();
+            }
+        };
+    }
+    private static void toggleMTGAShuffle() {
+        final boolean MTGAShuffle = !prefs.getPrefBoolean(FPref.UI_ENABLE_MTGA_SHUFFLE);
+        prefs.setPref(FPref.UI_ENABLE_MTGA_SHUFFLE, MTGAShuffle);
+        prefs.save();
+    }
+
+    private SkinnedMenu getMenuItem_StartPlayer() {
+        final SkinnedMenu menu = new SkinnedMenu("Start Player");
+        final ButtonGroup group = new ButtonGroup();
+
+        SkinnedRadioButtonMenuItem menuItem;
+        menuItem = getStartPlayerRadioButton("Random");
+        group.add(menuItem);
+        menu.add(menuItem);
+        menuItem = getStartPlayerRadioButton("Human");
+        group.add(menuItem);
+        menu.add(menuItem);
+        menuItem = getStartPlayerRadioButton("AI");
+        group.add(menuItem);
+        menu.add(menuItem);
+
+        return menu;
+    }
+
+    private SkinnedRadioButtonMenuItem getStartPlayerRadioButton(final String caption) {
+        final SkinnedRadioButtonMenuItem menuItem = new SkinnedRadioButtonMenuItem(caption);
+        menuItem.setSelected(caption.equals(prefs.getPref(FPref.UI_START_PLAYER)));
+        menuItem.addActionListener(getStartPlayerButtonAction(caption));
+        return menuItem;
+    }
+    
+    private ActionListener getStartPlayerButtonAction(final String starter) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                prefs.setPref(FPref.UI_START_PLAYER, starter);
+                prefs.save();
+            }
+        };
+    }
+    
+    private static SkinnedCheckBoxMenuItem getMenuItem_SkipAutoPay() {
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem("No Auto Pay/Confirm");
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SKIP_AUTO_PAY));
+        menuItem.addActionListener(getSkipAutoPay());
+        return menuItem;
+    }
+    private static ActionListener getSkipAutoPay() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                toggleSkipAutoPay();
+            }
+        };
+    }
+    private static void toggleSkipAutoPay() {
+        final boolean skipAutoPay = !prefs.getPrefBoolean(FPref.UI_SKIP_AUTO_PAY);
+        prefs.setPref(FPref.UI_SKIP_AUTO_PAY, skipAutoPay);
+        prefs.save();
     }
 }

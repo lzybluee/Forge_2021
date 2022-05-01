@@ -68,7 +68,10 @@ public class VPrompt implements IVDoc<CPrompt> {
     private CardView card = null ; 
 
     public void setCardView(final CardView card) {
-	this.card = card ;
+        this.card = card;
+        if (this.controller.getMatchUI() != null && card != null) {
+            this.controller.getMatchUI().setPaperCard(card);
+        }
     }
 
     private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
@@ -105,12 +108,12 @@ public class VPrompt implements IVDoc<CPrompt> {
         tarMessage.getAccessibleContext().setAccessibleName("Prompt");
         tarMessage.setFocusable(true); // Allow tab to navigate to the prompt.
         messageScroller.getViewport().getView().addMouseListener(new MouseAdapter() {
-        	@Override 
-        	public void mouseEntered(final MouseEvent e) {
-        		if ( card != null ) {
-			    controller.getMatchUI().setCard(card);
-        		}
-        	}
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                if (card != null) {
+                    controller.getMatchUI().setPaperCard(card);
+                }
+            }
         });
     }
 

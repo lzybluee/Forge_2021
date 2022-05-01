@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
@@ -66,7 +67,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
     private final JComboBox<String> cbOpponent = new JComboBox<>();
 
-    private final FLabel lblInfo = new FLabel.Builder()
+    private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
         .text(localizer.getMessage("lblSealedText1")).build();
 
@@ -96,6 +97,17 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lstDecks.setCaption(localizer.getMessage("lblSealedDecks"));
+
+        final JXButtonPanel grpPanel = new JXButtonPanel();
+        grpPanel.add(radSingle, "w 200px!, h 30px!");
+        grpPanel.add(radAll, "w 200px!, h 30px!");
+        radSingle.setSelected(true);
+        grpPanel.add(cbOpponent, "w 200px!, h 30px!");
+
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        pnlStart.setOpaque(false);
+        pnlStart.add(grpPanel, "gapright 20");
+        pnlStart.add(btnStart);
     }
 
     /* (non-Javadoc)
@@ -115,21 +127,10 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
         pnlDisplay.add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
         pnlDisplay.add(new ItemManagerContainer(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
-        //pnlDisplay.add(btnStart, "gap 0 10% 50px 50px, ax center");
-
-        final JXButtonPanel grpPanel = new JXButtonPanel();
-        grpPanel.add(radSingle, "w 200px!, h 30px!");
-        grpPanel.add(radAll, "w 200px!, h 30px!");
-        radSingle.setSelected(true);
-        grpPanel.add(cbOpponent, "w 200px!, h 30px!");
-        pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-        pnlStart.setOpaque(false);
-        pnlStart.add(grpPanel, "gapright 20");
-        pnlStart.add(btnStart);
 
         pnlDisplay.add(pnlStart, "gap 0 10% 50px 50px, ax center");
 
-        pnlDisplay.repaintSelf();
+        pnlDisplay.repaint();
         pnlDisplay.revalidate();
     }
 
@@ -254,7 +255,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
      * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
      */
     @Override
-    public void setParentCell(DragCell cell0) {
+    public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 

@@ -23,6 +23,12 @@ import forge.game.card.Card;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
+import forge.game.trigger.WrappedAbility;
+import forge.game.zone.ZoneType;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -142,10 +148,11 @@ public class GuiChoose {
     }
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display, final CMatchUI matchUI) {
         if (choices == null || choices.isEmpty()) {
-            if (min == 0) {
+            if (min <= 0) {
                 return new ArrayList<>();
             }
-            throw new RuntimeException("choice required from empty list");
+            System.err.println("choice required from empty list");
+            return new ArrayList<T>();
         }
 
         final Callable<List<T>> showChoice = new Callable<List<T>>() {
@@ -199,8 +206,29 @@ public class GuiChoose {
                                 card = (CardView) sel;
                             } else if (sel instanceof Card) {
                                 card = CardView.get((Card) sel);
+                            } else if (sel instanceof SpellAbilityView) {
+                                card = ((SpellAbilityView) sel).getHostCard();
+                            } else if (sel instanceof WrappedAbility) {
+                                Card host = ((WrappedAbility) sel).getHostCard();
+                                card = host != null ? host.getView() : null;
+                            } else if (sel instanceof PaperCard) {
+                                card = Card.getCardForUi((IPaperCard) sel).getView();
+                            } else if (sel instanceof ReplacementEffect) {
+                                card = ((ReplacementEffect) sel).getCardView();
+                            } else if (sel instanceof StackItemView) {
+                                card = ((StackItemView) sel).getSourceCard();
                             } else {
                                 card = null;
+                            }
+
+                            if(card == null) {
+                                return;
+                            }
+
+                            if(card.getZone() == ZoneType.Library) {
+                                matchUI.setPaperCard(card);
+                            } else {
+                                matchUI.setCard(card);
                             }
 
                             matchUI.setCard(card);

@@ -161,6 +161,8 @@ public final class CMatchUI
     private boolean showOverlay = true;
     private JPopupMenu openAbilityMenu;
 
+    private int opponentDeckIndex = 0;
+
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
     private final CAntes cAntes = new CAntes(this);
@@ -221,6 +223,7 @@ public final class CMatchUI
     @Override
     public void setGameView(GameView gameView0) {
         super.setGameView(gameView0);
+        opponentDeckIndex = 0;
         gameView0 = getGameView(); //ensure updated game view used for below logic
         if (gameView0 == null) { return; }
 
@@ -273,6 +276,20 @@ public final class CMatchUI
             return;
         }
         final Deck deck = getGameView().getDeck(getCurrentPlayer());
+        if (deck != null) {
+            FDeckViewer.show(deck);
+        }
+    }
+
+    public void viewOpponentDeckList() {
+        if (!isInGame()) {
+            return;
+        }
+        Deck deck = getGameView().getOpponentDeck(getCurrentPlayer().getLobbyPlayerName(), opponentDeckIndex++);
+        if(deck == null) {
+            opponentDeckIndex = 0;
+            deck = getGameView().getOpponentDeck(getCurrentPlayer().getLobbyPlayerName(), opponentDeckIndex++);
+        }
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -371,6 +388,12 @@ public final class CMatchUI
 
     @Override
     public void setCard(final CardView c) {
+        cDetailPicture.setShowFront(false);
+        this.setCard(c, false);
+    }
+
+    public void setPaperCard(final CardView c) {
+        cDetailPicture.setShowFront(true);
         this.setCard(c, false);
     }
 
@@ -383,6 +406,7 @@ public final class CMatchUI
     }
 
     public void setCard(final InventoryItem item) {
+        cDetailPicture.setShowFront(false);
         cDetailPicture.showItem(item);
     }
 
@@ -471,6 +495,7 @@ public final class CMatchUI
             if (updateZones) {
                 vField.updateZones();
             }
+            getFieldViewFor(owner).updateDetails();
         }
     }
 
@@ -916,6 +941,10 @@ public final class CMatchUI
             return null;
         }
 
+        if(openAbilityMenu != null) {
+            return null;
+        }
+
         //show menu if mouse was trigger for ability
         final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblAbilities"));
         //add scroll area when too big
@@ -959,10 +988,11 @@ public final class CMatchUI
                 y = 0;
                 SDisplayUtil.showTab(getCPrompt().getView());
             } else {
-                final ZoneType zone = hostCard.getZone();
-                if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library).contains(zone)) {
+                final ZoneType zone = panel.isInFlashbackZone() ? ZoneType.Flashback : hostCard.getZone();
+                if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library, ZoneType.Flashback).contains(zone)) {
                     FloatingZone.show(this, hostCard.getController(), zone);
                 }
+                panel.setInFlashbackZone(false);
                 menuParent = panel.getParent();
                 x = triggerEvent.getX();
                 y = triggerEvent.getY();

@@ -21,7 +21,7 @@ import forge.util.Localizer;
 public class DevModeMenu implements ActionListener, IDevListener {
 
     private CDev controller;
-    private JCheckBoxMenuItem playUnlimitedLands = null, viewAll = null;
+    private JCheckBoxMenuItem playUnlimited = null, viewAll = null;
     public DevModeMenu(final CDev controller) {
         this.controller = controller;
         controller.addListener(this);
@@ -30,28 +30,28 @@ public class DevModeMenu implements ActionListener, IDevListener {
     // Using an enum to avoid having to create multiple
     // ActionListeners each calling a single method.
     private enum DevMenuItem {
-        GENERATE_MANA("lblGenerateMana"),
-        TUTOR_FOR_CARD("lblTutor"),
-        ADD_CARD_TO_HAND("lblCardToHand"),
-        ADD_CARD_TO_PLAY("lblCastSpellOrPlayLand"),
-        EXILE_FROM_HAND("lblExileFromHand"),
-        EXILE_FROM_PLAY("lblExileFromPlay"),
-        SET_PLAYER_LIFE("lblSetLife"),
-        WIN_GAME("lblWinGame"),
-        SETUP_GAME_STATE("lblSetupGame"),
-        DUMP_GAME_STATE("lblDumpGame"),
-        PLAY_UNLIMITED_LANDS("lblUnlimitedLands"),
-        VIEW_ALL("lblViewAll"),
-        ADD_COUNTER("lblAddCounterPermanent"),
-        TAP_PERMANENT("lblTapPermanent"),
-        UNTAP_PERMANENT("lblUntapPermanent"),
-        RIGGED_PLANAR_ROLL("lblRiggedRoll"),
-        PLANESWALK_TO("lblWalkTo"),
-        DEV_CORNER("lblDeveloperCorner");
+        GENERATE_MANA(Localizer.getInstance().getMessage("lblGenerateMana")),
+        TUTOR_FOR_CARD(Localizer.getInstance().getMessage("lblTutor")),
+        ADD_CARD_TO_HAND(Localizer.getInstance().getMessage("lblCardToHand")),
+        ADD_CARD_TO_PLAY(Localizer.getInstance().getMessage("lblCastSpellOrPlayLand")),
+        EXILE_FROM_HAND(Localizer.getInstance().getMessage("lblExileFromHand")),
+        EXILE_FROM_PLAY(Localizer.getInstance().getMessage("lblExileFromPlay")),
+        SET_PLAYER_LIFE(Localizer.getInstance().getMessage("lblSetLife")),
+        WIN_GAME(Localizer.getInstance().getMessage("lblWinGame")),
+        SETUP_GAME_STATE(Localizer.getInstance().getMessage("lblSetupGame")),
+        DUMP_GAME_STATE(Localizer.getInstance().getMessage("lblDumpGame")),
+        PLAY_UNLIMITED_LANDS("Play Unlimited"),
+        VIEW_ALL(Localizer.getInstance().getMessage("lblViewAll")),
+        ADD_COUNTER(Localizer.getInstance().getMessage("lblAddCounterPermanent")),
+        TAP_PERMANENT(Localizer.getInstance().getMessage("lblTapPermanent")),
+        UNTAP_PERMANENT(Localizer.getInstance().getMessage("lblUntapPermanent")),
+        RIGGED_PLANAR_ROLL(Localizer.getInstance().getMessage("lblRiggedRoll")),
+        PLANESWALK_TO(Localizer.getInstance().getMessage("lblWalkTo")),
+        DEV_CORNER(Localizer.getInstance().getMessage("lblDeveloperCorner"));
 
         protected String caption;
         DevMenuItem(final String value) {
-            this.caption = Localizer.getInstance().getMessage(value);
+            this.caption = value;
         }
         protected static DevMenuItem getValue(final String s) {
             for (final DevMenuItem t : DevMenuItem.values()) {
@@ -64,9 +64,9 @@ public class DevModeMenu implements ActionListener, IDevListener {
     }
 
     @Override
-    public void update(final boolean playUnlimitedLands, final boolean mayViewAllCards) {
-        if (this.playUnlimitedLands != null && this.viewAll != null) {
-            this.playUnlimitedLands.setSelected(playUnlimitedLands);
+    public void update(final boolean playUnlimited, final boolean mayViewAllCards) {
+        if (this.playUnlimited != null && this.viewAll != null) {
+            this.playUnlimited.setSelected(playUnlimited);
             this.viewAll.setSelected(mayViewAllCards);
         }
     }
@@ -88,7 +88,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
         menu.add(getMenuItem(DevMenuItem.DUMP_GAME_STATE));
         menu.addSeparator();
-        menu.add(playUnlimitedLands = getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS));
+        menu.add(playUnlimited = getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS));
         menu.add(viewAll = getCheckboxMenuItem(DevMenuItem.VIEW_ALL));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();
@@ -120,21 +120,21 @@ public class DevModeMenu implements ActionListener, IDevListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         switch (DevMenuItem.getValue(e.getActionCommand())) {
-        case GENERATE_MANA:        { controller.generateMana(); break; }
-        case TUTOR_FOR_CARD:       { controller.tutorForCard(); break; }
-        case ADD_CARD_TO_HAND:     { controller.addCardToHand(); break; }
-        case ADD_CARD_TO_PLAY:     { controller.addCardToBattlefield(); break; }
-        case EXILE_FROM_PLAY:	   { controller.exileCardsFromPlay(); break; }
-        case EXILE_FROM_HAND:	   { controller.exileCardsFromHand(); break; }
-        case SET_PLAYER_LIFE:      { controller.setPlayerLife(); break; }
-        case WIN_GAME:             { controller.winGame(); break; }
-        case SETUP_GAME_STATE:     { controller.setupGameState(); break; }
-        case DUMP_GAME_STATE:      { controller.dumpGameState(); break; }
-        case PLAY_UNLIMITED_LANDS: { controller.togglePlayManyLandsPerTurn(); break; }
+        case GENERATE_MANA:        { controller.generateMana(false); break; }
+        case TUTOR_FOR_CARD:       { controller.tutorForCard(false); break; }
+        case ADD_CARD_TO_HAND:     { controller.addCardToHand(false); break; }
+        case ADD_CARD_TO_PLAY:     { controller.addCardToBattlefield(false); break; }
+        case EXILE_FROM_PLAY:      { controller.exileCardsFromPlay(); break; }
+        case EXILE_FROM_HAND:      { controller.exileCardsFromHand(); break; }
+        case SET_PLAYER_LIFE:      { controller.setPlayerLife(false); break; }
+        case WIN_GAME:             { controller.winGame(false); break; }
+        case SETUP_GAME_STATE:     { controller.setupGameState(false); break; }
+        case DUMP_GAME_STATE:      { controller.dumpGameState(false); break; }
+        case PLAY_UNLIMITED_LANDS: { controller.togglePlayUnlimited(); break; }
         case VIEW_ALL:             { controller.toggleViewAllCards(); break; }
-        case ADD_COUNTER:          { controller.addCounterToPermanent(); break; }
-        case TAP_PERMANENT:        { controller.tapPermanent(); break; }
-        case UNTAP_PERMANENT:      { controller.untapPermanent(); break; }
+        case ADD_COUNTER:          { controller.addCounterToPermanent(false); break; }
+        case TAP_PERMANENT:        { controller.tapPermanent(false); break; }
+        case UNTAP_PERMANENT:      { controller.untapPermanent(false); break; }
         case RIGGED_PLANAR_ROLL:   { controller.riggedPlanerRoll(); break; }
         case PLANESWALK_TO:        { controller.planeswalkTo(); break; }
         case DEV_CORNER:           { openDevForumInBrowser(); break; }

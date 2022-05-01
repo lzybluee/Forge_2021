@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -18,6 +19,7 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -397,7 +399,32 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA), tgtSA.getPayCosts().getCostMana().getRestriction()));
             }
 
-            if (controller.getController().playSaFromPlayEffect(tgtSA)) {
+            String activationLimit = null;
+            if(!sa.hasParam("WithoutManaCost") && tgtSA.hasParam("ActivationLimit")) {
+                activationLimit = tgtSA.getParam("ActivationLimit");
+            }
+
+            final List<SpellAbility> abilities = GameActionUtil.getAlternativeCosts(tgtSA, controller);
+
+            List<SpellAbility> choose = Lists.newArrayList();
+            choose.add(tgtSA);
+            for(SpellAbility sab : abilities) {
+                if(sab.getMayPlay() != null) {
+                    if(sab.getMayPlay().hasParam("MayPlayAltManaCost") && sab.getMayPlay().getParam("MayPlayAltManaCost").equals("0")) {
+                        choose.add(sab);
+                    }
+                }
+            }
+
+            SpellAbility playSa = tgtSA;
+            if(choose.size() > 1) {
+                playSa = controller.getController().chooseSingleSpellForEffect(choose, tgtSA, "Choose one", ImmutableMap.of());
+            }
+            if(abilities.contains(playSa)) {
+                activationLimit = null;
+            }
+            
+            if (!"0".equals(activationLimit) && controller.getController().playSaFromPlayEffect(playSa)) {
                 if (remember) {
                     source.addRemembered(tgtSA.getHostCard());
                 }

@@ -31,6 +31,7 @@ import forge.game.GameType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
@@ -183,11 +184,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Attacking, combat != null && combat.isAttacking(c));
     }
 
-    public boolean isExertedThisTurn() {
-        return get(TrackableProperty.ExertedThisTurn);
+    public FCollectionView<PlayerView> getExerted() {
+        return get(TrackableProperty.Exerted);
     }
-    void updateExertedThisTurn(Card c, boolean exerted) {
-        set(TrackableProperty.ExertedThisTurn, exerted);
+    void updateExerted(Card c, PlayerCollection players) {
+        set(TrackableProperty.Exerted, players.size() == 0 ? null : PlayerView.getCollection(players));
     }
 
     public boolean isBlocking() {
@@ -270,6 +271,13 @@ public class CardView extends GameEntityView {
     }
     public String getCommanderType() {
         return get(TrackableProperty.CommanderAltType);
+    }
+
+    public int getPlaneswalkerAbilityActivited() {
+        return get(TrackableProperty.PlaneswalkerAbilityActivited);
+    }
+    void updatePlaneswalkerAbilityActivited(int n) {
+        set(TrackableProperty.PlaneswalkerAbilityActivited, n);
     }
 
     public Map<CounterType, Integer> getCounters() {
@@ -1555,6 +1563,9 @@ public class CardView extends GameEntityView {
         }
         public boolean isArtifact() {
             return getType().isArtifact();
+        }
+        public boolean isEnchantment() {
+            return getType().isEnchantment();
         }
         public boolean isNyx() {
             if (!getType().isEnchantment() || getType().getCoreTypes() == null)

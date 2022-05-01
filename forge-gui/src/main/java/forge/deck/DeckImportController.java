@@ -160,6 +160,7 @@ public class DeckImportController {
 
     public List<Token> parseInput(String input) {
         tokens.clear();
+        input = input.replaceAll("Æ", "Ae");
         cardsInTokens.clear();
         DeckRecognizer recognizer = new DeckRecognizer();
         // Set Art Preference first thing
@@ -183,7 +184,12 @@ public class DeckImportController {
         if (this.inlcludeBnRInDeck)
             recognizer.forceImportBannedAndRestrictedCards();
 
-        String[] lines = input.split("\n");
+        String[] lines = null;
+        if(input.contains("\n")) {
+            lines = input.split("\n");
+        } else {
+            lines = input.split("\r");
+        }
         List<Token> parsedTokens = recognizer.parseCardList(lines);
         if (parsedTokens != null)
             tokens.addAll(parsedTokens);

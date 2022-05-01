@@ -55,7 +55,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Dev labels
-    private final DevLabel lblUnlimitedLands = new DevLabel(Localizer.getInstance().getMessage("lblUnlimitedLands"));
+    private final DevLabel lblUnlimited = new DevLabel("Play Unlimited");
     private final DevLabel lblViewAll = new DevLabel(Localizer.getInstance().getMessage("lblViewAll"));
     private final DevLabel lblGenerateMana = new DevLabel(Localizer.getInstance().getMessage("lblGenerateMana"));
     private final DevLabel lblSetupGame = new DevLabel(Localizer.getInstance().getMessage("lblSetupGame"));
@@ -91,32 +91,31 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     public VDev(final CDev controller) {
         this.controller = controller;
 
-        final String constraints = "w 95%!, gap 0 0 4px 0";
         final String halfConstraints = "w 47%!, gap 0 0 4px 0";
         final String halfConstraintsLeft = halfConstraints + ", split 2";
         viewport.setOpaque(false);
         viewport.add(this.lblGenerateMana, halfConstraintsLeft);
         viewport.add(this.lblTutor, halfConstraints);
         viewport.add(this.lblViewAll, halfConstraintsLeft);
-        viewport.add(this.lblUnlimitedLands, halfConstraints);
+        viewport.add(this.lblUnlimited, halfConstraints);
         viewport.add(this.lblCastSpell, halfConstraintsLeft);
         viewport.add(this.lblCardToHand, halfConstraints);
+        viewport.add(this.lblCardToBattlefield, halfConstraintsLeft);
+        viewport.add(this.lblRepeatAddCard, halfConstraints);
+        viewport.add(this.lblDumpGame, halfConstraintsLeft);
+        viewport.add(this.lblSetupGame, halfConstraints);
+        viewport.add(this.lblAddCounterPermanent, halfConstraintsLeft);
+        viewport.add(this.lblSubCounterPermanent, halfConstraints);
+        viewport.add(this.lblWinGame, halfConstraintsLeft);
+        viewport.add(this.lblSetLife, halfConstraints);
+        viewport.add(this.lblTapPermanent, halfConstraintsLeft);
+        viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblCardToLibrary, halfConstraintsLeft);
         viewport.add(this.lblCardToGraveyard, halfConstraints);
         viewport.add(this.lblCardToExile, halfConstraintsLeft);
-        viewport.add(this.lblCardToBattlefield, halfConstraints);
-        viewport.add(this.lblRemoveFromGame, halfConstraintsLeft);
-        viewport.add(this.lblRepeatAddCard, halfConstraints);
+        viewport.add(this.lblRemoveFromGame, halfConstraints);
         viewport.add(this.lblExileFromHand, halfConstraintsLeft);
         viewport.add(this.lblExileFromPlay, halfConstraints);
-        viewport.add(this.lblSetLife, halfConstraintsLeft);
-        viewport.add(this.lblWinGame, halfConstraints);
-        viewport.add(this.lblAddCounterPermanent, halfConstraintsLeft);
-        viewport.add(this.lblSubCounterPermanent, halfConstraints);
-        viewport.add(this.lblSetupGame, halfConstraintsLeft);
-        viewport.add(this.lblDumpGame, halfConstraints);
-        viewport.add(this.lblTapPermanent, halfConstraintsLeft);
-        viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblRiggedRoll, halfConstraintsLeft);
         viewport.add(this.lblWalkTo, halfConstraints);
         viewport.add(this.lblAskAI, halfConstraintsLeft);
@@ -134,8 +133,8 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     }
 
     @Override
-    public void update(final boolean playUnlimitedLands, final boolean mayViewAllCards) {
-        getLblUnlimitedLands().setToggled(playUnlimitedLands);
+    public void update(final boolean playUnlimited, final boolean mayViewAllCards) {
+        getLblUnlimited().setToggled(playUnlimited);
         getLblViewAll().setToggled(mayViewAllCards);
     }
 
@@ -271,8 +270,8 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
-    public DevLabel getLblUnlimitedLands() {
-        return this.lblUnlimitedLands;
+    public DevLabel getLblUnlimited() {
+        return this.lblUnlimited;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */

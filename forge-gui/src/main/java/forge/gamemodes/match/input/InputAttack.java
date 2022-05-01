@@ -28,6 +28,7 @@ import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardView;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -71,7 +72,20 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     public final void showMessage() {
         // TODO still seems to have some issues with multiple planeswalkers
-        setCurrentDefender(defenders.getFirst());
+        GameEntity preferredDefender = defenders.getFirst();
+        int max_loyalty_counters = 0;
+        for(GameEntity entity : defenders) {
+            if(entity instanceof Card) {
+                Card planeswalker = (Card)entity;
+                int loyalty_counters = planeswalker.getCounters(CounterEnumType.LOYALTY);
+                if(loyalty_counters > max_loyalty_counters) {
+                    max_loyalty_counters = loyalty_counters;
+                    preferredDefender = entity;
+                }
+            }
+        }
+        
+        setCurrentDefender(preferredDefender);
 
         if (currentDefender == null) {
             System.err.println("InputAttack has no potential defenders!");

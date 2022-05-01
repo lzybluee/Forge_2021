@@ -5570,7 +5570,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void exert() {
         exertedByPlayer.add(getController());
         exertThisTurn++;
-        view.updateExertedThisTurn(this, true);
+        view.updateExerted(this, exertedByPlayer);
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Player, getController());
         game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
@@ -5582,12 +5582,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void removeExertedBy(final Player player) {
         exertedByPlayer.remove(player);
-        view.updateExertedThisTurn(this, getExertedThisTurn() > 0);
+        view.updateExerted(this, exertedByPlayer);
     }
 
     protected void resetExertedThisTurn() {
         exertThisTurn = 0;
-        view.updateExertedThisTurn(this, false);
     }
 
     public boolean isMadness() {

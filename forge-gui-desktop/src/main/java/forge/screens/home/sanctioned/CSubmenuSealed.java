@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -104,12 +105,12 @@ public enum CSubmenuSealed implements ICDoc {
     @Override
     public void update() {
         final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
+        final JButton btnStart = view.getBtnStart();
         view.getLstDecks().setPool(DeckProxy.getAllSealedDecks());
         view.getLstDecks().setup(ItemManagerConfig.SEALED_DECKS);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
-                final JButton btnStart = view.getBtnStart();
                 if (btnStart.isEnabled()) {
                     view.getBtnStart().requestFocusInWindow();
                 } else {
@@ -157,7 +158,12 @@ public enum CSubmenuSealed implements ICDoc {
         });
 
         // Restore Zero Indexing
-        final int aiIndex = Integer.parseInt(duelType)-1;
+        int aiIndex = 0;
+        if("Random".equals(duelType)) {
+            aiIndex = new Random().nextInt(opponentDecks.getAiDecks().size());
+        } else {
+            aiIndex = Integer.parseInt(duelType)-1;
+        }
         final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
             throw new IllegalStateException("Sealed: Computer deck is null!");
@@ -207,6 +213,7 @@ public enum CSubmenuSealed implements ICDoc {
             // Single opponent
             final DeckGroup opponentDecks = FModel.getDecks().getSealed().get(humanDeck.getName());
             int indx = 0;
+            combo.addItem("Random");
             for (@SuppressWarnings("unused") Deck d : opponentDecks.getAiDecks()) {
                 indx++;
                 // 1-7 instead of 0-6

@@ -2,43 +2,43 @@ package forge.interfaces;
 
 public interface IDevModeCheats {
 
-    void setCanPlayUnlimitedLands(boolean canPlayUnlimitedLands0);
+    void setCanPlayUnlimited(boolean canPlayUnlimited);
 
     void setViewAllCards(boolean canViewAll);
 
-    void generateMana();
+    void generateMana(boolean empty);
 
     void rollbackPhase();
 
-    void dumpGameState();
+    void dumpGameState(boolean quick);
 
-    void setupGameState();
+    void setupGameState(boolean lastState);
 
-    void tutorForCard();
+    void tutorForCard(boolean sideboard);
 
-    void addCountersToPermanent();
+    void addCountersToPermanent(boolean player);
 
-    void removeCountersFromPermanent();
+    void removeCountersFromPermanent(boolean player);
 
-    void tapPermanents();
+    void tapPermanents(boolean all);
 
-    void untapPermanents();
+    void untapPermanents(boolean all);
 
-    void setPlayerLife();
+    void setPlayerLife(boolean maxLife);
 
-    void winGame();
+    void winGame(boolean lose);
 
-    void addCardToHand();
+    void addCardToHand(boolean mostCommon);
 
-    void addCardToBattlefield();
+    void addCardToBattlefield(boolean mostCommon);
 
-    void addCardToLibrary();
+    void addCardToLibrary(boolean mostCommon);
 
-    void addCardToGraveyard();
+    void addCardToGraveyard(boolean mostCommon);
 
-    void addCardToExile();
+    void addCardToExile(boolean mostCommon);
 
-    void castASpell();
+    void castASpell(boolean mostCommon);
 
     void repeatLastAddition();
 
@@ -67,28 +67,28 @@ public interface IDevModeCheats {
      */
     IDevModeCheats NO_CHEAT = new IDevModeCheats() {
         @Override
-        public void winGame() {
+        public void winGame(boolean lose) {
         }
         @Override
-        public void untapPermanents() {
+        public void untapPermanents(boolean all) {
         }
         @Override
-        public void tutorForCard() {
+        public void tutorForCard(boolean sideboard) {
         }
         @Override
-        public void tapPermanents() {
+        public void tapPermanents(boolean all) {
         }
         @Override
-        public void setupGameState() {
+        public void setupGameState(boolean lastState) {
         }
         @Override
         public void setViewAllCards(final boolean canViewAll) {
         }
         @Override
-        public void setPlayerLife() {
+        public void setPlayerLife(boolean maxLife) {
         }
         @Override
-        public void setCanPlayUnlimitedLands(final boolean canPlayUnlimitedLands0) {
+        public void setCanPlayUnlimited(final boolean canPlayUnlimited) {
         }
         @Override
         public void riggedPlanarRoll() {
@@ -97,24 +97,23 @@ public interface IDevModeCheats {
         public void planeswalkTo() {
         }
         @Override
-        public void generateMana() {
+        public void generateMana(boolean empty) {
         }
 
         @Override
         public void rollbackPhase() {
         }
-
         @Override
-        public void dumpGameState() {
+        public void dumpGameState(boolean quick) {
         }
         @Override
-        public void addCountersToPermanent() {
+        public void addCountersToPermanent(boolean player) {
         }
         @Override
-        public void removeCountersFromPermanent() {
+        public void removeCountersFromPermanent(boolean player) {
         }
         @Override
-        public void addCardToHand() {
+        public void addCardToHand(boolean mostCommon) {
         }
         @Override
         public void exileCardsFromHand() {
@@ -123,19 +122,19 @@ public interface IDevModeCheats {
         public void exileCardsFromBattlefield() {
         }
         @Override
-        public void addCardToBattlefield() {
+        public void addCardToBattlefield(boolean mostCommon) {
         }
         @Override
-        public void addCardToLibrary() {
+        public void addCardToLibrary(boolean mostCommon) {
         }
         @Override
-        public void addCardToGraveyard() {
+        public void addCardToGraveyard(boolean mostCommon) {
         }
         @Override
-        public void addCardToExile() {
+        public void addCardToExile(boolean mostCommon) {
         }
         @Override
-        public void castASpell() {
+        public void castASpell(boolean mostCommon) {
         }
         @Override
         public void repeatLastAddition() {

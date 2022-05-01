@@ -95,7 +95,8 @@ public enum TrackableProperty {
     LeftSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     RightSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     HiddenId(TrackableTypes.IntegerType),
-    ExertedThisTurn(TrackableTypes.BooleanType),
+    Exerted(TrackableTypes.PlayerViewCollectionType),
+    PlaneswalkerAbilityActivited(TrackableTypes.IntegerType),
 
     //Card State
     Name(TrackableTypes.StringType),

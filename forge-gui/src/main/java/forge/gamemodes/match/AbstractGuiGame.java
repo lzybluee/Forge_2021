@@ -105,6 +105,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (gameView == null || gameView0 == null) {
             if (gameView0 != null) {
                 gameView0.updateObjLookup();
+            } else {
+                autoPassUntilEndOfTurn.clear();
+                autoYields.clear();
+                autoYieldsCards.clear();
+                triggersAlwaysAccept.clear();
+                currentPlayer = null;
+                gameControllers.clear();
+                originalGameControllers.clear();
+                highlightedCards.clear();
+                highlightedPlayers.clear();
+                spectator = null;
             }
             gameView = gameView0;
             return;
@@ -224,6 +235,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
+    public boolean mayViewFront(final CardView c) {
+        if (!hasLocalPlayers()) {
+            return true; //if not in game, card can be shown
+        }
+        if (getGameController().mayLookAtAllCards()) {
+            return true;
+        }
+        return c.canBeShownToAny(null);
+    }
+
+    @Override
     public boolean mayFlip(final CardView cv) {
         if (cv == null) { return false; }
 
@@ -254,10 +276,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
     @Override
     public void setHighlighted(final PlayerView pv, final boolean b) {
-        final boolean hasChanged = b ? highlightedPlayers.add(pv) : highlightedPlayers.remove(pv);
-        if (hasChanged) {
-            updateLives(Collections.singleton(pv));
+        if (b) {
+            highlightedPlayers.add(pv);
+        } else {
+            highlightedPlayers.remove(pv);
         }
+        Set<PlayerView> p = Sets.newHashSet();
+        p.add(pv);
+        updateLives(p);
     }
 
     public boolean isHighlighted(final PlayerView player) {
@@ -493,6 +519,25 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
+    // Cards to auto-yield to
+    private final Set<String> autoYieldsCards = Sets.newHashSet();
+    public final Iterable<String> getAutoYieldsCards() {
+        return autoYieldsCards;
+    }
+    @Override
+    public final boolean shouldAutoYieldCard(final String card) {
+        return !getDisableAutoYields() && autoYieldsCards.contains(card);
+    }
+    @Override
+    public final void setShouldAutoYieldCard(final String card, final boolean autoYield) {
+        if (autoYield) {
+            autoYieldsCards.add(card);
+        }
+        else {
+            autoYieldsCards.remove(card);
+        }
+    }
+
     private boolean disableAutoYields;
     public final boolean getDisableAutoYields() {
         return disableAutoYields;
@@ -504,6 +549,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public final void clearAutoYields() {
         autoYields.clear();
+        autoYieldsCards.clear();
         triggersAlwaysAccept.clear();
     }
 

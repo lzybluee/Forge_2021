@@ -24,9 +24,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
+import forge.card.CardType.CoreType;
+import forge.card.CardType.Supertype;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
@@ -61,7 +64,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final int creatureStackMax = 4;
     private final int landStackMax = 5;
     private final int tokenStackMax = 5;
-    private final int othersStackMax = 4;
+    private final int othersStackMax = 5;
 
     private final boolean mirror;
 
@@ -86,6 +89,109 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.zone = zone;
         this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
         this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
+    }
+
+    private boolean compareCoreTypes(CardPanel panel1, CardPanel panel2) {
+        Set<CoreType> types1 = (Set<CoreType>) panel1.getCard().getCurrentState().getType().getCoreTypes();
+        Set<CoreType> types2 = (Set<CoreType>) panel2.getCard().getCurrentState().getType().getCoreTypes();
+        
+        if(types1.size() != types2.size()) {
+            return false;
+        }
+        
+        boolean equal = true;
+        for(CoreType s1 : types1) {
+            if(!types2.contains(s1)) {
+                equal = false;
+                break;
+            }
+        }
+        
+        return equal;
+    }
+
+    private boolean compareSupertypes(CardPanel panel1, CardPanel panel2) {
+        Set<Supertype> types1 = (Set<Supertype>) panel1.getCard().getCurrentState().getType().getSupertypes();
+        Set<Supertype> types2 = (Set<Supertype>) panel2.getCard().getCurrentState().getType().getSupertypes();
+        
+        if(types1.size() != types2.size()) {
+            return false;
+        }
+        
+        boolean equal = true;
+        for(Supertype s1 : types1) {
+            if(!types2.contains(s1)) {
+                equal = false;
+                break;
+            }
+        }
+        
+        return equal;
+    }
+
+    private boolean compareSubtypes(CardPanel panel1, CardPanel panel2) {
+        Set<String> types1 = (Set<String>) panel1.getCard().getCurrentState().getType().getSubtypes();
+        Set<String> types2 = (Set<String>) panel2.getCard().getCurrentState().getType().getSubtypes();
+        
+        if(types1.size() != types2.size()) {
+            return false;
+        }
+        
+        boolean equal = true;
+        for(String s1 : types1) {
+            if(!types2.contains(s1)) {
+                equal = false;
+                break;
+            }
+        }
+        
+        return equal;
+    }
+
+    private boolean compareCreatureTypes(CardPanel panel1, CardPanel panel2) {
+        Set<String> types1 = panel1.getCard().getCurrentState().getType().getCreatureTypes();
+        Set<String> types2 = panel2.getCard().getCurrentState().getType().getCreatureTypes();
+        
+        if(types1.size() != types2.size()) {
+            return false;
+        }
+        
+        boolean equal = true;
+        for(String s1 : types1) {
+            if(!types2.contains(s1)) {
+                equal = false;
+                break;
+            }
+        }
+        
+        return equal;
+    }
+
+    private boolean compareLandTypes(CardPanel panel1, CardPanel panel2) {
+        Set<String> types1 = panel1.getCard().getCurrentState().getType().getLandTypes();
+        Set<String> types2 = panel2.getCard().getCurrentState().getType().getLandTypes();
+        
+        if(types1.size() != types2.size()) {
+            return false;
+        }
+        
+        boolean equal = true;
+        for(String s1 : types1) {
+            if(!types2.contains(s1)) {
+                equal = false;
+                break;
+            }
+        }
+        
+        return equal;
+    }
+
+    private boolean compareTypes(CardPanel panel1, CardPanel panel2) {
+        return compareCoreTypes(panel1, panel2) &&
+                compareSupertypes(panel1, panel2) &&
+                compareSubtypes(panel1, panel2) &&
+                compareCreatureTypes(panel1, panel2) &&
+                compareLandTypes(panel1, panel2);
     }
 
     private final CardStackRow collectAllLands() {
@@ -114,8 +220,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.getAttachedPanels().isEmpty()
+                    if (!panel.getAttachedPanels().isEmpty() || !compareTypes(firstPanel, panel)
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
+                            || !card.getText().equals(firstPanel.getCard().getText())
                             || firstPanel.getCard().hasCardAttachments() || (stack.size() == this.landStackMax)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
@@ -160,7 +267,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStateView firstState = firstCard.getCurrentState();
 
                 if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
-                    if (!firstPanel.getAttachedPanels().isEmpty()) {
+                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().hasCardAttachments()) {
                         // Put this token to the left of tokens with the same
                         // name and attachments.
                         insertIndex = i;
@@ -168,10 +275,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     }
 
                     if (!panel.getAttachedPanels().isEmpty()
+                            || !compareTypes(firstPanel, panel)
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
                             || (state.getPower() != firstState.getPower())
                             || (state.getToughness() != firstState.getToughness())
+                            || (state.getColors().getColor() != firstState.getColors().getColor())
                             || !(card.getText().equals(firstCard.getText()))
                             || (stack.size() == tokenStackMax)) {
                         // If this token has attachments or the stack is full,
@@ -773,7 +882,56 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
          * the same get stacked.
          */
         private void addAllOthers(final List<CardPanel> cardPanels, final RowType type) {
+            List<CardPanel> sortedPanels = new ArrayList<>();
             for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isPlaneswalker() && !panel.getCard().isToken()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isArtifact() && !panel.getCard().getCurrentState().isEnchantment()
+                        && !panel.getCard().isToken()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isArtifact() && panel.getCard().getCurrentState().isEnchantment()
+                        && !panel.getCard().isToken()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isEnchantment() && !panel.getCard().isToken()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isPlaneswalker()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isArtifact() && !panel.getCard().getCurrentState().isEnchantment()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isArtifact() && panel.getCard().getCurrentState().isEnchantment()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel) && panel.getCard().getCurrentState().isEnchantment()) {
+                    sortedPanels.add(panel);
+                }
+            }
+            for (final CardPanel panel : cardPanels) {
+                if(!sortedPanels.contains(panel)) {
+                    sortedPanels.add(panel);
+                }
+            }
+
+            for (final CardPanel panel : sortedPanels) {
                 if (!type.isGoodFor(panel.getCard().getCurrentState()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
@@ -785,9 +943,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     final CardStateView thisState = thisCard.getCurrentState();
                     if (otherState.getName().equals(thisState.getName()) && s.size() < othersStackMax) {
                         if (panel.getAttachedPanels().isEmpty()
+                            && thisCard.isSick() == otherCard.isSick()
                             && thisCard.hasSameCounters(otherCard)
-                            && (thisCard.isSick() == otherCard.isSick())
-                            && (thisCard.isCloned() == otherCard.isCloned())) {
+                            && (thisCard.isCloned() == otherCard.isCloned())
+                            && (thisCard.isToken() == otherCard.isToken())) {
                             s.add(panel);
                             stackable = true;
                         }

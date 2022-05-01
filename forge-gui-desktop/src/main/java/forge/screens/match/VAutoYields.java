@@ -36,6 +36,9 @@ public class VAutoYields extends FDialog {
         setTitle(Localizer.getInstance().getMessage("lblAutoYields"));
 
         autoYields = new ArrayList<>();
+        for (final String autoYieldCard : matchUI.getAutoYieldsCards()) {
+            autoYields.add("[" + autoYieldCard + "]");
+        }
         for (final String autoYield : matchUI.getAutoYields()) {
             autoYields.add(autoYield);
         }
@@ -71,7 +74,11 @@ public class VAutoYields extends FDialog {
                 if (selected != null) {
                     autoYields.remove(selected);
                     btnRemove.setEnabled(autoYields.size() > 0);
-                    matchUI.setShouldAutoYield(selected, false);
+                    if(selected.startsWith("[") && selected.endsWith("]") ) {
+                        matchUI.setShouldAutoYieldCard(selected.substring(1, selected.length() - 1), false);
+                    } else {
+                        matchUI.setShouldAutoYield(selected, false);
+                    }
                     VAutoYields.this.revalidate();
                     lstAutoYields.repaint();
                 }

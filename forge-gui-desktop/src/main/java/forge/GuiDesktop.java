@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -231,6 +232,19 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public String showFileDialog(final String title, final String defaultDir) {
         final JFileChooser fc = new JFileChooser(defaultDir);
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.setFileFilter(new FileFilter() {
+            
+            @Override
+            public String getDescription() {
+                return "State File";
+            }
+            
+            @Override
+            public boolean accept(File f) {
+                return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
+            }
+        });
         final int rc = fc.showDialog(null, title);
         if (rc != JFileChooser.APPROVE_OPTION) {
             return null;
@@ -246,6 +260,22 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public File getSaveFile(final File defaultFile) {
         final JFileChooser fc = new JFileChooser();
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.setFileFilter(new FileFilter() {
+            
+            @Override
+            public String getDescription() {
+                if(defaultFile.toString().endsWith("state.txt"))
+                    return "State File";
+                else
+                    return "Log File";
+            }
+
+            @Override
+            public boolean accept(File f) {
+                return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
+            }
+        });
         fc.setSelectedFile(defaultFile);
         int result = fc.showSaveDialog(null);
         return result == JFileChooser.APPROVE_OPTION ? fc.getSelectedFile() : null;

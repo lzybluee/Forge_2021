@@ -75,7 +75,9 @@ public class TournamentUtil {
                 default:
                     continue;
             }
-            decks.add(deck);
+            if(deck != null) {
+                decks.add(deck);
+            }
         }
 
         tournament.setDecks(decks);

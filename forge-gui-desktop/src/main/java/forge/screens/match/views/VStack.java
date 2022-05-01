@@ -44,6 +44,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.controllers.CStack;
 import forge.toolbox.FMouseAdapter;
@@ -73,6 +74,7 @@ public class VStack implements IVDoc<CStack> {
     private final AbilityMenu abilityMenu = new AbilityMenu();
 
     private StackInstanceTextArea hoveredItem;
+    private int lastStackSize = 0;
 
     public StackInstanceTextArea getHoveredItem() {
         return hoveredItem;
@@ -139,9 +141,14 @@ public class VStack implements IVDoc<CStack> {
             //update the Card Picture/Detail when the spell is added to the stack
             if (isFirst) {
                 isFirst = false;
-                controller.getMatchUI().setCard(item.getSourceCard());
+                controller.getMatchUI().setPaperCard(item.getSourceCard());
             }
         }
+
+        if (lastStackSize != items.size()) {
+            controller.getMatchUI().clearPanelSelections();
+        }
+        lastStackSize = items.size();
 
         scroller.revalidate();
         scroller.repaint();
@@ -162,6 +169,7 @@ public class VStack implements IVDoc<CStack> {
 
         private final StackItemView item;
         private final CachedCardImage cachedImage;
+        private StackInstanceTextArea lastItem;
 
         public StackItemView getItem() {
             return item;
@@ -201,39 +209,34 @@ public class VStack implements IVDoc<CStack> {
             {
             	// set things up to draw an arc from it...
                 hoveredItem = StackInstanceTextArea.this;
-                controller.getMatchUI().setCard(item.getSourceCard());
+                controller.getMatchUI().setPaperCard(item.getSourceCard());
             }
 
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
-                        hoveredItem = StackInstanceTextArea.this;
+                    if(hoveredItem != null) {
+                        lastItem = hoveredItem;
                     }
-                    controller.getMatchUI().setCard(item.getSourceCard());
-
+                    hoveredItem = StackInstanceTextArea.this;
+                    CMatchUI matchUI = controller.getMatchUI();
+                    if (matchUI != null) {
+                        matchUI.clearPanelSelections();
+                        if (item.getSourceCard() != null) {
+                            matchUI.setPaperCard(item.getSourceCard());
+                            matchUI.setPanelSelection(item.getSourceCard());
+                        }
+                    }
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
-                        if (hoveredItem == StackInstanceTextArea.this) {
-                            hoveredItem = null;
-                        }
+                    CMatchUI matchUI = controller.getMatchUI();
+                    if (matchUI != null) {
+                        matchUI.clearPanelSelections();
                     }
-                }
-                
-                @Override
-                public void mouseClicked(final MouseEvent e) {
-                    if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
-                        if (hoveredItem == StackInstanceTextArea.this) {
-                            hoveredItem = null;
-                        }
-                        else
-                        {
-                            hoveredItem = StackInstanceTextArea.this;
-                            controller.getMatchUI().setCard(item.getSourceCard());
-                        }
+                    if (hoveredItem == StackInstanceTextArea.this) {
+                        hoveredItem = lastItem;
                     }
                 }
             });
@@ -277,7 +280,7 @@ public class VStack implements IVDoc<CStack> {
             final Graphics2D g2d = (Graphics2D) g;
 
             //draw image for source card
-            final BufferedImage img = cachedImage.getImage();
+            final BufferedImage img = cachedImage.getFrontImage();
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }
@@ -289,9 +292,11 @@ public class VStack implements IVDoc<CStack> {
     private final class AbilityMenu extends JPopupMenu {
         private static final long serialVersionUID = 1548494191627807962L;
         private final JCheckBoxMenuItem jmiAutoYield;
+        private final JCheckBoxMenuItem jmiAutoYieldCard;
         private final JCheckBoxMenuItem jmiAlwaysYes;
         private final JCheckBoxMenuItem jmiAlwaysNo;
         private StackItemView item;
+        private String cardName = "";
 
         private Integer triggerID = 0;
 
@@ -311,6 +316,20 @@ public class VStack implements IVDoc<CStack> {
             });
             add(jmiAutoYield);
 
+            jmiAutoYieldCard = new JCheckBoxMenuItem("Auto-Yield for all");
+            jmiAutoYieldCard.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent arg0) {
+                    final boolean autoYieldCard = controller.getMatchUI().shouldAutoYieldCard(cardName);
+                    controller.getMatchUI().setShouldAutoYieldCard(cardName, !autoYieldCard);
+                    if (!autoYieldCard && controller.getMatchUI().getGameView().peekStack() == item) {
+                        //auto-pass priority if ability is on top of stack
+                        controller.getMatchUI().getGameController().passPriority();
+                    }
+                }
+            });
+            add(jmiAutoYieldCard);
+
             jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
             jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
@@ -320,6 +339,13 @@ public class VStack implements IVDoc<CStack> {
                     }
                     else {
                         controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
+                        if(!controller.getMatchUI().shouldAutoYield(item.getKey())) {
+                            controller.getMatchUI().setShouldAutoYield(item.getKey(), true);
+                        }
+                        if (controller.getMatchUI().getGameView().peekStack() == item) {
+                            //auto-pass priority if ability is on top of stack
+                            controller.getMatchUI().getGameController().passPriority();
+                        }
                     }
                 }
             });
@@ -334,6 +360,13 @@ public class VStack implements IVDoc<CStack> {
                     }
                     else {
                         controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
+                        if(!controller.getMatchUI().shouldAutoYield(item.getKey())) {
+                            controller.getMatchUI().setShouldAutoYield(item.getKey(), true);
+                        }
+                        if (controller.getMatchUI().getGameView().peekStack() == item) {
+                            //auto-pass priority if ability is on top of stack
+                            controller.getMatchUI().getGameController().passPriority();
+                        }
                     }
                 }
             });
@@ -345,6 +378,19 @@ public class VStack implements IVDoc<CStack> {
             triggerID = Integer.valueOf(item.getSourceTrigger());
 
             jmiAutoYield.setSelected(controller.getMatchUI().shouldAutoYield(item.getKey()));
+
+            if(item.getSourceCard() == null || item.getSourceCard().getName() == null || item.getSourceCard().getName().isEmpty()) {
+                cardName = "";
+            } else {
+                cardName = item.getSourceCard().getName();
+            }
+
+            if(!cardName.isEmpty()) {
+                jmiAutoYieldCard.setText("Auto-Yield for all [" + cardName + "]");
+                jmiAutoYieldCard.setSelected(controller.getMatchUI().shouldAutoYieldCard(cardName));
+            } else {
+                jmiAutoYieldCard.setVisible(false);
+            }
 
             if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())) {
                 jmiAlwaysYes.setSelected(controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID));

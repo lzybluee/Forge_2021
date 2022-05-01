@@ -68,7 +68,6 @@ import forge.toolbox.FProgressBar;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLayeredPane;
-import forge.util.BuildInfo;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 
@@ -102,7 +101,7 @@ public enum FView {
 
 	FView() {
 		frmSplash = new SplashFrame();
-		frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
+		frmDocument.setTitle("Forge");
 		JOptionPane.setRootFrame(frmDocument);
 	}
 

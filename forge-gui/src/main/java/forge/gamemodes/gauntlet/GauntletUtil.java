@@ -35,27 +35,35 @@ public class GauntletUtil {
                 break;
             case STANDARD_COLOR_DECK:
                 deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(),true);
+                eventNames.add(deck.getName());
                 break;
             case STANDARD_CARDGEN_DECK:
                 deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(),true);
+                eventNames.add(deck.getName());
                 break;
             case PIONEER_CARDGEN_DECK:
                 deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPioneer(),true);
+                eventNames.add(deck.getName());
                 break;
             case HISTORIC_CARDGEN_DECK:
                 deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getHistoric(),true);
+                eventNames.add(deck.getName());
                 break;
             case MODERN_CARDGEN_DECK:
                 deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(),true);
+                eventNames.add(deck.getName());
                 break;
             case LEGACY_CARDGEN_DECK:
                 deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"),true);
+                eventNames.add(deck.getName());
                 break;
             case VINTAGE_CARDGEN_DECK:
                 deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"),true);
+                eventNames.add(deck.getName());
                 break;
             case MODERN_COLOR_DECK:
                 deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getModern().getFilterPrinted(),true);
+                eventNames.add(deck.getName());
                 break;
             case CUSTOM_DECK:
                 deck = DeckgenUtil.getRandomCustomDeck();
@@ -83,7 +91,9 @@ public class GauntletUtil {
             default:
                 continue;
             }
-            decks.add(deck);
+            if(deck != null) {
+                decks.add(deck);
+            }
         }
 
         gauntlet.setDecks(decks);

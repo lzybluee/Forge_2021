@@ -209,7 +209,7 @@ public class CardDetailUtil {
 
     public static String formatCardId(final CardStateView card) {
         final String id = card.getDisplayId();
-        return id.isEmpty() ? id : "[" + id + "]";
+        return id.isEmpty() ? id : "[" + id + "]" + ((card.getCard().getZone() == ZoneType.Battlefield && card.getCard().isFirstTurnControlled()) ? "*" : "");
     }
 
     public static String formatCurrentCardColors(final CardStateView state) {
@@ -238,7 +238,7 @@ public class CardDetailUtil {
                         origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getName());
                     } else {
                         // probably a morph or manifest, try to get its identity from the alternate state
-                        String altName = card.getAlternateState().getName();
+                        String altName = card.getAlternateState() != null ? card.getAlternateState().getName() : "";
                         if (!altName.isEmpty()) {
                             origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
                         }
@@ -272,14 +272,23 @@ public class CardDetailUtil {
 
         // Token
         if (card.isToken()) {
-            area.append("Token");
+            area.append("[Token]\n");
         } else if (card.isTokenCard()) {
-            area.append("Token card");
+            area.append("[Token card]\n");
         } else if (card.isEmblem()) {
-            area.append("Emblem");
+            area.append("[Emblem]\n");
         } else if (card.isImmutable()) {
-            area.append("Effect");
+            area.append("[Effect]\n");
         }
+
+        if(state.isPlaneswalker() && card.getZone() == ZoneType.Battlefield) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("> Planeswalker ability activated this turn : " + card.getPlaneswalkerAbilityActivited());
+            area.append("\n");
+        }
+
         // card text
         if (area.length() != 0) {
             area.append("\n");
@@ -308,6 +317,10 @@ public class CardDetailUtil {
         text = text.replaceAll(regex, ".\r\n");
 
         area.append(text);
+
+        if (area.length() != 0) {
+            area.append("\n");
+        }
 
         if (card.isPhasedOut()) {
             if (area.length() != 0) {
@@ -401,7 +414,9 @@ public class CardDetailUtil {
         // Damage Prevention
         final int preventNextDamage = card.getPreventNextDamage();
         if (preventNextDamage > 0) {
-            area.append("\n");
+            if (area.length() != 0) {
+                area.append("\n");
+            }
             area.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
             area.append(state.getName()).append(" this turn.");
         }
@@ -572,7 +587,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Haunting ").append(card.getHaunting());
+            area.append("Haunting: ");
+            area.append(StringUtils.join(card.getHaunting(), ", "));
         }
 
         // Cipher
@@ -580,7 +596,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Encoded: ").append(card.getEncodedCards());
+            area.append("Encoded: ");
+            area.append(StringUtils.join(card.getEncodedCards(), ", "));
         }
 
         if (card.getUntilLeavesBattlefield() != null) {
@@ -600,18 +617,28 @@ public class CardDetailUtil {
         }
 
         // exerted
-        if (card.isExertedThisTurn()) {
+        if (card.getExerted() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Exerted by: ");
+            area.append(StringUtils.join(card.getExerted(), ", "));
+        }
+
+        //show controller
+        if (card.getOwner() != card.getController()) {
             if (area.length() != 0) {
                 area.append("\n\n");
             }
-            area.append("^Exerted^");
+            area.append("[+Gain control from: " + card.getOwner().getName() + "+]");
+            area.append("\n");
         }
 
         //show current card colors if enabled
         String curCardColors = formatCurrentCardColors(state);
-        if (!curCardColors.isEmpty()) {
+        if (!curCardColors.isEmpty() && !card.isFaceDown()) {
             if (area.length() != 0) {
-                area.append("\n\n");
+                area.append("\n");
             }
             area.append("Current Card Colors: ");
             area.append(curCardColors);
@@ -630,10 +657,15 @@ public class CardDetailUtil {
         //show owner if being controlled by a different player
         if (card.getOwner() != card.getController()) {
             if (area.length() != 0) {
-                area.append("\n\n");
+                area.append("\n");
             }
             area.append("Owner: ").append(card.getOwner().toString());
         }
-        return area.toString();
+
+        String ret = area.toString();
+        while(ret.contains("\n\n\n")) {
+            ret = ret.replace("\n\n\n", "\n\n");
+        }
+        return ret;
     }
 }

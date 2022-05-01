@@ -63,15 +63,6 @@ public enum CSubmenuGauntletQuick implements ICDoc {
             return;
         }
 
-        // Start game overlay
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
-        });
-
         // Find appropriate filename for new save, create and set new save file.
         final List<DeckType> allowedDeckTypes = new ArrayList<>();
         if (view.getBoxColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.COLOR_DECK); }
@@ -88,7 +79,24 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         if (view.getBoxQuestDecks().isSelected()) { allowedDeckTypes.add(DeckType.QUEST_OPPONENT_DECK); }
         if (view.getBoxPreconDecks().isSelected()) { allowedDeckTypes.add(DeckType.PRECONSTRUCTED_DECK); }
 
+        if(allowedDeckTypes.isEmpty()) {
+            return;
+        }
+
         final GauntletData gd = GauntletUtil.createQuickGauntlet(player.getDeck(), view.getSliOpponents().getValue(), allowedDeckTypes, null);
+
+        if(gd.getDecks().isEmpty()) {
+            return;
+        }
+
+        // Start game overlay
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.startGameOverlay();
+                SOverlayUtils.showOverlay();
+            }
+        });
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
         final RegisteredPlayer human = player.setPlayer(GamePlayerUtil.getGuiPlayer());

@@ -164,6 +164,7 @@ public interface IGuiGame {
     List<CardView> manipulateCardList(String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere);
 
     void setCard(CardView card);
+    void setPaperCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players);
     void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
@@ -188,6 +189,8 @@ public interface IGuiGame {
     void updateAutoPassPrompt();
     boolean shouldAutoYield(String key);
     void setShouldAutoYield(String key, boolean autoYield);
+    boolean shouldAutoYieldCard(String card);
+    void setShouldAutoYieldCard(String card, boolean autoYield);
     boolean shouldAlwaysAcceptTrigger(int trigger);
     boolean shouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAcceptTrigger(int trigger);
