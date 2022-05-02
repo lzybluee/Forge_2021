@@ -295,8 +295,8 @@ public class CardView extends GameEntityView {
     }
     public boolean hasSameCounters(CardView otherCard) {
         Map<CounterType, Integer> counters = getCounters();
-        if (counters == null) {
-            return otherCard.getCounters() == null;
+        if (counters == null || counters.isEmpty()) {
+            return otherCard.getCounters() == null || otherCard.getCounters().isEmpty();
         }
         return counters.equals(otherCard.getCounters());
     }
@@ -812,7 +812,7 @@ public class CardView extends GameEntityView {
             sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
         }
 
-        return sb.toString().trim();
+        return sb.toString().trim().replaceAll("\\r\\n\\s*\\r\\n\\s*\\r\\n", "\r\n\r\n");
     }
 
     public CardStateView getCurrentState() {

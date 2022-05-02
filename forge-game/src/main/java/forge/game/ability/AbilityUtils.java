@@ -2062,6 +2062,9 @@ public class AbilityUtils {
         if (sq[0].contains("CardToughness")) {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
+        if (sq[0].contains("CardLoyalty")) {
+            return doXMath(c.getCurrentLoyalty(), expr, c, ctb);
+        }
         if (sq[0].contains("CardSumPT")) {
             return doXMath((c.getNetPower() + c.getNetToughness()), expr, c, ctb);
         }

@@ -1191,7 +1191,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Graft")) {
             final StringBuilder sb = new StringBuilder();
             sb.append("DB$ MoveCounter | Source$ Self | Defined$ TriggeredCardLKICopy");
-            sb.append(" | CounterType$ P1P1 | CounterNum$ 1");
+            sb.append(" | CounterType$ P1P1 | CounterNum$ 1 | Graft$ True");
 
             if (card.hasSVar("AIGraftPreference")) {
                 sb.append(" | AILogic$ ").append(card.getSVar("AIGraftPreference"));
@@ -2342,7 +2342,7 @@ public class CardFactoryUtil {
 
             String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " +
-            " | OptionalDecider$ You | RememberObjects$ ReplacedCard | TriggerDescription$"
+            " | RememberObjects$ ReplacedCard | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying its mana cost.";
             // TODO add check for still in exile
             String abPlay = "DB$ Play | Defined$ DelayTriggerRemembered | WithoutManaCost$ True | Optional$ True";
@@ -2422,7 +2422,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Totem armor")) {
             String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy"
                     + " | Secondary$ True | TotemArmor$ True"
-                    + " | Description$ Totem armor (" + inst.getReminderText() + ")";
+                    + " | Description$ " + card + ": Totem armor (" + inst.getReminderText() + ")";
 
             String abprevDamage = "DB$ DealDamage | Defined$ ReplacedCard | Remove$ All ";
             String abdestroy = "DB$ Destroy | Defined$ Self";

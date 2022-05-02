@@ -2227,7 +2227,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
-        if (!mayPlay.isEmpty()) {
+
+        List<CardPlayOption> payAltZeroMana = Lists.newArrayList();
+        if(!isInZone(ZoneType.Hand) && !isInZone(ZoneType.Command)) {
+            for (CardPlayOption o : mayPlay.values()) {
+                if (o.getAltManaCost() != null && "0".equals(o.getFormattedAltManaCost().replaceAll("[{}]", ""))) {
+                    payAltZeroMana.add(o);
+                }
+            }
+        }
+        
+        if (!mayPlay.isEmpty() && mayPlay.size() - payAltZeroMana.size() > 0) {
             sb.append("May be played by: ");
             sb.append(Lang.joinHomogenous(mayPlay.values()));
             sb.append("\r\n");
@@ -2277,13 +2287,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (monstrous) {
-            sb.append("Monstrous\r\n");
+            sb.append("==Monstrous==\r\n");
         }
         if (renowned) {
-            sb.append("Renowned\r\n");
+            sb.append("==Renowned==\r\n");
         }
         if (manifested) {
-            sb.append("Manifested\r\n");
+            sb.append("==Manifested==\r\n");
         }
         String keywordText = keywordsToText(getUnhiddenKeywords(state));
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
@@ -2477,7 +2487,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (isGoaded()) {
-            sb.append("is goaded by: ").append(Lang.joinHomogenous(getGoaded()));
+            sb.append("Goaded by: ").append(Lang.joinHomogenous(getGoaded()));
             sb.append("\r\n");
         }
 
@@ -2535,8 +2545,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Convoke") || keyword.equals("Delve")
                         || keyword.equals("Improvise") || keyword.equals("Retrace")
                         || keyword.equals("Undaunted") || keyword.equals("Cascade")
-                        || keyword.equals("Devoid") ||  keyword.equals("Lifelink")
-                        || keyword.equals("Split second")) {
+                        || keyword.equals("Devoid") || keyword.equals("Lifelink")
+                        || keyword.equals("Deathtouch") || keyword.equals("Split second")) {
                     sbBefore.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                     sbBefore.append("\r\n");
                 } else if (keyword.equals("Conspire") || keyword.equals("Epic")
@@ -5615,6 +5625,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setMonstrous(final boolean monstrous0) {
         monstrous = monstrous0;
+        updateAbilityTextForView();
     }
 
     public final boolean isRenowned() {
@@ -5622,6 +5633,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setRenowned(final boolean renowned0) {
         renowned = renowned0;
+        updateAbilityTextForView();
     }
 
     public final boolean isManifested() {
@@ -5629,6 +5641,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setManifested(final boolean manifested) {
         this.manifested = manifested;
+        updateAbilityTextForView();
     }
 
     public final boolean isForetold() {
@@ -6885,11 +6898,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void addPlaneswalkerAbilityActivated() {
         planeswalkerAbilityActivated++;
+        view.updatePlaneswalkerAbilityActivited(planeswalkerAbilityActivated);
+        game.fireEvent(new GameEventCardStatsChanged(this));
     }
 
     public void resetActivationsPerTurn() {
         planeswalkerAbilityActivated = 0;
+        view.updatePlaneswalkerAbilityActivited(planeswalkerAbilityActivated);
         numberTurnActivations.clear();
+        game.fireEvent(new GameEventCardStatsChanged(this));
     }
 
     public void addCanBlockAdditional(int n, long timestamp) {

@@ -71,7 +71,7 @@ public final class CardPlayOption {
 
     public Cost getAltManaCost() { return altManaCost; }
 
-    private String getFormattedAltManaCost() {
+    public String getFormattedAltManaCost() {
         return altManaCost.toSimpleString();
     }
 

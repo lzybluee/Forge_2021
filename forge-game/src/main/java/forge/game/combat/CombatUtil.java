@@ -217,7 +217,7 @@ public class CombatUtil {
         if (!forNextTurn && (
                    !attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
-                || isAttackerSick(attacker, defender)
+                || (isAttackerSick(attacker, defender) && !attacker.getController().getController().canPlayUnlimited())
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
