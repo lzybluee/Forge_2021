@@ -1,4 +1,4 @@
-package main.java.forge.adventure.editor;
+package forge.adventure.editor;
 
 import javax.swing.*;
 import java.awt.*;

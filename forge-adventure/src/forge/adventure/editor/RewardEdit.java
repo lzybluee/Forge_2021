@@ -1,4 +1,4 @@
-package main.java.forge.adventure.editor;
+package forge.adventure.editor;
 
 import forge.adventure.data.RewardData;
 import forge.card.CardType;
