@@ -1273,10 +1273,14 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Loyalty);
         }
         void updateLoyalty(Card c) {
-            if (c.isInZone(ZoneType.Battlefield)) {
-                updateLoyalty(String.valueOf(c.getCurrentLoyalty()));
+            if (c.getCurrentState().getView() == this || c.getAlternateState() == null) {
+                if (c.isInZone(ZoneType.Battlefield)) {
+                    updateLoyalty(String.valueOf(c.getCurrentLoyalty()));
+                } else {
+                    updateLoyalty(c.getCurrentState().getBaseLoyalty());
+                }
             } else {
-                updateLoyalty(c.getCurrentState().getBaseLoyalty());
+                updateLoyalty(c.getAlternateState().getBaseLoyalty());
             }
         }
         void updateLoyalty(String loyalty) {
