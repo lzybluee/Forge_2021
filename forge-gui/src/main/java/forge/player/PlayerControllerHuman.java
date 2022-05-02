@@ -2846,7 +2846,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         carddb.getFaceByName("Regrowth"), carddb.getFaceByName("Swords to Plowshares"), carddb.getFaceByName("Brainstorm"),
                         carddb.getFaceByName("Grizzly Bears"), carddb.getFaceByName("Act of Treason"), carddb.getFaceByName("Evolving Wilds"));
             } else {
-                Lists.newArrayList(carddb.getAllFaces());
+                faces = Lists.newArrayList(carddb.getAllFaces());
             }
 
             List<CardFaceView> choices = new ArrayList<>();
