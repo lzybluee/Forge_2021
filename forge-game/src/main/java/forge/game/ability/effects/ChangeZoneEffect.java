@@ -1062,7 +1062,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
 
-            if (sa.hasParam("NoShuffle")) {
+            if (sa.hasParam("NoShuffle") || (sa.hasParam("Shuffle") && "False".equals(sa.getParam("Shuffle")))) {
                 shuffleMandatory = false;
             }
 
@@ -1076,6 +1076,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
             final String totalcmc = sa.getParam("WithTotalCMC");
             int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
+
+            if (sa.hasParam("ForgetOtherRemembered")) {
+                source.clearRemembered();
+            }
 
             fetchList.sort();
 
@@ -1414,8 +1418,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
+            boolean revealed = false;
             if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
                     || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
+                game.getAction().reveal(movedCards, player);
+                revealed = true;
+            }
+
+            if(!revealed && origin.size() == 1 && origin.contains(ZoneType.Hand) && ZoneType.Exile.equals(destination)
+                    && !movedCards.isEmpty() && !sa.hasParam("ExileFaceDown") && !sa.hasParam("NoReveal")) {
                 game.getAction().reveal(movedCards, player);
             }
 

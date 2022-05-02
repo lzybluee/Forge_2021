@@ -27,6 +27,7 @@ public class RevealEffect extends SpellAbilityEffect {
         final boolean anyNumber = sa.hasParam("AnyNumber");
         final boolean optional = sa.hasParam("Optional");
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
+        boolean forceReveal = false;
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
@@ -55,7 +56,7 @@ public class RevealEffect extends SpellAbilityEffect {
                     } else {
                         revealed.add(Aggregates.random(valid));
                     }
-
+                    forceReveal = true;
                 } else if (sa.hasParam("RevealDefined")) {
                     revealed.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RevealDefined"), sa));
                 } else if (sa.hasParam("RevealAllValid")) {
@@ -92,7 +93,11 @@ public class RevealEffect extends SpellAbilityEffect {
                     game.getAction().reveal(revealed, p, false,
                             sa.getParamOrDefault("RevealTitle", ""));
                 } else {
-                    game.getAction().reveal(revealed, p);
+                    if(forceReveal) {
+                        game.getAction().reveal(revealed, p, false);
+                    } else {
+                        game.getAction().reveal(revealed, p);
+                    }
                 }
                 for (final Card c : revealed) {
                     game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);

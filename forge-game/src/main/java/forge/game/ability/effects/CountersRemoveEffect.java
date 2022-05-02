@@ -171,7 +171,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Target", gameCard);
                             params.put("CounterType", counterType);
-                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
+                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type) + "from " + gameCard;
                             cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
                         }
                     }
@@ -211,10 +211,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Target", entity);
 
-            String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
+            String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove") + "from " + entity;
             CounterType chosenType = pc.chooseCounterType(
                     ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
-            prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
+            prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName()) + "from " + entity;
             int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
             params = Maps.newHashMap();
             params.put("Target", entity);

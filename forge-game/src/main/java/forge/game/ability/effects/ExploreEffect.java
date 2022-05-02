@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -66,12 +68,12 @@ public class ExploreEffect extends SpellAbilityEffect {
                     movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
                     revealedLand = true;
                 } else {
-                    // TODO find better way to choose optional send away
-                    final Card choosen = pl.getController().chooseSingleCardForZoneChange(
-                            ZoneType.Graveyard, Lists.newArrayList(ZoneType.Library), sa, top, null,
-                            Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard"), true, pl);
-                    if (choosen != null) {
-                        movedCard = game.getAction().moveTo(ZoneType.Graveyard, choosen, sa, moveParams);
+                    CardCollection explored = new CardCollection();
+                    explored.add(r);
+                    final ImmutablePair<CardCollection, CardCollection> lists = pl.getController().arrangeForSurveil(explored);
+                    final CardCollection toGrave = lists.getRight();
+                    if (toGrave != null) {
+                        movedCard = game.getAction().moveTo(ZoneType.Graveyard, toGrave.get(0), sa, moveParams);
                     }
                 }
 

@@ -190,6 +190,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private GameEntityCounterTable counterTable;
     private CardZoneTable changeZoneTable;
 
+    private ManaCostBeingPaid usedToPayMana = null;
+    private boolean needChooseMana = false;
+
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
     }
@@ -2455,5 +2458,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             hidden = ZoneType.isHidden(getParam("Origin"));
         }
         return hidden;
+    }
+
+    public void setUsedToPayMana(ManaCostBeingPaid mana) {
+        usedToPayMana = mana;
+    }
+
+    public ManaCostBeingPaid getUsedToPayMana() {
+        return usedToPayMana;
+    }
+
+    public void setNeedChooseMana(boolean b) {
+        needChooseMana = b;
+    }
+
+    public boolean getNeedChooseMana() {
+        return needChooseMana;
     }
 }

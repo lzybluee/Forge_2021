@@ -86,6 +86,9 @@ public class UntapEffect extends SpellAbilityEffect {
             CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
                     valid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
             list = CardLists.filter(list, Presets.TAPPED);
+            if(list.isEmpty()) {
+                return;
+            }
 
             final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {

@@ -24,6 +24,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -693,7 +694,7 @@ public abstract class SpellAbilityEffect {
             final CardCollection discardedByPlayer = new CardCollection();
             for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
                 if (card == null) { continue; }
-                if (p.discard(card, sa, effect, table, params) != null) {
+                if (p.discard(card, sa, effect, table, params) != null || card.hasKeyword(Keyword.MADNESS)) {
                     discardedByPlayer.add(card);
 
                     if (sa.hasParam("RememberDiscarded")) {

@@ -40,7 +40,13 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         } else {
             List<Card> srcCards = getDefinedCardsOrTargeted(sa, "Source");
 
-            if (srcCards.size() > 0) {
+            if(srcCards == null || srcCards.isEmpty()) {
+                if(sa.getParent() != null) {
+                    srcCards = getDefinedCardsOrTargeted(sa.getParent());
+                }
+            }
+            
+            if(srcCards != null && srcCards.size() > 0) {
                 source = srcCards.get(0);
             }
         }
@@ -66,11 +72,15 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         if (amount != 1) {
             sb.append("s");
         }
-        sb.append(" from ").append(source).append(" to ");
+        if(source == null) {
+            sb.append(" to ");
+        } else {
+            sb.append(" from ").append(source).append(" to ");
+        }
         try {
             sb.append(tgtCards.get(0));
         } catch (final IndexOutOfBoundsException exception) {
-            System.out.println(TextUtil.concatWithSpace("Somehow this is missing targets?", source.toString()));
+            System.out.println(TextUtil.concatWithSpace("Somehow this is missing targets? ", source == null ? "NULL" : source.toString()));
         }
 
         sb.append(".");

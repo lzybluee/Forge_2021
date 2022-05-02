@@ -964,11 +964,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tempShowCards(topN);
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
              (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay())) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
-            CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
-            ImmutablePair<CardCollection, CardCollection> result =
-            arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
-            toTop = result.getLeft();
-            toBottom = result.getRight();
+            if(topN.size() == 1) {
+                if (willPutCardOnTop(topN.get(0))) {
+                    toTop = topN;
+                } else {
+                    toBottom = topN;
+                }
+            } else {
+                CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
+                ImmutablePair<CardCollection, CardCollection> result =
+                arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
+                toTop = result.getLeft();
+                toBottom = result.getRight();
+            }
         } else {
             if (topN.size() == 1) {
                 if (willPutCardOnTop(topN.get(0))) {

@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         
         final FCollectionView<Player> players = game.getPlayersInTurnOrder();
         final List<CardCollection> validCards = new ArrayList<>(players.size());
-        Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
+        LinkedHashMap<Player, CardCollectionView> discardedMap = Maps.newLinkedHashMap();
         
         for (int i = 0; i < players.size(); i++) {
             // Find the minimum of each Valid per player
@@ -66,6 +67,10 @@ public class BalanceEffect extends SpellAbilityEffect {
                     game.getAction().sacrifice(card, sa, true, table, params);
                 }
             }
+        }
+
+        for(Player p : discardedMap.keySet()) {
+            p.getGame().getAction().reveal(discardedMap.get(p), p, true);
         }
 
         if (zone.equals(ZoneType.Hand)) {

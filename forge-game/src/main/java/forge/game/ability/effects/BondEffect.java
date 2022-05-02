@@ -16,6 +16,10 @@ public class BondEffect extends SpellAbilityEffect {
         // find card that triggered pairing first
         CardCollectionView trigCards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
+        if(trigCards.isEmpty()) {
+            return;
+        }
+
         // Check that this card hasn't already become paired by an earlier trigger
         if (trigCards.getFirst().isPaired() || !trigCards.getFirst().isInPlay()) {
             return;
@@ -32,6 +36,22 @@ public class BondEffect extends SpellAbilityEffect {
         // skip choice if only one card on list
         if (cards.size() > 1) {
             partner = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(cards, sa, Localizer.getInstance().getMessage("lblSelectACardPair"), null);
+        }
+
+        if(trigCards.getFirst().getController() != sa.getActivatingPlayer()) {
+            return;
+        }
+
+        if(partner.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
+
+        if(!trigCards.getFirst().isInZone(ZoneType.Battlefield) || !partner.isInZone(ZoneType.Battlefield)) {
+            return;
+        }
+
+        if(!trigCards.getFirst().isCreature() || !partner.isCreature()) {
+            return;
         }
 
         // pair choices together

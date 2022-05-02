@@ -63,7 +63,6 @@ public enum AbilityKey {
     DividedShieldAmount("DividedShieldAmount"),
     EchoPaid("EchoPaid"),
     EffectOnly("EffectOnly"),
-    Enchanted("Enchanted"),
     Exploited("Exploited"),
     Explorer("Explorer"),
     ExtraTurn("ExtraTurn"),
