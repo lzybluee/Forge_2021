@@ -592,7 +592,9 @@ public class PlayerView extends GameEntityView {
         details.add(Localizer.getInstance().getMessage("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
         details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", String.valueOf(getNumDrawnThisTurn())));
         details.add("Spells cast this turn: " + String.valueOf(getSpellsCastThisTurn()));
-        details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
+        if(getPreventNextDamage() > 0) {
+            details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
+        }
 
         int v = getAdditionalVote();
         if (v > 0) {

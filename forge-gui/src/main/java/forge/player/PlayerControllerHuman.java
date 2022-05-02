@@ -2577,11 +2577,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     return;
                 }
 
-                GameEntityCounterTable table = new GameEntityCounterTable();
+                int num = p.getCounters(counter);
                 if (subtract) {
-                    p.subtractCounter(counter, count);
+                    p.setCounters(counter, (num - count) < 0 ? 0 : num - count, true);
                 } else {
-                    p.addCounter(counter, count, null, table);
+                    p.setCounters(counter, num + count, true);
                 }
             } else {
                 final String titleMsg = subtract ? localizer.getMessage("lblRemoveCountersFromWhichCard") : localizer.getMessage("lblAddCountersToWhichCard");
