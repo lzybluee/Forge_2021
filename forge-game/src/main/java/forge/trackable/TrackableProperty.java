@@ -184,6 +184,7 @@ public enum TrackableProperty {
     HasUnlimitedLandPlay(TrackableTypes.BooleanType),
     NumLandThisTurn(TrackableTypes.IntegerType),
     NumDrawnThisTurn(TrackableTypes.IntegerType),
+    SpellsCastThisTurn(TrackableTypes.IntegerType),
     AdditionalVote(TrackableTypes.IntegerType),
     OptionalAdditionalVote(TrackableTypes.IntegerType),
     ControlVotes(TrackableTypes.BooleanType),

@@ -520,6 +520,10 @@ public abstract class Trigger extends TriggerReplacementBase {
         validPhases = phases;
     }
 
+    public Set<PhaseType> getTriggerPhases() {
+        return validPhases;
+    }
+
     //public String getImportantStackObjects(SpellAbility sa) { return ""; };
     abstract public String getImportantStackObjects(SpellAbility sa);
 

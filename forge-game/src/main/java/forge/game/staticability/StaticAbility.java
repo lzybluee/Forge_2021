@@ -628,6 +628,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         try {
             clone = (StaticAbility) clone();
             clone.id = lki ? id : nextId();
+            clone.mayPlayTurn = 0;
 
             copyHelper(clone, host);
 

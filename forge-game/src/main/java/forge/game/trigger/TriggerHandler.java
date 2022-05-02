@@ -32,6 +32,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -53,6 +54,7 @@ public class TriggerHandler {
     private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
     private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<>());
     private final Game game;
+    private boolean skipRunZoneChangeTrigger = false;
 
     public TriggerHandler(final Game gameState) {
         game = gameState;
@@ -60,6 +62,25 @@ public class TriggerHandler {
 
     public final boolean hasDelayedTriggers() {
         return !delayedTriggers.isEmpty();
+    }
+
+    public final boolean hasDelayedTriggersDuringCombat() {
+        if(delayedTriggers.isEmpty()) {
+            return false;
+        }
+        for(Trigger t : delayedTriggers) {
+            if(t.getTriggerPhases() == null) {
+                continue;
+            }
+            for(PhaseType p : t.getTriggerPhases()) {
+                if(p == PhaseType.COMBAT_DECLARE_ATTACKERS || p == PhaseType.COMBAT_DECLARE_BLOCKERS ||
+                   p == PhaseType.COMBAT_FIRST_STRIKE_DAMAGE || p == PhaseType.COMBAT_DAMAGE ||
+                   p == PhaseType.COMBAT_END) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public final void registerDelayedTrigger(final Trigger trig) {
@@ -276,8 +297,17 @@ public class TriggerHandler {
     }
 
     public final boolean runWaitingTriggers() {
-        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
-        waitingTriggers.clear();
+        final List<TriggerWaiting> waiting = new ArrayList<>();
+        for(final TriggerWaiting wt : waitingTriggers) {
+            if(skipRunZoneChangeTrigger && (wt.getMode() == TriggerType.ChangesZone || wt.getMode() == TriggerType.ChangesZoneAll
+                     || wt.getMode() == TriggerType.Taps)) {
+                continue;
+            }
+            waiting.add(wt);
+        }
+        for (final TriggerWaiting wt : waiting) {
+            waitingTriggers.remove(wt);
+        }
         if (waiting.isEmpty()) {
             return false;
         }
@@ -353,7 +383,7 @@ public class TriggerHandler {
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
-        final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
+        final List<Trigger> triggers = (wt.getTriggers() != null && wt.getTriggers().size() > 0) ? wt.getTriggers() : activeTriggers;
 
         boolean checkStatics = false;
 
@@ -572,6 +602,12 @@ public class TriggerHandler {
             return;
         }
 
+        if(!regtrig.hasParam("CheckOnResolve")) {
+            if(!sa.getConditions().areMet(sa)) {
+                return;
+            }
+        }
+
         if (regtrig.hasParam("RememberController")) {
             host.addRemembered(sa.getActivatingPlayer());
         }
@@ -630,5 +666,9 @@ public class TriggerHandler {
         }
         // run all ChangesZone
         runWaitingTriggers();
+    }
+
+    public void setSkipRunZoneChangeTrigger(boolean skip) {
+        skipRunZoneChangeTrigger = skip;
     }
 }

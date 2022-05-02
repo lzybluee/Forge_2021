@@ -21,8 +21,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CounterEnumType;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -72,7 +74,7 @@ public class PlayerZone extends Zone {
                     return true;
                 }
 
-                if (sa.isSpell() && c.mayPlay(player).size() > 0) {
+                if (sa.isSpell() && c.mayPlayCheckDontGrantZonePermissions(player).size() > 0) {
                     return true;
                 }
 
@@ -134,5 +136,21 @@ public class PlayerZone extends Zone {
 
         final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : alienCardsActivationFilter(who);
         return CardLists.filter(cl, filterPredicate);
+    }
+
+    public CardCollectionView getCardsSuspended(Player who) {
+        boolean checkingForOwner = who == player;
+
+        CardCollection cards = new CardCollection();
+        if (checkingForOwner) {
+            CardCollectionView cl = getCards(false);
+            for(Card c : cl) {
+                if(c.hasSuspend() && c.getCounters(CounterEnumType.TIME) >= 1) {
+                    cards.add(c);
+                }
+            }
+        }
+
+        return cards;
     }
 }

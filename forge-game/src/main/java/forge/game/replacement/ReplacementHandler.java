@@ -64,6 +64,7 @@ import forge.util.Visitor;
 
 public class ReplacementHandler {
     private final Game game;
+    private boolean suppressAll;
 
     private Set<ReplacementEffect> hasRun = Sets.newHashSet();
 
@@ -78,7 +79,9 @@ public class ReplacementHandler {
         game = gameState;
     }
 
-    //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
+    public void setSuppressAll(boolean suppress) {
+        suppressAll = suppress;
+    }
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
@@ -227,6 +230,10 @@ public class ReplacementHandler {
      * @return ReplacementResult, an enum that represents what happened to the replacement effect.
      */
     public ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        if(suppressAll) {
+            return ReplacementResult.NotReplaced;
+        }
+
         final Object affected = runParams.get(AbilityKey.Affected);
         Player decider = null;
 
@@ -247,7 +254,6 @@ public class ReplacementHandler {
         }
 
         return ReplacementResult.NotReplaced;
-
     }
 
     private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Player decider) {
@@ -265,6 +271,17 @@ public class ReplacementHandler {
         hasRun.add(chosenRE);
         chosenRE.setOtherChoices(possibleReplacers);
         ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
+
+        if (res == ReplacementResult.NotReplaced && chosenRE.hasParam("CheckSVar") && chosenRE.getParam("CheckSVar").equals("DredgeCheckLib")) {
+            List<ReplacementEffect> removeDredge = Lists.newArrayList();
+            for(ReplacementEffect re : possibleReplacers) {
+                if(re.hasParam("CheckSVar") && re.getParam("CheckSVar").equals("DredgeCheckLib")) {
+                    removeDredge.add(re);
+                }
+            }
+            possibleReplacers.removeAll(removeDredge);
+        }
+
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
                 res = run(event, runParams);

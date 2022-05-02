@@ -227,6 +227,14 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        if (sa.toString().startsWith("Fuse (") && !cardZone.is(ZoneType.Hand, activator)) {
+            return false;
+        }
+
+        if (sa.isAftermath() && !cardZone.is(ZoneType.Graveyard, activator)) {
+            return false;
+        }
+
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
 
@@ -481,6 +489,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (sa.isPwAbility()) {
             final int initialLimit = c.hasKeyword("CARDNAME's loyalty abilities can be activated twice each turn rather than only once") ? 1 : 0;
             final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once") + initialLimit;
+
+            if(activator.getController().canPlayUnlimited()) {
+                return true;
+            }
 
             int numActivates = c.getPlaneswalkerAbilityActivated();
             if (numActivates > limits) {

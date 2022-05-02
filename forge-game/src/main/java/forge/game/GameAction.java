@@ -1481,6 +1481,7 @@ public class GameAction {
         for (final Card c : cardsToUpdateLKI) {
             game.updateLastStateForCard(c);
         }
+        game.clearChangeZoneLKIInfo();
 
         if (!refreeze) {
             game.getStack().unfreezeStack();

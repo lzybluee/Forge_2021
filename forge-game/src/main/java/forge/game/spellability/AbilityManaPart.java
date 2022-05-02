@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -281,6 +282,20 @@ public class AbilityManaPart implements java.io.Serializable {
     }
 
     public boolean meetsManaRestrictions(final SpellAbility sa) {
+        Card hostCard = sa.getHostCard();
+        if(hostCard != null && sa.isSpell() && sa.isCastFaceDown()) {
+            CardStateName stateBackup = hostCard.getCurrentStateName();
+            boolean face = hostCard.isFaceDown();
+            hostCard.turnFaceDownNoUpdate();
+            boolean success = checkMeetsManaRestrictions(sa);
+            hostCard.setState(stateBackup, false);
+            hostCard.setFaceDown(face);
+            return success;
+        }
+        return checkMeetsManaRestrictions(sa);
+    }
+
+    public boolean checkMeetsManaRestrictions(final SpellAbility sa) {
         return meetsManaRestrictions(sa, this.manaRestrictions) && meetsManaRestrictions(sa, this.extraManaRestrictions);
     }
 
@@ -339,10 +354,6 @@ public class AbilityManaPart implements java.io.Serializable {
 
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
-            }
-
-            if (sa.isAbility() && restriction.startsWith("Activated") && sa.isTrigger()) {
-                continue;
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that
