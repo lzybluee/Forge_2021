@@ -301,6 +301,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumDrawnThisTurn, p.getNumDrawnThisTurn());
     }
 
+    public int getSpellsCastThisTurn() {
+        return get(TrackableProperty.SpellsCastThisTurn);
+    }
+    void updateSpellsCastThisTurn(Player p) {
+        set(TrackableProperty.SpellsCastThisTurn, p.getSpellsCastThisTurn());
+    }
+    
     public int getAdditionalVote() {
         return get(TrackableProperty.AdditionalVote);
     }
@@ -584,6 +591,7 @@ public class PlayerView extends GameEntityView {
         details.add(Localizer.getInstance().getMessage("lblCardInHandHas", String.valueOf(getHandSize()), getMaxHandString()));
         details.add(Localizer.getInstance().getMessage("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
         details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", String.valueOf(getNumDrawnThisTurn())));
+        details.add("Spells cast this turn: " + String.valueOf(getSpellsCastThisTurn()));
         details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
 
         int v = getAdditionalVote();
@@ -602,7 +610,9 @@ public class PlayerView extends GameEntityView {
         if (getIsExtraTurn()) {
             details.add(Localizer.getInstance().getMessage("lblIsExtraTurn"));
         }
-        details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", String.valueOf(getExtraTurnCount())));
+        if (getExtraTurnCount() > 0) {
+            details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", String.valueOf(getExtraTurnCount())));
+        }
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);

@@ -40,6 +40,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardStatsChanged;
@@ -52,6 +53,7 @@ import forge.game.event.GameEventTokenStateUpdate;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventTurnPhase;
+import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
@@ -204,6 +206,8 @@ public class PhaseHandler implements java.io.Serializable {
 
                 final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands.size());
+
+                game.fireEvent(new GameEventZone(ZoneType.Battlefield, playerTurn, EventValueChangeType.ComplexUpdate, null));
             }
             //update tokens
             game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
@@ -319,6 +323,11 @@ public class PhaseHandler implements java.io.Serializable {
                         declareAttackersTurnBasedAction();
                         game.getStack().unfreezeStack();
 
+                        if (combat != null && combat.getAttackers().isEmpty()
+                                && !game.getTriggerHandler().hasDelayedTriggersDuringCombat()) {
+                            endCombat();
+                        }
+
                         if (combat != null) {
                             for (Card c : combat.getAttackers()) {
                                 if (combat.getDefenderByAttacker(c) instanceof Player) {
@@ -389,7 +398,8 @@ public class PhaseHandler implements java.io.Serializable {
                     // Rule 514.1
                     final int handSize = playerTurn.getZone(ZoneType.Hand).size();
                     final int max = playerTurn.getMaxHandSize();
-                    int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
+                    int numDiscard = playerTurn.isUnlimitedHandSize() || playerTurn.getController().canPlayUnlimited()
+                            || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -561,6 +571,11 @@ public class PhaseHandler implements java.io.Serializable {
                 }
 
                 whoDeclares.getController().declareAttackers(playerTurn, combat);
+
+                if(combat == null) {
+                    return;
+                }
+
                 combat.removeAbsentCombatants();
 
                 success = CombatUtil.validateAttackers(combat);
@@ -691,6 +706,10 @@ public class PhaseHandler implements java.io.Serializable {
             else { continue; }
 
             if (game.isGameOver()) { // they just like to close window at any moment
+                return;
+            }
+
+            if(combat == null) {
                 return;
             }
 
@@ -1140,6 +1159,7 @@ public class PhaseHandler implements java.io.Serializable {
             // If ever the karn's ultimate resolved
             if (game.getAge() == GameStage.RestartedByKarn) {
                 setPhase(null);
+                turn = 0;
                 game.updatePhaseForView();
                 game.fireEvent(new GameEventGameRestarted(playerTurn));
                 return;
