@@ -59,9 +59,10 @@ public class CostTap extends CostPart {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+    public final boolean canPay(final SpellAbility ability, final Player player, final boolean effect) {
         final Card source = ability.getHostCard();
-        return source.isUntapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
+        return source.isUntapped() && ((!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."))
+                || player.getController().canPlayUnlimited());
     }
 
     @Override

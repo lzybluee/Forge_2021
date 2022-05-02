@@ -72,6 +72,9 @@ public class CostRemoveCounter extends CostPart {
     public int paymentOrder() { return 8; }
 
     @Override
+    public boolean isUndoable() { return false; }
+
+    @Override
     public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
         final CounterType cntrs = this.counter;
         final Card source = ability.getHostCard();

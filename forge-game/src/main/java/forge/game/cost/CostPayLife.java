@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -28,6 +29,7 @@ public class CostPayLife extends CostPart {
      * Serializables need a version ID.
      */
     private static final long serialVersionUID = 1L;
+    int paidAmount = 0;
 
     /**
      * Instantiates a new cost pay life.
@@ -42,6 +44,8 @@ public class CostPayLife extends CostPart {
     @Override
     public int paymentOrder() { return 7; }
 
+    @Override
+    public boolean isUndoable() { return true; }
     /*
      * (non-Javadoc)
      *
@@ -69,6 +73,12 @@ public class CostPayLife extends CostPart {
     }
 
     @Override
+    public final void refund(final Card source) {
+        // Really should be activating player
+        source.getController().refundLife(this.paidAmount);
+    }
+
+    @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         if (!payer.canPayLife(this.getAbilityAmount(ability), effect, ability)) {
             return false;
@@ -79,11 +89,19 @@ public class CostPayLife extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        return ai.payLife(decision.c, ability, effect);
+        paidAmount = decision.c;
+        return ai.payLife(paidAmount, ability, effect);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
 
+    public int getPaidAmount() {
+        return paidAmount;
+    }
+
+    public void setPaidAmount(int amount) {
+        paidAmount = amount;
+    }
 }
