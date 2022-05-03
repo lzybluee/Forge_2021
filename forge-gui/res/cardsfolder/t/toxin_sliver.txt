@@ -5,4 +5,5 @@ PT:3/3
 T:Mode$ DamageDone | ValidSource$ Sliver | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy | NoRegen$ True
 SVar:PlayMain1:TRUE
+SVar:AllSliverHasDamageDestory:TRUE
 Oracle:Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
