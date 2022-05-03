@@ -455,7 +455,7 @@ public class TriggerHandler {
             }
         }
 
-        if (!regtrig.requirementsCheck(game)) {
+        if (!regtrig.requirementsCheck(game) && !regtrig.hasParam("CheckOnResolve")) {
             return false; // Conditions aren't right.
         }
 
@@ -597,10 +597,6 @@ public class TriggerHandler {
         }
 
         sa.setStackDescription(sa.toString());
-
-        if(!sa.getConditions().areMet(sa)) {
-            return;
-        }
 
         if(!regtrig.hasParam("CheckOnResolve")) {
             if(!sa.getConditions().areMet(sa)) {

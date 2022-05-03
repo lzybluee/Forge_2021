@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Kor Wizard
 PT:2/2
 K:Vigilance
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ PumpFlying | TriggerDescription$ Whenever CARDNAME attacks, it gains flying until end of turn if you control a creature with flying. The same is true for first strike, double strike, deathtouch, indestructible, lifelink, menace, and trample.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ PumpFlying | CheckOnResolve$ True | TriggerDescription$ Whenever CARDNAME attacks, it gains flying until end of turn if you control a creature with flying. The same is true for first strike, double strike, deathtouch, indestructible, lifelink, menace, and trample.
 SVar:PumpFlying:DB$ Pump | Defined$ Self | KW$ Flying | ConditionPresent$ Creature.YouCtrl+withFlying | SubAbility$ PumpFirstStrike
 SVar:PumpFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | ConditionPresent$ Creature.YouCtrl+withFirst Strike | SubAbility$ PumpDoubleStrike
 SVar:PumpDoubleStrike:DB$ Pump | Defined$ Self | KW$ Double Strike | ConditionPresent$ Creature.YouCtrl+withDouble Strike | SubAbility$ PumpDeathtouch

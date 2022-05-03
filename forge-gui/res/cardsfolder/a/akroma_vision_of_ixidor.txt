@@ -6,7 +6,7 @@ K:Flying
 K:First Strike
 K:Vigilance
 K:Trample
-T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ Flying | TriggerDescription$ At the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ Flying | CheckOnResolve$ True | TriggerDescription$ At the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.
 SVar:Flying:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withFlying | NumAtt$ +1 | NumDef$ +1 | SubAbility$ FirstStrike
 SVar:FirstStrike:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withFirst Strike | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DoubleStrike
 SVar:DoubleStrike:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withDouble Strike | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Deathtouch
