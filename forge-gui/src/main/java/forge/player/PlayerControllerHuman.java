@@ -211,6 +211,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         disableAutoYields = disableAutoYields0;
     }
 
+    public boolean shouldAutoYieldCard(String cardName) {
+        return gui != null && gui.shouldAutoYieldCard(cardName);
+    }
+
     @Override
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
@@ -297,8 +301,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void playSpellAbilityForFree(final SpellAbility copySA, final boolean mayChoseNewTargets) {
-        HumanPlay.playSaWithoutPayingManaCost(this, player.getGame(), copySA, mayChoseNewTargets);
+    public void playSpellAbilityForFree(final SpellAbility copySA, final boolean mayChooseNewTargets) {
+        boolean chooseNewTargets = mayChooseNewTargets;
+        if(chooseNewTargets && FModel.getPreferences().getPrefBoolean(FPref.UI_SKIP_AUTO_PAY)) {
+            chooseNewTargets = InputConfirm.confirm(this, copySA, "Choose new targets?");
+        }
+        HumanPlay.playSaWithoutPayingManaCost(this, player.getGame(), copySA, chooseNewTargets);
     }
 
     @Override
@@ -485,10 +493,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         if ("NumTimes".equals(announce)) {
             return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
-                    CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
+                    CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 21);
         }
         return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
-                CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
+                CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 21);
     }
 
     @Override
@@ -517,11 +525,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             inpMessage = localizer.getMessage("lblSelectNumTargetToAction", message, action);
         }
 
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-        inp.setMessage(inpMessage);
-        inp.setCancelAllowed(min == 0);
-        inp.showAndWait();
-        return new CardCollection(inp.getSelected());
+        CardCollection selected = new CardCollection();
+
+        while(true) {
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
+            inp.setMessage(inpMessage);
+            inp.setCancelAllowed(min == 0);
+            inp.showAndWait();
+
+            if(!inp.hasCancelled() && !valid.isEmpty() && inp.getSelected().isEmpty() && min == 0 && max > 0) {
+                if(InputConfirm.confirm(this, sa, "Cancel " + action + " ?")) {
+                    break;
+                }
+            } else {
+                selected.addAll(inp.getSelected());
+                break;
+            }
+        }
+
+        return selected;
     }
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
@@ -662,11 +684,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShow(optionList);
         if (useSelectCardsInput(optionList)) {
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList,
-                    sa);
-            input.setCancelAllowed(min == 0);
-            input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
-            input.showAndWait();
+            InputSelectEntitiesFromList<T> input = null;
+            while(true) {
+                input = new InputSelectEntitiesFromList<>(this, min, max, optionList,
+                        sa);
+                input.setCancelAllowed(min == 0);
+                input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
+                input.showAndWait();
+                if(!input.hasCancelled() && min == 0 && !optionList.isEmpty() && input.getSelected().isEmpty()) {
+                    if(InputConfirm.confirm(this, sa, "Cancel choose?")) {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
             endTempShowCards();
             return (List<T>) input.getSelected();
         }
@@ -710,7 +742,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         // Show the card that asked for this choice
-        getGui().setCard(CardView.get(sa.getHostCard()));
+        getGui().setPaperCard(CardView.get(sa.getHostCard()));
 
         // create a mapping between a spell's view and the spell itself
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
@@ -746,6 +778,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
+        if (sa != null && sa.getApi() == ApiType.SetState) {
+            final String cardName = sa.getHostCard() == null ? null : sa.getHostCard().getName();
+            if (getGui().shouldAutoYieldCard(cardName)) {
+                return false;
+            }
+        }
         if (sa != null && sa.getHostCard() != null && sa.hasParam("ShowCardInPrompt")) {
             // The card wants another thing displayed in the prompt on mouse over rather than itself
             Card show = null;
@@ -795,6 +833,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         if (getGui().shouldAlwaysDeclineTrigger(regtrig.getId())) {
             return false;
+        }
+        final String cardName = sa.getHostCard() == null ? null : sa.getHostCard().getName();
+        if (getGui().shouldAutoYieldCard(cardName)) {
+            return true;
+        }
+        if(!FModel.getPreferences().getPrefBoolean(FPref.UI_SKIP_AUTO_PAY)) {
+            if (sa != null && sa.hasParam("Graft") && !sa.getTriggeringObjects().isEmpty()) {
+                final Map<AbilityKey, Object> objs = sa.getTriggeringObjects();
+                if (objs.containsKey(AbilityKey.Card)) {
+                    final Card card = (Card) objs.get(AbilityKey.Card);
+                    if(sa.getActivatingPlayer() != card.getController()) {
+                        return false;
+                    }
+                }
+            }
         }
 
         // triggers with costs can always be declined by not paying the cost
@@ -1493,7 +1546,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.yieldKey())) {
+            final String cardName = ability.getHostCard() == null ? null : ability.getHostCard().getName();
+            boolean shouldAutoYield = getGui().shouldAutoYieldCard(cardName)  || getGui().shouldAutoYield(ability.yieldKey());
+            if(!shouldAutoYield && !FModel.getPreferences().getPrefBoolean(FPref.UI_SKIP_AUTO_PAY)) {
+                if (ability != null && ability.hasParam("Graft") && !ability.getTriggeringObjects().isEmpty()) {
+                    final Map<AbilityKey, Object> objs = ability.getTriggeringObjects();
+                    if (objs.containsKey(AbilityKey.Card)) {
+                        final Card card = (Card) objs.get(AbilityKey.Card);
+                        if(ability.getActivatingPlayer() != card.getController()) {
+                            shouldAutoYield = true;
+                        }
+                    }
+                }
+            }
+            if (ability != null && ability.isAbility() && shouldAutoYield) {
                 // avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
@@ -1712,6 +1778,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
         final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
+
+        final String cardName = sa.getHostCard() == null ? null : sa.getHostCard().getName();
+        if(num == 1 && choices.size() == 2 && getGui().shouldAutoYieldCard(cardName)) {
+            if(choices.get(0).toString().startsWith("Untap ") && choices.get(1).toString().startsWith("Tap ")) {
+                chosen.add(spellViewCache.get(choices.get(0)));
+                return chosen;
+            }
+            if(choices.get(1).toString().startsWith("Untap ") && choices.get(0).toString().startsWith("Tap ")) {
+                chosen.add(spellViewCache.get(choices.get(1)));
+                return chosen;
+            }
+        }
+
         for (int i = 0; i < num; i++) {
             SpellAbilityView a;
             if (i < min) {
@@ -1808,6 +1887,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
+        if(costPart.mustPay()) {
+            return true;
+        }
         final InputConfirm inp = new InputConfirm(this, question, sa);
         inp.showAndWait();
         return inp.getResult();
@@ -1845,9 +1927,38 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     // stores saved order for different sets of SpellAbilities
     private final Map<String, List<Integer>> orderedSALookup = Maps.newHashMap();
+    private final Map<String, Long> orderedSALookupTimestamp = Maps.newHashMap();
 
     @Override
-    public void orderAndPlaySimultaneousSa(final List<SpellAbility> activePlayerSAs) {
+    public void orderAndPlaySimultaneousSa(final List<SpellAbility> sas) {
+        List<SpellAbility> perCardList = Lists.newArrayList();
+        HashMap<Card, List<SpellAbility>> perCardmap = Maps.newHashMap();
+        List<SpellAbility> noHostList = Lists.newArrayList();
+        for(SpellAbility sa : sas) {
+            Card host = sa.getHostCard();
+            if(host != null) {
+                if(!perCardmap.containsKey(host)) {
+                    perCardmap.put(host, Lists.newArrayList());
+                }
+                perCardmap.get(host).add(sa);
+            } else {
+                noHostList.add(sa);
+            }
+        }
+        for(Map.Entry<Card, List<SpellAbility>> entry : perCardmap.entrySet()) {
+            perCardList.addAll(entry.getValue());
+        }
+        perCardList.addAll(noHostList);
+
+        List<SpellAbility> activePlayerSAs = Lists.newArrayList();
+        for(SpellAbility sa : perCardList) {
+            if(sa.getApi() != null && (sa.getApi() == ApiType.Untap || sa.getApi() == ApiType.Token)) {
+                activePlayerSAs.add(sa);
+            }
+        }
+        perCardList.removeAll(activePlayerSAs);
+        activePlayerSAs.addAll(perCardList);
+
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) {
             final String firstStr = activePlayerSAs.get(0).toString();
@@ -1901,6 +2012,49 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             preselect ? Lists.newArrayList() : orderedSAVs,
                             preselect ? orderedSAVs : Lists.newArrayList(), null, false);
                 } else {
+                    String refereceKey = null;
+                    List<String> toSort = Lists.newArrayList(orderedSALookup.keySet());
+                    Collections.sort(toSort, new Comparator<String>() {
+                        @Override
+                        public int compare(String s1, String s2) {
+                            return (int) (orderedSALookupTimestamp.get(s2) - orderedSALookupTimestamp.get(s1));
+                        }
+                    });
+                    for (String key : toSort) {
+                        boolean found = true;
+                        for (String s : key.split(delim + "")) {
+                            if (!saLookupKey.toString().contains(s)) {
+                                found = false;
+                                break;
+                            }
+                        }
+                        if (found) {
+                            refereceKey = key;
+                            break;
+                        }
+                    }
+                    if (refereceKey != null) {
+                        List<SpellAbility> copyOrderedSAs = Lists.newArrayList(orderedSAs);
+                        List<SpellAbility> newOrderedSAs = Lists.newArrayList();
+                        savedOrder = orderedSALookup.get(refereceKey);
+                        String[] strs = refereceKey.split(delim + "");
+                        for (Integer index : savedOrder) {
+                            if (index >= strs.length) {
+                                continue;
+                            }
+                            for (SpellAbility sa : copyOrderedSAs) {
+                                if (sa.toString().contains(strs[index])) {
+                                    newOrderedSAs.add(sa);
+                                    copyOrderedSAs.remove(sa);
+                                    break;
+                                }
+                            }
+                        }
+                        for (SpellAbility sa : copyOrderedSAs) {
+                            newOrderedSAs.add(sa);
+                        }
+                        orderedSAs = newOrderedSAs;
+                    }
                     orderedSAVs = getGui().order(localizer.getMessage("lblSelectOrderForSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), orderedSAVs,
                             null);
                 }
@@ -1915,6 +2069,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     savedOrder.add(activePlayerSAs.indexOf(sa));
                 }
                 orderedSALookup.put(saLookupKey.toString(), savedOrder);
+                orderedSALookupTimestamp.put(saLookupKey.toString(), player.getGame().getTimestamp());
             }
         }
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
@@ -2039,7 +2194,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final TargetChoices oldTarget = sa.getTargets();
         final TargetSelection select = new TargetSelection(this, sa);
         sa.clearTargets();
-        if (select.chooseTargets(oldTarget.size(), sa.isDividedAsYouChoose() ? Lists.newArrayList(oldTarget.getDividedValues()) : null, filter, optional, false)) {
+        if (select.chooseTargets(oldTarget.size(), sa.isDividedAsYouChoose() ? Lists.newArrayList(oldTarget.getDividedValues()) : null, filter, optional, false, true)) {
             return sa.getTargets();
         } else {
             sa.setTargets(oldTarget);

@@ -44,12 +44,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private final boolean mandatory;
     private Predicate<GameObject> filter;
     private boolean mustTargetFiltered;
+    private final boolean upTo;
+    private final int targetNum;
     private static final long serialVersionUID = -1091595663541356356L;
 
     public final boolean hasCancelled() { return bCancel; }
     public final boolean hasPressedOk() { return bOk; }
 
-    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered) {
+    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory,
+            Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered, final boolean upTo, final int targets) {
         super(controller);
         this.choices = choices;
         this.tgt = sa.getTargetRestrictions();
@@ -57,6 +60,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         this.mandatory = mandatory;
         this.divisionValues = divisionValues;
         this.filter = filter;
+        this.upTo = upTo;
+        this.targetNum = targets;
 
         this.mustTargetFiltered = mustTargetFiltered;
         for (final Card card : sa.getTargets().getTargetCards()) {
@@ -80,6 +85,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 controller.getGui().updateZones(zonesToUpdate);
             }
         });
+    }
+
+    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory,
+            Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered, final boolean upTo) {
+        this(controller, choices, sa, mandatory, divisionValues, filter, mustTargetFiltered, upTo, -1);
     }
 
     @Override
@@ -165,6 +175,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     @Override
     protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+            return false;
+        }
+
+        if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+            removeTarget(card);
             return false;
         }
 
@@ -300,7 +315,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
+        if (tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
+            return;
+        }
+
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
+            removeTarget(player);
             return;
         }
 
@@ -376,6 +396,17 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
     }
 
+    private void removeTarget(final GameEntity ge) {
+        sa.getTargets().remove(ge);
+        if (ge instanceof Card) {
+            getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
+        } else if(ge instanceof Player) {
+            getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);
+        }
+        targetDepth.remove(ge);
+        this.showMessage();
+    }
+
     private void done() {
         for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
@@ -391,7 +422,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     private boolean hasAllTargets() {
         return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() == 0)
-            || (divisionValues == null && sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
+            || (divisionValues == null && sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide())
+            || (upTo && choices.size() == sa.getTargets().size())
+            || (targetNum > 0 && sa.getTargets().size() == targetNum);
     }
 
     @Override

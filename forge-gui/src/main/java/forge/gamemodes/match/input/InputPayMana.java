@@ -19,6 +19,8 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostSacrifice;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -27,6 +29,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
@@ -200,7 +204,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
     protected boolean activateManaAbility(final Card card, SpellAbility chosenAbility, final ITriggerEvent triggerEvent) {
         if (locked) {
-            System.err.print("Should wait till previous call to playAbility finishes.");
+            System.err.println("Should wait till previous call to playAbility finishes.");
             return false;
         }
 
@@ -232,11 +236,52 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
 
             boolean guessAbilityWithRequiredColors = true;
+            SpellAbility priorAbility = null;
             int amountOfMana = -1;
+            boolean hasSpecialEffect = false;
+            boolean canProduceMoreMana = false;
+
             for (SpellAbility ma : getAllManaAbilities(card)) {
                 ma.setActivatingPlayer(player);
 
+                boolean skipManaCheck = false;
+                if(ma.hasParam("ConditionCheckSVar") || ma.hasParam("ReplaceIfLandPlayed")) {
+                    skipManaCheck = true;
+                }
+
                 if (!ma.isManaAbilityFor(saPaidFor, colorCanUse)) { continue; }
+
+                if(saPaidFor.getHostCard() != null && !saPaidFor.getHostCard().getConvoked().isEmpty()) {
+                    boolean isConvoked = false;
+                    for(Card c : saPaidFor.getHostCard().getConvoked()) {
+                        if(c.getId() == card.getId() && ma.getPayCosts() != null && ma.getPayCosts().getCostParts() != null) {
+                            for(CostPart part : ma.getPayCosts().getCostParts()) {
+                                if(part instanceof CostSacrifice) {
+                                    if(part.payCostFromSource()) {
+                                        isConvoked = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if(isConvoked) {
+                                break;
+                            }
+                        }
+                    }
+                    if(!isConvoked && ma.getPayCosts() != null && ma.getPayCosts().getCostParts() != null) {
+                        for(CostPart part : ma.getPayCosts().getCostParts()) {
+                            if(part instanceof CostSacrifice) {
+                                if(!part.payCostFromSource()) {
+                                    isConvoked = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if(isConvoked) {
+                        continue;
+                    }
+                }
 
                 // If Mana Abilities produce differing amounts of mana, let the player choose
                 int maAmount = ma.totalAmountOfManaGenerated(saPaidFor, true);
@@ -248,7 +293,19 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     }
                 }
 
+                if(ma.getManaPart().getManaRestrictions() != null && !ma.getManaPart().getManaRestrictions().isEmpty()) {
+                    priorAbility = ma;
+                }
+
                 abilitiesMap.put(ma.getView(), ma);
+
+                if(ma.hasParam("Amount") && ma.hasParam("RestrictValid")) {
+                    canProduceMoreMana = true;
+                }
+
+                if(ma.hasParam("AddsNoCounter")) {
+                    hasSpecialEffect = true;
+                }
 
                 // skip express mana if the ability is not undoable or reusable
                 if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null
@@ -257,7 +314,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             }
 
-            if (abilitiesMap.isEmpty()) {
+            if (abilitiesMap.isEmpty() || (chosenAbility != null && !abilitiesMap.containsValue(chosenAbility))) {
                 return false;
             }
 
@@ -279,6 +336,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
 
             boolean choice = true;
+            boolean isPayingGeneric = false;
             if (guessAbilityWithRequiredColors) {
                 // express Mana Choice
                 if (colorNeeded == 0) {
@@ -286,6 +344,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     //avoid unnecessary prompt by pretending we need White
                     //for the sake of "Add one mana of any color" effects
                     colorNeeded = MagicColor.WHITE;
+                    isPayingGeneric = true; // for further processing
                 }
                 else {
                     final HashMap<SpellAbilityView, SpellAbility> colorMatches = new HashMap<>();
@@ -307,11 +366,27 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             }
 
+            if (hasSpecialEffect && isPayingGeneric) {
+                choice = true;
+            }
+
+            if (canProduceMoreMana && priorAbility != null) {
+                choice = false;
+            }
+
             List<SpellAbility> choices = new ArrayList<>(abilitiesMap.values());
             if(choices.size() > 1) {
-                chosen = getController().getAbilityToPlay(card, choices, triggerEvent);
-                if(chosen == null) {
-                    return false;
+                if(choice) {
+                    chosen = getController().getAbilityToPlay(card, choices, triggerEvent);
+                    if(chosen == null) {
+                        return false;
+                    }
+                } else {
+                    if(abilitiesMap.containsValue(priorAbility)) {
+                        chosen = priorAbility;
+                    } else {
+                        chosen = choices.get(0);
+                    }
                 }
             } else {
                 chosen = choices.get(0);
@@ -321,6 +396,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
+
+        chosen.setNeedChooseMana(saPaidFor.tracksManaSpent());
 
         // Filter the colors for the express choice so that only actually producible colors can be chosen
         int producedColorMask = 0;
@@ -339,7 +416,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
+                chosen.setUsedToPayMana(InputPayMana.this.manaCost);
+                boolean paid = HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen);
+                chosen.setUsedToPayMana(null);
+                chosen.setNeedChooseMana(false);
+                if (paid) {
                     final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
                     boolean restrictionsMet = true;
 
@@ -351,7 +432,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     }
 
                     if (restrictionsMet) {
-                        player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
+                        player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen, !FModel.getPreferences().getPrefBoolean(FPref.UI_SKIP_AUTO_PAY));
                     }
                     onManaAbilityPaid();
                 }

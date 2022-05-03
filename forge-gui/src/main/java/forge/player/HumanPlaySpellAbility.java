@@ -150,14 +150,22 @@ public class HumanPlaySpellAbility {
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
-        final boolean prerequisitesMet = announceType()
+        boolean prerequisitesMet = announceType()
                 && announceValuesLikeX()
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
-                && ability.checkRestrictions(human)
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard())));
+                && ability.checkRestrictions(human);
+        
+        boolean payCost = true;
+        if(prerequisitesMet) {
+            payCost = isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard()));
+            prerequisitesMet = (prerequisitesMet && payCost);
+        }
 
         if (!prerequisitesMet) {
+            if (ability.isTrigger() && !payCost) {
+                payment.refundPayment();
+            }
             if (!ability.isTrigger()) {
                 rollbackAbility(fromZone, zonePosition, payment, c);
                 if (ability.getHostCard().isMadness()) {

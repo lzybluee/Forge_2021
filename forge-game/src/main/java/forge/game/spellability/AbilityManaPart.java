@@ -650,7 +650,7 @@ public class AbilityManaPart implements java.io.Serializable {
         if (am.getApi() == ApiType.ManaReflected) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
             for (final String color : reflectableColors) {
-                if (0 != (neededColor & ManaAtom.fromName(color))) {
+                if (0 != (neededColor & ManaAtom.fromName(color)) || color.equals("Chosen")) {
                     return true;
                 }
             }

@@ -37,6 +37,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -77,6 +78,10 @@ public class TargetSelection {
     }
 
     public final boolean chooseTargets(Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean optional, boolean canFilterMustTarget) {
+        return chooseTargets(numTargets, divisionValues, filter, optional, canFilterMustTarget, false);
+    }
+
+    public final boolean chooseTargets(Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean optional, boolean canFilterMustTarget, boolean changeTargets) {
         if (!ability.usesTargeting()) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
@@ -115,7 +120,7 @@ public class TargetSelection {
         final List<ZoneType> zones = tgt.getZone();
         final boolean mandatory = isMandatory() && hasCandidates && !optional;
 
-        final boolean choiceResult;
+        boolean choiceResult;
         if (tgt.isRandomTarget() && numTargets == null) {
             List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
             List<GameEntity> choices = new ArrayList<>();
@@ -190,11 +195,25 @@ public class TargetSelection {
             PlayerView playerView = controller.getLocalPlayerView();
             PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
             if (!zones.contains(ZoneType.Stack)) {
-                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered);
+                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered,
+                        minTargets == 0 && maxTargets > 0, changeTargets ? numTargets : -1);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
                 controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
+                while(bTargetingDone && choiceResult && minTargets == 0 && maxTargets > 0 && zones.size() == 1 && zones.get(0) == ZoneType.Battlefield
+                        && !validTargets.isEmpty() && ability.getTargets() != null && ability.getTargets().isEmpty()) {
+                    if(controller.confirmAction(ability, PlayerActionConfirmMode.ChangeZoneGeneral, "Cancel target?")) {
+                        break;
+                    }
+                    controller.getGui().openZones(playerView, zones, playersWithValidTargets);
+                    InputSelectTargets in = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered,
+                            minTargets == 0 && maxTargets > 0, changeTargets ? numTargets : -1);
+                    in.showAndWait();
+                    choiceResult = !in.hasCancelled();
+                    bTargetingDone = in.hasPressedOk();
+                    controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
+                }
             } else {
                 // for every other case an all-purpose GuiChoose
                 choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
@@ -260,8 +279,12 @@ public class TargetSelection {
 
         final String msgDone = "[FINISH TARGETING]";
         if (ability.isMinTargetChosen()) {
-            // is there a more elegant way of doing this?
-            choicesFiltered.add(msgDone);
+            if(choicesFiltered.isEmpty()) {
+                bTargetingDone = true;
+                return true;
+            } else {
+                choicesFiltered.add(msgDone);
+            }
         }
 
         Object chosen = null;

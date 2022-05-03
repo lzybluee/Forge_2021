@@ -192,11 +192,15 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return false;
     }
 
-    public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment) {
+    public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment, boolean autoPay) {
         // Mana restriction must be checked before this method is called
         final List<SpellAbility> paidAbs = saPaidFor.getPayingManaAbilities();
 
         paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
+
+        if(!autoPay) {
+            return;
+        }
 
         // need to get all mana from all ManaAbilities of the SpellAbility
         for (AbilityManaPart mp : saPayment.getAllManaParts()) {
