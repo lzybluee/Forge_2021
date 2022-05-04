@@ -2,7 +2,7 @@
 Code=MIC
 Date=2021-09-24
 Name=Innistrad: Midnight Hunt Commander
-Type=Expansion
+Type=Commander
 ScryfallCode=MIC
 
 [cards]

@@ -217,7 +217,6 @@ public final class FModel {
         magicDb.setOathbreakerPredicate(formats.get("Oathbreaker").getFilterRules());
         magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
 
-        magicDb.setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
         magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));

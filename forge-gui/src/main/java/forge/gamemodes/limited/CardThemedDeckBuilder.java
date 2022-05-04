@@ -221,9 +221,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         //calculated required lands based on https://www.channelfireball.com/articles/how-many-lands-do-you-need-to-consistently-hit-your-land-drops/
         float baseLandParameter = 16f;
         //reduce landcount if filtered hands enabled
-        if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.FILTERED_HANDS)){
-            baseLandParameter--;
-        }
         landsNeeded = Double.valueOf((baseLandParameter + 3.14f * avCMC) * targetSize/60f).intValue();
         if (logToConsole) {
             System.out.println("Required lands from linear regression : " + avCMC + " cmc, needed:  " + landsNeeded);

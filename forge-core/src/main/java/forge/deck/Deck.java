@@ -232,9 +232,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (lastCardArtOptimisationOptionUsed == null)  // first time here
             lastCardArtOptimisationOptionUsed = smartCardArtSelection;
 
-        if (loadedSections != null && cardArtPreference.equals(lastCardArtPreferenceUsed) &&
-                lastCardArtOptimisationOptionUsed == smartCardArtSelection)
-            return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
+        //if (loadedSections != null && cardArtPreference.equals(lastCardArtPreferenceUsed) &&
+        //        lastCardArtOptimisationOptionUsed == smartCardArtSelection)
+        //    return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
 
         Map<String, List<String>> referenceDeckLoadingMap;
         if (deferredSections != null) {

@@ -2,7 +2,7 @@
 Code=2XM
 Date=2020-08-07
 Name=Double Masters
-Type=Boxed_Set
+Type=Reprint
 BoosterCovers=3
 Booster=8 Common, 3 Uncommon, 2 RareMythic, 2 fromSheet("2XM Foils")
 Foil=NotSupported

@@ -285,7 +285,7 @@ public final class GameMenu {
 
     private static SkinnedCheckBoxMenuItem getMenuItem_MTGAShuffle() {
         SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem("MTGA Shuffle");
-        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_MTGA_SHUFFLE));
+        menuItem.setState(prefs.getPrefBoolean(FPref.FILTERED_HANDS));
         menuItem.addActionListener(getMTGAShuffle());
         return menuItem;
     }
@@ -298,8 +298,8 @@ public final class GameMenu {
         };
     }
     private static void toggleMTGAShuffle() {
-        final boolean MTGAShuffle = !prefs.getPrefBoolean(FPref.UI_ENABLE_MTGA_SHUFFLE);
-        prefs.setPref(FPref.UI_ENABLE_MTGA_SHUFFLE, MTGAShuffle);
+        final boolean MTGAShuffle = !prefs.getPrefBoolean(FPref.FILTERED_HANDS);
+        prefs.setPref(FPref.FILTERED_HANDS, MTGAShuffle);
         prefs.save();
     }
 

@@ -2,7 +2,7 @@
 Code=VOC
 Date=2021-11-19
 Name=Innistrad: Crimson Vow Commander
-Type=Expansion
+Type=Commander
 ScryfallCode=VOC
 
 [cards]

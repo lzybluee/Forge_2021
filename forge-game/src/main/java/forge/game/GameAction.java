@@ -1977,12 +1977,7 @@ public class GameAction {
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
-                if (StaticData.instance().getFilteredHandsEnabled() ) {
-                    drawStartingHand(p1);
-                } else {
-                    p1.drawCards(p1.getStartingHandSize());
-                }
-
+                p1.drawCards(p1.getStartingHandSize());
                 // If pl has Backup Plan as a Conspiracy draw that many extra hands
             }
 

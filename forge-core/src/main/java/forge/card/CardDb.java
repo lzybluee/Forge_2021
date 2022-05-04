@@ -27,6 +27,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
 import forge.util.Lang;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -727,10 +728,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             };
         cardQueryFilter = Predicates.and(cardQueryFilter, filter);
-        cards = getAllCards(cr.cardName, cardQueryFilter);
+        if (!artPref.latestFirst) {
+            cards = getAllCards(cr.cardName, Predicates.alwaysTrue());
+        } else {
+            cards = getAllCards(cr.cardName, cardQueryFilter);
+        }
         // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
         if (cards.size() == 1)  // if only one candidate, there much else we should do
             return cr.isFoil ? cards.get(0).getFoiled() : cards.get(0);
+
+        if (!artPref.latestFirst) {
+            return cards.get(MyRandom.getRandom().nextInt(cards.size()));
+        }
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */

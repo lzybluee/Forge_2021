@@ -68,7 +68,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAnte = new OptionsCheckBox(localizer.getMessage("cbAnte"));
     private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox(localizer.getMessage("cbAnteMatchRarity"));
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox(localizer.getMessage("cbEnableAICheats"));
-    private final JCheckBox cbEnableMTGAShuffle = new OptionsCheckBox("Enable MTGA Shuffle");
     private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
     private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
@@ -213,9 +212,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableAICheats, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
 
-        pnlPrefs.add(cbEnableMTGAShuffle, titleConstraints);
-        pnlPrefs.add(new NoteLabel("The system draws an opening hand from each of two separately randomized decks, and leans towards the hand with the mix of spells and lands closest to average for that deck."), descriptionConstraints);
-
         pnlPrefs.add(cbManaBurn, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaBurn")), descriptionConstraints);
 
@@ -238,7 +234,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSideboardForAI")), descriptionConstraints);
 
         pnlPrefs.add(cbFilteredHands, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilteredHands")), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel("The system draws an opening hand from each of three separately randomized decks, and leans towards the hand with the mix of spells and lands closest to average for that deck."), descriptionConstraints);
 
         pnlPrefs.add(cbCloneImgSource, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
@@ -653,11 +649,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbEnableMTGAShuffle() {
-        return cbEnableMTGAShuffle;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

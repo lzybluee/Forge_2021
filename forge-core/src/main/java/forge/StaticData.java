@@ -710,13 +710,6 @@ public class StaticData {
         return 0;
     }
 
-    public boolean getFilteredHandsEnabled() {
-        return filteredHandsEnabled;
-    }
-    public void setFilteredHandsEnabled(boolean filteredHandsEnabled) {
-        this.filteredHandsEnabled = filteredHandsEnabled;
-    }
-
     public void setMulliganRule(MulliganDefs.MulliganRule rule) {
         mulliganRule = rule;
     }
