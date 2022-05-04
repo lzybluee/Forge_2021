@@ -302,11 +302,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void playSpellAbilityForFree(final SpellAbility copySA, final boolean mayChooseNewTargets) {
-        boolean chooseNewTargets = mayChooseNewTargets;
-        if(chooseNewTargets && FModel.getPreferences().getPrefBoolean(FPref.UI_SKIP_AUTO_PAY)) {
-            chooseNewTargets = InputConfirm.confirm(this, copySA, "Choose new targets?");
-        }
-        HumanPlay.playSaWithoutPayingManaCost(this, player.getGame(), copySA, chooseNewTargets);
+        HumanPlay.playSaWithoutPayingManaCost(this, player.getGame(), copySA, mayChooseNewTargets);
     }
 
     @Override
@@ -683,6 +679,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         tempShow(optionList);
+        
+        boolean checkAgain = false;
+        int battlefield = 0;
+        for (final T t : optionList) {
+            if (t instanceof Card) {
+                Card c = (Card) t;
+                if (c.getZone().is(ZoneType.Battlefield)) {
+                    battlefield++;
+                }
+            }
+        }
+        if (optionList.size() == battlefield) {
+            checkAgain = true;
+        }
         if (useSelectCardsInput(optionList)) {
             InputSelectEntitiesFromList<T> input = null;
             while(true) {
@@ -691,7 +701,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 input.setCancelAllowed(min == 0);
                 input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
                 input.showAndWait();
-                if(!input.hasCancelled() && min == 0 && !optionList.isEmpty() && input.getSelected().isEmpty()) {
+                if(checkAgain && !input.hasCancelled() && min == 0 && !optionList.isEmpty() && input.getSelected().isEmpty()) {
                     if(InputConfirm.confirm(this, sa, "Cancel choose?")) {
                         break;
                     }
@@ -1026,7 +1036,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             } else {
                 CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
                 ImmutablePair<CardCollection, CardCollection> result =
-                arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
+                        arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
                 toTop = result.getLeft();
                 toBottom = result.getRight();
             }
@@ -2088,7 +2098,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     }
                     // TODO check if static abilities needs to be run for things affecting the copy?
                     if (next.isMayChooseNewTargets()) {
-                        next.setupNewTargets(player);
+                        if(FModel.getPreferences().getPrefBoolean(FPref.UI_SKIP_AUTO_PAY)) {
+                            if(InputConfirm.confirm(this, next, "Choose new targets?")) {
+                                next.setupNewTargets(player);
+                            }
+                        } else {
+                            next.setupNewTargets(player);
+                        }
                     }
                 }
                 player.getGame().getStack().add(next);
