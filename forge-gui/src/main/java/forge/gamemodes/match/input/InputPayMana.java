@@ -244,11 +244,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             for (SpellAbility ma : getAllManaAbilities(card)) {
                 ma.setActivatingPlayer(player);
 
-                boolean skipManaCheck = false;
-                if(ma.hasParam("ConditionCheckSVar") || ma.hasParam("ReplaceIfLandPlayed")) {
-                    skipManaCheck = true;
-                }
-
                 if (!ma.isManaAbilityFor(saPaidFor, colorCanUse)) { continue; }
 
                 if(saPaidFor.getHostCard() != null && !saPaidFor.getHostCard().getConvoked().isEmpty()) {
@@ -379,7 +374,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 if(choice) {
                     chosen = getController().getAbilityToPlay(card, choices, triggerEvent);
                     if(chosen == null) {
-                        return false;
+                        return true;
                     }
                 } else {
                     if(abilitiesMap.containsValue(priorAbility)) {
