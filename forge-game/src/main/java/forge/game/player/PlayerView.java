@@ -535,18 +535,6 @@ public class PlayerView extends GameEntityView {
         //update delirium
         if (ZoneType.Graveyard == zone.getZoneType())
             set(TrackableProperty.HasDelirium, getZoneTypes(TrackableProperty.Graveyard) >= 4);
-
-        //update flashback zone when graveyard, library, or exile zones updated
-        switch (zone.getZoneType()) {
-        case Command:
-        case Graveyard:
-        case Library:
-        case Exile:
-            set(TrackableProperty.Flashback, CardView.getCollection(zone.getPlayer().getCardsIn(ZoneType.Flashback)));
-            break;
-        default:
-            break;
-        }
     }
 
     void updateFlashbackForPlayer(Player p) {
