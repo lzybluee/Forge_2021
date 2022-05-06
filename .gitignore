@@ -79,3 +79,5 @@ forge-gui/tools/EditionTrackingResults
 forge-gui/tools/PerSetTrackingResults
 
 /forge
+/cardPicsDir
+/cacheDir
