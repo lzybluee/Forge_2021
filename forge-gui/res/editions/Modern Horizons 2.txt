@@ -318,6 +318,16 @@ ScryfallCode=MH2
 301 M Cabal Coffers @Don Hazeltine
 302 U Mishra's Factory @Scott Chou
 303 R Riptide Laboratory @John Avon
+481 L Plains @Eric Peterson
+482 L Plains @Alan Pollack
+483 L Island @Donato Giancola
+484 L Island @Douglas Shuler
+485 L Swamp @Jerry Tiritilli
+486 L Swamp @Pete Venters
+487 L Mountain @Heather Hudson
+488 L Mountain @Tony Szczudlo
+489 L Forest @Rob Alexander
+490 L Forest @John Avon
 
 [buy a box]
 491 M Sanctum Prelate @Michael C. Hayes

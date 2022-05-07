@@ -288,6 +288,16 @@ ScryfallCode=STX
 273 C Silverquill Campus @Titus Lunter
 274 R Vineglimmer Snarl @Sam Burley
 275 C Witherbloom Campus @Alayna Danner
+366 L Plains @Jonas De Ro
+367 L Plains @Titus Lunter
+368 L Island @Adam Paquette
+369 L Island @Lucas Staniec
+370 L Swamp @Titus Lunter
+371 L Swamp @Adam Paquette
+372 L Mountain @Jonas De Ro
+373 L Mountain @Grady Frederick
+374 L Forest @Grady Frederick
+375 L Forest @Adam Paquette
 
 [lesson]
 2 Environmental Sciences

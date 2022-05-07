@@ -523,6 +523,9 @@ ScryfallCode=CMR
 510 L Forest @Xin-Yu Liu
 511 L Forest @Kev Walker
 
+[buy a box]
+721 M Mana Confluence @Titus Lunter
+
 [Foils]
 The Prismatic Piper+|CMR
 Akroma, Vision of Ixidor+|CMR
