@@ -320,6 +320,11 @@ ScryfallCode=KHM
 391 U Elven Ambush @Chris Seaman
 392 U Gladewalker Ritualist @Irina Nordsol
 393 U Rampage of the Valkyries @Billy Christian
+394 L Plains @Piotr Dura
+395 L Island @Johannes Voss
+396 L Swamp @Piotr Dura
+397 L Mountain @Sam Burley
+398 L Forest @Sam Burley
 
 [Snow Lands]
 5 Snow-Covered Plains|KHM|1
