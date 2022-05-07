@@ -410,17 +410,20 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * @return card
      */
     private PaperCard getBasicLand(final int basicLand, final String landSetCode) {
-        String set;
-        if (landSetCode == null) {
+        PaperCard pc = null;
+        if (landSetCode != null) {
+            pc = FModel.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), landSetCode);
+        }
+        if (pc == null) {
+            String set;
             if (setsWithBasicLands.size() > 1) {
                 set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
             } else {
                 set = setsWithBasicLands.get(0);
             }
-        } else {
-            set = landSetCode;
+            pc = FModel.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
         }
-        return FModel.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
+        return pc;
     }
 
     /**
