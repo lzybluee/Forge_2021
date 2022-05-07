@@ -319,7 +319,6 @@ ScryfallCode=MH2
 302 U Mishra's Factory @Scott Chou
 303 R Riptide Laboratory @John Avon
 
-
 [buy a box]
 491 M Sanctum Prelate @Michael C. Hayes
 

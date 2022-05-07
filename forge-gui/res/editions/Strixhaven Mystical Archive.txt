@@ -5,7 +5,7 @@ Name=Strixhaven Mystical Archive
 Type=Collector_Edition
 ScryfallCode=STA
 
-[borderless]
+[cards]
 1 M Approach of the Second Sun @Minttu Hynninen
 2 M Day of Judgment @Anato Finnstark
 3 U Defiant Strike @Dominik Mayer
