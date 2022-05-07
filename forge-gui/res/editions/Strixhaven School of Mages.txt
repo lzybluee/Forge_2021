@@ -288,6 +288,8 @@ ScryfallCode=STX
 273 C Silverquill Campus @Titus Lunter
 274 R Vineglimmer Snarl @Sam Burley
 275 C Witherbloom Campus @Alayna Danner
+
+[precon product]
 366 L Plains @Jonas De Ro
 367 L Plains @Titus Lunter
 368 L Island @Adam Paquette

@@ -318,6 +318,8 @@ ScryfallCode=MH2
 301 M Cabal Coffers @Don Hazeltine
 302 U Mishra's Factory @Scott Chou
 303 R Riptide Laboratory @John Avon
+
+[precon product]
 481 L Plains @Eric Peterson
 482 L Plains @Alan Pollack
 483 L Island @Donato Giancola
