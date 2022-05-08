@@ -1189,6 +1189,13 @@ public class PhaseHandler implements java.io.Serializable {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
             allAffectedCards.clear();
         }
+
+        for(Player p : game.getPlayers()) {
+            p.updateFlashbackForView();
+            game.fireEvent(new GameEventZone(ZoneType.Flashback, p, EventValueChangeType.ComplexUpdate, null));
+            game.fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
+        }
+
         return false;
     }
 
