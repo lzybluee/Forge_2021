@@ -170,7 +170,7 @@ public class DigEffect extends SpellAbilityEffect {
                 DelayedReveal delayedReveal = null;
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal") && "True".equalsIgnoreCase(sa.getParam("Reveal"))) {
-                        game.getAction().reveal(top, p, false);
+                    game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
                     String question = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblReveal") + ":", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
@@ -194,10 +194,8 @@ public class DigEffect extends SpellAbilityEffect {
                     // show the user the revealed cards
                     delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), CardTranslation.getTranslatedName(host.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
 
-                    if (noMove) {
-                        // Let the activating player see the cards even if they're not moved
-                        game.getAction().revealTo(top, player);
-                    }
+                    // Let the activating player see the cards even if they're not moved
+                    game.getAction().reveal(top, p, false);
                 }
 
                 if (sa.hasParam("RememberRevealed") && !sa.hasParam("RevealValid") && hasRevealed) {

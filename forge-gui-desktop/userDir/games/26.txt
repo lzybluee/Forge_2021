@@ -1,0 +1,23 @@
+humanlife=20
+ailife=20
+humanlandsplayed=0
+ailandsplayed=0
+humanlandsplayedlastturn=0
+ailandsplayedlastturn=1
+turn=3
+activeplayer=human
+activephase=MAIN1
+humanhand=Show of Confidence;Jwari Disruption;Stormcarved Coast;Galvanic Iteration;Stormcarved Coast;Unexpected Windfall;Expressive Iteration;Hengegate Pathway
+humanlibrary=Stormcarved Coast;Fading Hope;Lier, Disciple of the Drowned;Riverglide Pathway;Goldspan Dragon;Smoldering Egg;Spikefield Hazard;Unexpected Windfall;Fading Hope;Jwari Disruption;Galvanic Iteration;Riverglide Pathway;Prismari Command;Expressive Iteration;Island;Unexpected Windfall;Riverglide Pathway;Hall of Storm Giants;Smoldering Egg;Spikefield Hazard;Hengegate Pathway;Prismari Command;Stormcarved Coast;Silundi Vision;Goldspan Dragon;Needleverge Pathway;Galvanic Iteration;Disdainful Stroke;Alchemist's Gambit;Expressive Iteration;Needleverge Pathway;Show of Confidence;Goldspan Dragon;Unexpected Windfall;Fading Hope;Smoldering Egg;Sejiri Shelter;Sejiri Shelter;Needleverge Pathway;Expressive Iteration;Mountain;Kazuul's Fury;Needleverge Pathway;Spikefield Hazard;Sejiri Shelter;Lier, Disciple of the Drowned;Prismari Command;Lier, Disciple of the Drowned;Goldspan Dragon;Riverglide Pathway;Lier, Disciple of the Drowned;Hengegate Pathway
+humangraveyard=
+humanbattlefield=Chandra, Torch of Defiance|Counters:LOYALTY=4;Karn Liberated|Counters:LOYALTY=6;Chandra, Fire Artisan|Counters:LOYALTY=4;Nightveil Specter;Ragavan, Nimble Pilferer
+humanexile=
+humancommand=
+humansideboard=Behold the Multiverse;Behold the Multiverse;Behold the Multiverse;Behold the Multiverse;Dragon's Fire;Dragon's Fire;Smoldering Egg;Valorous Stance;Valorous Stance;Negate;Negate;Negate;Disdainful Stroke;Cinderclasm;Cinderclasm
+aihand=Wolfir Silverheart;Island;Flowering Lumberknot;Forest;Druid's Familiar;Overrun
+ailibrary=Forest;Forest;Trusted Forcemage;Wolfir Avenger;Nephalia Smuggler;Forest;Island;Vorstclaw;Island;Lair Delve;Wingcrafter;Forest;Joint Assault;Island;Acidic Slime;Wingcrafter;Llanowar Elves;Latch Seeker;Island;Vorstclaw;Nightshade Peddler;Elgaud Shieldmate;Joint Assault;Island;Tandem Lookout;Forest;Island;Trusted Forcemage;Pathbreaker Wurm;Lair Delve;Forest;Geist Trappers;Forest;Forest;Deadeye Navigator;Island;Druid's Familiar;Nightshade Peddler;Flowering Lumberknot;Island;Tandem Lookout;Island;Latch Seeker;Runeclaw Bear;Trusted Forcemage;Island;Forest;Island;Ice Cage;Elgaud Shieldmate;Forest;Forest
+aigraveyard=
+aibattlefield=Forest|Tapped;Llanowar Elves|SummonSick
+aiexile=
+aicommand=
+aisideboard=
