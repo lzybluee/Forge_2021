@@ -154,22 +154,33 @@ public class ManaEffect extends SpellAbilityEffect {
             }
             else if (abMana.isAnyMana()) {
                 // AI color choice is set in ComputerUtils so only human players need to make a choice
+                boolean auto = false;
+                if(sa.getUsedToPayMana() != null) {
+                    String usedToPayMana = sa.getUsedToPayMana().toString();
+                    if (!usedToPayMana.contains("W") && !usedToPayMana.contains("U") && !usedToPayMana.contains("B") && !usedToPayMana.contains("R") && !usedToPayMana.contains("G")) {
+                        auto = true;
+                    }
+                }
 
                 String colorsNeeded = abMana.getExpressChoice();
                 String choice = "";
 
-                ColorSet colorMenu = null;
-                byte mask = 0;
-                //loop through colors to make menu
-                for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-                    mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
+                if(auto) {
+                    choice = "W";
+                } else {
+                    ColorSet colorMenu = null;
+                    byte mask = 0;
+                    //loop through colors to make menu
+                    for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
+                        mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
+                    }
+                    colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
+                    byte val = p.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
+                    if (0 == val) {
+                        throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + p + " color mana choice is empty for " + card.getName());
+                    }
+                    choice = MagicColor.toShortString(val);
                 }
-                colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
-                byte val = p.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
-                if (0 == val) {
-                    throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + p + " color mana choice is empty for " + card.getName());
-                }
-                choice = MagicColor.toShortString(val);
 
                 game.getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), choice), p);
                 abMana.setExpressChoice(choice);
