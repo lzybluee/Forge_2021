@@ -155,7 +155,7 @@ public class ManaEffect extends SpellAbilityEffect {
             else if (abMana.isAnyMana()) {
                 // AI color choice is set in ComputerUtils so only human players need to make a choice
                 boolean auto = false;
-                if(sa.getUsedToPayMana() != null) {
+                if(sa.getUsedToPayMana() != null && sa.isUndoable() && !sa.getNeedChooseMana()) {
                     String usedToPayMana = sa.getUsedToPayMana().toString();
                     if (!usedToPayMana.contains("W") && !usedToPayMana.contains("U") && !usedToPayMana.contains("B") && !usedToPayMana.contains("R") && !usedToPayMana.contains("G")) {
                         auto = true;
