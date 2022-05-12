@@ -10,6 +10,7 @@ import com.google.common.collect.Maps;
 
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -234,7 +235,18 @@ public class WrappedAbility extends Ability {
         List<TargetChoices> allTargets = sa.getAllTargetChoices();
         if (!allTargets.isEmpty() && !ApiType.Charm.equals(sa.getApi())) {
             sb.append(" (Targeting: ");
-            sb.append(allTargets);
+            for(TargetChoices target : allTargets) {
+                for(GameEntity object : target.getTargetEntities()) {
+                    sb.append(object);
+                    if (getDividedValue(object) != null) {
+                        sb.append(" (assign ").append(getDividedValue(object)).append(")");
+                    }
+                    sb.append(", ");
+                }
+            }
+            if (sb.indexOf(", ") >= 0) {
+                sb.delete(sb.length() - 2, sb.length());
+            }
             sb.append(")");
         }
 
