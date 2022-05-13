@@ -195,7 +195,9 @@ public class DigEffect extends SpellAbilityEffect {
                     delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), CardTranslation.getTranslatedName(host.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
 
                     // Let the activating player see the cards even if they're not moved
-                    game.getAction().reveal(top, p, false);
+                    if(!forceRevealToController) {
+                        game.getAction().reveal(top, p, false);
+                    }
                 }
 
                 if (sa.hasParam("RememberRevealed") && !sa.hasParam("RevealValid") && hasRevealed) {
