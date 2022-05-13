@@ -84,37 +84,29 @@ public final class GuiUtils {
     private static final int itemHeight = 25;
 
     public static void setMenuItemSize(final JMenuItem item) {
-        item.setPreferredSize(new Dimension(Math.max(item.getPreferredSize().width, minItemWidth), itemHeight));
-    }
-
-    public static void setMenuItemSize(final JMenuItem item, int lines) {
-        item.setPreferredSize(new Dimension(Math.max(item.getPreferredSize().width, minItemWidth), itemHeight + (lines - 1) * (itemHeight - 12)));
+        item.setPreferredSize(new Dimension(Math.max(item.getPreferredSize().width, minItemWidth), item.getPreferredSize().height));
     }
 
     public static JMenu createMenu(String label) {
-        int lines = 1;
         if (label.startsWith("<html>")) { //adjust label if HTML
             label = label.substring(6, label.length() - 7);
             while (label.endsWith("<br>")) {
                 label = label.substring(0, label.length() - 4);
             }
-            lines = label.split("<br>").length;
-            label = "<html>" + "<div style='height: " + (itemHeight + (lines - 1) * (itemHeight - 12)) + "px; margin-top: 6px;'>" + label + "</div></html>";
+            label = "<html>" + label + "</div></html>";
         }
         final JMenu menu = new JMenu(label);
-        setMenuItemSize(menu, lines);
+        setMenuItemSize(menu);
         return menu;
     }
 
     public static JMenuItem createMenuItem(String label, final KeyStroke accelerator, final Runnable onClick, final boolean enabled, final boolean bold) {
-        int lines = 1;
         if (label.startsWith("<html>")) { //adjust label if HTML
             label = label.substring(6, label.length() - 7);
             while (label.endsWith("<br>")) {
                 label = label.substring(0, label.length() - 4);
             }
-            lines = label.split("<br>").length;
-            label = "<html>" + "<div style='height: " + (itemHeight + (lines - 1) * (itemHeight - 12)) + "px; margin-top: 6px;'>" + label + "</div></html>";
+            label = "<html>" + label + "</div></html>";
         }
         final JMenuItem item = new JMenuItem(label);
         item.addActionListener(new ActionListener() {
@@ -130,7 +122,7 @@ public final class GuiUtils {
         if (bold) {
             item.setFont(item.getFont().deriveFont(Font.BOLD));
         }
-        setMenuItemSize(item, lines);
+        setMenuItemSize(item);
         return item;
     }
 

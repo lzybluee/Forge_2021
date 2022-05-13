@@ -949,7 +949,7 @@ public final class CMatchUI
         final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblAbilities"));
         //add scroll area when too big
         // TODO: do we need a user setting for the scrollCount?
-        MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
+        //MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
         boolean enabled;
         int firstEnabled = -1;
