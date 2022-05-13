@@ -3027,7 +3027,7 @@ public class ComputerUtil {
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                if ((AiPlayDecision.WillPlay == aic.canPlaySa(abTest)) || "Snapcaster".equals(sa.getParam("AILogic")) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
+                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
                     targets.add(c);
                 }
             }
@@ -3037,10 +3037,6 @@ public class ComputerUtil {
             if (mandatory && !options.isEmpty()) {
                 targets = options;
             } else {
-                if(!options.isEmpty() && "Snapcaster".equals(sa.getParam("AILogic"))) {
-                    sa.getTargets().add(options.get(0));
-                    return true;
-                }
                 return false;
             }
         }
