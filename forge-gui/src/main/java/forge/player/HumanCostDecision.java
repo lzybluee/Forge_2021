@@ -1020,7 +1020,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if(c > 0) {
             inp.showAndWait();
         }
-        inp.showAndWait();
         if (inp.hasCancelled()) {
             return null;
         }
