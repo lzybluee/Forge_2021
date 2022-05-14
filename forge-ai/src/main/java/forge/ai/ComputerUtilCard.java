@@ -1646,6 +1646,7 @@ public class ComputerUtilCard {
         Card pumped = CardFactory.copyCard(c, false);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
+        pumped.addHiddenExtrinsicKeywords(timestamp, 0, c.getHiddenExtrinsicKeywords());
         final List<String> kws = Lists.newArrayList();
         final List<String> hiddenKws = Lists.newArrayList();
         for (String kw : keywords) {
