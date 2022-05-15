@@ -673,7 +673,7 @@ public final class CMatchUI
 
     @Override
     public void register() {
-        initHandViews();
+        //initHandViews();
         registerDocs();
         for (final EDocID fieldDoc : EDocID.VarDocs) {
             // Remove unnecessary docs for this match
@@ -847,7 +847,7 @@ public final class CMatchUI
 
     @Override
     public void updatePlayerControl() {
-        initHandViews();
+        //initHandViews();
         SLayoutIO.loadLayout(null);
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
