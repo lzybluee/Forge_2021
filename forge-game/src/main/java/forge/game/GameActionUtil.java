@@ -256,6 +256,7 @@ public final class GameActionUtil {
                             }
                         } else { // same cost as original (e.g. Otaria plane)
                             flashback = sa.copy(activator);
+                            flashback.setDescription(flashback.getOriginalDescription() + " (by paying its mana cost)");
                         }
                         flashback.setAlternativeCost(AlternativeCost.Flashback);
                         flashback.getRestrictions().setZone(ZoneType.Graveyard);
