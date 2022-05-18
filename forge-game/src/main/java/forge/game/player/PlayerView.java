@@ -307,7 +307,21 @@ public class PlayerView extends GameEntityView {
     void updateSpellsCastThisTurn(Player p) {
         set(TrackableProperty.SpellsCastThisTurn, p.getSpellsCastThisTurn());
     }
-    
+
+    public boolean isMonarch() {
+        return get(TrackableProperty.IsMonarch);
+    }
+    void updateMonarch(boolean monarch) {
+        set(TrackableProperty.IsMonarch, monarch);
+    }
+
+    public boolean hasBlessing() {
+        return get(TrackableProperty.HasBlessing);
+    }
+    void updateBlessing(boolean blessing) {
+        set(TrackableProperty.HasBlessing, blessing);
+    }
+
     public int getAdditionalVote() {
         return get(TrackableProperty.AdditionalVote);
     }
@@ -565,6 +579,15 @@ public class PlayerView extends GameEntityView {
 
     private List<String> getDetailsList() {
         final List<String> details = Lists.newArrayListWithCapacity(8);
+
+        if(isMonarch()) {
+            details.add("[The Monarch]");
+        }
+
+        if(hasBlessing()) {
+            details.add("[City's Blessing]");
+        }
+
         details.add(Localizer.getInstance().getMessage("lblLifeHas", String.valueOf(getLife())));
 
         Map<CounterType, Integer> counters = getCounters();

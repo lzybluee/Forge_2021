@@ -3245,12 +3245,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         com.add(monarchEffect);
 
+        view.updateMonarch(true);
         this.updateZoneForView(com);
     }
     public void removeMonarchEffect() {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect != null) {
             com.remove(monarchEffect);
+
+            view.updateMonarch(false);
             this.updateZoneForView(com);
         }
     }
@@ -3328,6 +3331,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             blessingEffect = null;
         }
 
+        view.updateBlessing(bless);
         this.updateZoneForView(com);
     }
 
