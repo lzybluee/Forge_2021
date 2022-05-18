@@ -248,6 +248,7 @@ public final class GameActionUtil {
                         if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
                             final String[] k = keyword.split(":");
                             flashback = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+                            flashback.setDescription(flashback.getOriginalDescription() + " (Flashback: " + ManaCostParser.parse(k[1]) + ")");
                             String extraParams =  k.length > 2 ? k[2] : "";
                             if (!extraParams.isEmpty()) {
                                 for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
@@ -256,7 +257,7 @@ public final class GameActionUtil {
                             }
                         } else { // same cost as original (e.g. Otaria plane)
                             flashback = sa.copy(activator);
-                            flashback.setDescription(flashback.getOriginalDescription() + " (by paying its mana cost)");
+                            flashback.setDescription(flashback.getOriginalDescription() + " (Flashback: paying its mana cost)");
                         }
                         flashback.setAlternativeCost(AlternativeCost.Flashback);
                         flashback.getRestrictions().setZone(ZoneType.Graveyard);
