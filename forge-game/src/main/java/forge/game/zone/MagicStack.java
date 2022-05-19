@@ -72,7 +72,6 @@ import forge.util.TextUtil;
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
-    private final List<SpellAbility> modeSelected = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<>();
@@ -800,14 +799,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         Player whoAddsToStack = playerTurn;
-        modeSelected.clear();
         do {
             result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
             // 2014-08-10 Fix infinite loop when a player dies during a multiplayer game during their turn
             whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
         } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
-        modeSelected.clear();
-
         return result;
     }
 
@@ -821,25 +817,20 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
-
-            if (sa.getApi() == ApiType.Charm && !modeSelected.contains(sa)) {
-                boolean result = CharmEffect.makeChoices(sa);
-                modeSelected.add(sa);
-                if (!result) {
-                    // 603.3c If no mode is chosen, the ability is removed from the stack.
-                    failedSAs.add(sa);
-                    continue;
-                }
+            
+            if(activator == null) {
+                activator = sa.getHostCard().getController();
             }
 
-            if (activator == null) {
-                if (sa.getHostCard().getController().equals(activePlayer)) {
-                    activePlayerSAs.add(sa);
+            if (activePlayer.equals(activator)) {
+                if (sa.getApi() == ApiType.Charm) {
+                    if (!CharmEffect.makeChoices(sa)) {
+                        // 603.3c If no mode is chosen, the ability is removed from the stack.
+                        failedSAs.add(sa);
+                        continue;
+                    }
                 }
-            } else {
-                if (activator.equals(activePlayer)) {
-                    activePlayerSAs.add(sa);
-                }
+                activePlayerSAs.add(sa);
             }
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
