@@ -637,18 +637,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
 
-        boolean allBattlefield = false;
-        int battlefield = 0;
+        boolean checkNotChoose = false;
+        int count = 0;
         for (final T t : optionList) {
             if (t instanceof Card) {
                 Card c = (Card) t;
-                if (c.getZone().is(ZoneType.Battlefield)) {
-                    battlefield++;
+                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand)) {
+                    count++;
                 }
             }
         }
-        if (optionList.size() == battlefield) {
-            allBattlefield = true;
+        if (optionList.size() == count) {
+            checkNotChoose = true;
         }
         if (useSelectCardsInput(optionList)) {
             InputSelectEntitiesFromList<T> input = null;
@@ -657,7 +657,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 input.setCancelAllowed(isOptional);
                 input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
                 input.showAndWait();
-                if(allBattlefield && !input.hasCancelled() && isOptional && !optionList.isEmpty() && input.getSelected().isEmpty()) {
+                if(checkNotChoose && !input.hasCancelled() && isOptional && !optionList.isEmpty() && input.getSelected().isEmpty()) {
                     if(InputConfirm.confirm(this, sa, "Cancel choose?")) {
                         break;
                     }
@@ -702,18 +702,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShow(optionList);
 
-        boolean allBattlefield = false;
-        int battlefield = 0;
+        boolean checkNotChoose = false;
+        int count = 0;
         for (final T t : optionList) {
             if (t instanceof Card) {
                 Card c = (Card) t;
-                if (c.getZone().is(ZoneType.Battlefield)) {
-                    battlefield++;
+                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand)) {
+                    count++;
                 }
             }
         }
-        if (optionList.size() == battlefield) {
-            allBattlefield = true;
+        if (optionList.size() == count) {
+            checkNotChoose = true;
         }
         if (useSelectCardsInput(optionList)) {
             InputSelectEntitiesFromList<T> input = null;
@@ -723,7 +723,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 input.setCancelAllowed(min == 0);
                 input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
                 input.showAndWait();
-                if(allBattlefield && !input.hasCancelled() && min == 0 && !optionList.isEmpty() && input.getSelected().isEmpty()) {
+                if(checkNotChoose && !input.hasCancelled() && min == 0 && !optionList.isEmpty() && input.getSelected().isEmpty()) {
                     if(InputConfirm.confirm(this, sa, "Cancel choose?")) {
                         break;
                     }
