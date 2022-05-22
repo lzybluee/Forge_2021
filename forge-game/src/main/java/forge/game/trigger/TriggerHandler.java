@@ -54,7 +54,6 @@ public class TriggerHandler {
     private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
     private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<>());
     private final Game game;
-    private boolean skipRunZoneChangeTrigger = false;
 
     public TriggerHandler(final Game gameState) {
         game = gameState;
@@ -297,17 +296,8 @@ public class TriggerHandler {
     }
 
     public final boolean runWaitingTriggers() {
-        final List<TriggerWaiting> waiting = new ArrayList<>();
-        for(final TriggerWaiting wt : waitingTriggers) {
-            if(skipRunZoneChangeTrigger && (wt.getMode() == TriggerType.ChangesZone || wt.getMode() == TriggerType.ChangesZoneAll
-                     || wt.getMode() == TriggerType.Taps)) {
-                continue;
-            }
-            waiting.add(wt);
-        }
-        for (final TriggerWaiting wt : waiting) {
-            waitingTriggers.remove(wt);
-        }
+        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
+        waitingTriggers.clear();
         if (waiting.isEmpty()) {
             return false;
         }
@@ -662,9 +652,5 @@ public class TriggerHandler {
         }
         // run all ChangesZone
         runWaitingTriggers();
-    }
-
-    public void setSkipRunZoneChangeTrigger(boolean skip) {
-        skipRunZoneChangeTrigger = skip;
     }
 }
