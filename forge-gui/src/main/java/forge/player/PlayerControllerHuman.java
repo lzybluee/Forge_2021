@@ -80,6 +80,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventPlayerStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -2810,6 +2811,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 } else {
                     card.addCounterInternal(counter, count, card.getController(), false, null);
                 }
+                getGame().fireEvent(new GameEventCardStatsChanged(card));
             }
         }
 
