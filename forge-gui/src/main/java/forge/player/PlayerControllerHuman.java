@@ -643,7 +643,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (final T t : optionList) {
             if (t instanceof Card) {
                 Card c = (Card) t;
-                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand)) {
+                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand) || c.getZone().is(ZoneType.Sideboard)) {
                     count++;
                 }
             }
@@ -708,7 +708,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (final T t : optionList) {
             if (t instanceof Card) {
                 Card c = (Card) t;
-                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand)) {
+                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand) || c.getZone().is(ZoneType.Sideboard)) {
                     count++;
                 }
             }
