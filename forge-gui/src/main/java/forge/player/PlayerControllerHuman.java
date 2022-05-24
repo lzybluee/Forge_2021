@@ -3042,12 +3042,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
             List<ICardFace> faces = null;
             if(mostCommon) {
-                faces = Lists.newArrayList(carddb.getFaceByName("Plains"), carddb.getFaceByName("Island"),
-                        carddb.getFaceByName("Swamp"), carddb.getFaceByName("Mountain"), carddb.getFaceByName("Forest"),
-                        carddb.getFaceByName("Vindicate"), carddb.getFaceByName("Cancel"), carddb.getFaceByName("One with Nothing"),
-                        carddb.getFaceByName("Cloudshift"), carddb.getFaceByName("Lightning Bolt"), carddb.getFaceByName("Unsummon"),
-                        carddb.getFaceByName("Regrowth"), carddb.getFaceByName("Swords to Plowshares"), carddb.getFaceByName("Brainstorm"),
-                        carddb.getFaceByName("Grizzly Bears"), carddb.getFaceByName("Act of Treason"), carddb.getFaceByName("Evolving Wilds"));
+                faces = Lists.newArrayList(carddb.getFaceByName("Vindicate"), carddb.getFaceByName("Grizzly Bears"),
+                        carddb.getFaceByName("One with Nothing"), carddb.getFaceByName("Cancel"), carddb.getFaceByName("Wrath of God"),
+                        carddb.getFaceByName("Cloudshift"), carddb.getFaceByName("Regrowth"), carddb.getFaceByName("Lightning Bolt"), 
+                        carddb.getFaceByName("Plains"), carddb.getFaceByName("Island"), carddb.getFaceByName("Swamp"), carddb.getFaceByName("Mountain"), carddb.getFaceByName("Forest"),
+                        carddb.getFaceByName("Unsummon"), carddb.getFaceByName("Act of Treason"), carddb.getFaceByName("Brainstorm"));
             } else {
                 faces = Lists.newArrayList(carddb.getAllFaces());
             }
