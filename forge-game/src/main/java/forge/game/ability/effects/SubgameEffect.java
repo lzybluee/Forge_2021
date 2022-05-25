@@ -128,7 +128,7 @@ public class SubgameEffect extends SpellAbilityEffect {
                 // Create an effect that lets you cast your companion from your sideboard
                 if (companion != null) {
                     PlayerZone commandZone = player.getZone(ZoneType.Command);
-                    companion = subgame.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
+                    //companion = subgame.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
                     commandZone.add(Player.createCompanionEffect(subgame, companion));
 
                     player.updateZoneForView(commandZone);

@@ -3100,8 +3100,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         final String name = Lang.getInstance().getPossesive(companion.getName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
-        String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
-        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Companion - Put CARDNAME in to your hand";
+        String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Sideboard | AddAbility$ MoveToHand";
+        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Sideboard | Destination$ Hand | SorcerySpeed$ True | ActivationZone$ Sideboard | SpellDescription$ Companion - Put CARDNAME in to your hand";
         eff.setSVar("MoveToHand", moveToHand);
         eff.addStaticAbility(addToHandAbility);
 

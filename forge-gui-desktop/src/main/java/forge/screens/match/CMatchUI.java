@@ -758,6 +758,7 @@ public final class CMatchUI
         case Exile:
         case Graveyard:
         case Library:
+        case Sideboard:
             return FloatingZone.getCardPanel(this, card);
         default:
             break;
@@ -989,7 +990,7 @@ public final class CMatchUI
                 SDisplayUtil.showTab(getCPrompt().getView());
             } else {
                 final ZoneType zone = panel.isInFlashbackZone() ? ZoneType.Flashback : hostCard.getZone();
-                if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library, ZoneType.Flashback).contains(zone)) {
+                if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library, ZoneType.Flashback, ZoneType.Sideboard).contains(zone)) {
                     FloatingZone.show(this, hostCard.getController(), zone);
                 }
                 panel.setInFlashbackZone(false);
