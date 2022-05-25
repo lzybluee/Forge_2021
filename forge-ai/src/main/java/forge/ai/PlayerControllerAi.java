@@ -213,7 +213,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params, boolean needCheck) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
@@ -1268,7 +1268,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Card chooseSingleCardForZoneChange(ZoneType destination,
             List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal,
-            String selectPrompt, boolean isOptional, Player decider) {
+            String selectPrompt, boolean isOptional, Player decider, boolean needCheck) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }

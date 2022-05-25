@@ -616,7 +616,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(final FCollectionView<T> optionList,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final boolean isOptional,
-            final Player targetedPlayer, Map<String, Object> params) {
+            final Player targetedPlayer, Map<String, Object> params, final boolean needCheck) {
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
@@ -639,17 +639,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         boolean checkNotChoose = false;
-        int count = 0;
-        for (final T t : optionList) {
-            if (t instanceof Card) {
-                Card c = (Card) t;
-                if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand) || c.getZone().is(ZoneType.Sideboard)) {
-                    count++;
+        if(needCheck) {
+            int count = 0;
+            for (final T t : optionList) {
+                if (t instanceof Card) {
+                    Card c = (Card) t;
+                    if (c.getZone().is(ZoneType.Battlefield) || c.getZone().is(ZoneType.Hand) || c.getZone().is(ZoneType.Sideboard)) {
+                        count++;
+                    }
                 }
             }
-        }
-        if (optionList.size() == count) {
-            checkNotChoose = true;
+            if (optionList.size() == count) {
+                checkNotChoose = true;
+            }
         }
         if (useSelectCardsInput(optionList)) {
             InputSelectEntitiesFromList<T> input = null;
@@ -2368,8 +2370,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Card chooseSingleCardForZoneChange(final ZoneType destination, final List<ZoneType> origin,
             final SpellAbility sa, final CardCollection fetchList, final DelayedReveal delayedReveal,
-            final String selectPrompt, final boolean isOptional, final Player decider) {
-        return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider, null);
+            final String selectPrompt, final boolean isOptional, final Player decider, final boolean needCheck) {
+        return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider, null, needCheck);
     }
 
     public List<Card> chooseCardsForZoneChange(final ZoneType destination, final List<ZoneType> origin,
@@ -2720,7 +2722,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             origin.add(sideboard ? ZoneType.Sideboard : ZoneType.Library);
             final SpellAbility sa = new SpellAbility.EmptySa(new Card(-1, getGame()));
             final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, null, localizer.getMessage("lblChooseaCard"), true,
-                    pPriority);
+                    pPriority, false);
             if (card == null) {
                 return;
             }

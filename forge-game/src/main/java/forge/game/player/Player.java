@@ -3550,7 +3550,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         Card c = getController().chooseSingleCardForZoneChange(ZoneType.Hand, ImmutableList.of(ZoneType.Sideboard, ZoneType.Hand),
-                sa, list, null, Localizer.getInstance().getMessage("lblLearnALesson"), true, this);
+                sa, list, null, Localizer.getInstance().getMessage("lblLearnALesson"), true, this, true);
         if (c == null) {
             return;
         }
