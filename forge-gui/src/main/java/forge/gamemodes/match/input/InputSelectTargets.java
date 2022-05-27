@@ -179,6 +179,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+            Integer value = sa.getDividedValue(card);
+            if(value != null) {
+                divisionValues.add(value);
+            }
             removeTarget(card);
             return false;
         }
@@ -320,6 +324,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
+            Integer value = sa.getDividedValue(player);
+            if(value != null) {
+                divisionValues.add(value);
+            }
             removeTarget(player);
             return;
         }
