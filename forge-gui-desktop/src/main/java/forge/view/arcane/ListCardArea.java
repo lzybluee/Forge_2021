@@ -59,7 +59,7 @@ public class ListCardArea extends FloatingCardArea {
     }
 
     public static ListCardArea show(final CMatchUI matchUI, final String title0, final Iterable<CardView> cardList0, final Iterable<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
-		if (storedArea==null) {
+		if (storedArea==null || storedArea.getMatchUI() != matchUI) {
 			storedArea = new ListCardArea(matchUI);
 		}
 		cardList = new ArrayList<>();
