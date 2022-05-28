@@ -192,6 +192,9 @@ public final class ImageKeys {
             }
             if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
                 int index = filename.lastIndexOf('_');
+                if(filename.contains("_mps_")) {
+                    index = filename.substring(0, index).lastIndexOf('_');
+                }
                 if (index != -1) {
                     String setlessFilename = filename.substring(0, index);
                     String setCode = filename.substring(index + 1);
