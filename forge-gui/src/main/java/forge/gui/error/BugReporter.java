@@ -91,7 +91,10 @@ public class BugReporter {
         if (isSentryEnabled()) {
             sendSentry();
         } else {
-            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessage("lblReportCrash"), sb.toString(), true);
+            String stack = sb.toString();
+            if (stack.contains("forge.")) {
+                GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessage("lblReportCrash"), stack, true);
+            }
         }
     }
 
