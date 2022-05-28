@@ -39,7 +39,7 @@ public class TokenInfo {
         this.name = c.getName();
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
-        this.color = MagicColor.toShortString(c.getCurrentState().getColor());
+        this.color = MagicColor.toFullString(c.getCurrentState().getColor());
         this.types = getCardTypes(c);
 
         List<String> list = Lists.newArrayList();

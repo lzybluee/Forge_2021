@@ -108,6 +108,30 @@ public final class MagicColor {
         }
     }
 
+    public static String toFullString(final byte color) {
+        String ret = "";
+        if((color & WHITE) != 0) {
+            ret += "W";
+        }
+        if((color & BLUE) != 0) {
+            ret += "U";
+        }
+        if((color & BLACK) != 0) {
+            ret += "B";
+        }
+        if((color & RED) != 0) {
+            ret += "R";
+        }
+        if((color & GREEN) != 0) {
+            ret += "G";
+        }
+        if(!ret.isEmpty()) {
+            return ret;
+        } else {
+            return "C";
+        }
+    }
+
     /**
      * The Interface Color.
      */
