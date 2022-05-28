@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <layout serial="">
-	<cell x="0.8" y="0.46627" w="0.2" h="0.53373" sel="CARD_PICTURE">
-		<doc>CARD_PICTURE</doc>
+	<cell x="0.0" y="0.4127" w="0.14099" h="0.29365" sel="REPORT_STACK">
+		<doc>REPORT_STACK</doc>
 	</cell>
 	<cell x="0.14099" y="0.36409" w="0.65901" h="0.36806" sel="FIELD_0">
 		<doc>FIELD_0</doc>
 	</cell>
-	<cell x="0.0" y="0.11508" w="0.14099" h="0.33135" sel="REPORT_MESSAGE">
-		<doc>REPORT_MESSAGE</doc>
+	<cell x="0.14099" y="0.0" w="0.65901" h="0.36409" sel="FIELD_1">
+		<doc>FIELD_1</doc>
 	</cell>
 	<cell x="0.0" y="0.0" w="0.14099" h="0.11508" sel="BUTTON_DOCK">
 		<doc>BUTTON_DOCK</doc>
+	</cell>
+	<cell x="0.8" y="0.0" w="0.2" h="0.46627" sel="CARD_DETAIL">
+		<doc>CARD_DETAIL</doc>
+	</cell>
+	<cell x="0.14099" y="0.73214" w="0.65901" h="0.26786" sel="HAND_0">
+		<doc>HAND_0</doc>
 	</cell>
 	<cell x="0.0" y="0.70635" w="0.14099" h="0.29365" sel="DEV_MODE">
 		<doc>REPORT_COMBAT</doc>
 		<doc>REPORT_LOG</doc>
 		<doc>DEV_MODE</doc>
 	</cell>
-	<cell x="0.8" y="0.0" w="0.2" h="0.46627" sel="CARD_DETAIL">
-		<doc>CARD_DETAIL</doc>
+	<cell x="0.8" y="0.46627" w="0.2" h="0.53373" sel="CARD_PICTURE">
+		<doc>CARD_PICTURE</doc>
 	</cell>
-	<cell x="0.14099" y="0.0" w="0.65901" h="0.36409" sel="FIELD_1">
-		<doc>FIELD_1</doc>
-	</cell>
-	<cell x="0.0" y="0.44643" w="0.14099" h="0.25992" sel="REPORT_STACK">
-		<doc>REPORT_STACK</doc>
-	</cell>
-	<cell x="0.14099" y="0.73214" w="0.65901" h="0.26786" sel="HAND_0">
-		<doc>HAND_0</doc>
+	<cell x="0.0" y="0.11508" w="0.14099" h="0.29762" sel="REPORT_MESSAGE">
+		<doc>REPORT_MESSAGE</doc>
 	</cell>
 </layout>
