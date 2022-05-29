@@ -3661,4 +3661,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return result;
     }
 
+    public void clearHighlights() {
+        if (gui != null) {
+            gui.clearHighlights();
+        }
+    }
 }

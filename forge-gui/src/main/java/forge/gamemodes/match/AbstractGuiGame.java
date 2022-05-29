@@ -830,4 +830,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         daytime = null;
     }
     // End of Choice code
+
+    public void clearHighlights() {
+        highlightedCards.clear();
+        highlightedPlayers.clear();
+    }
 }

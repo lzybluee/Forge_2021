@@ -3579,4 +3579,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
     }
+
+    public void clearHighlights() {
+        getController().clearHighlights();
+    }
 }

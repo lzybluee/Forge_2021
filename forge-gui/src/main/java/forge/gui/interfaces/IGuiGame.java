@@ -199,4 +199,5 @@ public interface IGuiGame {
     void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
+    void clearHighlights();
 }
