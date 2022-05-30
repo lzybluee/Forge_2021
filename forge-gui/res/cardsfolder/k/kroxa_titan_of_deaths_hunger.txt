@@ -2,7 +2,7 @@ Name:Kroxa, Titan of Death's Hunger
 ManaCost:B R
 Types:Legendary Creature Elder Giant
 PT:6/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless it escaped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | CheckOnResolve$ True | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless it escaped.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | ConditionNotPresent$ Card.Self+escaped
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, each opponent discards a card, then each opponent who didn't discard a nonland card this way loses 3 life.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDiscard | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, each opponent discards a card, then each opponent who didn't discard a nonland card this way loses 3 life.
