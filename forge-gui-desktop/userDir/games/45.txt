@@ -1,0 +1,23 @@
+humanlife=20
+ailife=8
+humanlandsplayed=1
+ailandsplayed=0
+humanlandsplayedlastturn=0
+ailandsplayedlastturn=1
+turn=13
+activeplayer=human
+activephase=MAIN1
+humanhand=Merfolk Trickster;Svyelun of Sea and Sky;Counterspell
+humanlibrary=Counterspell;Master of the Pearl Trident;Aether Vial;Mutavault;Merfolk Trickster;Counterspell;Aether Vial;Master of the Pearl Trident;Tide Shaper;Aether Vial;Force of Negation;Island;Island;Counterspell;Island;Fiery Islet;Lord of Atlantis;Rishadan Dockhand;Force of Negation;Island;Spreading Seas;Tide Shaper;Island;Tide Shaper;Spreading Seas;Silvergill Adept;Spreading Seas;Lord of Atlantis;Waterlogged Grove;Island;Archmage's Charm;Island;Master of the Pearl Trident;Archmage's Charm;Merfolk Trickster;Cavern of Souls;Svyelun of Sea and Sky;Fiery Islet;Svyelun of Sea and Sky;Master of the Pearl Trident
+humangraveyard=Fiery Islet;Tide Shaper;Vindicate
+humanbattlefield=Island;Aether Vial|Tapped|Counters:CHARGE=2;Island;Mutavault;Svyelun of Sea and Sky;Silvergill Adept;Silvergill Adept;Merfolk Trickster;Rishadan Dockhand;Island;Silvergill Adept;Rishadan Dockhand;Island|Tapped;Island|Tapped;Lord of Atlantis|SummonSick
+humanexile=
+humancommand=
+humansideboard=Mystical Dispute;Mystical Dispute;Mystical Dispute;Subtlety;Subtlety;Subtlety;Hurkyl's Recall;Hurkyl's Recall;Tidebinder Mage;Tidebinder Mage;Tidebinder Mage;Force of Negation;Relic of Progenitus;Relic of Progenitus;Relic of Progenitus
+aihand=Joint Assault;Forest;Nightshade Peddler
+ailibrary=Nightshade Peddler;Island;Llanowar Elves;Lair Delve;Wolfir Avenger;Vorstclaw;Forest;Llanowar Elves;Island;Pathbreaker Wurm;Island;Forest;Trusted Forcemage;Island;Forest;Forest;Flowering Lumberknot;Island;Druid's Familiar;Island;Runeclaw Bear;Druid's Familiar;Forest;Island;Vorstclaw;Nephalia Smuggler;Forest;Joint Assault;Island;Deadeye Navigator;Forest;Forest;Wolfir Silverheart;Island;Overrun;Latch Seeker;Tandem Lookout;Wingcrafter;Latch Seeker;Geist Trappers;Wingcrafter;Island;Acidic Slime;Trusted Forcemage;Elgaud Shieldmate;Ice Cage
+aigraveyard=Lair Delve
+aibattlefield=Forest|Tapped;Forest|Tapped;Island|Tapped;Trusted Forcemage;Forest|Tapped;Elgaud Shieldmate;Island|Tapped;Flowering Lumberknot;Forest|Tapped;Tandem Lookout|SummonSick
+aiexile=
+aicommand=
+aisideboard=

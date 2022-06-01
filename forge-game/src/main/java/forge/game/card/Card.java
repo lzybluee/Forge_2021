@@ -2174,8 +2174,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     if (keyword.contains("Strike")) {
                         keyword = keyword.replace("Strike", "strike");
                     }
-                    sb.append(i !=0 && sb.length() !=0 ? ", " : "");
-                    sb.append(i > 0 && sb.length() !=0 ? keyword.toLowerCase() : keyword);
+                    sb.append(i > 0 && sb.length() != 0 && sb.charAt(sb.length() - 1) != '\n' ? ", " : "");
+                    sb.append(i > 0 && sb.length() != 0 && sb.charAt(sb.length() - 1) != '\n' ? keyword.toLowerCase() : keyword);
                 }
                 if (sbLong.length() > 0) {
                     sbLong.append("\r\n");
