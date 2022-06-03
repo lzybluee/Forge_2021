@@ -32,6 +32,8 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 
+import forge.LobbyPlayer;
+import forge.game.GameOutcome;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.gui.FThreads;
@@ -197,6 +199,16 @@ public class CPrompt implements ICDoc {
         }
         final String text = String.format("T:%d G:%d/%d [%s]", game.getTurn(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
         view.getLblGames().setText(text);
-        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurn()));
+        String winners = "Winners: ";
+        for (GameOutcome outcome : game.getOutcomesOfMatch()) {
+            LobbyPlayer winner = outcome.getWinningLobbyPlayer();
+            if(winner != null) {
+                winners += outcome.getWinningLobbyPlayer().getName() + ", ";
+            }
+        }
+        if (winners.endsWith(", ")) {
+            winners = winners.substring(0, winners.length() - 2);
+        }
+        view.getLblGames().setToolTipText(winners);
     }
 }
