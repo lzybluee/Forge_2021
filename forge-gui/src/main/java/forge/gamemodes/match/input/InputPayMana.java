@@ -289,7 +289,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     }
                 }
 
-                if(ma.getManaPart().getManaRestrictions() != null && !ma.getManaPart().getManaRestrictions().isEmpty()) {
+                if(ma.getManaPart() != null && ma.getManaPart().getManaRestrictions() != null && !ma.getManaPart().getManaRestrictions().isEmpty()) {
                     priorAbility = ma;
                 }
 
