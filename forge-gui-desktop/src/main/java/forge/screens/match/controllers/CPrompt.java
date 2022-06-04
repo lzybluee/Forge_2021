@@ -197,18 +197,7 @@ public class CPrompt implements ICDoc {
         if (game == null) {
             return;
         }
-        final String text = String.format("T:%d G:%d/%d [%s]", game.getTurn(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
-        view.getLblGames().setText(text);
-        String winners = "Winners: ";
-        for (GameOutcome outcome : game.getOutcomesOfMatch()) {
-            LobbyPlayer winner = outcome.getWinningLobbyPlayer();
-            if(winner != null) {
-                winners += outcome.getWinningLobbyPlayer().getName() + ", ";
-            }
-        }
-        if (winners.endsWith(", ")) {
-            winners = winners.substring(0, winners.length() - 2);
-        }
-        view.getLblGames().setToolTipText(winners);
+        view.getLblGames().setText(String.format("T:%d G:%d/%d [%s]", game.getTurn(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType()));
+        view.getLblGames().setToolTipText(game.getWinners());
     }
 }

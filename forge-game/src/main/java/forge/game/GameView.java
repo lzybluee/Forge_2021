@@ -234,6 +234,20 @@ public class GameView extends TrackableObject {
         return getMatch().getGamesWonBy(questPlayer);
     }
 
+    public String getWinners() {
+        String winners = "Winners: ";
+        for (GameOutcome outcome : getOutcomesOfMatch()) {
+            LobbyPlayer winner = outcome.getWinningLobbyPlayer();
+            if(winner != null) {
+                winners += outcome.getWinningLobbyPlayer().getName() + ", ";
+            }
+        }
+        if (winners.endsWith(", ")) {
+            winners = winners.substring(0, winners.length() - 2);
+        }
+        return winners;
+    }
+
     public Deck getDeck(final PlayerView pv) {
         for (final RegisteredPlayer rp : getMatch().getPlayers()) {
             if (pv.isLobbyPlayer(rp.getPlayer())) {

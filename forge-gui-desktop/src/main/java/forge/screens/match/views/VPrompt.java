@@ -137,6 +137,7 @@ public class VPrompt implements IVDoc<CPrompt> {
             tarMessage.setFont(FSkin.getRelativeFont(14));
         }
         lblGames.setText(localizer.getMessage("lblGameSetup"));
+        lblGames.setToolTipText("");
 
         container.add(messageScroller, "span 2, w 10:100%, h 0:100%");
 
