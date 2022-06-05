@@ -221,6 +221,10 @@ public final class SRearrangingUtil {
         pnlPreview.setVisible(false);
         pnlPreview.setBounds(0, 0, 0, 0);
 
+        if (cellSrc == null) {
+            return;
+        }
+
         // Source and target are the same?
         if (dropzone.equals(Dropzone.NONE) || (cellTarget.equals(cellSrc) && cellSrc.getDocs().size() == 1))
         {
