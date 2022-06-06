@@ -295,7 +295,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
                 abilitiesMap.put(ma.getView(), ma);
 
-                if(ma.hasParam("Amount") && ma.hasParam("RestrictValid")) {
+                if(ma.hasParam("Amount") && ma.hasParam("RestrictValid") && !(ma.getPayCosts() != null && ma.getPayCosts().hasManaCost())) {
                     canProduceMoreMana = true;
                 }
 
