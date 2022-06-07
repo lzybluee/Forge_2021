@@ -662,7 +662,7 @@ public class CardDetailUtil {
             area.append("Owner: ").append(card.getOwner().toString());
         }
 
-        String ret = area.toString();
+        String ret = area.toString().replace("\r", "");
         while(ret.contains("\n\n\n")) {
             ret = ret.replace("\n\n\n", "\n\n");
         }

@@ -742,7 +742,7 @@ public class CardView extends GameEntityView {
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
         if (!nonAbilityText.isEmpty()) {
-            sb.append("\r\n \r\nNon ability features: \r\n");
+            sb.append("\r\n\r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
         }
 
@@ -771,7 +771,7 @@ public class CardView extends GameEntityView {
 
         CardView pairedWith = getPairedWith();
         if (pairedWith != null) {
-            sb.append("\r\n \r\nPaired With: ").append(pairedWith);
+            sb.append("\r\n\r\nPaired With: ").append(pairedWith);
             sb.append("\r\n");
         }
 
