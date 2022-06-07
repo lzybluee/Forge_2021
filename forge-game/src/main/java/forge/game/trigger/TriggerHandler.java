@@ -588,7 +588,7 @@ public class TriggerHandler {
 
         sa.setStackDescription(sa.toString());
 
-        if(!regtrig.hasParam("CheckOnResolve")) {
+        if(!regtrig.hasParam("CheckOnResolve") && regtrig.hasParam("TriggerDescription") && regtrig.getParam("TriggerDescription").contains(", if ")) {
             if(!sa.getConditions().areMet(sa)) {
                 return;
             }
