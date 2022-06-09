@@ -972,7 +972,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Card name overlay
-        titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
+        String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
+        if (card.isToken() && !name.endsWith(" Token")) {
+            name += " (T)";
+        }
+        if (card.isCloned() && !card.isToken()) {
+            name += " (C)";
+        }
+        titleText.setText(name);
         // Screen readers can't tell if a card is tapped.
         if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
                 if (this.isTapped()) {
