@@ -804,12 +804,12 @@ public class CardView extends GameEntityView {
 
         String cloner = get(TrackableProperty.Cloner);
         if (!cloner.isEmpty()) {
-            sb.append("\r\nCloned by: ").append(cloner);
+            sb.append("\r\n\r\nCloned by: ").append(cloner);
         }
 
         String mergedCards = get(TrackableProperty.MergedCards);
         if (!mergedCards.isEmpty()) {
-            sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
+            sb.append("\r\n\r\nMerged cards: ").append(mergedCards);
         }
 
         return sb.toString().trim().replaceAll("\\r\\n\\s*\\r\\n\\s*\\r\\n", "\r\n\r\n");

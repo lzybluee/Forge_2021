@@ -426,7 +426,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen type: ");
+            area.append("(Chosen type: ");
             area.append(card.getChosenType());
             if (!card.getChosenType2().isEmpty()) {
                 area.append(", ").append(card.getChosenType2());
@@ -439,7 +439,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen colors: ");
+            area.append("(Chosen colors: ");
             area.append(Lang.joinHomogenous(card.getChosenColors()));
             area.append(")");
         }
@@ -449,7 +449,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen cards: ");
+            area.append("(Chosen cards: ");
             if (card.isImmutable() && card.getName().contains("Perpetual Effect")) {
                 List<CardView> chosenToShow = new ArrayList<>();
                 for (CardView cc : card.getChosenCards()) {
@@ -469,7 +469,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen number: ").append(card.getChosenNumber()).append(")");
+            area.append("(Chosen number: ").append(card.getChosenNumber()).append(")");
         }
 
         // chosen player
@@ -477,7 +477,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen player: ").append(card.getChosenPlayer()).append(")");
+            area.append("(Chosen player: ").append(card.getChosenPlayer()).append(")");
         }
 
         // chosen mode
@@ -485,7 +485,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen mode: ").append(card.getChosenMode()).append(")");
+            area.append("(Chosen mode: ").append(card.getChosenMode()).append(")");
         }
 
         // named card
@@ -493,7 +493,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(named card: ");
+            area.append("(Named card: ");
             if (card.isFaceDown() && state.getState() == CardStateName.FaceDown) {
                 area.append("Hidden");
             } else {
@@ -519,7 +519,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n\n");
             }
-            area.append("(Class Level:").append(card.getClassLevel()).append(")");
+            area.append("(Class level:").append(card.getClassLevel()).append(")");
         }
 
         // a card has something attached to it
@@ -527,9 +527,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("=Attached: ");
+            area.append("Attached: ");
             area.append(StringUtils.join(card.getAttachedCards(), ", "));
-            area.append("=");
         }
 
         // a card is attached to something
@@ -537,13 +536,13 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Attached to ").append(card.getAttachedTo()).append("*");
+            area.append("Attached to ").append(card.getAttachedTo());
         }
         if (card.getEnchantedPlayer() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Enchanting ").append(card.getEnchantedPlayer()).append("*");
+            area.append("Enchanting ").append(card.getEnchantedPlayer());
         }
 
         // controlling
@@ -551,9 +550,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("+Controlling: ");
+            area.append("Controlling: ");
             area.append(StringUtils.join(card.getGainControlTargets(), ", "));
-            area.append("+");
         }
 
         // cloned via
@@ -561,9 +559,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("^Cloned via: ");
+            area.append("Cloned via: ");
             area.append(card.getCloneOrigin().getCurrentState().getName());
-            area.append("^");
         }
 
         // Imprint
@@ -630,7 +627,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n\n");
             }
-            area.append("[+Gain control from: " + card.getOwner().getName() + "+]");
+            area.append("Gain control from: " + card.getOwner().getName());
             area.append("\n");
         }
 
