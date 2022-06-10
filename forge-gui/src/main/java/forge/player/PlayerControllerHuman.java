@@ -1937,10 +1937,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final String firstStr = first.toString();
+        final String firstStr = first.getDescription();
         for (int i = 1; i < possibleReplacers.size(); i++) {
             // prompt user if there are multiple different options
-            if (!possibleReplacers.get(i).toString().equals(firstStr)) {
+            if (!possibleReplacers.get(i).getDescription().equals(firstStr)) {
                 return getGui().one(prompt, possibleReplacers);
             }
         }
