@@ -281,6 +281,13 @@ public class TriggerHandler {
         if (mode == TriggerType.Always) {
             runStateTrigger(runParams);
         } else if (game.getStack().isFrozen() || holdTrigger) {
+            if(mode == TriggerType.Immediate && runParams.isEmpty()) {
+                for (final TriggerWaiting wt : waitingTriggers) {
+                    if (wt.getMode() == TriggerType.Immediate && wt.getParams().isEmpty()) {
+                        return;
+                    }
+                }
+            }
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));
