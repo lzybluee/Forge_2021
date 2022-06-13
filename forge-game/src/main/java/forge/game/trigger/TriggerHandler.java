@@ -467,6 +467,21 @@ public class TriggerHandler {
             return false; // Trigger removed by effect
         }
 
+        if(regtrig.hasParam("TriggerZones") && regtrig.getParam("TriggerZones").equals("Battlefield")
+                && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+            CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateBattlefield);
+            if (!cards.contains(regtrig.getHostCard())) {
+                return false;
+            }
+        }
+        if(regtrig.hasParam("TriggerZones") && regtrig.getParam("TriggerZones").equals("Graveyard")
+                && runParams.containsKey(AbilityKey.LastStateGraveyard)) {
+            CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateGraveyard);
+            if (!cards.contains(regtrig.getHostCard())) {
+                return false;
+            }
+        }
+
         if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
