@@ -470,14 +470,14 @@ public class TriggerHandler {
         if(regtrig.hasParam("TriggerZones") && regtrig.getParam("TriggerZones").equals("Battlefield")
                 && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
             CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateBattlefield);
-            if (!cards.contains(regtrig.getHostCard())) {
+            if (cards != null && !cards.contains(regtrig.getHostCard())) {
                 return false;
             }
         }
         if(regtrig.hasParam("TriggerZones") && regtrig.getParam("TriggerZones").equals("Graveyard")
                 && runParams.containsKey(AbilityKey.LastStateGraveyard)) {
             CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateGraveyard);
-            if (!cards.contains(regtrig.getHostCard())) {
+            if (cards != null && !cards.contains(regtrig.getHostCard())) {
                 return false;
             }
         }
