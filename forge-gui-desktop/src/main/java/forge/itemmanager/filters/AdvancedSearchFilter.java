@@ -178,15 +178,15 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         private boolean show() {
             optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblAdvancedSearch"), null, scroller, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0);
-            optionPane.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentShown(ComponentEvent e) {
-                    //automatically edit first filter if search is empty
-                    if (model.isEmpty()) {
-                        model.editFilterControl(Iterables.getFirst(model.getControls(), null), onFilterChange);
-                    }
-                }
-            });
+//            optionPane.addComponentListener(new ComponentAdapter() {
+//                @Override
+//                public void componentShown(ComponentEvent e) {
+//                    //automatically edit first filter if search is empty
+//                    if (model.isEmpty()) {
+//                        model.editFilterControl(Iterables.getFirst(model.getControls(), null), onFilterChange);
+//                    }
+//                }
+//            });
             scroller.revalidate();
             scroller.repaint();
             optionPane.setVisible(true);
