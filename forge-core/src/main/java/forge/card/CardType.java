@@ -530,7 +530,16 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return this;
         }
         // we assume that changes are already correctly ordered (taken from TreeMap.values())
-        for (final CardChangedType ct : changedCardTypes) {
+        final Iterator<CardChangedType> it = changedCardTypes.iterator();
+        while (it.hasNext()) {
+            final CardChangedType ct;
+            try {
+                ct = it.next();
+            } catch (Exception e) {
+                System.out.println("getTypeWithChanges() size " + Iterables.size(changedCardTypes) + " " + changedCardTypes);
+                e.printStackTrace();
+                break;
+            }
             if (null == newType)
                 newType = new CardType(CardType.this);
 
