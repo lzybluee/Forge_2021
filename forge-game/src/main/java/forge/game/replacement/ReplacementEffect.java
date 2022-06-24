@@ -161,7 +161,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             }
         }
 
-        return meetsCommonRequirements(params);
+        return meetsCommonRequirements(params, null);
     }
 
     /**

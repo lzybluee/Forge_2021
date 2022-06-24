@@ -452,7 +452,7 @@ public class TriggerHandler {
             }
         }
 
-        if (!regtrig.requirementsCheck(game) && !regtrig.hasParam("CheckOnResolve")) {
+        if (!regtrig.requirementsCheck(game, runParams.get(AbilityKey.Card)) && !regtrig.hasParam("CheckOnResolve")) {
             return false; // Conditions aren't right.
         }
 

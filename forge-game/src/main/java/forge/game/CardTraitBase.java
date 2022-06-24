@@ -235,7 +235,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return this.suppressed;
     }
 
-    protected boolean meetsCommonRequirements(Map<String, String> params) {
+    protected boolean meetsCommonRequirements(Map<String, String> params, Object object) {
         final Player hostController = this.getHostCard().getController();
         final Game game = hostController.getGame();
 
@@ -364,6 +364,12 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 list.addAll(hostController.getAllies().getCardsIn(presentZone));
             }
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
+
+            if(params.containsKey("CheckOther")) {
+                if(object != null) {
+                    list.remove(object);
+                }
+            }
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);

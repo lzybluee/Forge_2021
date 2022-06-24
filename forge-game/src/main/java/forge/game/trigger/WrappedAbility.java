@@ -454,7 +454,7 @@ public class WrappedAbility extends Ability {
 
         if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
             // Most State triggers don't have "Intervening If"
-            if (!regtrig.requirementsCheck(game)) {
+            if (!regtrig.requirementsCheck(game, getTriggeringObject(AbilityKey.Card))) {
                 return;
             }
             // Since basic requirements check only cares about whether it's "Activated"
@@ -469,7 +469,7 @@ public class WrappedAbility extends Ability {
             Map<String, String> recheck = Maps.newHashMap();
             String key = regtrig.getParam("ResolvingCheck");
             recheck.put(key, regtrig.getParam(key));
-            if (!meetsCommonRequirements(recheck)) {
+            if (!meetsCommonRequirements(recheck, null)) {
                 return;
             }
         }

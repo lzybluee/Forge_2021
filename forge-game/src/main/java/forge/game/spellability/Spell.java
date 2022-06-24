@@ -199,6 +199,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     }
 
     public boolean meetsCommonRequirements() {
-        return meetsCommonRequirements(this.mapParams);
+        return meetsCommonRequirements(this.mapParams, null);
     }
 }

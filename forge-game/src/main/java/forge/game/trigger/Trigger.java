@@ -289,6 +289,11 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         return true;
     }
+
+    public final boolean requirementsCheck(Game game) {
+        return requirementsCheck(game, null);
+    }
+
     /**
      * <p>
      * requirementsCheck.
@@ -297,7 +302,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      *
      * @return a boolean.
      */
-    public final boolean requirementsCheck(Game game) {
+    public final boolean requirementsCheck(Game game, Object object) {
         if (hasParam("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = Integer.MIN_VALUE; // Negative base just in case a few Lich's or Platinum Angels are running around
             final List<Player> healthiest = new ArrayList<>();
@@ -345,7 +350,8 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         // host controller will be null when adding card in a simulation game
-        if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(this.mapParams)) {
+        if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn)
+                || !meetsCommonRequirements(this.mapParams, object)) {
             return false;
         }
 
