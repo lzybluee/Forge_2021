@@ -705,6 +705,35 @@ public class Game {
         }
         visitor.visitAll(getStackZone().getCards());
     }
+    public void forEachCardInGameAndSideboard(Visitor<Card> visitor) {
+        for (final Player player : getPlayers()) {
+            if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Hand).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Library).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Command).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getInboundTokens())) {
+                return;
+            }
+        }
+        visitor.visitAll(getStackZone().getCards());
+    }
     public CardCollectionView getCardsInGame() {
         final CardCollection all = new CardCollection();
         Visitor<Card> visitor = new Visitor<Card>() {

@@ -172,12 +172,16 @@ public class ReplacementHandler {
         }*/
 
         // Round up Static replacement effects
-        game.forEachCardInGame(new Visitor<Card>() {
+        game.forEachCardInGameAndSideboard(new Visitor<Card>() {
             @Override
             public boolean visit(Card crd) {
                 final Card c = preList.get(crd);
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
+                    if(crd.getZone() != null && crd.getZone().is(ZoneType.Sideboard) && replacementEffect.getMode() != ReplacementType.Moved) {
+                        continue;
+                    }
+                    
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
                     // getting hit by mass removal should still produce tokens).
                     Zone cardZone = "True".equals(replacementEffect.getParam("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(c).getLastKnownZone() : game.getZoneOf(c);
