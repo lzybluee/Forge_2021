@@ -1249,10 +1249,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return choices;
         }
 
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-        inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
-        inp.showAndWait();
-        return new CardCollection(inp.getSelected());
+        while(true) {
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
+            inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
+            inp.showAndWait();
+            if(!inp.hasCancelled() && min == 0 && !valid.isEmpty() && inp.getSelected().isEmpty()) {
+                if(InputConfirm.confirm(this, sa, "Cancel discard?")) {
+                    break;
+                }
+            } else {
+                return new CardCollection(inp.getSelected());
+            }
+        }
+        return new CardCollection();
     }
 
     @Override
