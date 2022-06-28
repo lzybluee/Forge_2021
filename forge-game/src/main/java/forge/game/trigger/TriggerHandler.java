@@ -467,31 +467,6 @@ public class TriggerHandler {
             return false; // Trigger removed by effect
         }
 
-        if(regtrig.hasParam("TriggerZones") && regtrig.getParam("TriggerZones").equals("Battlefield")
-                && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
-            boolean etb = false;
-            if ((regtrig.getMode() == TriggerType.ChangesZone || regtrig.getMode() == TriggerType.ChangesZoneAll) &&
-                    regtrig.hasParam("Destination") && regtrig.getParam("Destination").equals("Battlefield")) {
-                etb = true;
-            }
-            CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateBattlefield);
-            if (!etb && cards != null && !cards.contains(regtrig.getHostCard())) {
-                return false;
-            }
-        }
-        if(regtrig.hasParam("TriggerZones") && regtrig.getParam("TriggerZones").equals("Graveyard")
-                && runParams.containsKey(AbilityKey.LastStateGraveyard)) {
-            boolean etg = false;
-            if ((regtrig.getMode() == TriggerType.ChangesZone || regtrig.getMode() == TriggerType.ChangesZoneAll) &&
-                    regtrig.hasParam("Destination") && regtrig.getParam("Destination").equals("Graveyard")) {
-                etg = true;
-            }
-            CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateGraveyard);
-            if (!etg && cards != null && !cards.contains(regtrig.getHostCard())) {
-                return false;
-            }
-        }
-
         if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack

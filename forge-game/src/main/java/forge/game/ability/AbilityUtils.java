@@ -1436,6 +1436,9 @@ public class AbilityUtils {
             game.getTriggerHandler().resetActiveTriggers(false);
         } else {
             game.getTriggerHandler().resetActiveTriggers();
+            if(sa.hasParam("RunWaitingTriggers")) {
+                game.getTriggerHandler().runWaitingTriggers();
+            }
         }
         AbilityUtils.resolveApiAbility(abSub, game);
     }
