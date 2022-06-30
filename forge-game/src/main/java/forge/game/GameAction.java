@@ -329,7 +329,14 @@ public class GameAction {
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
-        if (!suppress) {
+        boolean checkSeacrhLibrary = false;
+        if(suppress && zoneFrom != null && zoneFrom.is(ZoneType.Library) && zoneTo != null && zoneTo.is(ZoneType.Library)) {
+            if(params.containsKey(AbilityKey.FoundSearchingLibrary)) {
+                checkSeacrhLibrary = (Boolean) params.get(AbilityKey.FoundSearchingLibrary);
+            }
+        }
+
+        if (!suppress || checkSeacrhLibrary) {
             // Temporary disable commander replacement effect
             // 903.9a
             if (fromBattlefield && !toBattlefield && c.isCommander() && c.hasMergedCard()) {
