@@ -331,7 +331,7 @@ public class GameAction {
 
         boolean checkSeacrhLibrary = false;
         if(suppress && zoneFrom != null && zoneFrom.is(ZoneType.Library) && zoneTo != null && zoneTo.is(ZoneType.Library)) {
-            if(params.containsKey(AbilityKey.FoundSearchingLibrary)) {
+            if(params != null && params.containsKey(AbilityKey.FoundSearchingLibrary)) {
                 checkSeacrhLibrary = (Boolean) params.get(AbilityKey.FoundSearchingLibrary);
             }
         }
