@@ -136,8 +136,12 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     public static void refreshAll() {
-        for (final FloatingZone cardArea : floatingAreas.values()) {
-            cardArea.refresh();
+        try {
+            for (final FloatingZone cardArea : floatingAreas.values()) {
+                cardArea.refresh();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
