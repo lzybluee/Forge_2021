@@ -278,10 +278,18 @@ public class VField implements IVDoc<CField> {
         // Update life total
         final int life = player.getLife();
         lblLife.setText(String.valueOf(life));
-        if (life > LIFE_CRITICAL) {
-            lblLife.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        if(player.isMonarch() && player.hasBlessing()) {
+            lblLife.setForeground(new Color(102, 0, 153));
+        } else if(player.isMonarch()) {
+            lblLife.setForeground(new Color(255, 204, 51));
+        } else if(player.hasBlessing()) {
+            lblLife.setForeground(new Color(0, 0, 255));
         } else {
-            lblLife.setForeground(Color.RED);
+            if (life > LIFE_CRITICAL) {
+                lblLife.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            } else {
+                lblLife.setForeground(Color.RED);
+            }
         }
 
         // Update poison and/or energy counters, poison counters take precedence
