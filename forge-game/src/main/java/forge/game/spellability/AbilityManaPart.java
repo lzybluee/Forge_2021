@@ -174,12 +174,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
 
-        SpellAbility rootAbility = sa;
-        while(rootAbility.getParent() != null) {
-            rootAbility = rootAbility.getParent();
-        }
-
-        if (source.isLand() && rootAbility.getPayCosts() != null && rootAbility.getPayCosts().hasTapCost()) {
+        if (root != null && source.isLand() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
             player.setTappedLandForManaThisTurn(true);
         }
     } // end produceMana(String)
