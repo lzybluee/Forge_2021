@@ -68,3 +68,17 @@ EDT > java.util.ConcurrentModificationException
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[3]
+Game-5 > java.lang.NullPointerException
+	at forge.game.combat.Combat.getDefendersCreatures(Combat.java:399)
+	at forge.game.combat.Combat.assignAttackersDamage(Combat.java:812)
+	at forge.game.combat.Combat.assignCombatDamage(Combat.java:910)
+	at forge.game.phase.PhaseHandler.onPhaseBegin(PhaseHandler.java:368)
+	at forge.game.phase.PhaseHandler.startFirstTurn(PhaseHandler.java:1149)
+	at forge.game.GameAction.startGame(GameAction.java:2000)
+	at forge.game.Match.startGame(Match.java:90)
+	at forge.gamemodes.match.HostedMatch$2.run(HostedMatch.java:253)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)

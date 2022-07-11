@@ -396,8 +396,11 @@ public class Combat {
     public final CardCollection getDefendersCreatures() {
         CardCollection result = new CardCollection();
         for (Card attacker : getAttackers()) {
-            CardCollection cc = getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
-            result.addAll(cc);
+            Player defender = getDefenderPlayerByAttacker(attacker);
+            if(defender != null) {
+                CardCollection cc = defender.getCreaturesInPlay();
+                result.addAll(cc);
+            }
         }
         return result;
     }
