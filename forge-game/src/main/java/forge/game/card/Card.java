@@ -4722,7 +4722,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void updateStaticAbilities(List<StaticAbility> list, CardState state) {
-        for (final CardTraitChanges ck : getChangedCardTraitsList(state)) {
+        final Iterable<CardTraitChanges> changedCardTraitsList = getChangedCardTraitsList(state);
+        final Iterator<CardTraitChanges> it = changedCardTraitsList.iterator();
+        while (it.hasNext()) {
+            final CardTraitChanges ck;
+            try {
+                ck = it.next();
+            } catch (Exception e) {
+                System.out.println("changedCardTraitsList size " + Iterables.size(changedCardTraitsList) + " " + changedCardTraitsList);
+                e.printStackTrace();
+                break;
+            }
             if (ck.isRemoveAll()) {
                 list.clear();
             }
