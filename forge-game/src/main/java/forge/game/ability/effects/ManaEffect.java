@@ -57,6 +57,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 String express = abMana.getExpressChoice();
                 String colorsProducedStr = abMana.getComboColors(sa);
                 String[] colorsProduced = colorsProducedStr.split(" ");
+                String usedToPayMana = (sa.getUsedToPayMana() == null ? null : sa.getUsedToPayMana().toString());
 
                 final StringBuilder choiceString = new StringBuilder();
                 ColorSet colorOptions = ColorSet.fromNames(colorsProduced);
@@ -93,8 +94,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             choice = colorsProduced[differentChoice ? nMana : 0];
                         } else {
                             byte chosenColor = 0;
-                            if(sa.getUsedToPayMana() != null) {
-                                String usedToPayMana = sa.getUsedToPayMana().toString();
+                            if(usedToPayMana != null) {
                                 ArrayList<String> new_colors = new ArrayList<>();
                                 
                                 if((colorOptions.hasWhite() || colorsProducedStr.contains("W")) && (usedToPayMana.contains("{W") || usedToPayMana.contains("W}"))) {
@@ -119,6 +119,26 @@ public class ManaEffect extends SpellAbilityEffect {
                                     chosenColor = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(new_colors));
                                 } else {
                                     chosenColor = MagicColor.fromName(MagicColor.toLongString(colorOptions.iterator().next()));
+                                }
+
+                                if(amount > 1) {
+                                    switch(chosenColor) {
+                                    case MagicColor.WHITE:
+                                        usedToPayMana = usedToPayMana.replaceFirst("\\{[^{}]*W[^{}]*\\}", "");
+                                        break;
+                                    case MagicColor.BLUE:
+                                        usedToPayMana = usedToPayMana.replaceFirst("\\{[^{}]*U[^{}]*\\}", "");
+                                        break;
+                                    case MagicColor.BLACK:
+                                        usedToPayMana = usedToPayMana.replaceFirst("\\{[^{}]*B[^{}]*\\}", "");
+                                        break;
+                                    case MagicColor.RED:
+                                        usedToPayMana = usedToPayMana.replaceFirst("\\{[^{}]*R[^{}]*\\}", "");
+                                        break;
+                                    case MagicColor.GREEN:
+                                        usedToPayMana = usedToPayMana.replaceFirst("\\{[^{}]*G[^{}]*\\}", "");
+                                        break;
+                                    }
                                 }
                             }
                             else {
