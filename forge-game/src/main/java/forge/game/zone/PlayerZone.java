@@ -46,7 +46,7 @@ public class PlayerZone extends Zone {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !c.mayPlay(who).isEmpty() || c.mayPlayerLook(who);
+                return !c.mayPlayCheckDontGrantZonePermissions(who).isEmpty() || c.mayPlayerLook(who);
             }
         };
     }
@@ -74,7 +74,7 @@ public class PlayerZone extends Zone {
                     return true;
                 }
 
-                if (sa.isSpell() && c.mayPlayCheckDontGrantZonePermissions(player).size() > 0) {
+                if (sa.isSpell() && !c.mayPlayCheckDontGrantZonePermissions(player).isEmpty()) {
                     return true;
                 }
 
