@@ -1784,6 +1784,13 @@ public class ComputerUtilCombat {
         if(attackerDamage > 0 && blocker.getSVar("HasDamagedEffect").equals("TRUE")) {
             return true;
         }
+        if(defenderDamage > 0) {
+            for(Card c : blocker.getAttachedCards()) {
+                if(c.getSVar("HasDamageEffect").equals("TRUE")) {
+                    return true;
+                }
+            }
+        }
 
         if (blocker.hasDoubleStrike()) {
             if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || hasDamageDestoryAbility(blocker) || attacker.hasSVar("DestroyWhenDamaged"))) {
@@ -2017,6 +2024,13 @@ public class ComputerUtilCombat {
 
         if(defenderDamage > 0 && attacker.getSVar("HasDamagedEffect").equals("TRUE")) {
             return true;
+        }
+        if(attackerDamage > 0) {
+            for(Card c : attacker.getAttachedCards()) {
+                if(c.getSVar("HasDamageEffect").equals("TRUE")) {
+                    return true;
+                }
+            }
         }
 
         if (attacker.hasDoubleStrike()) {
