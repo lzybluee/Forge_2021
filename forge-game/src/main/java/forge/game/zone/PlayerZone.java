@@ -65,7 +65,7 @@ public class PlayerZone extends Zone {
             boolean graveyardCastable = c.hasKeyword(Keyword.FLASHBACK) ||
                     c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START) || c.hasKeyword(Keyword.ESCAPE) ||
                     c.hasKeyword(Keyword.DISTURB);
-            boolean exileCastable = (c.isAdventureCard() || c.isForetold()) && c.isInZone(ZoneType.Exile);
+            boolean exileCastable = c.isForetold() && c.isInZone(ZoneType.Exile);
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
 
