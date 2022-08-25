@@ -22,6 +22,7 @@ import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -289,7 +290,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     }
                 }
 
-                if(ma.getManaPart() != null && ma.getManaPart().getManaRestrictions() != null && !ma.getManaPart().getManaRestrictions().isEmpty()) {
+                if(ma.getManaPart() != null && ma.getManaPart().getManaRestrictions() != null && !ma.getManaPart().getManaRestrictions().isEmpty()
+                        && (ma.getPayCosts() == null || ma.getPayCosts().hasOnlySpecificCostType(CostTap.class))) {
                     priorAbility = ma;
                 }
 
