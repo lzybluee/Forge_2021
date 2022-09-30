@@ -44,7 +44,7 @@ public class Config {
          adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list();
         try
         {
-            settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_DIR +  "/adventure/settings.json"));
+            settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR +  "settings.json"));
 
         }
         catch (Exception e)
@@ -113,7 +113,7 @@ public class Config {
 
         Deck[] deck = new Deck[configData.starterDecks.length];
         for (int i = 0; i < configData.starterDecks.length; i++) {
-            deck[i] = CardUtil.getDeck(configData.starterDecks[i]);
+            deck[i] = CardUtil.getDeck(configData.starterDecks[i], false, false, "", false, false);
         }
         return deck;
     }

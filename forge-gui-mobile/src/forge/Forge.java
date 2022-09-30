@@ -92,12 +92,14 @@ public class Forge implements ApplicationListener {
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
+    public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
     public static boolean allowCardBG = false;
     public static boolean altPlayerLayout = false;
     public static boolean altZoneTabs = false;
     public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
+    public static String selector = "Default";
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
@@ -119,6 +121,7 @@ public class Forge implements ApplicationListener {
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
+    public static boolean adventureLoaded = false;
     private static Localizer localizer;
     static Map<Integer, Texture> misc = new HashMap<>();
 
@@ -188,9 +191,11 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
+        autoAIDeckSelection = prefs.getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
         animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
@@ -330,8 +335,12 @@ public class Forge implements ApplicationListener {
         //pixl cursor for adventure
         setCursor(null, "0");
         try {
-            for (SceneType sceneType : SceneType.values()) {
-                sceneType.instance.resLoaded();
+            if(!adventureLoaded)
+            {
+                for (SceneType sceneType : SceneType.values()) {
+                    sceneType.instance.resLoaded();
+                }
+                adventureLoaded=true;
             }
             switchScene(SceneType.StartScene.instance);
         } catch (Exception e) {
@@ -384,11 +393,24 @@ public class Forge implements ApplicationListener {
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
-                                        //selection
-                                        splashScreen.setShowModeSelector(true);
-                                        //start background music
-                                        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                                        safeToClose = true;
+                                        //selection transition
+                                        setTransitionScreen(new TransitionScreen(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                if (selector.equals("Classic")) {
+                                                    openHomeDefault();
+                                                    clearSplashScreen();
+                                                } else if (selector.equals("Adventure")) {
+                                                    openAdventure();
+                                                    clearSplashScreen();
+                                                } else
+                                                    splashScreen.setShowModeSelector(true);
+                                                //start background music
+                                                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+                                                safeToClose = true;
+                                                clearTransitionScreen();
+                                            }
+                                        }, Forge.takeScreenshot(), false, false, true, false));
                                     }
                                 });
                             }
@@ -740,7 +762,7 @@ public class Forge implements ApplicationListener {
                 openHomeDefault();
                 exited = false;
             }
-        }, ScreenUtils.getFrameBufferTexture(), false, false));
+        }, Forge.takeScreenshot(), false, false));
     }
 
     public static void switchToAdventure() {
@@ -765,6 +787,10 @@ public class Forge implements ApplicationListener {
 
     public static void clearSplashScreen() {
         splashScreen = null;
+    }
+    public static TextureRegion takeScreenshot() {
+        TextureRegion screenShot = ScreenUtils.getFrameBufferTexture();
+        return screenShot;
     }
 
     private static void setCurrentScreen(FScreen screen0) {
@@ -813,7 +839,7 @@ public class Forge implements ApplicationListener {
                     if (isMobileAdventureMode) {
                         try {
                             float delta = Gdx.graphics.getDeltaTime();
-                            float transitionTime = 0.2f;
+                            float transitionTime = 0.12f;
                             if (sceneWasSwapped) {
                                 sceneWasSwapped = false;
                                 animationTimeout = transitionTime;
@@ -982,7 +1008,7 @@ public class Forge implements ApplicationListener {
         if (!(currentScene instanceof ForgeScene)) {
             if (lastScreenTexture != null)
                 lastScreenTexture.getTexture().dispose();
-            lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+            lastScreenTexture = Forge.takeScreenshot();
         }
 
 

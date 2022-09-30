@@ -674,7 +674,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter
-        final CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
+        final CardCollectionView typeList = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
                 cost.getType().split(";"), player, ability.getHostCard(), ability);
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, typeList, ability);
@@ -818,8 +818,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             super(controller, cntCounters, cntCounters, sa);
             this.validChoices = validCards;
             counterType = cType;
+            String fromWhat = costPart.getDescriptiveType();
+            if (fromWhat.equals("CARDNAME")) {
+                fromWhat = sa.getHostCard().getName();
+            }
 
-            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", counterType == null ? "any" : counterType.getName().toLowerCase(), costPart.getDescriptiveType()));
+            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm",
+                    "%d", counterType == null ? "" : " " + counterType.getName().toLowerCase(), fromWhat));
         }
 
         @Override

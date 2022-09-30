@@ -15,11 +15,20 @@ public class MapActor extends Actor {
 
     Texture debugTexture;
     float collisionHeight=1.0f;
+    final int objectId;
+    public MapActor(int objectId)
+    {
+        this.objectId=objectId;
+    }
+    public int getObjectId()
+    {
+        return objectId;
+    }
     private Texture getDebugTexture() {
         if (debugTexture == null) {
             Pixmap pixmap = new Pixmap((int) getWidth(), (int) getHeight(), Pixmap.Format.RGBA8888);
             pixmap.setColor(1.0f,0,0,0.5f);
-            pixmap.fillRectangle(0, (int) getHeight()- (int)boundingRect.getHeight(), (int) boundingRect.getWidth(), (int) boundingRect.getHeight());
+            pixmap.fillRectangle((int)(boundingRect.x - getX()), (int)(getHeight()- boundingRect.getHeight()) + (int)(boundingRect.y - getY()), (int)boundingRect.getWidth(), (int)boundingRect.getHeight());
             debugTexture = new Texture(pixmap);
             pixmap.dispose();
 
@@ -83,6 +92,10 @@ public class MapActor extends Actor {
     public boolean collideWith(Rectangle other) {
        return boundingRect().overlaps(other);
 
+    }
+
+    public int getId(){
+        return objectId;
     }
 
     public boolean collideWith(MapActor other) {
