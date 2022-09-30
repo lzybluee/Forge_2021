@@ -127,20 +127,22 @@ public class AbilityManaPart implements java.io.Serializable {
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
-        repParams.put(AbilityKey.Mana, afterReplace);
-        repParams.put(AbilityKey.Player, player);
-        repParams.put(AbilityKey.AbilityMana, root);
-        repParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
+        if (root != null && root.isManaAbility()) {
+            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
+            repParams.put(AbilityKey.Mana, afterReplace);
+            repParams.put(AbilityKey.Player, player);
+            repParams.put(AbilityKey.AbilityMana, root);
+            repParams.put(AbilityKey.Activator, root.getActivatingPlayer());
 
-        switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
-        case NotReplaced:
-            break;
-        case Updated:
-            afterReplace = (String) repParams.get(AbilityKey.Mana);
-            break;
-        default:
-            return;
+            switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated:
+                afterReplace = (String) repParams.get(AbilityKey.Mana);
+                break;
+            default:
+                return;
+            }
         }
 
         //clear lastProduced
@@ -173,8 +175,7 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
 
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-
-        if (root != null && source.isLand() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
+        if (source.isLand() && root != null && root.isManaAbility() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
             player.setTappedLandForManaThisTurn(true);
         }
     } // end produceMana(String)

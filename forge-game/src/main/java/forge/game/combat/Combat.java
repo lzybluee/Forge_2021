@@ -200,6 +200,19 @@ public class Combat {
         return attackableEntries;
     }
 
+    //gets attacked player opponents (ignores planeswalkers)
+    public final FCollection<Player> getAttackedOpponents(Player atk) {
+        FCollection<Player> attackedOpps = new FCollection<Player>();
+        if (atk == playerWhoAttacks) {
+            for (Player defender : getDefendingPlayers()) {
+                if (!getAttackersOf(defender).isEmpty()) {
+                    attackedOpps.add(defender);
+                }
+            }
+        }
+        return attackedOpps;
+    }
+
     public final FCollection<GameEntity> getDefendersControlledBy(Player who) {
         FCollection<GameEntity> res = new FCollection<>();
         for (GameEntity ge : attackableEntries) {
@@ -295,12 +308,15 @@ public class Combat {
 
     // takes LKI into consideration, should use it at all times (though a single iteration over multimap seems faster)
     public final AttackingBand getBandOfAttacker(final Card c) {
+        if (c == null) {
+            return null;
+        }
         for (AttackingBand ab : attackedByBands.values()) {
             if (ab.contains(c)) {
                 return ab;
             }
         }
-        CombatLki lki = lkiCache.get(c) != null ? lkiCache.get(c).getCombatLKI() : null;
+        CombatLki lki = lkiCache.get(c).getCombatLKI();
         return lki == null || !lki.isAttacker ? null : lki.getFirstBand();
     }
 
@@ -976,7 +992,7 @@ public class Combat {
             return false;
         }
 
-        CombatLki lki = lkiCache.get(blocker) != null ? lkiCache.get(blocker).getCombatLKI() : null;
+        CombatLki lki = lkiCache.get(blocker).getCombatLKI();
         return null != lki && !lki.isAttacker; // was blocking something anyway
     }
 
@@ -991,7 +1007,7 @@ public class Combat {
             return false;
         }
 
-        CombatLki lki = lkiCache.get(blocker) != null ? lkiCache.get(blocker).getCombatLKI() : null;
+        CombatLki lki = lkiCache.get(blocker).getCombatLKI();
         return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
     }
 

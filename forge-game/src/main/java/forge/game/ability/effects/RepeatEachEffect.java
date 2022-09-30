@@ -109,7 +109,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 } else {
                     source.addRemembered(card);
                 }
-
                 AbilityUtils.resolve(repeat);
                 if (useImprinted) {
                     source.removeImprintedCard(card);
@@ -156,7 +155,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (nextTurn) {
-                    game.getUntap().addUntil(p, new GameCommand() {
+                    game.getCleanup().addUntil(p, new GameCommand() {
                         @Override
                         public void run() {
                             List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));

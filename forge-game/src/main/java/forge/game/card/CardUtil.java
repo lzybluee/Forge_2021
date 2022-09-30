@@ -112,6 +112,9 @@ public final class CardUtil {
      * @return a CardCollection that matches the given criteria
      */
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
+        return getThisTurnEntered(to, from, valid, src, ctb, src.getController());
+    }
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -121,7 +124,7 @@ public final class CardUtil {
         } else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
+        return CardLists.getValidCardsAsList(res, valid, controller, src, ctb);
     }
 
     /**
@@ -315,7 +318,7 @@ public final class CardUtil {
 
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
 
-        if (in.getGame().getCombat() != null) {
+        if (in.getGame().getCombat() != null && in.isPermanent()) {
             newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 
         }
 

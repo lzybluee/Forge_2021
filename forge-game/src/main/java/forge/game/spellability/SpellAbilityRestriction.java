@@ -338,7 +338,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getFirstCombatOnly()) {
-            if (game.getPhaseHandler().getNumCombat() > 1) {
+            if (game.getPhaseHandler().getNumCombat() > (game.getPhaseHandler().inCombat() ? 1 : 0)) {
                 return false;
             }
         }
@@ -593,6 +593,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        // Special check for Lion's Eye Diamond
+        if (sa.isManaAbility() && c.getGame().getStack().isFrozen() && isInstantSpeed()) {
+            return false;
+        }
+
         if (!sa.hasSVar("IsCastFromPlayEffect")) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;
@@ -632,6 +637,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         return true;
-    } // canPlay()
+    }
 
-} // end class SpellAbilityRestriction
+}

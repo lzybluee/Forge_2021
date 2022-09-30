@@ -117,15 +117,13 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
-    private Map<Player, PlayerCollection> attackedThisTurn = Maps.newHashMap();
-    private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
-
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
 
     private Player monarch = null;
+    private Player initiative = null;
     private Player monarchBeginTurn = null;
     private Player startingPlayer;
 
@@ -176,26 +174,11 @@ public class Game {
         this.monarchBeginTurn = monarchBeginTurn;
     }
 
-    public Map<Player, PlayerCollection> getPlayersAttackedThisTurn() {
-        return attackedThisTurn;
+    public Player getHasInitiative() {
+        return initiative;
     }
-
-    public Map<Player, PlayerCollection> getPlayersAttackedLastTurn() {
-        return attackedLastTurn;
-    }
-
-    public void addPlayerAttackedThisTurn(Player attacker, Player defender) {
-        PlayerCollection atk = attackedThisTurn.get(attacker);
-        if (atk == null) {
-            attackedThisTurn.put(attacker, new PlayerCollection());
-        }
-        attackedThisTurn.get(attacker).add(defender);
-    }
-
-    public void resetPlayersAttackedOnNextTurn() {
-        attackedLastTurn.clear();
-        attackedLastTurn.putAll(attackedThisTurn);
-        attackedThisTurn.clear();
+    public void setHasInitiative(final Player p ) {
+        initiative = p;
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -897,6 +880,18 @@ public class Game {
                 getAction().becomeMonarch(getNextPlayerAfter(p), null);
             } else {
                 getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);
+            }
+        }
+
+        if (p.hasInitiative()) {
+            // The third way to take the initiative is if the player who currently has the initiative leaves the game.
+            // When that happens, the player whose turn it is takes the initiative.
+            // If the player who has the initiative leaves the game on their own turn,
+            // or the active player left the game at the same time, the next player in turn order takes the initiative.
+            if (p.equals(getPhaseHandler().getPlayerTurn())) {
+                getAction().takeInitiative(getNextPlayerAfter(p), null);
+            } else {
+                getAction().takeInitiative(getPhaseHandler().getPlayerTurn(), null);
             }
         }
 

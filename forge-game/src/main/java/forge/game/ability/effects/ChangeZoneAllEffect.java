@@ -192,6 +192,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     if (host == null) {
                         host = sa.getHostCard();
                     }
+                    host.addExiledCard(movedCard);
                     movedCard.setExiledWith(host);
                     movedCard.setExiledBy(host.getController());
                 }
@@ -260,7 +261,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game, sa);
 
         if (sa.hasParam("Duration")) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
 
         // if Shuffle parameter exists, and any amount of cards were owned by

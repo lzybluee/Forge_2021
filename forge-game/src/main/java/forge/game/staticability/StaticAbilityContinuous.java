@@ -56,11 +56,9 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
@@ -675,6 +673,10 @@ public final class StaticAbilityContinuous {
                 if (stAb.hasParam("AddNames")) { // currently only for AllNonLegendaryCreatureNames
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
                 }
+                if (stAb.hasParam("SetName")) {
+                    affectedCard.addChangedName(stAb.getParam("SetName"), false,
+                            se.getTimestamp(), stAb.getId());
+                }
 
                 // Change color words
                 if (params.containsKey("ChangeColorWordsTo")) {
@@ -724,8 +726,6 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            // TODO regular keywords currently don't try to use keyword multiplier
-            // (Although nothing uses it at this time)
             if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
@@ -806,17 +806,13 @@ public final class StaticAbilityContinuous {
                             abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                         }
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
-                            sa.setIntrinsic(false);
-                            sa.setGrantorStatic(stAb);
-                            addedAbilities.add(sa);
+                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(abilty, stAb));
                         }
                     }
                 }
 
                 if (params.containsKey("GainsAbilitiesOf") || params.containsKey("GainsAbilitiesOfDefined")) {
                     CardCollection cardsIGainedAbilitiesFrom = new CardCollection();
-                    final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
 
                     if (params.containsKey("GainsAbilitiesOf")) {
                         final String[] valids = params.get("GainsAbilitiesOf").split(",");
@@ -835,13 +831,16 @@ public final class StaticAbilityContinuous {
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
                             if (sa.isActivatedAbility()) {
-                                if (loyaltyAB && !sa.isPwAbility()) {
+                                if (!stAb.matchesValidParam("GainsValidAbilities", sa)) {
                                     continue;
                                 }
                                 SpellAbility newSA = sa.copy(affectedCard, false);
                                 if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
+                                }
+                                if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
+                                    newSA.putParam("ActivateIgnoreColor","True");
                                 }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
@@ -855,15 +854,14 @@ public final class StaticAbilityContinuous {
                 // add Replacement effects
                 if (addReplacements != null) {
                     for (String rep : addReplacements) {
-                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false, stAb);
-                        addedReplacementEffects.add(actualRep);
+                        addedReplacementEffects.add(affectedCard.getReplacementEffectForStaticAbility(rep, stAb));
                     }
                 }
 
                 // add triggers
                 if (addTriggers != null) {
                     for (final String trigger : addTriggers) {
-                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false, stAb);
+                        final Trigger actualTrigger = affectedCard.getTriggerForStaticAbility(trigger, stAb);
                         // if the trigger has Execute param, which most trigger gained by Static Abilties should have
                         // turn them into SpellAbility object before adding to card
                         // with that the TargetedCard does not need the Svars added to them anymore
@@ -888,7 +886,7 @@ public final class StaticAbilityContinuous {
                             s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                         }
 
-                        addedStaticAbility.add(StaticAbility.create(s, affectedCard, stAb.getCardState(), false));
+                        addedStaticAbility.add(affectedCard.getStaticAbilityForStaticAbility(s, stAb));
                     }
                 }
 
@@ -937,25 +935,32 @@ public final class StaticAbilityContinuous {
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 String mayPlayAltCost = mayPlayAltManaCost;
+                boolean additional = mayPlayAltCost != null && mayPlayAltCost.contains("RegularCost");
 
-                if (mayPlayAltCost != null && mayPlayAltCost.contains("ConvertedManaCost")) {
-                    final String costcmc = Integer.toString(affectedCard.getCMC());
-                    mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
+                if (mayPlayAltCost != null) {
+                    if (mayPlayAltCost.contains("ConvertedManaCost")) {
+                        final String costcmc = Integer.toString(affectedCard.getCMC());
+                        mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
+                    } else if (additional) {
+                        final String regCost = affectedCard.getManaCost().getShortString();
+                        mayPlayAltCost = mayPlayAltManaCost.replace("RegularCost", regCost);
+
+                    }
                 }
 
                 Player mayPlayController = params.containsKey("MayPlayPlayer") ?
                     AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
                     controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
-                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
-                        mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null, additional, mayPlayWithFlash,
+                        mayPlayGrantZonePermissions, stAb);
 
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
                 if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
                     for (final Player p : game.getPlayers()) {
                         if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
                             affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
-                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
+                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null, additional,
                                     mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
                         }
                     }

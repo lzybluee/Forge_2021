@@ -9,6 +9,8 @@ import com.google.common.collect.Maps;
 
 import forge.game.GameEntity;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
+import forge.util.collect.FCollection;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -16,24 +18,29 @@ import forge.game.player.Player;
  */
 public class CardDamageHistory {
 
-    private boolean creatureAttackedThisTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureGotBlockedThisCombat = false;
-    private int attacksThisTurn = 0;
+
+    boolean hasdealtDamagetoAny = false;
+    private List<GameEntity> attackedThisTurn = Lists.newArrayList();
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
     private final List<Player> NotAttackedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBlockedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBeenBlockedSinceLastUpkeepOf = Lists.newArrayList();
 
-    private final Map<GameEntity, Integer> damagedThisCombat = Maps.newHashMap();
+    // only needed for Glen Elendra (Plane)
+    private final List<Player> damagedThisCombat = Lists.newArrayList();
+    // only needed for The Fallen
+    private final FCollection<GameEntity> damagedThisGame = new FCollection<>();
+
     private final Map<GameEntity, Integer> damagedThisTurn = Maps.newHashMap();
     private final Map<GameEntity, Integer> damagedThisTurnInCombat = Maps.newHashMap();
-    private final Map<GameEntity, Integer> damagedThisGame = Maps.newHashMap();
-    
+    private boolean receivedNonCombatDamageThisTurn = false;
+
     public final boolean getHasdealtDamagetoAny() {
-        return !damagedThisGame.isEmpty();
+        return hasdealtDamagetoAny;
     }
 
     // used to see if an attacking creature with a triggering attack ability
@@ -46,12 +53,11 @@ public class CardDamageHistory {
      * @param hasAttacked
      *            a boolean.
      */
-    public final void setCreatureAttackedThisCombat(final boolean hasAttacked) {
-        this.creatureAttackedThisCombat = hasAttacked;
+    public final void setCreatureAttackedThisCombat(GameEntity defender) {
+        this.creatureAttackedThisCombat = defender != null;
 
-        if (hasAttacked) {
-            this.setCreatureAttackedThisTurn(true);
-            this.attacksThisTurn++;
+        if (defender != null) {
+            attackedThisTurn.add(defender);
         }
     }
     /**
@@ -66,45 +72,16 @@ public class CardDamageHistory {
     }
     /**
      * <p>
-     * Setter for the field <code>creatureAttackedThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCreatureAttackedThisTurn(final boolean b) {
-        this.creatureAttackedThisTurn = b;
-     }
-    /**
-     * <p>
-     * Getter for the field <code>creatureAttackedThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCreatureAttackedThisTurn() {
-        return this.creatureAttackedThisTurn;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>attacksThisTurn</code>.
-     * </p>
-     * 
-     * @param num
-     *            a integer.
-     */
-    public final void setCreatureAttacksThisTurn(final int num) {
-        this.attacksThisTurn = num;
-    }
-    /**
-     * <p>
      * Getter for the field <code>attacksThisTurn</code>.
      * </p>
      * 
      * @return a int.
      */
     public final int getCreatureAttacksThisTurn() {
-        return this.attacksThisTurn;
+        return this.attackedThisTurn.size();
+    }
+    public final boolean hasAttackedThisTurn(GameEntity e) {
+        return this.attackedThisTurn.contains(e);
     }
     /**
      * <p>
@@ -247,7 +224,31 @@ public class CardDamageHistory {
     public final boolean getCreatureGotBlockedThisCombat() {
         return this.creatureGotBlockedThisCombat;
     }
-    public final Map<GameEntity, Integer> getThisCombatDamaged() {
+
+    /**
+     * <p>
+     * Getter for the field <code>receivedNonCombatDamageThisTurn</code>.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public boolean hasBeenDealtNonCombatDamageThisTurn() {
+        return this.receivedNonCombatDamageThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>receivedNonCombatDamageThisTurn</code>.
+     * </p>
+     *
+     * @param b
+     *            a boolean.
+     */
+    public void setHasBeenDealtNonCombatDamageThisTurn(boolean b) {
+        this.receivedNonCombatDamageThisTurn = b;
+    }
+
+    public final List<Player> getThisCombatDamaged() {
         return damagedThisCombat;
     }
     public final Map<GameEntity, Integer> getThisTurnDamaged() {
@@ -256,7 +257,7 @@ public class CardDamageHistory {
     public final Map<GameEntity, Integer> getThisTurnCombatDamaged() {
         return damagedThisTurnInCombat;
     }
-    public final Map<GameEntity, Integer> getThisGameDamaged() {
+    public final FCollection<GameEntity> getThisGameDamaged() {
         return damagedThisGame;
     }
     /**
@@ -265,27 +266,15 @@ public class CardDamageHistory {
      */
     public void registerCombatDamage(GameEntity entity, int amount) {
         int old = 0;
-        if (damagedThisCombat.containsKey(entity)) {
-            old = damagedThisCombat.get(entity);
+        if (entity instanceof Player) {
+            damagedThisCombat.add((Player) entity);
         }
-        damagedThisCombat.put(entity, old + amount);
         old = 0;
         if (damagedThisTurnInCombat.containsKey(entity)) {
             old = damagedThisTurnInCombat.get(entity);
         }
         damagedThisTurnInCombat.put(entity, old + amount);
-    }
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void newTurn() {
-        damagedThisCombat.clear();
-        damagedThisTurnInCombat.clear();
-        damagedThisTurn.clear();
-    }
-
-    public void endCombat() {
-        damagedThisCombat.clear();
+        hasdealtDamagetoAny = true;
     }
 
     /**
@@ -298,11 +287,30 @@ public class CardDamageHistory {
             old = damagedThisTurn.get(entity);
         }
         damagedThisTurn.put(entity, old + amount);
-        old = 0;
-        if (damagedThisGame.containsKey(entity)) {
-            old = damagedThisGame.get(entity);
-        }
-        damagedThisGame.put(entity, old + amount);
+        damagedThisGame.add(entity);
+        hasdealtDamagetoAny = true;
     }
 
+    public void newTurn() {
+        damagedThisCombat.clear();
+        damagedThisTurnInCombat.clear();
+        damagedThisTurn.clear();
+        attackedThisTurn.clear();
+
+        // if card already LTB we can safely dereference (allows quite a few objects to be cleaned up earlier for bigger boardstates)
+        CardCollection toRemove = new CardCollection();
+        for (GameEntity e : damagedThisGame) {
+            if (e instanceof Card) {
+                if (((Card) e).getZone().getZoneType() != ZoneType.Battlefield) {
+                    toRemove.add((Card)e);
+                }
+            }
+        }
+        damagedThisGame.removeAll(toRemove);
+        setHasBeenDealtNonCombatDamageThisTurn(false);
+    }
+
+    public void endCombat() {
+        damagedThisCombat.clear();
+    }
 }

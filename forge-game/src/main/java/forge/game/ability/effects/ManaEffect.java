@@ -311,8 +311,6 @@ public class ManaEffect extends SpellAbilityEffect {
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
-
-        //resolveDrawback(sa);
     }
 
     /**
@@ -335,6 +333,19 @@ public class ManaEffect extends SpellAbilityEffect {
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
         sb.append("Add ").append(toManaString(mana)).append(".");
+        if (sa.hasParam("RestrictValid")) {
+            sb.append(" ");
+            final String desc = sa.getDescription();
+            if (desc.contains("Spend this") && desc.contains(".")) {
+                int i = desc.indexOf("Spend this");
+                sb.append(desc, i, desc.indexOf(".", i) + 1);
+            } else if (desc.contains("This mana can't") && desc.contains(".")) { //for negative restrictions (Jegantha)
+                int i = desc.indexOf("This mana can't");
+                sb.append(desc, i, desc.indexOf(".", i) + 1);
+            } else {
+                sb.append("[failed to add RestrictValid to StackDesc]");
+            }
+        }
         return sb.toString();
     }
 }
