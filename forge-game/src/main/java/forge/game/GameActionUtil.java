@@ -550,15 +550,24 @@ public final class GameActionUtil {
         for (KeywordInterface ki : host.getKeywords()) {
             final String o = ki.getOriginal();
             if (o.startsWith("Casualty")) {
+                CardCollectionView creatures = CardLists.filter(CardLists.filterControlledBy(game.getCardsIn
+                        (ZoneType.Battlefield), activator), CardPredicates.Presets.CREATURES);
+                if(creatures.isEmpty()) {
+                    continue;
+                }
                 Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
                 if (tr != null) {
                     String n = o.split(":")[1];
-                    if (host.wasCast() && n.equals("X")) {
-                        CardCollectionView creatures = CardLists.filter(CardLists.filterControlledBy(game.getCardsIn
-                                (ZoneType.Battlefield), activator), CardPredicates.Presets.CREATURES);
+                    if (host.wasCast()) {
                         int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
-                        int min = Aggregates.min(creatures, CardPredicates.Accessors.fnGetNetPower);
-                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", min, max));
+                        if(n.equals("X")) {
+                            int min = Aggregates.min(creatures, CardPredicates.Accessors.fnGetNetPower);
+                            n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", min, max));
+                        } else {
+                            if(Integer.parseInt(n) > max) {
+                                continue;
+                            }
+                        }
                     }
                     final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
                             " or greater>";
@@ -566,6 +575,8 @@ public final class GameActionUtil {
                     String str = "Pay for Casualty? " + cost.toSimpleString();
                     boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
+                    tr.setSVar("CasualtyPaid", v ? "1" : "0");
+                    tr.getOverridingAbility().setSVar("CasualtyPaid", v ? "1" : "0");
                     tr.setSVar("Casualty", v ? n : "0");
                     tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
 
