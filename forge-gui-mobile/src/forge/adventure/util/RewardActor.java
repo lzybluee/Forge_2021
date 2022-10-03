@@ -1,11 +1,13 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
@@ -21,12 +23,21 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
+import forge.Graphics;
+import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
+import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
+import forge.card.CardImageRenderer;
+import forge.card.CardRenderer;
+import forge.game.card.CardView;
 import forge.gui.GuiBase;
+import forge.item.PaperCard;
 import forge.util.ImageFetcher;
+
+import static forge.adventure.util.Paths.ITEMS_ATLAS;
 
 /**
  * Render the rewards as a card on the reward scene.
@@ -37,8 +48,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     Reward reward;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
 
+    final int preview_w = 488; //Width and height for generated images.
+    final int preview_h = 680;
+
     static TextureRegion backTexture;
     Texture image;
+    Texture generatedTooltip = null; //Storage for a generated tooltip. To dispose of on exit.
     boolean needsToBeDisposed;
     float flipProcess = 0;
     boolean clicked = false;
@@ -46,6 +61,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean flipOnClick;
     private boolean hover;
 
+    public static int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     Image toolTipImage;
 
@@ -53,6 +69,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public void dispose() {
         if (needsToBeDisposed)
             image.dispose();
+          if (generatedTooltip != null)
+             generatedTooltip.dispose();
     }
 
     public Reward getReward() {
@@ -75,22 +93,49 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
                     setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
                 } else {
-
                     if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                        //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
+                        Graphics G = new Graphics();
+                        if(renderedCount++ == 0) {
+                            //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
+                            G.begin(preview_w, preview_h);
+                            CardImageRenderer.drawCardImage(G, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+                            G.end();
+                        }
+                        Texture T = renderPlaceholder(G, reward.getCard()); //Now we can render the card.
+                        setCardImage(T);
+                        //Set the fetcher regardless. It'll replace the preview once it lands.
                         fetcher.fetchImage(reward.getCard().getImageKey(false), this);
                     }
                 }
                 break;
             }
+            case Item: {
+                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
+                Sprite backSprite = atlas.createSprite("CardBack");
+                Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
+
+                DrawOnPixmap.draw(drawingMap, backSprite);
+                Sprite item = reward.getItem().sprite();
+
+                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
+                //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
+
+                setItemTooltips(item);
+                image=new Texture(drawingMap);
+                drawingMap.dispose();
+                needsToBeDisposed = true;
+                break;
+            }
             case Gold: {
-                TextureAtlas atlas = Config.instance().getAtlas("sprites/items.atlas");
+                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite gold = atlas.createSprite("Gold");
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f), backSprite.getWidth());
+                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f)-1, backSprite.getWidth(), true,Color.WHITE);
 
                 image=new Texture(drawingMap);
                 drawingMap.dispose();
@@ -98,14 +143,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
             case Life: {
-                TextureAtlas atlas = Config.instance().getAtlas("sprites/items.atlas");
+                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite gold = atlas.createSprite("Life");
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f), backSprite.getWidth());
+                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f)-1, backSprite.getWidth(), true,Color.WHITE);
 
                 image = new Texture(drawingMap);
                 drawingMap.dispose();
@@ -137,7 +182,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (Forge.isTextureFilteringEnabled())
             image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
         TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
-        drawable.setMinSize((Scene.GetIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.GetIntendedHeight() * 0.95f);
+        if(Forge.isLandscapeMode())
+            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+        else
+            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
         toolTipImage = new Image(drawable);
         tooltip = new Tooltip<Image>(toolTipImage);
         holdTooltip = new HoldTooltip(new Image(drawable));
@@ -148,6 +196,68 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             else
                 addListener(tooltip);
         }
+    }
+
+    private Texture renderPlaceholder(Graphics G, PaperCard card){ //Use CardImageRenderer to output a Texture.
+        Matrix4 m  = new Matrix4();
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, preview_w, preview_h, false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+
+        G.begin(preview_w, preview_h);
+        G.setProjectionMatrix(m);
+        G.startClip();
+        CardImageRenderer.drawCardImage(G, CardView.getCardForUi(card), false, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+        G.end();
+        G.endClip();
+        //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
+        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+        frameBuffer.end();
+        G.dispose();
+        frameBuffer.dispose();
+        return result;
+    }
+
+    private void setItemTooltips(Sprite icon) {
+        float icon_w = 64f; float icon_h = 64f; //Sizes for the embedded icon. Could be made smaller on smaller resolutions.
+        Matrix4 m  = new Matrix4();
+        ItemData item = getReward().getItem();
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+        Graphics G = new Graphics();
+        G.begin(preview_w, preview_h);
+        G.setProjectionMatrix(m);
+        G.startClip();
+        //Draw item description panel.
+        G.fillRect(new Color(0f, 0f, 0f, 0.96f), 0, 0, preview_w, preview_h); //Translucent background.
+        G.drawRectLines(2, Color.WHITE, 0, 0, preview_w, preview_h); //Add a border.
+        G.drawImage(icon, 2, 2, icon_w, icon_h); //Draw the item's icon.
+        G.drawText(item.name, FSkinFont.get(24), Color.WHITE, icon_w + 2, 2, preview_w - (icon_w + 2), icon_h, false, 1, true); //Item name.
+        G.drawRectLines(1, Color.WHITE, 6, icon_h + 2, preview_w - 12, preview_h - (icon_h + 6)); //Description border.
+        G.drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, true, Align.left, false); //Description.
+        G.end();
+        G.endClip();
+        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+        frameBuffer.end();
+        G.dispose();
+        frameBuffer.dispose();
+        //Rendering code ends here.
+
+        TextureRegionDrawable drawable = new TextureRegionDrawable(result);
+        if(Forge.isLandscapeMode())
+            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+        else
+            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
+        toolTipImage = new Image(drawable);
+        tooltip = new Tooltip<>(toolTipImage);
+        holdTooltip = new HoldTooltip(new Image(drawable));
+        tooltip.setInstant(true);
+        if (frontSideUp()) {
+            if (GuiBase.isAndroid()) addListener(holdTooltip);
+            else addListener(tooltip);
+        }
+        generatedTooltip = result; //Dispose of this later.
     }
 
     private boolean frontSideUp() {
@@ -176,7 +286,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         super.act(delta);
         if (clicked) {
             if (flipProcess < 1)
-                flipProcess += delta;
+                flipProcess += delta * 1.5;
             else
                 flipProcess = 1;
 
@@ -206,7 +316,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             batch.setColor(0.5f, 0.5f, 0.5f, 1);
 
         if (!frontSideUp()) {
-            batch.draw(backTexture, -getWidth() / 2, -getHeight() / 2, getWidth(), getHeight());
+            if (flipOnClick) {
+                batch.draw(backTexture, -getWidth() / 2, -getHeight() / 2, getWidth(), getHeight());
+            } else {
+                batch.draw(backTexture, getWidth() / 2, -getHeight() / 2, -getWidth(), getHeight());
+            }
         } else {
             drawFrontSide(batch);
         }
@@ -247,7 +361,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             batch.draw(ImageCache.defaultImage, x, -getHeight() / 2, width, getHeight());
         switch (reward.getType()) {
             case Card:
-
                 break;
             case Gold:
                 break;
@@ -260,19 +373,19 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         final Vector3 direction = new Vector3(0, 0, -1);
         final Vector3 up = new Vector3(0, 1, 0);
         //final Vector3 position = new Vector3( getX()+getWidth()/2 , getY()+getHeight()/2, 0);
-        final Vector3 position = new Vector3(Scene.GetIntendedWidth() / 2f, Scene.GetIntendedHeight() / 2f, 0);
+        final Vector3 position = new Vector3(Scene.getIntendedWidth() / 2f, Scene.getIntendedHeight() / 2f, 0);
 
         float fov = 67;
         Matrix4 projection = new Matrix4();
         Matrix4 view = new Matrix4();
-        float hy = Scene.GetIntendedHeight() / 2f;
+        float hy = Scene.getIntendedHeight() / 2f;
         float a = (float) ((hy) / Math.sin(MathUtils.degreesToRadians * (fov / 2f)));
         float height = (float) Math.sqrt((a * a) - (hy * hy));
         position.z = height * 1f;
         float far = height * 2f;
         float near = height * 0.8f;
 
-        float aspect = (float) Scene.GetIntendedWidth() / (float) Scene.GetIntendedHeight();
+        float aspect = (float) Scene.getIntendedWidth() / (float) Scene.getIntendedHeight();
         projection.setToProjection(Math.abs(near), Math.abs(far), fov, aspect);
         view.setToLookAt(position, position.cpy().add(direction), up);
         Matrix4.mul(projection.val, view.val);
@@ -332,15 +445,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         public boolean longPress(Actor actor, float x, float y) {
             //Vector2 point = actor.localToStageCoordinates(tmp.set(x, y));
             tooltip_actor.setX(actor.getRight());
-            if (tooltip_actor.getX() + tooltip_actor.getWidth() > 480)
-                tooltip_actor.setX(actor.getX() - tooltip_actor.getWidth());
-            tooltip_actor.setY(270 / 2 - tooltip_actor.getHeight() / 2);
-            if (!Forge.isLandscapeMode()) {
-                float h = height * 0.65f;
-                tooltip_actor.setX(480/2 - tooltip_actor.getWidth() /2);
-                tooltip_actor.setHeight(h);
-                tooltip_actor.setY(270/2 - h/2);
-            }
+            if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
+                tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
+            tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
             //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
             //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
             actor.getStage().addActor(tooltip_actor);

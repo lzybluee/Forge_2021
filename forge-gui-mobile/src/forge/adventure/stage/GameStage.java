@@ -12,11 +12,14 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.PointOfInterestData;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
+import forge.util.MyRandom;
 
 /**
  * Base class to render a player sprite on a map
@@ -49,7 +52,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(Scaling.stretch, Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {
@@ -136,8 +139,8 @@ public abstract class GameStage extends Stage {
         else
             player.setMoveModifier(1);*/
 
-        camera.position.x = Math.min(Math.max(Scene.GetIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.GetIntendedWidth() / 2f);
-        camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2f);
+        camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
+        camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 
 
         onActing(delta);
@@ -188,7 +191,15 @@ public abstract class GameStage extends Stage {
                     ((MapActor) actor).setBoundDebug(true);
                 }
             }
+            setDebugAll(true);
             player.setBoundDebug(true);
+        }
+        if (keycode == Input.Keys.F2) {
+            TileMapScene S = ((TileMapScene)SceneType.TileMapScene.instance);
+            PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
+            PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+            S.load(PoI);
+            Forge.switchScene(S);
         }
         if (keycode == Input.Keys.F11) {
             debugCollision(false);
@@ -198,11 +209,6 @@ public abstract class GameStage extends Stage {
                 }
             }
             player.setBoundDebug(false);
-        }
-        if (keycode == Input.Keys.F10) {
-            setDebugAll(true);
-        }
-        if (keycode == Input.Keys.F9) {
             setDebugAll(false);
         }
         return true;
@@ -216,8 +222,8 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         camera.zoom += (amountY * 0.03);
-        if (camera.zoom < 0.2f)
-            camera.zoom = 0.2f;
+        if (camera.zoom < 0.3f)
+            camera.zoom = 0.3f;
         if (camera.zoom > 1.5f)
             camera.zoom = 1.5f;
         return super.scrolled(amountX, amountY);
@@ -320,9 +326,9 @@ public abstract class GameStage extends Stage {
                 break;
 
             if (adjDirX.x >= 0)
-                adjDirX.x = Math.round(Math.max(0, adjDirX.x - 1));
+                adjDirX.x = Math.max(0, adjDirX.x - 0.2f);
             else
-                adjDirX.x = Math.round(Math.max(0, adjDirX.x + 1));
+                adjDirX.x = Math.max(0, adjDirX.x + 0.2f);
         }
         while (true) {
             if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
@@ -333,9 +339,9 @@ public abstract class GameStage extends Stage {
                 break;
 
             if (adjDirY.y >= 0)
-                adjDirY.y = Math.round(Math.max(0, adjDirY.y - 1));
+                adjDirY.y = (Math.max(0, adjDirY.y - 0.2f));
             else
-                adjDirY.y = Math.round(Math.max(0, adjDirY.y + 1));
+                adjDirY.y = (Math.max(0, adjDirY.y + 0.2f));
         }
         if (foundY && foundX)
             return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;
@@ -345,4 +351,5 @@ public abstract class GameStage extends Stage {
             return adjDirX;
         return Vector2.Zero.cpy();
     }
+
 }

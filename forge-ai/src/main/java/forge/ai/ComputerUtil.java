@@ -329,9 +329,6 @@ public class ComputerUtil {
             }
 
             AbilityUtils.resolve(sa);
-
-            // destroys creatures if they have lethal damage, etc..
-            //game.getAction().checkStateEffects();
         }
     }
 
@@ -827,7 +824,7 @@ public class ComputerUtil {
                         }
                     }
 
-                    if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
+                    if ("DesecrationDemon".equals(logic)) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
                     } else if (considerSacThreshold != -1) {
                         sacThreshold = considerSacThreshold;
@@ -1093,7 +1090,7 @@ public class ComputerUtil {
                     playNow = false;
                     break;
                 }
-                if (!playNow && c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c) && c.canBeAttached(card)) {
+                if (!playNow && c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c) && c.canBeAttached(card, null)) {
                     playNow = true;
                 }
             }
@@ -1243,12 +1240,12 @@ public class ComputerUtil {
         final Game game = sa.getActivatingPlayer().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
-        return (sa.getHostCard().isCreature()
+        return sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
-                && !sa.hasParam("ActivationPhases"));
+                && !sa.hasParam("ActivationPhases");
     }
 
     //returns true if it's better to wait until blockers are declared).
@@ -1697,7 +1694,7 @@ public class ComputerUtil {
         }
 
         if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
-            if (saviour != null && saviour.getParam("CounterType").equals("P1P1")) {
+            if (saviour != null && saviour.hasParam("CounterType") && saviour.getParam("CounterType").equals("P1P1")) {
                 toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParamOrDefault("CounterNum", "1"), saviour);
             } else {
                 Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
@@ -1731,7 +1728,7 @@ public class ComputerUtil {
         // Lethal Damage => prevent damage/regeneration/bounce/shroud
         if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll || fightDmg > 0) {
             // If PredictDamage is >= Lethal Damage
-            final int dmg = (fightDmg > 0 ? fightDmg : AbilityUtils.calculateAmount(topStack.getHostCard(),
+            final int dmg = (fightDmg > 0 ? fightDmg : AbilityUtils.calculateAmount(source,
                     topStack.getParam("NumDmg"), topStack));
             final SpellAbility sub = topStack.getSubAbility();
             boolean noRegen = false;
@@ -1821,7 +1818,7 @@ public class ComputerUtil {
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                 || saviourApi == ApiType.Protection || saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll
                 || saviourApi == null)) {
-            final int dmg = -AbilityUtils.calculateAmount(topStack.getHostCard(),
+            final int dmg = -AbilityUtils.calculateAmount(source,
                     topStack.getParam("NumDef"), topStack);
             for (final Object o : objects) {
                 if (o instanceof Card) {
@@ -2148,7 +2145,7 @@ public class ComputerUtil {
         final CardCollectionView castables = CardLists.filter(handList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() > landSize;
+                return c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize;
             }
         });
 
@@ -2692,8 +2689,7 @@ public class ComputerUtil {
     }
 
     public static CardCollection getSafeTargets(final Player ai, SpellAbility sa, CardCollectionView validCards) {
-        CardCollection safeCards = new CardCollection(validCards);
-        safeCards = CardLists.filter(safeCards, new Predicate<Card>() {
+        CardCollection safeCards = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (c.getController() == ai) {
@@ -2706,8 +2702,7 @@ public class ComputerUtil {
     }
 
     public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
-        CardCollection killables = new CardCollection(validCards);
-        killables = CardLists.filter(killables, new Predicate<Card>() {
+        CardCollection killables = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies");

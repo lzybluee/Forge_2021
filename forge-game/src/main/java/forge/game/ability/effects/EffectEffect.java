@@ -61,8 +61,8 @@ public class EffectEffect extends SpellAbilityEffect {
         boolean imprintOnHost = false;
         final String duration = sa.getParam("Duration");
 
-        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
-                && !hostCard.isInPlay()) {
+        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
+                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
             return;
         }
         if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
@@ -272,7 +272,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("CopySVar")) {
-                eff.setSVar(sa.getParam("CopySVar"), sa.getHostCard().getSVar(sa.getParam("CopySVar")));
+                eff.setSVar(sa.getParam("CopySVar"), hostCard.getSVar(sa.getParam("CopySVar")));
             }
 
             // Copy text changes
@@ -311,6 +311,8 @@ public class EffectEffect extends SpellAbilityEffect {
                     game.getUpkeep().addUntil(controller, endEffect);
                 } else if (duration.equals("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(endEffect);
+                } else if (duration.equals("UntilYourNextEndStep")) {
+                    game.getEndOfTurn().addUntil(controller, endEffect);
                 } else if (duration.equals("UntilTheEndOfYourNextTurn")) {
                     if (game.getPhaseHandler().isPlayerTurn(controller)) {
                         game.getEndOfTurn().registerUntilEnd(controller, endEffect);
@@ -318,7 +320,7 @@ public class EffectEffect extends SpellAbilityEffect {
                         game.getEndOfTurn().addUntilEnd(controller, endEffect);
                     }
                 } else if (duration.equals("ThisTurnAndNextTurn")) {
-                    game.getUntap().addAt(new GameCommand() {
+                    game.getEndOfTurn().addUntil(new GameCommand() {
                         private static final long serialVersionUID = -5054153666503075717L;
 
                         @Override

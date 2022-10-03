@@ -3,20 +3,14 @@ package forge.adventure.util;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import forge.Forge;
 
 import java.util.function.Function;
 
@@ -25,11 +19,20 @@ import java.util.function.Function;
  */
 public class Controls {
     private static Skin SelectedSkin = null;
-    private static BitmapFont defaultfont, bigfont, miKrollFantasy;
+    private static BitmapFont defaultfont, bigfont;
 
     static public TextButton newTextButton(String text) {
 
         return new TextButton(text, GetSkin());
+    }
+    static public Rectangle getBoundingRect(Actor actor) {
+
+        return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
+    }
+    static public boolean actorContainsVector (Actor actor, Vector2 point) {
+        if (!actor.isVisible())
+            return false;
+        return getBoundingRect(actor).contains(point);
     }
 
     static public SelectBox newComboBox(String[] text, String item, Function<Object, Void> func) {
@@ -103,8 +106,6 @@ public class Controls {
 
     static public BitmapFont getBitmapFont(String fontName) {
         switch (fontName) {
-            case "MiKrollFantasyBig":
-                return miKrollFantasy;
             case "blackbig":
             case "big":
                 return bigfont;
@@ -122,31 +123,27 @@ public class Controls {
             FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
-            SelectedSkin.addRegions(atlas);
-
-            SelectedSkin.load(skinFile);
             //font
-            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
-            miKrollFantasy = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("MiKrollFantasyBig.fnt"));
-            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
+            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
+            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
             bigfont.getData().setScale(2, 2);
+            SelectedSkin.add("default", defaultfont);
+            SelectedSkin.add("big", bigfont);
+            SelectedSkin.addRegions(atlas);
+            SelectedSkin.load(skinFile);
+
         }
         return SelectedSkin;
     }
 
     public static Label newLabel(String name) {
         Label ret = new Label(name, GetSkin());
-        if (!Forge.isLandscapeMode()) {
-            ret.setFontScaleX(2);
-        }
         return ret;
     }
 
     public static Dialog newDialog(String title) {
         Dialog ret = new Dialog(title, GetSkin());
-        if (!Forge.isLandscapeMode()) {
-            ret.getTitleLabel().setFontScaleX(2);
-        }
+        ret.setMovable(false);
         return ret;
     }
 

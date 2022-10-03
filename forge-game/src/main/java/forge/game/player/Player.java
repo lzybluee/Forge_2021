@@ -197,14 +197,18 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection inboundTokens = new CardCollection();
 
     private KeywordCollection keywords = new KeywordCollection();
+    // stores the keywords created by static abilities
+    private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
 
     private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
 
     private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
     private ManaPool manaPool = new ManaPool(this);
-    private GameEntity mustAttackEntity;
-    private GameEntity mustAttackEntityThisTurn;
     private List<Card> creatureAttackedThisTurn = new ArrayList<>();
+    private List<Player> attackedPlayersThisTurn = new ArrayList<>();
+    private List <Player> attackedPlayersLastTurn = new ArrayList<>();
+    private List<Player> attackedPlayersThisCombat = new ArrayList<>();
+
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
@@ -237,6 +241,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
     private Card monarchEffect;
+    private Card initiativeEffect;
     private Card blessingEffect;
     private Card keywordEffect;
 
@@ -1000,9 +1005,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     // ================ POISON Merged =================================
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
-        // if the key already exists - merge entries
-        KeywordsChange cks = new KeywordsChange(addKeywords, removeKeywords, false);
-        cks.addKeywordsToPlayer(this);
+        List<KeywordInterface> kws = Lists.newArrayList();
+        if (addKeywords != null) {
+            for(String kw : addKeywords) {
+                kws.add(getKeywordForStaticAbility(kw, staticId));
+            }
+        }
+        KeywordsChange cks = new KeywordsChange(kws, removeKeywords, false);
         if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
             getKeywordCard().addChangedCardTraits(
                 cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, timestamp, staticId);
@@ -1010,6 +1019,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this, true));
+    }
+
+    public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId) {
+        KeywordInterface result;
+        if (staticId < 1 || !storedKeywords.contains(staticId, kw)) {
+            result = Keyword.getInstance(kw);
+            result.createTraits(this, false);
+        } else {
+            result = storedKeywords.get(staticId, kw);
+        }
+        return result;
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp, final long staticId) {
@@ -1188,7 +1208,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean canDraw() {
         return canDrawAmount(1);
     }
-    
+
     public final boolean canDrawAmount(int amount) {
         return StaticAbilityCantDraw.canDrawThisAmount(this, amount);
     }
@@ -1416,9 +1436,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardCollection.combine(getCardsIn(Player.ALL_ZONES), getCardsIn(ZoneType.Stack), inboundTokens);
     }
 
+    public final void resetNumDrawnThisDrawStep() {
+        numDrawnThisDrawStep = 0;
+    }
+
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
-        numDrawnThisDrawStep = 0;
         view.updateNumDrawnThisTurn(this);
     }
 
@@ -1516,10 +1539,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
         game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
         return newCard;
-    }
-
-    public final int getNumTokensCreatedThisTurn() {
-        return numTokenCreatedThisTurn;
     }
 
     public final void addTokensCreatedThisTurn(Card token) {
@@ -1968,6 +1987,33 @@ public class Player extends GameEntity implements Comparable<Player> {
         creatureAttackedThisTurn.clear();
     }
 
+    public final void addAttackedPlayersMyTurn(final Player p) {
+        if (!attackedPlayersThisTurn.contains(p)) {
+            attackedPlayersThisCombat.add(p);
+            attackedPlayersThisTurn.add(p);
+        }
+    }
+    public final List<Player> getAttackedPlayersMyTurn() {
+        return attackedPlayersThisTurn;
+    }
+    public final List<Player> getAttackedPlayersMyLastTurn() {
+        return attackedPlayersLastTurn;
+    }
+    public final void clearAttackedPlayersMyTurn() {
+        attackedPlayersThisTurn.clear();
+    }
+    public final void setAttackedPlayersMyLastTurn(List<Player> players) {
+        attackedPlayersLastTurn.clear();
+        attackedPlayersLastTurn.addAll(players);
+    }
+
+    public final List<Player> getAttackedPlayersMyCombat() {
+        return attackedPlayersThisTurn;
+    }
+    public final void clearAttackedPlayersMyCombat() {
+        attackedPlayersThisCombat.clear();
+    }
+
     public final int getVenturedThisTurn() {
         return venturedThisTurn;
     }
@@ -2126,6 +2172,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.Presets.LANDS);
     }
 
+    public boolean hasFerocious() {
+        return !CardLists.filterPower(getCreaturesInPlay(), 4).isEmpty();
+    }
+
+    public final boolean hasSurge() {
+        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
+    }
+
     public final boolean hasBloodthirst() {
         for (Player p : game.getRegisteredPlayers()) {
             if (p.isOpponentOf(this) && p.getAssignedDamage() > 0) {
@@ -2135,16 +2189,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public boolean hasFerocious() {
-        return !CardLists.filterPower(getCreaturesInPlay(), 4).isEmpty();
-    }
-
     public final int getBloodthirstAmount() {
         return Aggregates.sum(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
-    }
-
-    public final boolean hasSurge() {
-        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
     }
 
     public final int getOpponentLostLifeThisTurn() {
@@ -2378,22 +2424,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         lifeLostLastTurn = n;
     }
 
-    /**
-     * get the Player object or Card (Planeswalker) object that this Player must
-     * attack this combat.
-     *
-     * @return the Player or Card (Planeswalker)
-     * @since 1.1.01
-     */
-    public final GameEntity getMustAttackEntity() {
-        return mustAttackEntity;
-    }
-    public final void setMustAttackEntity(final GameEntity o) {
-        mustAttackEntity = o;
-    }
-    public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
-    public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
-
     @Override
     public int compareTo(Player o) {
         if (o == null) {
@@ -2540,6 +2570,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
+            setAttackedPlayersMyLastTurn(attackedPlayersThisTurn);
+            clearAttackedPlayersMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
         }
     }
@@ -2765,7 +2797,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (Card c : list) {
             if (c.getDamageHistory().getCreatureAttackedThisCombat()) {
-                c.getDamageHistory().setCreatureAttackedThisCombat(false);
+                c.getDamageHistory().setCreatureAttackedThisCombat(null);
             }
             if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 c.getDamageHistory().setCreatureBlockedThisCombat(false);
@@ -3261,6 +3293,77 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !StaticAbilityCantBecomeMonarch.anyCantBecomeMonarch(this);
     }
 
+    public void createInitiativeEffect(final String set) {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (initiativeEffect == null) {
+            initiativeEffect = new Card(game.nextCardId(), null, game);
+            initiativeEffect.setOwner(this);
+            initiativeEffect.setImmutable(true);
+            if (set != null) {
+                initiativeEffect.setImageKey("t:initiative_" + set.toLowerCase());
+                initiativeEffect.setSetCode(set);
+            } else {
+                initiativeEffect.setImageKey("t:initiative");
+            }
+            initiativeEffect.setName("The Initiative");
+
+            //Set up damage trigger
+            final String damageTrig = "Mode$ DamageDoneOnceByController | ValidSource$ Player | ValidTarget$ You | " +
+                    "CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever one or more " +
+                    "creatures a player controls deal combat damage to you, that player takes the initiative.";
+            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredAttackingPlayer";
+
+            final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, initiativeEffect, true);
+
+            damageTrigger.setOverridingAbility(AbilityFactory.getAbility(damageEff, initiativeEffect));
+            initiativeEffect.addTrigger(damageTrigger);
+
+            //Set up triggers to venture into Undercity
+            final String ventureTakeTrig  = "Mode$ TakesInitiative | ValidPlayer$ You | TriggerZones$ Command | " +
+                    "TriggerDescription$ Whenever you take the initiative and at the beginning of your upkeep, " +
+                    "venture into Undercity. (If you're in a dungeon, advance to the next room. If not, enter " +
+                    "Undercity. You can take the initiative even if you already have it.)";
+
+            final String ventureUpkpTrig = "Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | ValidPlayer$ You " +
+                    "| TriggerDescription$ Whenever you take the initiative and at the beginning of your upkeep, " +
+                    "venture into Undercity. (If you're in a dungeon, advance to the next room. If not, enter " +
+                    "Undercity. You can take the initiative even if you already have it.) | Secondary$ True";
+
+            final String ventureEff = "DB$ Venture | Dungeon$ Undercity";
+
+            final Trigger ventureUTrigger = TriggerHandler.parseTrigger(ventureUpkpTrig, initiativeEffect, true);
+            ventureUTrigger.setOverridingAbility(AbilityFactory.getAbility(ventureEff, initiativeEffect));
+            initiativeEffect.addTrigger(ventureUTrigger);
+
+            final Trigger ventureTTrigger = TriggerHandler.parseTrigger(ventureTakeTrig, initiativeEffect, true);
+            ventureTTrigger.setOverridingAbility(AbilityFactory.getAbility(ventureEff, initiativeEffect));
+            initiativeEffect.addTrigger(ventureTTrigger);
+
+            initiativeEffect.updateStateForView();
+        }
+
+        final TriggerHandler triggerHandler = game.getTriggerHandler();
+        triggerHandler.suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, initiativeEffect, null, null);
+        triggerHandler.clearSuppression(TriggerType.ChangesZone);
+        triggerHandler.clearActiveTriggers(initiativeEffect, null);
+        triggerHandler.registerActiveTrigger(initiativeEffect, false);
+
+        this.updateZoneForView(com);
+    }
+
+    public boolean hasInitiative() {
+        return equals(game.getHasInitiative());
+    }
+
+    public void removeInitiativeEffect() {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (initiativeEffect != null) {
+            com.remove(initiativeEffect);
+            this.updateZoneForView(com);
+        }
+    }
+
     public void updateKeywordCardAbilityText() {
         if (getKeywordCard() == null)
             return;
@@ -3501,7 +3604,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void resetEquippedThisTurn() {
         equippedThisTurn = 0;
     }
-
 
     public boolean hasUrzaLands() {
         final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);

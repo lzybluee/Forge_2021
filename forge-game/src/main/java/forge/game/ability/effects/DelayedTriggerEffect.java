@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -97,6 +98,27 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             trigHandler.registerPlayerDefinedDelayedTrigger(p, delTrig);
         } else if (mapParams.containsKey("ThisTurn")) {
             trigHandler.registerThisTurnDelayedTrigger(delTrig);
+        } else if (mapParams.containsKey("NextTurn")) {
+            final GameCommand nextTurnTrig = new GameCommand() {
+                private static final long serialVersionUID = -5861518814760561373L;
+
+                @Override
+                public void run() {
+                    trigHandler.registerThisTurnDelayedTrigger(delTrig);
+                }
+            };
+            game.getCleanup().addUntil(nextTurnTrig);
+        }  else if (mapParams.containsKey("UpcomingTurn")) {
+            final GameCommand upcomingTurnTrig = new GameCommand() {
+                private static final long serialVersionUID = -5860518814760461373L;
+
+                @Override
+                public void run() {
+                    trigHandler.registerDelayedTrigger(delTrig);
+                    
+                }
+            };
+            game.getCleanup().addUntil(upcomingTurnTrig);
         } else {
             trigHandler.registerDelayedTrigger(delTrig);
         }

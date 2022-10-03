@@ -41,7 +41,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -49,6 +48,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -114,25 +114,11 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        // TODO replace with Static Ability
-        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
-                }
-            }
-        }
-        for (final KeywordInterface inst : attacker.getKeywords(Keyword.UNDEFINED)) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
-                }
-            }
+        final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+        //if it contains only attacker, it only has a non-specific must attack
+        mustAttack.removeAll(new CardCollection(attacker));
+        if (!mustAttack.isEmpty() && !mustAttack.contains(defender)) {
+            return false;
         }
 
         // TODO this should be a factor but needs some alignment with AttachAi
@@ -1203,11 +1189,6 @@ public class ComputerUtilCombat {
     public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat, boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int power = 0;
 
-        //check Exalted only for the first attacker
-        if (combat != null && combat.getAttackers().isEmpty()) {
-            power += attacker.getController().countExaltedBonus();
-        }
-
         // Serene Master switches power with attacker
         if (blocker!= null && blocker.getName().equals("Serene Master")) {
             power += blocker.getNetPower() - attacker.getNetPower();
@@ -1290,21 +1271,17 @@ public class ComputerUtilCombat {
             }
 
             List<Card> list = Lists.newArrayList();
-            if (!sa.hasParam("ValidCards")) {
-                list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
-            }
-            if (sa.hasParam("Defined") && sa.getParam("Defined").startsWith("TriggeredAttacker")) {
-                list.add(attacker);
-            }
             if (sa.hasParam("ValidCards")) {
                 if (attacker.isValid(sa.getParam("ValidCards").split(","), source.getController(), source, null)
                         || attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","),
                                 source.getController(), source, null)) {
                     list.add(attacker);
                 }
+            } else {
+                list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
             }
-            if (list.isEmpty()) {
-                continue;
+            if (sa.hasParam("Defined") && sa.getParam("Defined").startsWith("TriggeredAttacker")) {
+                list.add(attacker);
             }
             if (!list.contains(attacker)) {
                 continue;
@@ -1403,11 +1380,6 @@ public class ComputerUtilCombat {
             , boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int toughness = 0;
 
-        //check Exalted only for the first attacker
-        if (combat != null && combat.getAttackers().isEmpty()) {
-            toughness += attacker.getController().countExaltedBonus();
-        }
-
         if (blocker != null && attacker.getName().equals("Shape Stealer")) {
             toughness += blocker.getNetToughness() - attacker.getNetToughness();
         }
@@ -1486,14 +1458,15 @@ public class ComputerUtilCombat {
                 toughness -= predictDamageTo(attacker, damage, source, false);
                 continue;
             } else if (ApiType.Pump.equals(sa.getApi())) {
+                if (!sa.hasParam("NumDef")) {
+                    continue;
+                }
                 if (sa.hasParam("Cost")) {
                     if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                         continue;
                     }
                 }
-                if (!sa.hasParam("NumDef")) {
-                    continue;
-                }
+
                 final String defined = sa.getParam("Defined");
                 CardCollection list = AbilityUtils.getDefinedCards(source, defined, sa);
                 if (defined != null && defined.startsWith("TriggeredAttacker")) {
@@ -1519,6 +1492,9 @@ public class ComputerUtilCombat {
                     toughness += AbilityUtils.calculateAmount(source, bonus, sa);
                 }
             } else if (ApiType.PumpAll.equals(sa.getApi())) {
+                if (!sa.hasParam("NumDef")) {
+                    continue;
+                }
                 if (sa.hasParam("Cost")) {
                     if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                         continue;
@@ -1526,9 +1502,6 @@ public class ComputerUtilCombat {
                 }
 
                 if (!sa.hasParam("ValidCards")) {
-                    continue;
-                }
-                if (!sa.hasParam("NumDef")) {
                     continue;
                 }
                 if (!attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","), source.getController(), source, sa)) {

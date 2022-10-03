@@ -57,7 +57,7 @@ public enum ProtocolMethod {
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
     getAbilityToPlay    (Mode.SERVER, SpellAbilityView.class, CardView.class, List/*SpellAbilityView*/.class, ITriggerEvent.class),
     assignCombatDamage  (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE, Boolean.TYPE),
-    divideShield        (Mode.SERVER, Map.class, CardView.class, Map.class, Integer.TYPE, Boolean.TYPE, String.class),
+    assignGenericAmount (Mode.SERVER, Map.class, CardView.class, Map.class, Integer.TYPE, Boolean.TYPE, String.class),
     message             (Mode.SERVER, Void.TYPE, String.class, String.class),
     showErrorDialog     (Mode.SERVER, Void.TYPE, String.class, String.class),
     showConfirmDialog   (Mode.SERVER, Boolean.TYPE, String.class, String.class, String.class, String.class, Boolean.TYPE),
@@ -76,7 +76,7 @@ public enum ProtocolMethod {
     refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
-    restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdates*/.class),
+    restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),

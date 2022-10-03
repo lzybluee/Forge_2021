@@ -59,6 +59,7 @@ import forge.util.storage.IStorage;
  */
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
+    private static List<DeckProxy> advPrecons = Lists.newArrayList(), advThemes = Lists.newArrayList(), geneticAI = Lists.newArrayList();
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         try {
@@ -430,6 +431,61 @@ public class DeckgenUtil {
         final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI) {
+        final List<String> selection = new ArrayList<>();
+        Deck deck = null;
+        if (advPrecons.isEmpty()) {
+            advPrecons.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
+        }
+        if (advThemes.isEmpty()) {
+            advThemes.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
+            advThemes.addAll(DeckProxy.getNonEasyQuestDuelDecks());
+        }
+        if (geneticAI.isEmpty()) {
+            geneticAI.addAll(DeckProxy.getAllGeneticAIDecks());
+        }
+        if (!colors.isEmpty()) {
+            for (char c : colors.toLowerCase().toCharArray()) {
+                switch (c) {
+                    case 'b': selection.add("black");
+                    case 'r': selection.add("red");
+                    case 'g': selection.add("green");
+                    case 'u': selection.add("blue");
+                    case 'w': selection.add("white");
+                }
+            }
+        }
+        try {
+            if (useGeneticAI) {
+                if (!selection.isEmpty())
+                    deck = Aggregates.random(Iterables.filter(geneticAI, deckProxy -> deckProxy.getColorIdentity().sharesColorWith(ColorSet.fromNames(colors.toCharArray())))).getDeck();
+                else
+                    deck = Aggregates.random(geneticAI).getDeck();
+
+            } else {
+                if (!selection.isEmpty() && selection.size() < 4) {
+                    Predicate<DeckProxy> pred = Predicates.and(deckProxy -> deckProxy.getMainSize() <= 60, deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
+                    if (isTheme)
+                        deck = Aggregates.random(Iterables.filter(advThemes, pred)).getDeck();
+                    else
+                        deck = Aggregates.random(Iterables.filter(advPrecons, pred)).getDeck();
+                } else {
+                    if (isTheme)
+                        deck = Aggregates.random(Iterables.filter(advThemes, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                    else
+                        deck = Aggregates.random(Iterables.filter(advPrecons, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (deck != null) {
+            return deck;
+        }
+        return getRandomColorDeck(forAi);
     }
 
     /** @return {@link forge.deck.Deck} */

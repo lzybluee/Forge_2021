@@ -17,6 +17,7 @@
  */
 package forge.game.ability;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
 import forge.game.ability.effects.CharmEffect;
@@ -48,7 +50,7 @@ import io.sentry.Sentry;
  */
 public final class AbilityFactory {
 
-    static final List<String> additionalAbilityKeys = Lists.newArrayList(
+    public static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
             "BidSubAbility", // BidLifeEffect
             "ChooseNumberSubAbility", "Lowest", "Highest", "NotLowest", // ChooseNumber
@@ -60,7 +62,8 @@ public final class AbilityFactory {
             "FallbackAbility", // Complex Unless costs which can be unpayable
             "ChooseSubAbility", // Can choose a player via ChoosePlayer
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
-            "AnimateSubAbility" // For ChangeZone Effects to Animate before ETB
+            "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
+            "ReturnAbility" // for Delayed Trigger on Magpie
         );
 
     public enum AbilityRecordType {
@@ -77,7 +80,7 @@ public final class AbilityFactory {
             return prefix;
         }
 
-        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams ) {
+        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams) {
             switch(this) {
                 case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
                 case Spell: return new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
@@ -327,8 +330,17 @@ public final class AbilityFactory {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
-        // TgtPrompt now optional
-        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
+        // TgtPrompt should only be needed for more complicated ValidTgts
+        String tgtWhat = mapParams.get("ValidTgts");
+        final String[] commonStuff = new String[] {
+                //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
+                "Player", "Opponent", "Card"
+        };
+        if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
+            tgtWhat = tgtWhat.toLowerCase();
+        }
+        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") :
+                "Select target " + tgtWhat;
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
@@ -353,9 +365,6 @@ public final class AbilityFactory {
             abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
         }
 
-        if (mapParams.containsKey("TargetsSingleTarget")) {
-            abTgt.setSingleTarget(true);
-        }
         if (mapParams.containsKey("TargetUnique")) {
             abTgt.setUniqueTargets(true);
         }
@@ -500,4 +509,4 @@ public final class AbilityFactory {
         left.appendSubAbility(right);
         return left;
     }
-} // end class AbilityFactory
+}

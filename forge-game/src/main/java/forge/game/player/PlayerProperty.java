@@ -78,6 +78,10 @@ public class PlayerProperty {
             if (player.isMonarch()) {
                 return false;
             }
+        } else if (property.equals("hasInitiative")) {
+            if (!player.hasInitiative()) {
+                return false;
+            }
         } else if (property.equals("hasBlessing")) {
             if (!player.hasBlessing()) {
                 return false;
@@ -94,7 +98,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisCombatDamaged().containsKey(player)) {
+                if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
                     found++;
                 }
             }
@@ -113,7 +117,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisGameDamaged().containsKey(player)) {
+                if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
                     found++;
                 }
             }
@@ -161,6 +165,10 @@ public class PlayerProperty {
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
             if (game.getCombat() == null || !player.equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
+                return false;
+            }
+        } else if (property.equals("attackedBySourceThisTurn")) {
+            if (!source.getDamageHistory().hasAttackedThisTurn(player)) {
                 return false;
             }
         } else if (property.equals("wasDealtDamageThisTurn")) {
@@ -387,11 +395,33 @@ public class PlayerProperty {
             if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.equals("attackedYouTheirLastTurn")) {
+            if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
+                return false;
+            }
+        } else if (property.equals("BeenAttackedThisCombat")) {
+            for (Player p : game.getRegisteredPlayers()) {
+                if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("VenturedThisTurn")) {
             if (player.getVenturedThisTurn() < 1) {
                 return false;
             }
-        }
+        } else if (property.startsWith("NotedFor")) {
+            final String key = property.substring("NotedFor".length());
+            for (String note : player.getNotesForName(key)) {
+                if (note.equals("Name:" + source.getName())) {
+                    return true;
+                }
+                if (note.equals("Id:" + source.getId())) {
+                    return true;
+                }
+            }
+            return false;
+        }  
         return true;
     }
 

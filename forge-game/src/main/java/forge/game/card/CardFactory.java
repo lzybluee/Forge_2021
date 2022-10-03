@@ -137,6 +137,10 @@ public class CardFactory {
             c.setBaseToughness(Integer.parseInt(sourceSA.getParam("CopySetToughness")));
         }
 
+        if (sourceSA.hasParam("CopySetLoyalty")) {
+            c.setBaseLoyalty(AbilityUtils.calculateAmount(source, sourceSA.getParam("CopySetLoyalty"), sourceSA));
+        }
+
         if (sourceSA.hasParam("CopyAddTypes")) {
             c.addType(Arrays.asList(sourceSA.getParam("CopyAddTypes").split(" & ")));
         }
@@ -168,8 +172,10 @@ public class CardFactory {
         if (targetSA.isBestow()) {
             c.animateBestow();
         }
+        
         return c;
     }
+
     /**
      * <p>
      * copySpellAbilityAndPossiblyHost.
@@ -196,9 +202,12 @@ public class CardFactory {
             copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c, controller);
         } else {
             copySA = targetSA.copy(c, controller, false);
+            c.setCastSA(copySA);
         }
 
         copySA.setCopied(true);
+        // 707.10b
+        copySA.setOriginalAbility(targetSA);
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?
@@ -300,7 +309,7 @@ public class CardFactory {
             buildPlaneAbilities(card);
         }
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
-        card.getView().updateState(card);
+        card.updateStateForView();
     }
 
     private static void buildPlaneAbilities(Card card) {
@@ -749,7 +758,7 @@ public class CardFactory {
                 }
             }
 
-            if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
+            if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
                 if (root.isTrigger()) {
@@ -788,16 +797,13 @@ public class CardFactory {
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
-            // set the host card for copied replacement effects
-            // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
-
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());
                 state.setImageKey(originalState.getImageKey());
             }
 
-            // remove some characteristic static abilties
+            // remove some characteristic static abilities
             for (StaticAbility sta : state.getStaticAbilities()) {
                 if (!sta.hasParam("CharacteristicDefining")) {
                     continue;

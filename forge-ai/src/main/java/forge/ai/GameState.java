@@ -831,6 +831,7 @@ public abstract class GameState {
             String id = rememberedEnts.getValue();
 
             Card exiledWith = idToCard.get(Integer.parseInt(id));
+            exiledWith.addExiledCard(c);
             c.setExiledWith(exiledWith);
             c.setExiledBy(exiledWith.getController());
         }
@@ -1142,7 +1143,7 @@ public abstract class GameState {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
             if (attacher.isAttachment()) {
-                attacher.attachToEntity(attachedTo);
+                attacher.attachToEntity(attachedTo, null, true);
             }
         }
 
@@ -1153,7 +1154,7 @@ public abstract class GameState {
             Game game = attacher.getGame();
             Player attachedTo = entry.getValue() == TARGET_AI ? game.getPlayers().get(1) : game.getPlayers().get(0);
 
-            attacher.attachToEntity(attachedTo);
+            attacher.attachToEntity(attachedTo, null);
         }
     }
 
@@ -1351,12 +1352,14 @@ public abstract class GameState {
                     c.animateBestow();
                 } else if (info.startsWith("Transformed")) {
                     c.setState(CardStateName.Transformed, true);
+                    c.setBackSide(true);
                 } else if (info.startsWith("Flipped")) {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
                 } else if (info.startsWith("Modal")) {
                     c.setState(CardStateName.Modal, true);
+                    c.setBackSide(true);
                 }
                 else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";

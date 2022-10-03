@@ -33,7 +33,7 @@ public class PumpAi extends PumpAiBase {
         }
         return cost.hasSpecificCostType(CostTapType.class);
     }
-    
+
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("MoveCounter".equals(aiLogic)) {
@@ -145,6 +145,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             final String counterType = moveSA.getParam("CounterType");
+            final String amountStr = moveSA.getParamOrDefault("CounterNum", "1");
             final CounterType cType = "Any".equals(counterType) ? null : CounterType.getType(counterType);
 
             final PhaseHandler ph = game.getPhaseHandler();
@@ -157,7 +158,6 @@ public class PumpAi extends PumpAiBase {
                     if (attr.isEmpty()) {
                         return false;
                     }
-                    final String amountStr = moveSA.getParam("CounterNum");
                     CardCollection best = CardLists.filter(attr, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {
@@ -198,7 +198,6 @@ public class PumpAi extends PumpAiBase {
                     return true;
                 }
             } else {
-                final String amountStr = moveSA.getParam("CounterNum");
                 final boolean sameCtrl = moveSA.getTargetRestrictions().isSameController();
 
                 List<Card> list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
@@ -399,7 +398,7 @@ public class PumpAi extends PumpAiBase {
 
         if (!mandatory
                 && !immediately
-                && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                && (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS) && !"AnyPhase".equals(sa.getParam("AILogic")))
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
@@ -597,7 +596,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpTgtAI()
+    }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
@@ -658,7 +657,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpMandatoryTarget()
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
@@ -707,7 +706,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpTriggerAI
+    }
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
@@ -779,7 +778,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpDrawbackAI()
+    }
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {

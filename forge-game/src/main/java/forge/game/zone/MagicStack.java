@@ -231,6 +231,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+            runParams.put(AbilityKey.Cost, sp.getPayCosts());
+            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+            runParams.put(AbilityKey.CastSA, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
+            if (sp.isActivatedAbility()) {
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
+            }
+
+            // reset in case a trigger stopped it on a previous activation
+            sp.setUndoable(true);
+
             AbilityUtils.resolve(sp);
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
@@ -273,7 +285,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        if (frozen) {
+        if (frozen && !sp.hasParam("IgnoreFreeze")) {
             si = new SpellAbilityStackInstance(sp);
             frozenStack.push(si);
             return;
@@ -292,9 +304,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         si = push(sp);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
-        runParams.put(AbilityKey.Player, sp.getHostCard().getController());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
         runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
@@ -304,9 +315,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
-            
+
             sp.applyPayingManaEffects();
-            
+
             // Run SpellCast triggers
             if (sp.isSpell()) {
                 if (source.isCommander() && source.getCastFrom() != null && ZoneType.Command == source.getCastFrom().getZoneType()
@@ -328,7 +339,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             // Log number of Equips
-            if (sp.hasParam("Equip")) {
+            if (sp.isEquip()) {
                 activator.addEquipped();
             }
 
@@ -539,9 +550,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
-        if (isEmpty()) {
-            game.copyLastState();
-        }
+        game.copyLastState();
     }
 
     private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
@@ -817,7 +826,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
-            
+
             if(activator == null) {
                 activator = sa.getHostCard().getController();
             }

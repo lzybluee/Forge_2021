@@ -64,15 +64,6 @@ public abstract class SpellAbilityEffect {
         return sa.getDescription();
     }
 
-    protected static final void resolveSubAbility(final SpellAbility sa) {
-        // if mana production has any type of SubAbility, undoable=false
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sa.setUndoable(false);
-            AbilityUtils.resolve(abSub);
-        }
-    }
-
     /**
      * Returns this effect description with needed prelude and epilogue.
      * @param params
@@ -169,18 +160,23 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (!isPlainText) {
-                final List<? extends GameObject> objs;
-                if (t.startsWith("p:")) {
-                    objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
-                } else if (t.startsWith("s:")) {
-                    objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
-                } else if (t.startsWith("c:")) {
-                    objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
+                    String parts[] = t.substring(2).split(" ", 2);
+                    int n = AbilityUtils.calculateAmount(sa.getHostCard(), parts[0], sa);
+                    sb.append(parts.length == 1 ? Lang.getNumeral(n) : Lang.nounWithNumeral(n, parts[1]));
                 } else {
-                    objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
+                    final List<? extends GameObject> objs;
+                    if (t.startsWith("p:")) {
+                        objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
+                    } else if (t.startsWith("s:")) {
+                        objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
+                    } else if (t.startsWith("c:")) {
+                        objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                    } else {
+                        objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
+                    }
+                    sb.append(StringUtils.join(objs, ", "));
                 }
-
-                sb.append(StringUtils.join(objs, ", "));
             } else {
                 sb.append(t);
             }
@@ -579,7 +575,7 @@ public abstract class SpellAbilityEffect {
             // important to update defenders here, maybe some PW got removed
             combat.initConstraints();
             if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(host, attacking, sa);
+                PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(sa.hasParam("ForEach") ? c : host, attacking, sa);
                 defs = new FCollection<>();
                 for (Player p : defendingPlayers) {
                     defs.addAll(combat.getDefendersControlledBy(p));
@@ -648,9 +644,15 @@ public abstract class SpellAbilityEffect {
         return combatChanged;
     }
 
-    protected static GameCommand untilHostLeavesPlayCommand(final CardZoneTable triggerList, final Card hostCard) {
+    protected static GameCommand untilHostLeavesPlayCommand(final CardZoneTable triggerList, final SpellAbility sa) {
+        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         hostCard.addUntilLeavesBattlefield(triggerList.allCards());
+        final TriggerHandler trigHandler  = game.getTriggerHandler();
+        final Card lki = CardUtil.getLKICopy(hostCard);
+        lki.clearControllers();
+        lki.setOwner(sa.getActivatingPlayer());
+
         return new GameCommand() {
 
             private static final long serialVersionUID = 1L;
@@ -676,6 +678,29 @@ public abstract class SpellAbilityEffect {
                         Card newCard = game.getCardState(c, null);
                         if (newCard == null || !newCard.equalsWithTimestamp(c)) {
                             continue;
+                        }
+                        Trigger trig = null;
+                        if (sa.hasAdditionalAbility("ReturnAbility")) {
+                            String valid = sa.getParamOrDefault("ReturnValid", "Card.IsTriggerRemembered");
+
+                            String trigSA = "Mode$ ChangesZone | Origin$ " + cell.getColumnKey() + " | Destination$ " + cell.getRowKey() + " | ValidCard$ " + valid +
+                                    " | TriggerDescription$ " + sa.getAdditionalAbility("ReturnAbility").getParam("SpellDescription");
+
+                            trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
+                            trig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+                            trig.setActiveZone(null);
+                            trig.addRemembered(newCard);
+
+                            SpellAbility overridingSA = sa.getAdditionalAbility("ReturnAbility").copy(hostCard, sa.getActivatingPlayer(), false);
+                            // need to reset the parent, additionalAbility does set it to this
+                            if (overridingSA instanceof AbilitySub) {
+                                ((AbilitySub)overridingSA).setParent(null);
+                            }
+
+                            trig.setOverridingAbility(overridingSA);
+
+                            // Delayed Trigger should only happen once, no need for cleanup?
+                            trigHandler.registerThisTurnDelayedTrigger(trig);
                         }
                         // no cause there?
                         Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, 0, null, moveParams);

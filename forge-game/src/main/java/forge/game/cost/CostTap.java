@@ -20,6 +20,7 @@ package forge.game.cost;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityActivateAbilityAsIfHaste;
 
 /**
  * The Class CostTap.
@@ -61,8 +62,7 @@ public class CostTap extends CostPart {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player player, final boolean effect) {
         final Card source = ability.getHostCard();
-        return source.isUntapped() && ((!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."))
-                || player.getController().canPlayUnlimited());
+        return source.isUntapped() && (!isAbilitySick(source) || player.getController().canPlayUnlimited());
     }
 
     @Override
@@ -75,4 +75,10 @@ public class CostTap extends CostPart {
         return visitor.visit(this);
     }
 
+    public boolean isAbilitySick(final Card source) {
+        if (!source.isSick()) {
+            return false;
+        }
+        return !StaticAbilityActivateAbilityAsIfHaste.canActivate(source);
+    }
 }

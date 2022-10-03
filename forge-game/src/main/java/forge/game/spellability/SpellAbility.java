@@ -21,11 +21,9 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -113,6 +111,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private ManaCost multiKickerManaCost;
     private Player activatingPlayer;
     private Player targetingPlayer;
+    private Card playEffectCard;
     private Pair<Long, Player> controlledByPlayer;
     private ManaCostBeingPaid manaCostBeingPaid;
     private boolean spentPhyrexian = false;
@@ -866,15 +865,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (hasParam("CostDesc")) {
                 sb.append(getParam("CostDesc")).append(" ");
             } else {
-                sb.append(payCosts.toString());
-
-                // for cards like  Crystal Shard with {3}, {T} or {U}, {T}:
                 if (hasParam("AlternateCost")) {
                     Cost alternateCost = new Cost(getParam("AlternateCost"), payCosts.isAbility());
-                    sb.append(" or ").append(alternateCost.toString());
+                    boolean altOnlyMana = alternateCost.isOnlyManaCost();
+                    if (payCosts.isOnlyManaCost() && !altOnlyMana) {
+                        sb.append("Pay ");
+                    }
+                    sb.append(payCosts.toString());
+                    sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
+                            StringUtils.uncapitalize(alternateCost.toString()));
+                    sb.append(isEquip() ? "." : "");
+                } else {
+                    sb.append(payCosts.toString());
                 }
 
-                if (payCosts.isAbility()) {
+                if (payCosts.isAbility() && !isEquip()) {
                     sb.append(": ");
                 }
             }
@@ -1037,6 +1042,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Outlast);
     }
 
+    public boolean isEquip() {
+        return hasParam("Equip");
+    }
+
     public boolean isBlessing() {
         return blessing;
     }
@@ -1117,7 +1126,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.changeZoneTable = new CardZoneTable(changeZoneTable);
             }
 
-            clone.payingMana = Lists.newArrayList(payingMana);
+            clone.payingMana = Lists.newArrayList();
+            // mana is not copied
+            if (lki) {
+                clone.payingMana.addAll(payingMana);
+            }
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(Maps.newHashMap(getPaidHash()));
 
@@ -1424,6 +1437,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isBestow() {
         return isAlternativeCost(AlternativeCost.Bestow);
+    }
+
+    public final boolean isBlitz() {
+        return isAlternativeCost(AlternativeCost.Blitz);
     }
 
     public final boolean isDash() {
@@ -1791,6 +1808,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         targetChosen.add(card);
         setStackDescription(getHostCard().getName() + " - targeting " + card);
     }
+    public void setPlayEffectCard(final Card card) {
+        playEffectCard = card;
+    }
+    public Card getPlayEffectCard() {
+        return playEffectCard;
+    }
 
     /**
      * <p>
@@ -1948,21 +1971,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (!result) {
-                return false;
-            }
-        }
-
-        if (tgt.isSingleTarget()) {
-            Set<GameObject> targets = new HashSet<>();
-            for (TargetChoices tc : topSA.getAllTargetChoices()) {
-                targets.addAll(tc);
-                if (targets.size() > 1) {
-                    // As soon as we get more than one, bail out
-                    return false;
-                }
-            }
-            if (targets.size() != 1) {
-                // Make sure that there actually is one target
                 return false;
             }
         }
@@ -2347,7 +2355,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility getOriginalAbility() {
         return grantorOriginal;
     }
-
     public void setOriginalAbility(final SpellAbility sa) {
         grantorOriginal = sa;
     }
@@ -2355,7 +2362,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public StaticAbility getGrantorStatic() {
         return grantorStatic;
     }
-
     public void setGrantorStatic(final StaticAbility st) {
         grantorStatic = st;
     }

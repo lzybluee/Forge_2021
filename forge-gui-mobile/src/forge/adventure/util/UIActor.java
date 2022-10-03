@@ -7,21 +7,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
-import forge.Forge;
 import forge.adventure.data.UIData;
 
 /**
@@ -29,6 +21,7 @@ import forge.adventure.data.UIData;
  */
 public class UIActor extends Group {
     UIData data;
+    Actor lastActor=null;
 
     public UIActor(FileHandle handle) {
         data = (new Json()).fromJson(UIData.class, handle);
@@ -102,11 +95,28 @@ public class UIActor extends Group {
                         yValue = (Float) property.value;
                         newActor.setY(data.yDown ? data.height - yValue - newActor.getHeight() : yValue);
                         break;
+                    case "yOffset":
+                        if(data.yDown)
+                        {
+                            yValue =  (Float)property.value+((lastActor!=null?(data.height-lastActor.getY()):0f));
+                            newActor.setY( data.height - yValue - newActor.getHeight() );
+                        }
+                        else
+                        {
+
+                            yValue =  (Float)property.value+((lastActor!=null?(lastActor.getY()):0f));
+                            newActor.setY(yValue);
+                        }
+                        break;
+                    case "xOffset":
+                        newActor.setX((Float)property.value+((lastActor!=null?lastActor.getX():0f)));
+                        break;
                     case "name":
                         newActor.setName((String) property.value);
                         break;
                 }
             }
+            lastActor=newActor;
             addActor(newActor);
         }
     }
@@ -150,25 +160,35 @@ public class UIActor extends Group {
             switch (property.key.toString()) {
                 case "style":
                     newActor.setStyle(Controls.GetSkin().get(property.value.toString(), ImageButton.ImageButtonStyle.class));
-                    break;
+                    break; 
             }
         }
     }
 
     private void readLabelProperties(Label newActor, ObjectMap.Entries<String, String> entries) {
+        Label.LabelStyle style = new Label.LabelStyle(newActor.getStyle());
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "text":
                     newActor.setText(property.value.toString());
                     break;
-                case "font":
-                    Label.LabelStyle style = new Label.LabelStyle(newActor.getStyle());
+                case "font"://legacy
                     style.font = Controls.getBitmapFont(property.value.toString());
                     if (property.value.toString().contains("black"))
                         style.fontColor = Color.BLACK;
                     if (property.value.toString().contains("big"))
                         newActor.setFontScale(2, 2);
                     newActor.setStyle(style);
+                    break;
+                case "fontSize":
+                    newActor.setFontScale((Float)property.value, (Float)property.value);
+                    break;
+                case "fontName":
+                    style.font = Controls.getBitmapFont(property.value.toString());
+                    newActor.setStyle(style);
+                    break;
+                case "fontColor":
+                    newActor.setColor(new Color(Integer.decode(property.value.toString()) ));
                     break;
             }
         }
@@ -207,12 +227,6 @@ public class UIActor extends Group {
                 case "image":
                     Texture t = new Texture(Config.instance().getFile(property.value.toString()));
                     TextureRegion tr = new TextureRegion(t);
-                    if (!Forge.isLandscapeMode() && t.toString().contains("title_bg")) {
-                        float ar = 1.78f;
-                        int w = (int) (tr.getRegionHeight() / ar);
-                        int x = (int) ((tr.getRegionWidth() - w) / ar);
-                        tr.setRegion(x, 0, w, tr.getRegionHeight());
-                    }
                     newActor.setDrawable(new TextureRegionDrawable(tr));
                     break;
             }
@@ -226,6 +240,11 @@ public class UIActor extends Group {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if(button instanceof Button)
+                {
+                    if(((Button)button).isDisabled())
+                        return;
+                }
                 func.run();
             }
         });

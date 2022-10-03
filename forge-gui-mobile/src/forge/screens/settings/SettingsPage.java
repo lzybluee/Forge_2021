@@ -179,6 +179,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
             }, 0);
         }
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SELECTOR_MODE,
+                Forge.getLocalizer().getMessage("lblSelectorMode"),
+                Forge.getLocalizer().getMessage("nlSelectorMode"),
+                new String[]{"Default", "Classic", "Adventure"}) {
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                Forge.selector = FModel.getPreferences().getPref(FPref.UI_SELECTOR_MODE);
+            }
+        }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
                 Forge.getLocalizer().getMessage("lblAutomaticBugReports"),
                 Forge.getLocalizer().getMessage("nlAutomaticBugReports")),
@@ -610,6 +620,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
             },4);
         }
+        lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_AIDECK_SELECTION,
+                Forge.getLocalizer().getMessage("lblAutoAIDeck"),
+                Forge.getLocalizer().getMessage("nlAutoAIDeck")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.autoAIDeckSelection = FModel.getPreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
+            }
+        },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
                 Forge.getLocalizer().getMessage("lblShowFPSDisplay"),
                 Forge.getLocalizer().getMessage("nlShowFPSDisplay")){

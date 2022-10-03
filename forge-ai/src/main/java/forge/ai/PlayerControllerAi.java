@@ -3,7 +3,6 @@ package forge.ai;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -378,7 +377,7 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         // put the rest on top in random order
-        Collections.shuffle(toTop, MyRandom.getRandom());
+        CardLists.shuffle(toTop);
         return ImmutablePair.of(toTop, toBottom);
     }
 
@@ -404,7 +403,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        Collections.shuffle(toTop, MyRandom.getRandom());
+        CardLists.shuffle(toTop);
         return ImmutablePair.of(toTop, toGraveyard);
     }
 
@@ -729,7 +728,6 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
-        // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
         return brains.chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
     }
 
@@ -1042,9 +1040,9 @@ public class PlayerControllerAi extends PlayerController {
                 if (sa.isCopied()) {
                     if (sa.isSpell()) {
                         if (!sa.getHostCard().isInZone(ZoneType.Stack)) {
-                            sa.setHostCard(player.getGame().getAction().moveToStack(sa.getHostCard(), sa));
+                            sa.setHostCard(getGame().getAction().moveToStack(sa.getHostCard(), sa));
                         } else {
-                            player.getGame().getStackZone().add(sa.getHostCard());
+                            getGame().getStackZone().add(sa.getHostCard());
                         }
                     }
 
@@ -1055,13 +1053,13 @@ public class PlayerControllerAi extends PlayerController {
                     */
                     if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
                         if (sa.isSpell()) {
-                            player.getGame().getAction().ceaseToExist(sa.getHostCard(), false);
+                            getGame().getAction().ceaseToExist(sa.getHostCard(), false);
                         }
                         continue;
                     }
                 }
                 // need finally add the new spell to the stack
-                player.getGame().getStack().add(sa);
+                getGame().getStack().add(sa);
             }
         }
     }

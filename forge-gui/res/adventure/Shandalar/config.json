@@ -11,13 +11,26 @@
     "decks/starter/red.json",
     "decks/starter/green.json"
   ],
+  "restrictedCards": [
+    "Black Lotus",
+    "Mox Emerald",
+    "Mox Pearl",
+    "Mox Ruby",
+    "Mox Sapphire",
+    "Mox Jet",
+    "Ancestral Recall",
+    "Timetwister",
+    "Time Walk"
+  ],
   "difficulties": [
     {
       "name": "Easy",
       "startingLife": 16,
       "staringMoney": 200,
       "enemyLifeFactor": 0.8,
-      "sellFactor": 0.5
+      "spawnRank": 0,
+      "sellFactor": 0.5     ,
+      "startItems": ["Treasure","Jungle Shield"]
     },
     {
       "name": "Normal",
@@ -25,14 +38,18 @@
       "staringMoney": 100,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
-      "sellFactor": 0.2
+      "spawnRank": 1,
+      "sellFactor": 0.2        ,
+      "startItems": [ "Treasure"]
     },
     {
       "name": "Hard",
       "startingLife": 8,
       "staringMoney": 10,
       "enemyLifeFactor": 1.5,
+      "spawnRank": 2,
       "sellFactor": 0.1
     }
   ]
 }
+

@@ -13,6 +13,7 @@ public class PlayerSprite extends CharacterSprite {
     private final float playerSpeed;
     private final Vector2 direction = Vector2.Zero.cpy();
     private float playerSpeedModifier = 1f;
+    private float playerSpeedEquipmentModifier = 1f;
     GameStage gameStage;
     public PlayerSprite(GameStage gameStage) {
         super(AdventurePlayer.current().spriteName());
@@ -24,7 +25,9 @@ public class PlayerSprite extends CharacterSprite {
                 PlayerSprite.this.updatePlayer();
             }
         });
-        playerSpeed=Config.instance().getConfigData().playerBaseSpeed;
+        playerSpeed = Config.instance().getConfigData().playerBaseSpeed;
+        Current.player().onBlessing( () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
+        Current.player().onEquipmentChanged( () -> playerSpeedEquipmentModifier=Current.player().equipmentSpeed() );
     }
 
     private void updatePlayer() {
@@ -55,11 +58,10 @@ public class PlayerSprite extends CharacterSprite {
     @Override
     public void act(float delta) {
         super.act(delta);
-        direction.setLength(playerSpeed * delta * playerSpeedModifier);
+        direction.setLength(playerSpeed * delta * playerSpeedModifier*playerSpeedEquipmentModifier);
 
         if(!direction.isZero())
         {
-
             gameStage.prepareCollision(pos(),direction,boundingRect);
             direction.set(gameStage.adjustMovement(direction,boundingRect));
             moveBy(direction.x, direction.y);
