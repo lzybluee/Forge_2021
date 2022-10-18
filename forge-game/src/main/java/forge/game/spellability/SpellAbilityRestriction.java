@@ -235,6 +235,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
+        if (sa.isAdventure() && this.getZone() == null) {
+            this.setZone(ZoneType.Hand);
+        }
+
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
 
