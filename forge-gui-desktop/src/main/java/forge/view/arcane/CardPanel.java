@@ -512,6 +512,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
 
+        if(card.getShieldCount() > 0) {
+            drawRegenerationShields(g);
+        }
+
         if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
             List<String> markers = new ArrayList<>();
             markers.add("In Room:");
@@ -752,6 +756,55 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
     }
 
+    private void drawRegenerationShields(final Graphics g) {
+        final Dimension imgSize = calculateImageSize();
+        final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
+
+        final int spaceFromTopOfCard = titleY + 60;
+        final int regenBoxHeight = 24;
+        final int regenBoxBaseWidth = 58;
+
+        FontMetrics smallFontMetrics = g.getFontMetrics(smallCounterFont);
+        FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
+
+        final int numberOfShields = card.getShieldCount();
+        final int regenBoxRealWidth = regenBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfShields));
+
+        final int regenYOffset;
+        if (ForgeConstants.CounterDisplayLocation.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_LOCATION)) == ForgeConstants.CounterDisplayLocation.BOTTOM) {
+            regenYOffset = cardYOffset + spaceFromTopOfCard - regenBoxHeight;
+        } else {
+            regenYOffset = cardYOffset + cardHeight - spaceFromTopOfCard / 2 - regenBoxHeight;
+        }
+
+        if (isSelected) {
+            g.setColor(new Color(0, 0, 0, 255));
+        } else {
+            g.setColor(new Color(0, 0, 0, 200));
+        }
+
+        RoundRectangle2D regArea = new RoundRectangle2D.Float(cardXOffset, regenYOffset, regenBoxRealWidth, regenBoxHeight, 9, 9);
+        ((Graphics2D) g).fill(regArea);
+
+        g.fillRect(cardXOffset, regenYOffset, 9, regenBoxHeight);
+
+        if (isSelected) {
+            g.setColor(Color.GREEN);
+        } else {
+            g.setColor(new Color(Color.GREEN.getRed(), Color.GREEN.getGreen(), Color.GREEN.getBlue(), 180));
+        }
+
+        Rectangle nameBounds = regArea.getBounds();
+        nameBounds.x += 8;
+        nameBounds.y -= 1;
+        nameBounds.width = 43;
+        drawVerticallyCenteredString(g, "Regen", nameBounds, smallCounterFont, smallFontMetrics);
+
+        Rectangle numberBounds = regArea.getBounds();
+        numberBounds.x += 52;
+        drawVerticallyCenteredString(g, String.valueOf(numberOfShields), numberBounds, largeCounterFont, largeFontMetrics);
+    }
+    
     private void drawCounterTabs(final Graphics g) {
         final Dimension imgSize = calculateImageSize();
         final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
