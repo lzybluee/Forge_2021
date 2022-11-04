@@ -18,7 +18,7 @@ public class CounterType implements Comparable<CounterType>, Serializable {
     private String sVal = null;
 
     // Rule 122.1b
-    static ImmutableList<String> keywordCounter = ImmutableList.of(
+    public static ImmutableList<String> keywordCounter = ImmutableList.of(
             "Flying", "First Strike", "Double Strike", "Deathtouch", "Haste", "Hexproof",
             "Indestructible", "Lifelink", "Menace", "Reach", "Trample", "Vigilance");
 

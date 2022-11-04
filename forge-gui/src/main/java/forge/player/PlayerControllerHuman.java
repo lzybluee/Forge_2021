@@ -2797,13 +2797,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
                 final Card card = gameCacheCounters.get(cv);
     
-                final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, new Function<CounterEnumType, CounterType>() {
+                ArrayList<CounterType> counters = Lists.newArrayList();
+                if(subtract) {
+                    counters.addAll(card.getCounters().keySet());
+                } else {
+                    counters.add(CounterType.get(CounterEnumType.P1P1));
+                    counters.add(CounterType.get(CounterEnumType.M1M1));
+                    counters.add(CounterType.get(CounterEnumType.LOYALTY));
+                    counters.add(CounterType.get(CounterEnumType.SHIELD));
+                    counters.add(CounterType.get(CounterEnumType.CHARGE));
+                    for(String keyword : CounterType.keywordCounter) {
+                        counters.add(CounterType.get(keyword));
+                    }
+                    counters.addAll(Collections2.transform(CounterEnumType.values, new Function<CounterEnumType, CounterType>() {
                         @Override
                         public CounterType apply(CounterEnumType input) {
                             return CounterType.get(input);
                         }
                     }));
+                }
     
                 final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
                 if (counter == null) {

@@ -30,13 +30,10 @@ import com.google.common.collect.ImmutableList;
  */
 public enum CounterEnumType {
 
+    M1M1("-1/-1", "-1/-1", 255, 110, 106),
     P1P1("+1/+1", "+1/+1", 96, 226, 23),
 
-    M1M1("-1/-1", "-1/-1", 255, 110, 106),
-
     LOYALTY("LOYAL", 198, 198, 198),
-
-    CHARGE("CHARG", 246, 192, 0),
 
     ACORN("ACORN", 139,69,19),
 
@@ -67,6 +64,8 @@ public enum CounterEnumType {
     CAGE("CAGE", 155, 155, 155),
 
     CARRION("CRRON", 255, 163, 222),
+
+    CHARGE("CHARG", 246, 192, 0),
 
     COIN("COIN",255,215,0),
 
