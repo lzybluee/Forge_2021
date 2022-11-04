@@ -1130,9 +1130,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 // ensure that selection is within maximum allowed changeNum
-                do {
-                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
-                } while (selectedCards != null && selectedCards.size() > changeNum);
+                while(true) {
+                    do {
+                        selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
+                    } while (selectedCards != null && selectedCards.size() > changeNum);
+                    if (selectedCards.size() == 0) {
+                        if(decider.getController().confirmAction(sa, null, "Cancel?")) {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                }
                 if (selectedCards != null) {
                     chosenCards.addAll(selectedCards);
                 }
@@ -1210,6 +1219,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
+            if (chosenCards.size() > 1 && sa.hasParam("ChooseOrder")) {
+                CardCollectionView reordered = decider.getController().orderMoveToZoneList(chosenCards, destination, sa);
+                chosenCards.clear();
+                for(int i = reordered.size() - 1; i >= 0; i--) {
+                    chosenCards.add(reordered.get(i));
+                }
+            }
             if (sa.hasParam("ShuffleChangedPile")) {
                 CardLists.shuffle(chosenCards);
             }
