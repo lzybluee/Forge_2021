@@ -4,6 +4,7 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -85,6 +86,15 @@ public class ReplaceMoved extends ReplacementEffect {
                 }
             Boolean val = (Boolean) runParams.get(AbilityKey.FoundSearchingLibrary);
             if (!val) { return false; }
+        }
+
+        if(hasParam("ValidCard") && hasParam("Destination") && getParam("Destination").equals("Battlefield")) {
+            if(runParams.get(AbilityKey.LastStateBattlefield) != null) {
+                CardCollectionView lastCards = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+                if(runParams.get(AbilityKey.Affected) != getHostCard() && !lastCards.contains(getHostCard())) {
+                    return false;
+                }
+            }
         }
 
         return true;
