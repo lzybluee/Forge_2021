@@ -1691,6 +1691,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
 
     private final void shuffleCards(CardCollection list) {
+    	if(list.size() <= 1) {
+    		return;
+    	}
+
         // overdone but wanted to make sure it was really random
         final Random random = MyRandom.getRandom();
         Collections.shuffle(list, random);
