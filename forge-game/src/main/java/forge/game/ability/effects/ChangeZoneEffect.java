@@ -1134,7 +1134,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     do {
                         selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
                     } while (selectedCards != null && selectedCards.size() > changeNum);
-                    if (selectedCards.size() == 0) {
+                    if (selectedCards.isEmpty() && !fetchList.isEmpty()) {
                         if(decider.getController().confirmAction(sa, null, "Cancel?")) {
                             break;
                         }
