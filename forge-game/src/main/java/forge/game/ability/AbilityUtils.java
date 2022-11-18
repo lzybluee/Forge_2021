@@ -3630,10 +3630,12 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("GreatestPower")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetPower);
+            int max = Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetPower);
+            return max == Integer.MIN_VALUE ? 0 : max;
         }
         if (string.startsWith("GreatestToughness")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetToughness);
+            int max = Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetToughness);
+            return max == Integer.MIN_VALUE ? 0 : max;
         }
 
         if (string.startsWith("SumToughness")) {
