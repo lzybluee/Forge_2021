@@ -5,7 +5,7 @@ A:SP$ Effect | Cost$ 6 B | Name$ Plague of Vermin Life Paid | EffectOwner$ Playe
 SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBRepeatToken
 SVar:DBResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
 SVar:DBRepeatChoice:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
-SVar:DBChoice:DB$ ChooseNumber | Defined$ Player.IsRemembered | Max$ LifeTotal | AILogic$ Vermin | ListTitle$ Pay Any Amount of Life | SubAbility$ DBCheckPaid
+SVar:DBChoice:DB$ ChooseNumber | Defined$ Player.IsRemembered | Max$ LifeTotal | AILogic$ Vermin | ListTitle$ Pay Any Amount of Life | SubAbility$ DBCheckPaid | Notify$ True
 SVar:DBCheckPaid:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBStore
 SVar:DBStore:DB$ PutCounter | Defined$ ValidCommand Effect.namedPlague of Vermin Life Paid+OwnedBy Player.IsRemembered | CounterNum$ X | Placer$ Player.IsRemembered | CounterType$ PLAGUE | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | UnlessCost$ PayLife<X> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBGiveUp | SpellDescription$ You may pay any amount of life.
 SVar:DBGiveUp:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
