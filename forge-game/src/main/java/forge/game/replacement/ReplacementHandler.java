@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -69,7 +70,7 @@ public class ReplacementHandler {
     private Set<ReplacementEffect> hasRun = Sets.newHashSet();
 
     // List of all replacement effect candidates for DamageDone event, in APNAP order
-    private final List<Map<ReplacementEffect, List<Map<AbilityKey, Object>>>> replaceDamageList = new ArrayList<>();
+    private final List<LinkedHashMap<ReplacementEffect, List<Map<AbilityKey, Object>>>> replaceDamageList = new ArrayList<>();
 
     /**
      * ReplacementHandler.
@@ -458,7 +459,7 @@ public class ReplacementHandler {
             int playerIndex = target instanceof Player ? players.indexOf(((Player) target)) :
                                 players.indexOf(((Card) target).getController());
             if (playerIndex == -1) continue;
-            Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = replaceDamageList.get(playerIndex);
+            LinkedHashMap<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = replaceDamageList.get(playerIndex);
             for (Map.Entry<Card, Integer> e : et.getValue().entrySet()) {
                 Card source = e.getKey();
                 Integer damage = e.getValue();
@@ -475,6 +476,29 @@ public class ReplacementHandler {
                     }
 
                     List<ReplacementEffect> reList = getReplacementList(ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
+
+                    List<ReplacementEffect> replaceConuter = Lists.newArrayList();
+                    List<ReplacementEffect> replaceDmgMulti = Lists.newArrayList();
+                    List<ReplacementEffect> replaceRest = Lists.newArrayList();
+                    for (ReplacementEffect re : reList) {
+                        if(re.hasParam("ReplaceWith")) {
+                            String replaceWith = re.getParam("ReplaceWith");
+                            if(replaceWith.equals("Counters")) {
+                                replaceConuter.add(re);
+                            } else if(replaceWith.equals("DmgTwice") || replaceWith.equals("DmgThrice")) {
+                                replaceDmgMulti.add(re);
+                            } else {
+                                replaceRest.add(re);
+                            }
+                        } else {
+                            replaceRest.add(re);
+                        }
+                    }
+                    reList.clear();
+                    reList.addAll(replaceConuter);
+                    reList.addAll(replaceDmgMulti);
+                    reList.addAll(replaceRest);
+
                     for (ReplacementEffect re : reList) {
                         if (!replaceCandidateMap.containsKey(re)) {
                             replaceCandidateMap.put(re, new ArrayList<>());
@@ -697,7 +721,7 @@ public class ReplacementHandler {
             final GameEntityCounterTable counterTable, final SpellAbility cause) {
         PlayerCollection players = game.getPlayersInTurnOrder();
         for (int i = 0; i < players.size(); i++) {
-            replaceDamageList.add(new HashMap<>());
+            replaceDamageList.add(new LinkedHashMap<>());
         }
 
         // Map of all executed replacement effect for DamageDone event, including run params
