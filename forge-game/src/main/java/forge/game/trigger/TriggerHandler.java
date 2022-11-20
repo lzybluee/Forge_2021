@@ -471,6 +471,13 @@ public class TriggerHandler {
             return false; // Trigger removed by effect
         }
 
+        if(regtrig.hasParam("CheckLastState")) {
+            CardCollection cards = (CardCollection) runParams.get(AbilityKey.LastStateBattlefield);
+            if (cards != null && cards.contains(regtrig.getHostCard())) {
+                return false;
+            }
+        }
+
         if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
