@@ -123,7 +123,10 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
-        String afterReplace = produced;
+        String afterReplace = produced.trim();
+        while(afterReplace.contains("  ")) {
+            afterReplace= produced.replaceAll("  ", " ");
+        }
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
 
