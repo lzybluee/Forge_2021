@@ -1397,28 +1397,13 @@ public class GameAction {
                     checkAgain = true;
                 }
             }
-
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
-
-            if(!noRegCreats.isEmpty() || !sacrificeList.isEmpty() || (desCreats != null && !desCreats.isEmpty())) {
-                q--;
-            } else if(game.getRules().hasAppliedVariant(GameType.Commander)
-                    || game.getRules().hasAppliedVariant(GameType.Brawl)
-                    || game.getRules().hasAppliedVariant(GameType.Planeswalker)) {
-                for (Player p : game.getPlayers()) {
-                    for (final Card c : p.getCardsIn(ZoneType.Graveyard).threadSafeIterable()) {
-                        checkAgain |= stateBasedAction903_9a(c);
-                    }
-                    for (final Card c : p.getCardsIn(ZoneType.Exile).threadSafeIterable()) {
-                        checkAgain |= stateBasedAction903_9a(c);
-                    }
-                }
-            }
-
             // only check static abilities once after destroying all the creatures
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
+
+            int destroyedNum = 0;
 
             if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
                 noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard, null);
@@ -1426,7 +1411,8 @@ public class GameAction {
             }
             for (Card c : noRegCreats) {
                 c.updateWasDestroyed(true);
-                sacrificeDestroy(c, null, table, mapParams);
+                if (sacrificeDestroy(c, null, table, mapParams) != null)
+                    destroyedNum++;
             }
 
             if (desCreats != null) {
@@ -1438,7 +1424,8 @@ public class GameAction {
                     orderedDesCreats = true;
                 }
                 for (Card c : desCreats) {
-                    destroy(c, null, true, table, mapParams);
+                    if (destroy(c, null, true, table, mapParams))
+                        destroyedNum++;
                 }
             }
 
@@ -1448,9 +1435,27 @@ public class GameAction {
             }
             for (Card c : sacrificeList) {
                 c.updateWasDestroyed(true);
-                sacrifice(c, null, true, table, mapParams);
+                if (sacrifice(c, null, true, table, mapParams) != null) {
+                    destroyedNum++;
+                }
             }
             setHoldCheckingStaticAbilities(false);
+
+            if (destroyedNum > 0) {
+                q--;
+            } else if (game.getRules().hasAppliedVariant(GameType.Commander)
+                    || game.getRules().hasAppliedVariant(GameType.Brawl)
+                    || game.getRules().hasAppliedVariant(GameType.Planeswalker)
+            ) {
+                for (Player p : game.getPlayers()) {
+                    for (final Card c : p.getCardsIn(ZoneType.Graveyard).threadSafeIterable()) {
+                        checkAgain |= stateBasedAction903_9a(c);
+                    }
+                    for (final Card c : p.getCardsIn(ZoneType.Exile).threadSafeIterable()) {
+                        checkAgain |= stateBasedAction903_9a(c);
+                    }
+                }
+            }
 
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
