@@ -1457,6 +1457,9 @@ public class GameAction {
             if (!checkAgain) {
                 break; // do not continue the loop
             }
+            if(!noRegCreats.isEmpty() || !sacrificeList.isEmpty() || (desCreats != null && !desCreats.isEmpty())) {
+                q--;
+            }
         } // for q=0;q<9
 
         game.getTracker().unfreeze();
