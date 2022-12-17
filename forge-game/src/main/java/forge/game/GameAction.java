@@ -1393,9 +1393,20 @@ public class GameAction {
                     checkAgain = true;
                 }
 
-                if ((game.getRules().hasAppliedVariant(GameType.Commander)
-                        || game.getRules().hasAppliedVariant(GameType.Brawl)
-                        || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
+                if (handlePlaneswalkerRule(p, noRegCreats)) {
+                    checkAgain = true;
+                }
+            }
+
+            // 704.5m World rule
+            checkAgain |= handleWorldRule(noRegCreats);
+
+            if(!noRegCreats.isEmpty() || !sacrificeList.isEmpty() || (desCreats != null && !desCreats.isEmpty())) {
+                q--;
+            } else if(game.getRules().hasAppliedVariant(GameType.Commander)
+                    || game.getRules().hasAppliedVariant(GameType.Brawl)
+                    || game.getRules().hasAppliedVariant(GameType.Planeswalker)) {
+                for (Player p : game.getPlayers()) {
                     for (final Card c : p.getCardsIn(ZoneType.Graveyard).threadSafeIterable()) {
                         checkAgain |= stateBasedAction903_9a(c);
                     }
@@ -1403,13 +1414,8 @@ public class GameAction {
                         checkAgain |= stateBasedAction903_9a(c);
                     }
                 }
-
-                if (handlePlaneswalkerRule(p, noRegCreats)) {
-                    checkAgain = true;
-                }
             }
-            // 704.5m World rule
-            checkAgain |= handleWorldRule(noRegCreats);
+
             // only check static abilities once after destroying all the creatures
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
@@ -1456,9 +1462,6 @@ public class GameAction {
             table.triggerChangesZoneAll(game, null);
             if (!checkAgain) {
                 break; // do not continue the loop
-            }
-            if(!noRegCreats.isEmpty() || !sacrificeList.isEmpty() || (desCreats != null && !desCreats.isEmpty())) {
-                q--;
             }
         } // for q=0;q<9
 
