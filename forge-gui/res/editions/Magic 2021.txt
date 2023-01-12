@@ -291,6 +291,11 @@ ScryfallCode=M21
 278 M Rin and Seri, Inseparable @Leesha Hannigan
 
 [precon product]
+309 L Plains @Jonas De Ro
+310 L Island @Jonas De Ro
+311 L Swamp @Jonas De Ro
+312 L Mountain @Jonas De Ro
+313 L Forest @Jonas De Ro
 320 M Basri, Devoted Paladin @Jason Rainville
 321 C Adherent of Hope @Dan Scott
 322 R Basri's Aegis @Paul Scott Canavan

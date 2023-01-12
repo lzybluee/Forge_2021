@@ -288,6 +288,13 @@ Prerelease=6 Boosters, 1 RareMythic+
 276 L Forest @Alayna Danner
 277 L Forest @Dan Mumford
 
+[precon product]
+380 L Plains @Andreas Rocha
+381 L Island @Andreas Rocha
+382 L Swamp @Kasia Kafis Zielinska
+383 L Mountain @Muhammad Firdaus
+384 L Forest @Andreas Rocha
+
 [tokens]
 b_1_1_bat_flying
 b_2_2_zombie_decayed

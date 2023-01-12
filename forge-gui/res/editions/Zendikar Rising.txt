@@ -296,6 +296,13 @@ ScryfallCode=ZNR
 279 L Forest @Adam Paquette
 280 L Forest @Tianhua X
 
+[precon product]
+380 L Plains @Adam Paquette
+381 L Island @Tianhua X
+382 L Swamp @Adam Paquette
+383 L Mountain @Sam Burley
+384 L Forest @Adam Paquette
+
 [ModalDoubleFaceCards]
 1 Agadeem's Awakening|ZNR
 1 Emeria's Call|ZNR
