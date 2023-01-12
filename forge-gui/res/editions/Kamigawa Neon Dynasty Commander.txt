@@ -1,0 +1,60 @@
+[metadata]
+Code=NEC
+Date=2022-02-18
+Name=Kamigawa: Neon Dynasty Commander
+Type=Commander
+ScryfallCode=NEC
+
+[cards]
+1 M Chishiro, the Shattered Blade @Lius Lasahido
+2 M Kotori, Pilot Prodigy @Aaron J. Riley
+3 M Kaima, the Fractured Calm @Filip Burburan
+4 M Shorikai, Genesis Engine @Wisnu Tan
+5 R Aerial Surveyor @Antonio José Manzanedo
+6 R Drumbellower @Lie Setiawan
+7 R Ironsoul Enforcer @Antonio José Manzanedo
+8 R Organic Extinction @Cristi Balanescu
+9 R Release to Memory @Alayna Danner
+10 R Swift Reconfiguration @Nicholas Gregory
+11 R Access Denied @Johan Grenier
+12 R Cyberdrive Awakener @Zezhou Chen
+13 R Imposter Mech @Andrew Mar
+14 R Kappa Cannoneer @Jesper Ejsing
+15 R Katsumasa, the Animator @Heonhwa Choe
+16 R Research Thief @Cristi Balanescu
+17 R Universal Surveillance @Aaron J. Riley
+18 R Akki Battle Squad @Steve Prescott
+19 R Collision of Realms @Piotr Dura
+20 R Kami of Celebration @Milivoj Ćeran
+21 R Komainu Battle Armor @Nestor Ossandon Leal
+22 R Smoke Spirits' Aid @Uriah Voth
+23 R Unquenchable Fury @Livia Prima
+24 R Ascendant Acolyte @Micah Epstein
+25 R Concord with the Kami @Marta Nael
+26 R Kosei, Penitent Warlord @Matt Stewart
+27 R One with the Kami @Justyna Gil
+28 R Rampant Rejuvenator @Andrey Kuzinskiy
+29 R Silkguard @Dan Scott
+30 R Tanuki Transplanter @Oleksandr Kozachenko
+31 R Myojin of Blooming Dawn @Yigit Koroglu
+32 M Yoshimaru, Ever Faithful @Ilse Gort
+33 R Myojin of Cryptic Dreams @Yigit Koroglu
+34 R Myojin of Grim Betrayal @Jason A. Engle
+35 R Ruthless Technomancer @PINDURSKI
+36 R Myojin of Roaring Blades @Jason A. Engle
+37 M Go-Shintai of Life's Origin @Alexander Mokhov
+38 R Myojin of Towering Might @Ryan Pancoast
+
+[tokens]
+b_0_0_phyrexian_germ
+c_1_1_a_myr
+c_1_1_a_thopter_flying
+c_1_1_e_shrine
+g_0_1_plant
+g_1_1_saproling
+g_3_3_beast
+g_3_3_elephant
+r_1_1_elemental
+r_1_1_goblin
+smoke_blessing
+w_4_4_angel_flying_vigilance
