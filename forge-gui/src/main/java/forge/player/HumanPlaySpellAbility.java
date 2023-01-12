@@ -158,7 +158,8 @@ public class HumanPlaySpellAbility {
                 && announceValuesLikeX()
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
-                && ability.checkRestrictions(human);
+                && ability.checkRestrictions(human)
+                && ability.isLegalAfterStack();
         
         boolean payCost = true;
         if(prerequisitesMet) {

@@ -37,6 +37,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -66,6 +67,7 @@ import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventScry;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -495,6 +497,36 @@ public class GameAction {
 
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.cleanupExiledWith();
+            }
+
+            // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
+            // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
+            if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
+                List<KeywordInterface> newKw = Lists.newArrayList();
+                for (Table.Cell<Long, Long, KeywordsChange> cell : c.getChangedCardKeywords().cellSet()) {
+                    // comes from a static ability
+                    if (cell.getColumnKey() == 0) {
+                        continue;
+                    }
+                    for (KeywordInterface ki : cell.getValue().getKeywords()) {
+                        boolean keepKeyword = false;
+                        for (SpellAbility sa : ki.getAbilities()) {
+                            if (!sa.isSpell()) {
+                                continue;
+                            }
+                            if (sa.getAlternativeCost() != null) {
+                                keepKeyword = true;
+                                break;
+                            }
+                        }
+                        if (keepKeyword) {
+                            newKw.add(ki);
+                        }
+                    }
+                }
+                if (!newKw.isEmpty()) {
+                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getTimestamp(), 0, true);
+                }
             }
         }
 
@@ -1066,6 +1098,24 @@ public class GameAction {
         return holdCheckingStaticAbilities;
     }
 
+    // This doesn't check layers or if the ability gets removed by other effects
+    public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals("Continuous") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (layer != null && !stAb.getLayers().contains(layer)) {
+                    continue;
+                }
+                if (ZoneType.listValueOf(stAb.getParamOrDefault("AffectedZone", ZoneType.Battlefield.toString())).contains(zone)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public final void checkStaticAbilities() {
         checkStaticAbilities(true);
     }
@@ -1300,33 +1350,13 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        // merge entries with same source
-                        List<Integer> dmgList = Lists.newArrayList();
-                        List<Pair<Card, Integer>> remainingDamaged = Lists.newArrayList(c.getReceivedDamageFromThisTurn());
-                        while (!remainingDamaged.isEmpty()) {
-                            Pair <Card, Integer> damaged = remainingDamaged.get(0);
-                            int sum = damaged.getRight();
-                            remainingDamaged.remove(damaged);
-                            for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
-                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
-                                    sum += other.getRight();
-                                    // once it got counted keep it out
-                                    remainingDamaged.remove(other);
-                                }
+                        if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
+                            if (desCreats == null) {
+                                desCreats = new CardCollection();
                             }
-                            dmgList.add(sum);
-                        }
-
-                        for (final Integer dmg : dmgList) {
-                            if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
-                                if (desCreats == null) {
-                                    desCreats = new CardCollection();
-                                }
-                                desCreats.add(c);
-                                c.setHasBeenDealtDeathtouchDamage(false);
-                                checkAgain = true;
-                                break;
-                            }
+                            desCreats.add(c);
+                            c.setHasBeenDealtDeathtouchDamage(false);
+                            checkAgain = true;
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
@@ -2363,6 +2393,7 @@ public class GameAction {
         game.getReplacementHandler().runReplaceDamage(isCombat, damageMap, preventMap, counterTable, cause);
 
         Map<Card, Integer> lethalDamage = Maps.newHashMap();
+        Map<Integer, Card> lkiCache = Maps.newHashMap();
 
         // Actually deal damage according to replaced damage map
         for (Map.Entry<Card, Map<GameEntity, Integer>> et : damageMap.rowMap().entrySet()) {
@@ -2389,6 +2420,8 @@ public class GameAction {
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
+
+                sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
             }
 
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {

@@ -181,9 +181,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
     private Map<Player, String> flipResult;
 
-    private List<Pair<Card, Integer>> receivedDamageFromThisTurn = Lists.newArrayList();
-    private Map<Player, Integer> receivedDamageFromPlayerThisTurn = Maps.newHashMap();
-
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
 
     private boolean isCommander = false;
@@ -258,7 +255,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private String oracleText = "";
 
-    private int damage;
+    private Map<Integer, Integer> damage = Maps.newHashMap();
     private boolean hasBeenDealtDeathtouchDamage;
 
     // regeneration
@@ -952,7 +949,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         devouredCards.add(c);
     }
-
     public final void clearDevoured() {
         devouredCards = null;
     }
@@ -982,7 +978,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void clearDelved() {
         delvedCards = null;
     }
-
 
     public final CardCollectionView getConvoked() {
         return CardCollection.getView(convokedCards);
@@ -5330,62 +5325,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         damageHistory = history;
     }
 
-    public final List<Pair<Card, Integer>> getReceivedDamageFromThisTurn() {
-        return receivedDamageFromThisTurn;
+    public List<Pair<Integer, Boolean>> getDamageReceivedThisTurn() {
+        return damageReceivedThisTurn;
     }
-    public final void setReceivedDamageFromThisTurn(final List<Pair<Card, Integer>> receivedDamageList) {
-        receivedDamageFromThisTurn = Lists.newArrayList(receivedDamageList);
-    }
-    public final Map<Player, Integer> getReceivedDamageFromPlayerThisTurn() {
-        return receivedDamageFromPlayerThisTurn;
-    }
-    public final void setReceivedDamageFromPlayerThisTurn(final Map<Player, Integer> receivedDamageMap) {
-        receivedDamageFromPlayerThisTurn = Maps.newHashMap(receivedDamageMap);
-    }
-
-    public int getReceivedDamageByPlayerThisTurn(final Player p) {
-        if (receivedDamageFromPlayerThisTurn.containsKey(p)) {
-            return receivedDamageFromPlayerThisTurn.get(p);
-        }
-        return 0;
-    }
-
-    public final void addReceivedDamageFromThisTurn(Card c, final int damage) {
-        int currentDamage = 0;
-        // because Aegar cares about the past state we need to keep all LKI instances
-        receivedDamageFromThisTurn.add(Pair.of(c.isLKI() ? c : CardUtil.getLKICopy(c), damage));
-
-        Player p = c.getController();
-        if (p != null) {
-            if (receivedDamageFromPlayerThisTurn.containsKey(p)) {
-                currentDamage = receivedDamageFromPlayerThisTurn.get(p);
-            }
-            receivedDamageFromPlayerThisTurn.put(p, damage+currentDamage);
-        }
-    }
-    public final void resetReceivedDamageFromThisTurn() {
-        receivedDamageFromThisTurn.clear();
-        receivedDamageFromPlayerThisTurn.clear();
-    }
-
-    public final int getTotalDamageReceivedThisTurn() {
-        int total = 0;
-        for (Integer i : receivedDamageFromPlayerThisTurn.values()) {
-            total += i;
-        }
-        return total;
+    public void setDamageReceivedThisTurn(List<Pair<Integer, Boolean>> dmg) {
+        damageReceivedThisTurn.addAll(dmg);
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
-        for (final GameEntity e : getDamageHistory().getThisTurnDamaged().keySet()) {
-            if (e instanceof Player) {
-                final Player p = (Player) e;
-                if (getController().isOpponentOf(p)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return getDamageHistory().getDamageDoneThisTurn(null, true, null, "Player.Opponent", this, getController(), null) > 0;
     }
 
     /**
@@ -5394,11 +5342,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
      * @return the damage done to player p this turn
      */
     public final int getTotalDamageDoneBy() {
-        int sum = 0;
-        for (final GameEntity e : getDamageHistory().getThisTurnDamaged().keySet()) {
-            sum += getDamageHistory().getThisTurnDamaged().get(e);
-        }
-        return sum;
+        return getDamageHistory().getDamageDoneThisTurn(null, false, null, null, this, getController(), null);
     }
 
     // this is the amount of damage a creature needs to receive before it dies
@@ -5421,13 +5365,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final int getDamage() {
-        return damage;
+        int sum = 0;
+        for (int i : damage.values()) {
+            sum += i;
+        }
+        return sum;
     }
     public final void setDamage(int damage0) {
-        if (damage == damage0) { return; }
-        damage = damage0;
+        if (getDamage() == damage0) { return; }
+        damage.clear();
+        if (damage0 != 0) {
+            damage.put(0, damage0);
+        }
         view.updateDamage(this);
         getGame().fireEvent(new GameEventCardStatsChanged(this));
+    }
+
+    public int getMaxDamageFromSource() {
+        return damage.isEmpty() ? 0 : Collections.max(damage.values());
     }
 
     public final boolean hasBeenDealtDeathtouchDamage() {
@@ -5580,14 +5535,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Run replacement effects
         getGame().getReplacementHandler().run(ReplacementType.DealtDamage, AbilityKey.mapFromAffected(this));
 
-        addReceivedDamageFromThisTurn(source, damageIn);
-        source.getDamageHistory().registerDamage(this, damageIn);
-        if (isCombat) {
-            source.getDamageHistory().registerCombatDamage(this, damageIn);
-        } else {
-            getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(true);
-        }
-
         // Run triggers
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
@@ -5614,7 +5561,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 damageType = DamageType.M1M1Counters;
             }
             else { // 120.3e
-                damage += damageIn;
+            	int old = damage.getOrDefault(Objects.hash(source.getId(), source.getTimestamp()), 0);
+                damage.put(Objects.hash(source.getId(), source.getTimestamp()), old + damageIn);
                 view.updateDamage(this);
             }
 
@@ -5754,7 +5702,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return false;
     }
-
     public final void setForetold(final boolean foretold) {
         this.foretold = foretold;
     }
@@ -5772,7 +5719,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setForetoldThisTurn(final boolean foretoldThisTurn) {
         this.foretoldThisTurn = foretoldThisTurn;
     }
-
     public void resetForetoldThisTurn() {
         foretoldThisTurn = false;
     }
@@ -5843,7 +5789,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final long getBestowTimestamp() {
         return bestowTimestamp;
     }
-
     public final void setBestowTimestamp(final long t) {
         bestowTimestamp = t;
     }
@@ -6246,7 +6191,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDamage(0);
         }
         setHasBeenDealtDeathtouchDamage(false);
-        resetReceivedDamageFromThisTurn();
         setRegeneratedThisTurn(0);
         resetShield();
         setBecameTargetThisTurn(false);
@@ -6254,6 +6198,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
+        damageReceivedThisTurn.clear();
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();
