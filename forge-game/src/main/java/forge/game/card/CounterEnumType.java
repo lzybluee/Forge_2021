@@ -247,6 +247,8 @@ public enum CounterEnumType {
 
     PAIN("PAIN", 255, 108, 111),
 
+    PALLIATION("PLLTN", 202, 198, 186),
+
     PARALYZATION("PRLYZ", 220, 201, 0),
 
     PETAL("PETAL", 255, 162, 216),
