@@ -3460,7 +3460,7 @@ public class CardFactoryUtil {
             String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed+castKeyword | AddKeyword$ Haste | AddTrigger$ Dies"
                     + " | Secondary$ True | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
             String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self" +
-                    " | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature dies, draw a card.";
+                    " | Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.";
             String ab = "DB$ Draw | NumCards$ 1";
 
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
