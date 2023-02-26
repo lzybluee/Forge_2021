@@ -1255,12 +1255,18 @@ public class GameAction {
                     controllerChangeZoneCorrection(c);
                     affectedCards.add(c);
                 }
+            }
+        }
+
+        for (Player p : game.getPlayers()) {
+            for (Card c : p.getCardsIn(ZoneType.Battlefield, false).threadSafeIterable()) {
                 if (c.isCreature() && c.isPaired()) {
                     Card partner = c.getPairedWith();
-                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay()) {
+                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay() || c.isPhasedOut() || partner.isPhasedOut()) {
                         c.setPairedWith(null);
                         partner.setPairedWith(null);
                         affectedCards.add(c);
+                        affectedCards.add(partner);
                     }
                 }
             }
