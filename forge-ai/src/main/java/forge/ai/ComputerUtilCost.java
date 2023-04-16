@@ -733,6 +733,7 @@ public class ComputerUtilCost {
             }
         }
 
+        boolean loseLifeWillDie = false;
         if(sa.getApi() == ApiType.LoseLife && sa.hasParam("LifeAmount")) {
             if(!payer.canLoseLife()) {
                 return false;
@@ -742,6 +743,8 @@ public class ComputerUtilCost {
                     int loss = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
                     if(payer.getLife() - loss >= 6) {
                         return false;
+                    } else if(payer.getLife() - loss <= 0) {
+                        loseLifeWillDie = true;
                     }
                 }
             }
@@ -752,8 +755,8 @@ public class ComputerUtilCost {
 
         return checkLifeCost(payer, cost, source, 4, sa)
                 && checkDamageCost(payer, cost, source, 4)
-                && (isMine || checkSacrificeCost(payer, cost, source, sa))
-                && (isMine || checkDiscardCost(payer, cost, source, sa))
+                && (loseLifeWillDie || isMine || checkSacrificeCost(payer, cost, source, sa))
+                && (loseLifeWillDie || isMine || checkDiscardCost(payer, cost, source, sa))
                 && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
                 && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
                 && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
