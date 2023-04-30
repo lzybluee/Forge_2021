@@ -1952,23 +1952,34 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (!possibleReplacers.get(i).getDescription().equals(firstStr)) {
                 List<ReplacementEffect> all = Lists.newArrayList(possibleReplacers);
                 List<ReplacementEffect> reordered = Lists.newArrayList();
+                List<String> related = Lists.newArrayList();
                 for(String s : preferredReplacerOrder) {
                     List<ReplacementEffect> removed = Lists.newArrayList();
                     for(ReplacementEffect re : all) {
                         if(s.equals(re.getDescription())) {
                             reordered.add(re);
                             removed.add(re);
+                            if(!related.contains(s)) {
+                                related.add(s);
+                            }
                         }
                     }
                     all.removeAll(removed);
                 }
                 reordered.addAll(all);
                 ReplacementEffect chosen = getGui().one(prompt, reordered);
-                if(!preferredReplacerOrder.contains(chosen.getDescription())) {
-                    preferredReplacerOrder.add(chosen.getDescription());
-                } else if(!chosen.getDescription().equals(reordered.get(0).getDescription())) {
-                    preferredReplacerOrder.clear();
-                    preferredReplacerOrder.add(chosen.getDescription());
+                final String desc = chosen.getDescription();
+                if(preferredReplacerOrder.isEmpty()) {
+                    preferredReplacerOrder.add(desc);
+                } else if(!desc.equals(reordered.get(0).getDescription())) {
+                    preferredReplacerOrder.removeAll(related);
+                    preferredReplacerOrder.add(desc);
+                    related.remove(desc);
+                    preferredReplacerOrder.addAll(related);
+                } else {
+                    if(!preferredReplacerOrder.contains(desc)) {
+                        preferredReplacerOrder.add(desc);
+                    }
                 }
                 return chosen;
             }
