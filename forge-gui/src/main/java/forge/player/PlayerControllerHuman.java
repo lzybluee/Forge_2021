@@ -171,6 +171,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     protected Map<SpellAbilityView, SpellAbility> spellViewCache = null;
 
+    protected List<String> preferredReplacerOrder = Lists.newArrayList();
+
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp) {
         super(game0, p, lp);
         inputProxy = new InputProxy(this);
@@ -1948,7 +1950,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 1; i < possibleReplacers.size(); i++) {
             // prompt user if there are multiple different options
             if (!possibleReplacers.get(i).getDescription().equals(firstStr)) {
-                return getGui().one(prompt, possibleReplacers);
+                List<ReplacementEffect> all = Lists.newArrayList(possibleReplacers);
+                List<ReplacementEffect> reordered = Lists.newArrayList();
+                for(String s : preferredReplacerOrder) {
+                    List<ReplacementEffect> removed = Lists.newArrayList();
+                    for(ReplacementEffect re : all) {
+                        if(s.equals(re.getDescription())) {
+                            reordered.add(re);
+                            removed.add(re);
+                        }
+                    }
+                    all.removeAll(removed);
+                }
+                reordered.addAll(all);
+                ReplacementEffect chosen = getGui().one(prompt, reordered);
+                if(!preferredReplacerOrder.contains(chosen.getDescription())) {
+                    preferredReplacerOrder.add(chosen.getDescription());
+                } else if(!chosen.getDescription().equals(reordered.get(0).getDescription())) {
+                    preferredReplacerOrder.clear();
+                    preferredReplacerOrder.add(chosen.getDescription());
+                }
+                return chosen;
             }
         }
         // return first option without prompting if all options are the same
