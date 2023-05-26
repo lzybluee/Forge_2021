@@ -1685,6 +1685,7 @@
 #301|Glimpse of Tomorrow|R|MH2
 #302|Chance Encounter|R|MH2
 #303|Break the Ice|U|MH2
+//Rank|Name|Rarity|Set
 #1|Hofri Ghostforge|M|STX
 #2|Tanazir Quandrix|M|STX
 #3|Multiple Choice|R|STX
