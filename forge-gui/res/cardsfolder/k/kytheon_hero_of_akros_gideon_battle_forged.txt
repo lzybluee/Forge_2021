@@ -2,7 +2,7 @@ Name:Kytheon, Hero of Akros
 ManaCost:W
 Types:Legendary Creature Human Soldier
 PT:2/1
-T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Execute$ DelayedTansform | TriggerZones$ Battlefield | Static$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Execute$ DelayedTansform | TriggerZones$ Battlefield | Static$ True | Description$ At end of combat, if CARDNAME and at least two other creatures attacked this combat, exile CARDNAME, then return him to the battlefield transformed under his owner's control.
 SVar:DelayedTansform:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | TriggerDescription$ At end of combat, if CARDNAME and at least two other creatures attacked this combat, exile CARDNAME, then return him to the battlefield transformed under his owner's control.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
