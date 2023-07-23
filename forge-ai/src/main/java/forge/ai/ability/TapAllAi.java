@@ -14,6 +14,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -41,6 +42,9 @@ public class TapAllAi extends SpellAbilityAi {
         CardCollectionView validTappables = game.getCardsIn(ZoneType.Battlefield);
 
         if (sa.usesTargeting()) {
+            if(opp.hasKeyword(Keyword.HEXPROOF) || opp.hasKeyword(Keyword.SHROUD)) {
+                return false;
+            }
             sa.resetTargets();
             sa.getTargets().add(opp);
             validTappables = opp.getCardsIn(ZoneType.Battlefield);
