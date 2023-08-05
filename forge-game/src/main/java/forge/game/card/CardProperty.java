@@ -377,6 +377,14 @@ public class CardProperty {
             if (!card.getExiledWith().equals(host)) {
                 return false;
             }
+        } else if (property.startsWith("ExiledWithDelve")) {
+            if (card.getExiledWith() == null) {
+                return false;
+            }
+
+            if (!card.getExiledWith().equals(source)) {
+                return false;
+            }
         } else if (property.equals("ExiledWithEffectSource")) {
             if (card.getExiledWith() == null) {
                 return false;
