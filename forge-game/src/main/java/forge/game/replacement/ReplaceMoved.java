@@ -30,8 +30,8 @@ public class ReplaceMoved extends ReplacementEffect {
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
-            return false;
-        }
+        		return false;
+        	}
         if (!matchesValidParam("ValidLKI", runParams.get(AbilityKey.CardLKI))) {
             return false;
         }
@@ -88,7 +88,7 @@ public class ReplaceMoved extends ReplacementEffect {
             if (!val) { return false; }
         }
 
-        if(hasParam("ValidCard") && hasParam("Destination") && getParam("Destination").equals("Battlefield")) {
+        if(!getHostCard().isEffect() && hasParam("ValidCard") && hasParam("Destination") && getParam("Destination").equals("Battlefield")) {
             if(runParams.get(AbilityKey.LastStateBattlefield) != null) {
                 CardCollectionView lastCards = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
                 if(runParams.get(AbilityKey.Affected) != getHostCard() && !lastCards.contains(getHostCard())) {
