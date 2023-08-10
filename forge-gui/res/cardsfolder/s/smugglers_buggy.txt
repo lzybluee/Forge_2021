@@ -8,4 +8,6 @@ SVar:TrigPlay:DB$ Play | ValidSA$ Spell | Defined$ Remembered | Amount$ All | Co
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | ConditionDefined$ Imprinted | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card
 K:Crew:2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Hideaway 4 (When this artifact enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nWhenever Smuggler's Buggy deals combat damage to a player, you may cast the exiled card without paying its mana cost. If you do, return Smuggler's Buggy to its owner's hand.\nCrew 2
