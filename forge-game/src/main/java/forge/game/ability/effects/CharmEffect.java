@@ -204,6 +204,10 @@ public class CharmEffect extends SpellAbilityEffect {
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, sa.hasParam("CanRepeatModes"));
         chainAbilities(sa, chosen);
 
+        if(sa.hasParam("ChoiceRestriction")) {
+            source.addChosenModes(sa, sa.getSubAbility().getDescription());
+        }
+
         // trigger without chosen modes are removed from stack
         if (sa.isTrigger()) {
             return chosen != null && !chosen.isEmpty();

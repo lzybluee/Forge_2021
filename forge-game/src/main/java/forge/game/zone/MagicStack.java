@@ -272,11 +272,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp.getApi() == ApiType.Charm && sp.hasParam("ChoiceRestriction")) {
-            // Remember the Choice here for later handling
-            source.addChosenModes(sp, sp.getSubAbility().getDescription());
-        }
-
         //cancel auto-pass for all opponents of activating player
         //when a new non-triggered ability is put on the stack
         if (!sp.isTrigger()) {
