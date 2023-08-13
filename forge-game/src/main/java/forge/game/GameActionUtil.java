@@ -145,7 +145,9 @@ public final class GameActionUtil {
                 if (o.isWithFlash()) {
                     sar.setInstantSpeed(true);
                 }
-                sar.setZone(null);
+                if(o.grantsZonePermissions()) {
+                    sar.setZone(null);
+                }
                 newSA.setMayPlay(o.getAbility());
 
                 if (changedManaCost) {
