@@ -2248,7 +2248,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (getGame() != null) {
             useGrayTag = game.getRules().useGrayText();
         }
-        final String grayTag = useGrayTag ? "<span style=\"color:gray;\">" : "";
+        final String grayTag = useGrayTag ? "<span style=\"color:silver;\">" : "";
         final String endTag = useGrayTag ? "</span>" : "";
         final CardTypeView type = state.getType();
 
