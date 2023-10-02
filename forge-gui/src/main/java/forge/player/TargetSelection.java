@@ -369,6 +369,12 @@ public class TargetSelection {
             }
             if (madeChoice instanceof StackItemView) {
                 ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
+                if (selectOptions.contains("[FINISH TARGETING]")) {
+                	selectOptions.remove(madeChoice);
+                	if(selectOptions.size() <= 1) {
+                		bTargetingDone = true;
+                	}
+                }
             } else {// 'FINISH TARGETING' chosen
                 bTargetingDone = true;
             }
