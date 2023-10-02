@@ -47,6 +47,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("Defined")) {
+            // If there needs to be an imprinted card, don't activate the ability if nothing was imprinted yet (e.g. Mimic Vat)
+            if (sa.getParam("Defined").equals("Imprinted.ExiledWithSource") && source.getImprintedCards().isEmpty()) {
+                return false;
+            }
+        }
+
         if ("MomirAvatar".equals(aiLogic)) {
             return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
         } else if ("MimicVat".equals(aiLogic)) {
@@ -64,13 +71,6 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (sa.hasParam("AtEOT") && !ph.is(PhaseType.MAIN1)) {
             return false;
-        }
-
-        if (sa.hasParam("Defined")) {
-            // If there needs to be an imprinted card, don't activate the ability if nothing was imprinted yet (e.g. Mimic Vat)
-            if (sa.getParam("Defined").equals("Imprinted.ExiledWithSource") && source.getImprintedCards().isEmpty()) {
-                return false;
-            }
         }
 
         if (sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
