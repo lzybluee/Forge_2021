@@ -1031,11 +1031,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // Card name overlay
         String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
-        if (card.isToken() && !name.endsWith(" Token")) {
-            name += " (T)";
+        if (card.getId() >= 0 && card.getCurrentState().getType().hasStringType("Class") && card.getZone() == ZoneType.Battlefield) {
+            name += " (L" + card.getClassLevel() + ")";
         }
         if (card.isCloned() && !card.isToken()) {
             name += " (C)";
+        }
+        if (card.isToken() && !name.endsWith(" Token")) {
+            name += " (T)";
         }
         titleText.setText(name);
         // Screen readers can't tell if a card is tapped.
