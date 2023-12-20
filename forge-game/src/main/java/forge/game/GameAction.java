@@ -362,8 +362,10 @@ public class GameAction {
                     if (commanderEffect != null) break;
                 }
                 // Disable the commander replacement effect
-                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
-                    re.setSuppressed(true);
+                if(commanderEffect != null) {
+                    for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                        re.setSuppressed(true);
+                    }
                 }
             }
 
