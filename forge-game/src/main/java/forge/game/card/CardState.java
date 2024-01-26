@@ -455,9 +455,13 @@ public class CardState extends GameObject implements IHasSVars {
 
         if (getTypeWithChanges().isPlaneswalker()) {
             if (loyaltyRep == null) {
-                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
+                if(!this.baseLoyalty.isEmpty()) { 
+                    loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
+                    result.add(loyaltyRep);
+                }
+            } else {
+                result.add(loyaltyRep);
             }
-            result.add(loyaltyRep);
         }
 
         card.updateReplacementEffects(result, this);
