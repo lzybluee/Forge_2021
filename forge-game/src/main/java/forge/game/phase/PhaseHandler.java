@@ -388,7 +388,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case CLEANUP:
                     // Rule 514.1
                     final int handSize = playerTurn.getZone(ZoneType.Hand).size();
-                    final int max = playerTurn.getMaxHandSize();
+                    final int max = Math.max(playerTurn.getMaxHandSize(), 0);
                     int numDiscard = playerTurn.isUnlimitedHandSize() || playerTurn.getController().canPlayUnlimited()
                             || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
