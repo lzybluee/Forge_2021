@@ -437,9 +437,20 @@ public class ComputerUtilCombat {
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
-                if (!attacker.getSVar("MustBeBlocked").equals("")) {
+                List<String> mustBeBlocked = Lists.newArrayList();
+                if (attacker.hasSVar("MustBeBlocked")) {
+                    mustBeBlocked.add(attacker.getSVar("MustBeBlocked"));
+                }
+                Player player = attacker.getController();
+                for(Card c : player.getCardsIn(ZoneType.Command)) {
+                    for(Trigger t : c.getTriggers()) {
+                        if(t.hasParam("MustBeBlocked")) {
+                            mustBeBlocked.add(t.getParam("MustBeBlocked"));
+                        }
+                    }
+                }
+                for (String condVal : mustBeBlocked) {
                     boolean cond = false;
-                    String condVal = attacker.getSVar("MustBeBlocked");
                     boolean isAttackingPlayer = combat.getDefenderByAttacker(attacker) instanceof Player;
 
                     cond |= "true".equalsIgnoreCase(condVal);
