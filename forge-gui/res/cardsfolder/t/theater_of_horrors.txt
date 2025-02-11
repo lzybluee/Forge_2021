@@ -5,7 +5,8 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZ
 SVar:TrigExile:DB$ Dig | Defined$ You | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True
 S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Condition$ PlayerTurn | CheckSVar$ X | Description$ During your turn, if an opponent lost life this turn, you may play lands and cast spells from among cards exiled with CARDNAME.
 SVar:X:Count$LifeOppsLostThisTurn
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+T:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | Execute$ DBForget
+T:Mode$ LandPlayed | ValidCard$ Card.IsRemembered | Static$ True | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
