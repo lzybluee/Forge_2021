@@ -821,7 +821,7 @@ public class GameAction {
 
         // need to refresh ability text for affected cards
         for (final StaticAbility stAb : c.getStaticAbilities()) {
-            if (stAb.isSuppressed() || !stAb.checkConditions()) {
+            if (stAb.isSuppressed()) {
                 continue;
             }
 
