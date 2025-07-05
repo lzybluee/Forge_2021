@@ -61,7 +61,7 @@ public class Mana {
             return false;
         }
 
-        if (mp.getTriggersWhenSpent() || mp2.getTriggersWhenSpent()) {
+        if ((mp!= null && mp.getTriggersWhenSpent()) || (mp2!= null && mp2.getTriggersWhenSpent())) {
             return mp == mp2;
         }
 
