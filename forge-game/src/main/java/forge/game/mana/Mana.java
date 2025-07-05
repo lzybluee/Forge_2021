@@ -61,6 +61,10 @@ public class Mana {
             return false;
         }
 
+        if (mp.getTriggersWhenSpent() || mp2.getTriggersWhenSpent()) {
+            return mp == mp2;
+        }
+
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
 
