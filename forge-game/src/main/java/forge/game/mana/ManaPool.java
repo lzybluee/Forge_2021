@@ -184,12 +184,13 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return removeMana(mana, true);
     }
     public boolean removeMana(final Mana mana, boolean updateView) {
-        if (floatingMana.remove(mana.getColor(), mana) && updateView) {
+        boolean removed = floatingMana.remove(mana.getColor(), mana);
+        if (removed && updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
             return true;
         }
-        return false;
+        return removed;
     }
 
     public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment, boolean autoPay) {
@@ -243,7 +244,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
         // only pay mana into manaCost when the Mana could be removed from the Mana pool
         // if the mana wasn't in the mana pool then something is wrong
-        if (!removeMana(mana)) {
+        if (!removeMana(mana, !test)) {
             return false;
         }
         manaCost.payMana(mana, this);
@@ -296,11 +297,15 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public static void refundMana(List<Mana> manaSpent, Player player, SpellAbility sa) {
+        refundMana(manaSpent, player, sa, true);
+    }
+
+    public static void refundMana(List<Mana> manaSpent, Player player, SpellAbility sa, boolean updateView) {
         if (sa.getHostCard() != null) {
             sa.getHostCard().setCanCounter(true);
         }
         for (final Mana m : manaSpent) {
-            player.getManaPool().addMana(m);
+            player.getManaPool().addMana(m, updateView);
         }
         manaSpent.clear();
     }
@@ -391,7 +396,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
             if (test) {
-                refundMana(manaSpentToPay, player, sa);
+                refundMana(manaSpentToPay, player, sa, false);
             }
             CostPayment.handleOfferings(sa, test, cost.isPaid());
             return true;

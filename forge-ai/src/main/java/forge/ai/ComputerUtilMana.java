@@ -881,7 +881,7 @@ public class ComputerUtilMana {
         }
 
         if (test) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            ManaPool.refundMana(manaSpentToPay, ai, sa, false);
             resetPayment(paymentList);
         }
 
