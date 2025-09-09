@@ -133,7 +133,10 @@ public class DestroyEffect extends SpellAbilityEffect {
         if (destroyed && remDestroyed) {
             card.addRemembered(gameCard);
         }
-        if (destroyed && sa.hasParam("RememberLKI")) {
+        if (destroyed && sa.hasParam("RememberDestroyedLKI")) {
+            card.addRemembered(lki);
+        }
+        if (sa.hasParam("RememberLKI")) {
             card.addRemembered(lki);
         }
     }
