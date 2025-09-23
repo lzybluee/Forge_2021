@@ -210,4 +210,11 @@ public class CostExile extends CostPartWithList {
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
+    @Override
+    protected void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
+        if (!canPayListAtOnce() && this.from == ZoneType.Hand) {
+            ai.getGame().getAction().reveal(targetCards, ai, true);
+        }
+    }
 }

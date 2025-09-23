@@ -225,8 +225,13 @@ public class CostDiscard extends CostPartWithList {
         return visitor.visit(this);
     }
 
+    @Override
     protected void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
         firstTime = ai.getNumDiscardedThisTurn() == 0;
+
+        if (!canPayListAtOnce()) {
+            ai.getGame().getAction().reveal(targetCards, ai, true);
+        }
     }
 
     @Override
