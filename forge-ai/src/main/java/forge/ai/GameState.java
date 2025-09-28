@@ -682,6 +682,8 @@ public abstract class GameState {
         handlePrecastSpells(game);
         handleMarkedDamage();
 
+        game.copyLastState();
+
         game.getTriggerHandler().setSuppressAllTriggers(false);
 
         // SAs added to stack cause triggers to fire, as if the relevant SAs were cast
