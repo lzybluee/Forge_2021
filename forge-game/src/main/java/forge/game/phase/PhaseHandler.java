@@ -1054,6 +1054,8 @@ public class PhaseHandler implements java.io.Serializable {
                         return;
                     }
 
+                    game.copyLastState();
+
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
                     // this needs to come after chosenSa so it sees you conceding on own turn
