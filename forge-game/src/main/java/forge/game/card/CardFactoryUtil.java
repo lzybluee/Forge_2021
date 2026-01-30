@@ -960,7 +960,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigReturn);
         } else if (keyword.startsWith("Casualty")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | " +
-                    "CheckSVar$ CasualtyPaid | Secondary$ True";
+                    "CheckSVar$ CasualtyPaid | Secondary$ True | TriggerDescription$ Casualty";
             String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True";
             String[] k = keyword.split(":");
             if (k.length > 2) {

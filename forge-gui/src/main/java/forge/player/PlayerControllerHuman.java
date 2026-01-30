@@ -2057,14 +2057,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                        // are the same
                 }
 
-                saLookupKey.append(delim).append(saStr);
-                idxAdditionalInfo = saLookupKey.indexOf(" [");
+                idxAdditionalInfo = saStr.indexOf(" [");
                 if (idxAdditionalInfo > 0) {
-                    saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
+                    saLookupKey.append(delim).append(saStr.substring(0, idxAdditionalInfo - 1));
+                } else {
+                    saLookupKey.append(delim).append(saStr);
                 }
             }
             if (needPrompt) {
                 List<Integer> savedOrder = orderedSALookup.get(saLookupKey.toString());
+
+                if (savedOrder != null && savedOrder.size() != activePlayerSAs.size()) {
+                    savedOrder = null;
+                }
+
                 List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
 
                 // create a mapping between a spell's view and the spell itself
