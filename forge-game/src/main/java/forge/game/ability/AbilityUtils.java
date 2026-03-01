@@ -1435,7 +1435,7 @@ public class AbilityUtils {
             game.getTriggerHandler().resetActiveTriggers(false);
         } else {
             game.getTriggerHandler().resetActiveTriggers();
-            if(sa.hasParam("RunWaitingTriggers")) {
+            if(sa.hasParam("SubAbility") && (sa.getApi() == ApiType.Destroy || sa.getApi() == ApiType.DestroyAll || sa.getApi() == ApiType.Sacrifice || sa.getApi() == ApiType.SacrificeAll)) {
                 game.getTriggerHandler().runWaitingTriggers();
             }
         }
