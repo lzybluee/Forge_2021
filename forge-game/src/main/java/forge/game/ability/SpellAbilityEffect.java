@@ -703,9 +703,9 @@ public abstract class SpellAbilityEffect {
                             // Delayed Trigger should only happen once, no need for cleanup?
                             trigHandler.registerThisTurnDelayedTrigger(trig);
                         }
-                        trigHandler.runWaitingTriggers();
                         // no cause there?
                         Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, 0, null, moveParams);
+                        game.addUnbanished(movedCard);
                         untilTable.put(cell.getColumnKey(), cell.getRowKey(), movedCard);
                     }
                 }

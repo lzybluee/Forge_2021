@@ -120,6 +120,8 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
+    private CardCollection unbanished = null;
+
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
@@ -1265,5 +1267,20 @@ public class Game {
         }
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
+    }
+
+    public void addUnbanished(Card card) {
+        if (unbanished != null) {
+            unbanished.add(card);
+        }
+    }
+    public boolean checkUnbanished(Card host, Object object) {
+        if (unbanished != null && unbanished.contains(host) && lastStateBattlefield.contains(object)) {
+            return true;
+        }
+        return false;
+    }
+    public void clearUnbanished(boolean start) {
+        unbanished = start ? new CardCollection() : null;
     }
 }

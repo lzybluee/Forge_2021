@@ -485,6 +485,13 @@ public class TriggerHandler {
             }
         }
 
+        if (TriggerType.Destroyed.equals(regtrig.getMode()) || TriggerType.Sacrificed.equals(regtrig.getMode()) ||
+                (TriggerType.ChangesZone.equals(regtrig.getMode()) && "Battlefield".equals(regtrig.getParam("Origin")))) {
+            if (game.checkUnbanished(regtrig.getHostCard(), runParams.get(AbilityKey.Card))) {
+                return false;
+            }
+        }
+
         // Torpor Orb check
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
                 && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {

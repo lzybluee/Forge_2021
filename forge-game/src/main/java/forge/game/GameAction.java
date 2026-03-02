@@ -1449,6 +1449,7 @@ public class GameAction {
             // only check static abilities once after destroying all the creatures
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
+            game.clearUnbanished(true);
 
             int destroyedNum = 0;
 
@@ -1507,6 +1508,7 @@ public class GameAction {
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
             }
+            game.clearUnbanished(false);
 
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();

@@ -482,6 +482,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // freeze the stack while we're in the middle of resolving
         freezeStack();
         setResolving(true);
+        game.clearUnbanished(true);
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
         // temporarily reverted removing SAs after resolution
@@ -545,6 +546,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
+        game.clearUnbanished(false);
         game.copyLastState();
     }
 

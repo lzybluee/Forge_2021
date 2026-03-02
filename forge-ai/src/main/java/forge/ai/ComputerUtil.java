@@ -148,10 +148,12 @@ public class ComputerUtil {
         // Remember the now-forgotten kicker cost? Why is this needed?
         sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
 
+        game.clearUnbanished(true);
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
             if (ComputerUtilMana.payManaCost(ai, sa, false)) {
                 game.getStack().addAndUnfreeze(sa);
+                game.clearUnbanished(false);
                 return true;
             }
         } else {
@@ -161,9 +163,11 @@ public class ComputerUtil {
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
                     game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
                 }
+                game.clearUnbanished(false);
                 return true;
             }
         }
+        game.clearUnbanished(false);
         //Should not arrive here
         System.out.println("AI failed to play " + sa.getHostCard());
         return false;

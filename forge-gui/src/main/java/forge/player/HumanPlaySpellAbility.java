@@ -162,6 +162,7 @@ public class HumanPlaySpellAbility {
                 && ability.isLegalAfterStack();
         
         boolean payCost = true;
+        game.clearUnbanished(true);
         if(prerequisitesMet) {
             payCost = isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard()));
             prerequisitesMet = (prerequisitesMet && payCost);
@@ -188,6 +189,7 @@ public class HumanPlaySpellAbility {
                 human.decNumManaConversion();
             }
             game.clearTopLibsCast(ability);
+            game.clearUnbanished(false);
             return false;
         }
 
@@ -216,6 +218,7 @@ public class HumanPlaySpellAbility {
             }
         }
         game.clearTopLibsCast(ability);
+        game.clearUnbanished(false);
         return true;
     }
 
