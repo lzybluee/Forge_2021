@@ -231,7 +231,6 @@ public class GuiChoose {
                                 matchUI.setCard(card);
                             }
 
-                            matchUI.setCard(card);
                             matchUI.clearPanelSelections();
                             matchUI.setPanelSelection(card);
                         }
