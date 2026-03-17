@@ -1,0 +1,23 @@
+humanlife=35
+ailife=6
+humanlandsplayed=1
+ailandsplayed=0
+humanlandsplayedlastturn=0
+ailandsplayedlastturn=0
+turn=14
+activeplayer=human
+activephase=MAIN2
+humanhand=
+humanlibrary=Swamp;Toxic Deluge;Hypnotic Specter;Dark Confidant;Charcoal Diamond;Liliana's Triumph;Swamp;Swamp;Nykthos, Shrine to Nyx;Maralen of the Mornsong;Waste Not;Takenuma, Abandoned Mire;Swamp;Swamp;Sudden Edict;Necrogen Mists;Necropotence;Swamp;Malakir Rebirth;Innocent Blood;Phyrexian Obliterator;Swamp;Tourach, Dread Cantor;Swamp;Demon's Disciple;Chain of Smog;Witch's Cottage;Jet Medallion;Swamp;Geth's Grimoire;Grief;Tinybones, Trinket Thief;Swamp;Deadly Rollick;Reanimate;Arcane Signet;Anvil of Bogardan;Bojuka Bog;Feed the Swarm;Soul Shatter;Demonic Tutor;Animate Dead;Myriad Landscape;Tyrite Sanctum;Lightning Greaves;Smokestack;Mana Crypt;War Room;Desolation;Damnation;Ancient Tomb;Mind Rake;Bottomless Pit;Crypt Ghast;Imperial Seal;Liliana, Waker of the Dead;Geier Reach Sanitarium;Cabal Ritual;Archfiend of Depravity;Mana Vault;Opposition Agent;Dark Deal;Command Beacon;Swamp;Mind Stone;Dark Ritual;Chrome Mox;Mind Twist;Pelakka Predation;Castle Locthwain;Cabal Coffers;Contamination
+humangraveyard=Farewell|Id:481
+humanbattlefield=Swamp;Swamp;Swamp|Tapped;Liliana of the Veil|Counters:LOYALTY=4;Plains|Owner:AI;Swamp|Tapped;Professor Onyx|Counters:LOYALTY=6;Garruk, Primal Hunter|Owner:AI|Counters:LOYALTY=3;Swamp
+humanexile=Sol Ring|ExiledWith:481;Grim Monolith|ExiledWith:481;Expedition Map|ExiledWith:481;Jeweled Lotus|ExiledWith:481;Fellwar Stone|ExiledWith:481;Fleshbag Marauder|ExiledWith:481;Rankle, Master of Pranks|ExiledWith:481;Bitterblossom|ExiledWith:481;Oppression|ExiledWith:481;Mire in Misery|ExiledWith:481;Vampiric Tutor|ExiledWith:481;Memory Jar|ExiledWith:481;Lotus Petal|ExiledWith:481;Cabal Stronghold|ExiledWith:481;Phyrexian Arena|ExiledWith:481;The Eldest Reborn|ExiledWith:481;Vona's Hunger|ExiledWith:481;Smallpox|ExiledWith:481;Plaguecrafter|ExiledWith:481;Urborg, Tomb of Yawgmoth|ExiledWith:481
+humancommand=Tergrid, God of Fright|IsCommander
+humansideboard=
+aihand=
+ailibrary=Ghired, Conclave Exile;Fresh Meat;Command Tower;Cinder Glade;Mountain;Harmonize;Momentous Fall;Doomed Artisan;Trostani, Selesnya's Voice;Feldon of the Third Path;Slice in Twain;Hour of Reckoning;Forest;Ghired's Belligerence;Selesnya Eulogist;Colossal Majesty;Kazandu Refuge;Plains;Boros Garrison;Wayfaring Temple;Emmara Tandris;Forest;Mountain;Graypelt Refuge;Naya Charm;Thragtusk;Ash Barrens;Desolation Twin;Naya Panorama;Evolving Wilds;Jungle Shrine;Druid's Deliverance;Beast Within;Explore;Wingmate Roc;Exotic Orchard;Song of the Worldsoul;Forest;Tectonic Hellion;Garruk's Packleader;Phyrexian Rebirth;Atla Palani, Nest Tender;Plains;Ohran Frostfang;Blossoming Sands;Intangible Virtue;Myriad Landscape;Selesnya Sanctuary;Hate Mirage;Rogue's Passage;Plains;Heart-Piercer Manticore;Trostani's Judgment;Marisi, Breaker of the Coil;Krosan Verge;Mountain;Gargoyle Castle;Voice of Many;Plains;Forest;Rugged Highlands;Sakura-Tribe Elder;Vitu-Ghazi Guildmage;Rootborn Defenses;Angel of Sanctions;Roc Egg;Lightning Greaves;Giant Adephage;Cultivate;Forest;Full Flowering;Plains;Rampaging Baloths;Plains;Forest;Forest;Tahngarth, First Mate;Farseek
+aigraveyard=
+aibattlefield=Forest;Mountain;Tranquil Expanse;Gruul Turf
+aiexile=Scaretiller|ExiledWith:481;Soul Foundry|ExiledWith:481;Mimic Vat|ExiledWith:481;Sol Ring|ExiledWith:481;Idol of Oblivion|ExiledWith:481;Soul of Zendikar|ExiledWith:481;Dragonmaster Outcast|ExiledWith:481;Flamerush Rider|ExiledWith:481;Cliffside Rescuer|ExiledWith:481;Elemental Bond|ExiledWith:481;Growing Ranks|ExiledWith:481;Terramorphic Expanse|ExiledWith:481;Commander's Insignia|ExiledWith:481;Sundering Growth|ExiledWith:481;Second Harvest|ExiledWith:481;Shamanic Revelation|ExiledWith:481
+aicommand=Ghired, Conclave Exile|IsCommander
+aisideboard=
