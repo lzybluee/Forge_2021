@@ -18,6 +18,7 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -810,7 +811,19 @@ public class AiAttackController {
                 } else {
                     if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
                     // check defenders in order of maximum requirements
-                    for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
+                    final List<Pair<GameEntity, Integer>> sortedRequirements = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                    sortedRequirements.sort(new Comparator<Pair<GameEntity, Integer>>() {
+                        @Override
+                        public int compare(Pair<GameEntity, Integer> p1, Pair<GameEntity, Integer> p2) {
+                            if (p1.getValue() == p2.getValue()) {
+                                Integer v1 = (p1.getLeft() instanceof Card) ? ((Card)p1.getLeft()).getCounters(CounterEnumType.LOYALTY) : 0;
+                                Integer v2 = (p2.getLeft() instanceof Card) ? ((Card)p2.getLeft()).getCounters(CounterEnumType.LOYALTY) : 0;
+                                return v2.compareTo(v1);
+                            }
+                            return p1.getValue().compareTo(p2.getValue());
+                        }
+                    });
+                    for (Pair<GameEntity, Integer> e : sortedRequirements) {
                         if (e.getRight() == 0) continue;
                         GameEntity mustAttackDefMaybe = e.getLeft();
                         // Gideon Jura returns LKI
