@@ -820,7 +820,7 @@ public class AiAttackController {
                                 Integer v2 = (p2.getLeft() instanceof Card) ? ((Card)p2.getLeft()).getCounters(CounterEnumType.LOYALTY) : 0;
                                 return v2.compareTo(v1);
                             }
-                            return p1.getValue().compareTo(p2.getValue());
+                            return p2.getValue().compareTo(p1.getValue());
                         }
                     });
                     for (Pair<GameEntity, Integer> e : sortedRequirements) {
