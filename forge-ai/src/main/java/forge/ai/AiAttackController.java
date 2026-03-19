@@ -816,8 +816,8 @@ public class AiAttackController {
                         @Override
                         public int compare(Pair<GameEntity, Integer> p1, Pair<GameEntity, Integer> p2) {
                             if (p1.getValue() == p2.getValue()) {
-                                Integer v1 = (p1.getLeft() instanceof Card) ? ((Card)p1.getLeft()).getCounters(CounterEnumType.LOYALTY) : 0;
-                                Integer v2 = (p2.getLeft() instanceof Card) ? ((Card)p2.getLeft()).getCounters(CounterEnumType.LOYALTY) : 0;
+                                Integer v1 = (p1.getLeft() instanceof Card) ? ((Card)p1.getLeft()).getCounters(CounterEnumType.LOYALTY) : (bAssault ? Integer.MAX_VALUE : 0);
+                                Integer v2 = (p2.getLeft() instanceof Card) ? ((Card)p2.getLeft()).getCounters(CounterEnumType.LOYALTY) : (bAssault ? Integer.MAX_VALUE : 0);
                                 return v2.compareTo(v1);
                             }
                             return p2.getValue().compareTo(p1.getValue());
