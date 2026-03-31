@@ -202,8 +202,11 @@ public class TargetSelection {
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
                 controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
-                while(bTargetingDone && choiceResult && minTargets == 0 && maxTargets > 0 && zones.size() == 1 && zones.get(0) == ZoneType.Battlefield
-                        && !validTargets.isEmpty() && ability.getTargets() != null && ability.getTargets().isEmpty()) {
+                int slectedTargets = (ability.getTargets() == null) ? 0 : ability.getTargets().size();
+                while(bTargetingDone && choiceResult && maxTargets > 0 && zones.size() == 1 && zones.get(0) == ZoneType.Battlefield
+                        && !validTargets.isEmpty() && ability.getTargets() != null &&
+                        ((minTargets == 0 && slectedTargets == 0) ||
+                        (changeTargets && minTargets == maxTargets && slectedTargets > 0 && slectedTargets < maxTargets))) {
                     if(controller.confirmAction(ability, PlayerActionConfirmMode.ChangeZoneGeneral, "Cancel target?")) {
                         break;
                     }
@@ -214,6 +217,7 @@ public class TargetSelection {
                     choiceResult = !in.hasCancelled();
                     bTargetingDone = in.hasPressedOk();
                     controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
+                    slectedTargets = (ability.getTargets() == null) ? 0 : ability.getTargets().size();
                 }
             } else {
                 // for every other case an all-purpose GuiChoose
