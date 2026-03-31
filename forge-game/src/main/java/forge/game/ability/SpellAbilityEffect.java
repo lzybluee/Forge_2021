@@ -581,6 +581,11 @@ public abstract class SpellAbilityEffect {
                 for (Player p : defendingPlayers) {
                     defs.addAll(combat.getDefendersControlledBy(p));
                 }
+            } else if (sa.hasParam("ChooseAttackingPlayerOrPlaneswalker")) {
+                defs = new FCollection<>();
+                for (Card attacker : combat.getAttackers()) {
+                    defs.add(combat.getDefenderByAttacker(attacker));
+                }
             } else if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();
             } else {
