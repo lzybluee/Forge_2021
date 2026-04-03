@@ -337,11 +337,17 @@ public class TriggerHandler {
         boolean checkStatics = false;
 
         // Static triggers
+        final List<Trigger> copyActiveTriggers = new ArrayList<>(activeTriggers);
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
                 runSingleTrigger(t, runParams);
 
                 checkStatics = true;
+            }
+        }
+        for (final Trigger t : copyActiveTriggers) {
+            if (!activeTriggers.contains(t)) {
+                activeTriggers.add(t);
             }
         }
 
