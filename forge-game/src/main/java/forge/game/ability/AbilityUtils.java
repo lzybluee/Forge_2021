@@ -1860,6 +1860,8 @@ public class AbilityUtils {
                             return doXMath(0, expr, c, ctb);
                         }
                         list = sa.getHostCard().getCastSA().getLastStateBattlefield();
+                    } else if (sq[0].contains("BeforeResolving") && game.getStack().isResolving()) {
+                        list = game.getLastStateBeforeResolving();
                     } else {
                         list = sa.getLastStateBattlefield();
                     }

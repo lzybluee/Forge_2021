@@ -482,6 +482,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // freeze the stack while we're in the middle of resolving
         freezeStack();
         setResolving(true);
+        game.updateLastStateBeforeResolving();
         game.clearUnbanished(true);
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
