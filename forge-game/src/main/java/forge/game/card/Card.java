@@ -5464,7 +5464,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Dictate of the Twin Gods")) {
-                restDamage += restDamage;
+                restDamage *= 2;
             } else if (c.getName().equals("Gratuitous Violence")) {
                 if (c.getController().equals(source.getController()) && source.isCreature() && isCreature()) {
                     restDamage *= 2;
@@ -5485,7 +5485,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             } else if (c.getName().equals("Ghosts of the Innocent")) {
                 if (isCreature()) {
-                    restDamage = restDamage / 2;
+                    restDamage /= 2;
                 }
             } else if (c.getName().equals("Benevolent Unicorn")) {
                 if (source.isSpell() && isCreature()) {
@@ -5498,6 +5498,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             } else if (c.getName().equals("Lashknife Barrier")) {
                 if (c.getController().equals(getController()) && isCreature()) {
                     restDamage -= 1;
+                }
+            } else if (c.getName().equals("Angrath's Marauders")) {
+                if (c.getController().equals(source.getController())) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Torbran, Thane of Red Fell")) {
+                if (!c.getController().equals(getController()) && c.getController().equals(source.getController()) && source.isRed()) {
+                    restDamage += 2;
                 }
             }
         }
