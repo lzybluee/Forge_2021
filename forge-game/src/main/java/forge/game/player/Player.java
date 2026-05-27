@@ -772,7 +772,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Ghosts of the Innocent")) {
-                restDamage = restDamage / 2;
+                restDamage /= 2;
             } else if (c.getName().equals("Benevolent Unicorn")) {
                 if (source.isSpell()) {
                     restDamage -= 1;
@@ -796,6 +796,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             } else if (c.getName().equals("Obosh, the Preypiercer")) {
                 if (c.getController().equals(source.getController()) && source.getCMC() % 2 != 0) {
                     restDamage *= 2;
+                }
+            } else if (c.getName().equals("Angrath's Marauders")) {
+                if (c.getController().equals(source.getController())) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Torbran, Thane of Red Fell")) {
+                if (!c.getController().equals(this) && c.getController().equals(source.getController()) && source.isRed()) {
+                    restDamage += 2;
                 }
             }
         }

@@ -5455,18 +5455,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     restDamage += 1;
                 }
             } else if (c.getName().equals("Pyromancer's Swath")) {
-                if (c.getController().equals(source.getController()) && (source.isInstant() || source.isSorcery())
-                        && isCreature()) {
+                if (c.getController().equals(source.getController()) && (source.isInstant() || source.isSorcery())) {
                     restDamage += 2;
                 }
-            } else if (c.getName().equals("Furnace of Rath")) {
-                if (isCreature()) {
-                    restDamage *= 2;
+            } else if (c.getName().equals("Pyromancer's Gauntlet")) {
+                if (c.getController().equals(source.getController()) && source.isRed()
+                        && (source.isInstant() || source.isSorcery() || source.isPlaneswalker())) {
+                    restDamage += 2;
                 }
-            } else if (c.getName().equals("Dictate of the Twin Gods")) {
+            } else if (c.getName().equals("Furnace of Rath") || c.getName().equals("Dictate of the Twin Gods")) {
                 restDamage *= 2;
             } else if (c.getName().equals("Gratuitous Violence")) {
-                if (c.getController().equals(source.getController()) && source.isCreature() && isCreature()) {
+                if (c.getController().equals(source.getController()) && source.isCreature()) {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Fire Servant")) {
@@ -5484,20 +5484,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Ghosts of the Innocent")) {
-                if (isCreature()) {
-                    restDamage /= 2;
-                }
+                restDamage /= 2;
             } else if (c.getName().equals("Benevolent Unicorn")) {
-                if (source.isSpell() && isCreature()) {
-                   restDamage -= 1;
+                if (source.isSpell()) {
+                    restDamage -= 1;
                 }
             } else if (c.getName().equals("Divine Presence")) {
-                if (restDamage > 3 && isCreature()) {
+                if (restDamage > 3) {
                     restDamage = 3;
                 }
             } else if (c.getName().equals("Lashknife Barrier")) {
                 if (c.getController().equals(getController()) && isCreature()) {
                     restDamage -= 1;
+                }
+            } else if (c.getName().equals("Obosh, the Preypiercer")) {
+                if (c.getController().equals(source.getController()) && source.getCMC() % 2 != 0) {
+                    restDamage *= 2;
                 }
             } else if (c.getName().equals("Angrath's Marauders")) {
                 if (c.getController().equals(source.getController())) {
