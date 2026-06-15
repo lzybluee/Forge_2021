@@ -113,9 +113,14 @@ public class GauntletIO {
     }
 
     public static GauntletData loadGauntlet(final File xmlSaveFile) {
+        String version = System.getProperty("java.specification.version");
+        if (!"1.8".equals(version)) {
+            return null;
+        }
+
         boolean isCorrupt = false;
         try (GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
-             InputStreamReader reader = new InputStreamReader(zin)) {
+            InputStreamReader reader = new InputStreamReader(zin)) {
             final GauntletData data = (GauntletData)GauntletIO.getSerializer(true).fromXML(reader);
 
             final String filename = xmlSaveFile.getName();
