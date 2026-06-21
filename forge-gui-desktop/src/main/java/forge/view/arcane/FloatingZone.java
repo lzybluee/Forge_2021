@@ -130,7 +130,7 @@ public class FloatingZone extends FloatingCardArea {
 
     public static void closeAll() {
         for (final FloatingZone cardArea : floatingAreas.values()) {
-            cardArea.window.setVisible(false);
+            cardArea.window.dispose();
         }
         floatingAreas.clear();
     }
