@@ -528,6 +528,7 @@ public class DamageDealAi extends DamageAiBase {
 
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player enemy = targetableOpps.min(PlayerPredicates.compareByLife());
+        boolean excessDmg = false;
         if (enemy == null) {
             enemy = ai.getWeakestOpponent();
         }
@@ -646,6 +647,8 @@ public class DamageDealAi extends DamageAiBase {
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
+                        } else {
+                            excessDmg = true;
                         }
                     }
                     continue;
@@ -685,6 +688,8 @@ public class DamageDealAi extends DamageAiBase {
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
+                        } else {
+                            excessDmg = true;
                         }
                     }
                     continue;
@@ -744,6 +749,8 @@ public class DamageDealAi extends DamageAiBase {
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
+                        } else {
+                            excessDmg = true;
                         }
                     }
                     continue;
@@ -780,6 +787,21 @@ public class DamageDealAi extends DamageAiBase {
             sa.resetTargets();
             return false;
         }
+
+        if (excessDmg) {
+            while (dmg > 0) {
+                for (GameObject object : sa.getTargets()) {
+                    int n = sa.getDividedValue(object);
+                    if (n > 0) {
+                        sa.addDividedAllocation(object, n + 1);
+                        dmg -= 1;
+                        if (dmg == 0)
+                            break;
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
