@@ -71,5 +71,9 @@ public class StoreSVarEffect extends SpellAbilityEffect {
             root.setSVar(key, numBuilder.toString());
             root = root.getSubAbility();
         }
+
+        if (key.startsWith("NotedLife")) {
+            source.updateAbilityTextForView();
+        }
     }
 }

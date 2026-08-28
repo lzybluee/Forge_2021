@@ -2526,6 +2526,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("\r\n");
         }
 
+        if (isInPlay()) {
+            for (String k : getSVars().keySet()) {
+                if (k.equals("NotedLife"))
+                    sb.append("Noted life: " + getSVar(k).replace("Number$", "") + "\r\n");
+            }
+        }
+
         // replace triple line feeds with double line feeds
         final String s = "\r\n\r\n\r\n";
         int start = sb.lastIndexOf(s);
