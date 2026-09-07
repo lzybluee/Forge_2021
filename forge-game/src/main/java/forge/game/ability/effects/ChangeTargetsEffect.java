@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
+import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -38,6 +39,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
         final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : sa.getActivatingPlayer();
 
         final MagicStack stack = activator.getGame().getStack();
+        boolean changed = false;
         for (final SpellAbility tgtSA : sas) {
             SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
@@ -90,6 +92,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         newTargetBlock.addDividedAllocation(newTarget, div);
                     }
                     replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
+                    changed = true;
                 }
             } else {
                 while (changingTgtSI != null) {
@@ -115,6 +118,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             }
 
                             changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
+                            changed = true;
                         }
                         else if (sa.hasParam("DefinedMagnet")) {
                             GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
@@ -123,6 +127,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 changingTgtSA.resetTargets();
                                 changingTgtSA.getTargets().add(newTarget);
                                 changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
+                                changed = true;
                                 if (changingTgtSA.isDividedAsYouChoose()) {
                                     changingTgtSA.addDividedAllocation(newTarget, div);
                                 }
@@ -134,11 +139,15 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
                             if (null != newTarget) {
                                 changingTgtSI.updateTarget(newTarget, sa.getHostCard());
+                                changed = true;
                             }
                         }
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();
                 }
+            }
+            if (changed && tgtSA.getApi() == ApiType.Charm) {
+                si.updateText();
             }
             if (remember) {
                 sa.getHostCard().addRemembered(tgtSA.getHostCard());

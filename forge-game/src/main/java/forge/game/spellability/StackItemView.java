@@ -157,7 +157,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         return get(TrackableProperty.SubInstance);
     }
     void updateSubInstance(SpellAbilityStackInstance si) {
-        set(TrackableProperty.SubInstance, si.getSubInstance() == null ? null : new StackItemView(si.getSubInstance()));
+        set(TrackableProperty.SubInstance, si.getSubInstance() == null ? null : si.getSubInstance().getView());
     }
 
     @Override

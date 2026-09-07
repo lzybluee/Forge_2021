@@ -251,6 +251,11 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return playersWithValidTargets;
     }
 
+    public void updateText() {
+        stackDescription = ability.getStackDescription();
+        view.updateText(this);
+    }
+
     public void updateTarget(TargetChoices target, Card cause) {
         if (target != null) {
             TargetChoices oldTarget = tc;
