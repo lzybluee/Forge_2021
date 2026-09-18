@@ -55,6 +55,7 @@ public interface IGuiGame {
     void updateStack();
     void notifyStackAddition(final GameEventSpellAbilityCast event);
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
+    void notifyStackClear();
     void handleLandPlayed(Card land);
     Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);

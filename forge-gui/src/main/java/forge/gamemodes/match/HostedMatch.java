@@ -203,6 +203,7 @@ public class HostedMatch {
                 humanController.setGui(gui);
                 gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
+                gui.notifyStackClear();
                 gui.setOriginalGameController(p.getView(), humanController);
 
                 game.subscribeToEvents(new FControlGameEventHandler(humanController));
@@ -226,6 +227,7 @@ public class HostedMatch {
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
             gui.setGameView(null); //clear the view so when the game restarts again, it updates correctly
             gui.setGameView(gameView);
+            gui.notifyStackClear();
             registerSpectator(gui, new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui));
         }
 

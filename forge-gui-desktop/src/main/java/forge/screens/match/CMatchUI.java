@@ -1341,6 +1341,8 @@ public final class CMatchUI
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
         SpellAbility sa = event.sa;
+        if (sa.getHostCard().getGame().isGameOver())
+            return;
         String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
         boolean isAi = sa.getActivatingPlayer().isAI();
         boolean isTrigger = sa.isTrigger();
@@ -1533,6 +1535,11 @@ public final class CMatchUI
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
         // I always decrease the counter
         nextNotifiableStackIndex--;
+    }
+
+    @Override
+    public void notifyStackClear() {
+        nextNotifiableStackIndex = 0;
     }
 
     @Override
