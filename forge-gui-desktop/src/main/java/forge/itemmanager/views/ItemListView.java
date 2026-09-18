@@ -478,9 +478,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             // if we're conditionally showing the tooltip, check to see
             // if we shouldn't show it
-            if (val == null) { return ""; }
+            if (val == null) { return null; }
             final String text = val.toString();
-            if (text.isEmpty()) { return ""; }
+            if (text.isEmpty()) { return null; }
 
             if (!(renderer instanceof ItemCellRenderer) || !((ItemCellRenderer)renderer).alwaysShowTooltip()) {
                 // if there's enough room (or there's no value), no tooltip
@@ -490,7 +490,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 final int requiredWidth = cell.getPreferredSize().width;
                 final TableColumn tableColumn = this.getColumnModel().getColumn(col);
                 if (tableColumn.getWidth() > requiredWidth) {
-                    return "";
+                    return null;
                 }
             }
 
