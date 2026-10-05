@@ -338,7 +338,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         String originalRequestCandidate = null;
         for (Pair<String, Integer> originalRequest : originalCardRequests){
             String cardRequest = originalRequest.getLeft();
-            if (!StringUtils.startsWithIgnoreCase(poolCardRequest, cardRequest))
+            if (!StringUtils.startsWithIgnoreCase(poolCardRequest, cardRequest.contains("|") ? cardRequest : cardRequest + "|"))
                 continue;
             originalRequestCandidate = cardRequest;
             int cardAmount = originalRequest.getRight();
