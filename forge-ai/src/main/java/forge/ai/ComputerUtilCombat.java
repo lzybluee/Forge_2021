@@ -1000,7 +1000,8 @@ public class ComputerUtilCombat {
         if (withoutAbilities) {
             return power;
         }
-        for (SpellAbility ability : blocker.getAllSpellAbilities()) {
+        int maxAnimatePower = blocker.getNetPower();
+        for (SpellAbility ability : blocker.getSpellAbilities()) {
             if (!ability.isActivatedAbility()) {
                 continue;
             }
@@ -1041,9 +1042,21 @@ public class ComputerUtilCombat {
                         power += pBonus;
                     }
                 }
+            } else if (ability.getApi() == ApiType.Animate) {
+                if (!ability.hasParam("Power")) {
+                    continue;
+                }
+                
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
+                    int animatePower = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("Power"), ability);
+                    if (animatePower > maxAnimatePower)
+                        maxAnimatePower = animatePower;
+                }
             }
         }
-
+        if (maxAnimatePower > blocker.getNetPower()) {
+            power += maxAnimatePower - blocker.getNetPower();
+        }
         return power;
     }
 
@@ -1132,7 +1145,8 @@ public class ComputerUtilCombat {
         if (withoutAbilities) {
             return toughness;
         }
-        for (SpellAbility ability : blocker.getAllSpellAbilities()) {
+        int maxAnimateToughness = blocker.getNetToughness();
+        for (SpellAbility ability : blocker.getSpellAbilities()) {
             if (!ability.isActivatedAbility()) {
                 continue;
             }
@@ -1174,7 +1188,20 @@ public class ComputerUtilCombat {
                         toughness += tBonus;
                     }
                 }
+            } else if (ability.getApi() == ApiType.Animate) {
+                if (!ability.hasParam("Toughness")) {
+                    continue;
+                }
+                
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
+                    int animateToughness = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("Toughness"), ability);
+                    if (animateToughness > maxAnimateToughness)
+                        maxAnimateToughness = animateToughness;
+                }
             }
+        }
+        if (maxAnimateToughness > blocker.getNetToughness()) {
+            toughness += maxAnimateToughness - blocker.getNetToughness();
         }
         return toughness;
     }
@@ -1322,7 +1349,8 @@ public class ComputerUtilCombat {
         if (withoutAbilities) {
             return power;
         }
-        for (SpellAbility ability : attacker.getAllSpellAbilities()) {
+        int maxAnimatePower = attacker.getNetPower();
+        for (SpellAbility ability : attacker.getSpellAbilities()) {
             if (!ability.isActivatedAbility()) {
                 continue;
             }
@@ -1363,7 +1391,20 @@ public class ComputerUtilCombat {
                         power += pBonus;
                     }
                 }
+            } else if (ability.getApi() == ApiType.Animate) {
+                if (!ability.hasParam("Power")) {
+                    continue;
+                }
+                
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
+                    int animatePower = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("Power"), ability);
+                    if (animatePower > maxAnimatePower)
+                        maxAnimatePower = animatePower;
+                }
             }
+        }
+        if (maxAnimatePower > attacker.getNetPower()) {
+            power += maxAnimatePower - attacker.getNetPower();
         }
         return power;
     }
@@ -1539,7 +1580,8 @@ public class ComputerUtilCombat {
         if (withoutAbilities) {
             return toughness;
         }
-        for (SpellAbility ability : attacker.getAllSpellAbilities()) {
+        int maxAnimateToughness = attacker.getNetToughness();
+        for (SpellAbility ability : attacker.getSpellAbilities()) {
             if (!ability.isActivatedAbility()) {
                 continue;
             }
@@ -1580,7 +1622,20 @@ public class ComputerUtilCombat {
                 if (tBonus > 0) {
                     toughness += tBonus;
                 }
+            } else if (ability.getApi() == ApiType.Animate) {
+                if (!ability.hasParam("Toughness")) {
+                    continue;
+                }
+                
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
+                    int animateToughness = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("Toughness"), ability);
+                    if (animateToughness > maxAnimateToughness)
+                        maxAnimateToughness = animateToughness;
+                }
             }
+        }
+        if (maxAnimateToughness > attacker.getNetToughness()) {
+            toughness += maxAnimateToughness - attacker.getNetToughness();
         }
         return toughness;
     }
