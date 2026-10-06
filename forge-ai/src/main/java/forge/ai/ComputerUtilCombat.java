@@ -2574,11 +2574,12 @@ public class ComputerUtilCombat {
     }
 
     public static int predictPoisonFromTriggers(Card attacker, Player attacked, int damage) {
-        int pd = 0, poison = 0;
+        int poison = 0;
         int damageAfterRepl = predictDamageTo(attacked, damage, attacker, true);
         if (damageAfterRepl > 0) {
             CardCollectionView trigCards = attacker.getController().getCardsIn(ZoneType.Battlefield);
             for (Card c : trigCards) {
+                int pd = 0;
                 for (Trigger t : c.getTriggers()) {
                     if (t.getMode() == TriggerType.DamageDone && "True".equals(t.getParam("CombatDamage")) && t.matchesValidParam("ValidSource", attacker)) {
                         SpellAbility ab = t.getOverridingAbility();
