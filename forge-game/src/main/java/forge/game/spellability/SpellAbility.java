@@ -1564,6 +1564,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isUndoable() {
+        if (hostCard != null && isManaAbility()) {
+            for (CostPart part : payCosts.getCostParts()) {
+                if (part instanceof CostTap) {
+                    for (Trigger t : hostCard.getTriggers()) {
+                        if (t.getMode() ==  TriggerType.Taps) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
         return undoable && payCosts.isUndoable() && getHostCard().isInPlay();
     }
 
