@@ -1860,8 +1860,6 @@ public class AbilityUtils {
                             return doXMath(0, expr, c, ctb);
                         }
                         list = sa.getHostCard().getCastSA().getLastStateBattlefield();
-                    } else if (sq[0].contains("BeforeResolving") && game.getStack().isResolving()) {
-                        list = game.getLastStateBeforeResolving();
                     } else {
                         list = sa.getLastStateBattlefield();
                     }
@@ -2759,6 +2757,11 @@ public class AbilityUtils {
         if (sq[0].startsWith("Valid")) {
             String[] paidparts = l[0].split("\\$", 2);
             String[] lparts = paidparts[0].split(" ", 2);
+            boolean checkExist = false;
+            if (lparts[0].equals("ValidAlready")) {
+                lparts[0] = "Valid";
+                checkExist = true;
+            }
 
             CardCollectionView cardsInZones = null;
             if (lparts[0].contains("All")) {
@@ -2780,6 +2783,16 @@ public class AbilityUtils {
                 }
                 if (!usedLastState) {
                     cardsInZones = game.getCardsIn(zones);
+                }
+                if (checkExist) {
+                    CardCollection lastCards = new CardCollection(cardsInZones);
+                    CardCollectionView currentCards = game.getCardsIn(zones);
+                    for (Card card : cardsInZones) {
+                        if (!currentCards.contains(card)) {
+                            lastCards.remove(card);
+                        }
+                    }
+                    cardsInZones = lastCards;
                 }
             }
 

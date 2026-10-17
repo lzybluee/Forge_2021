@@ -119,7 +119,6 @@ public class Game {
 
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
-    private CardCollection lastStateBeforeResolving = new CardCollection();
 
     private CardCollection unbanished = null;
 
@@ -234,7 +233,7 @@ public class Game {
                 : zone.equals(ZoneType.Graveyard) ? lastStateGraveyard
                 : null;
 
-        if (lookup != null) {
+        if (lookup != null && lookup.contains(c)) {
             lookup.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
@@ -1090,7 +1089,6 @@ public class Game {
     public void clearCaches() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
-        lastStateBeforeResolving.clear();
         //playerCache.clear();
     }
 
@@ -1284,13 +1282,5 @@ public class Game {
     }
     public void clearUnbanished(boolean start) {
         unbanished = start ? new CardCollection() : null;
-    }
-
-    public void updateLastStateBeforeResolving() {
-        lastStateBeforeResolving.clear();
-        lastStateBeforeResolving.addAll(lastStateBattlefield);
-    }
-    public CardCollectionView getLastStateBeforeResolving() {
-        return lastStateBeforeResolving;
     }
 }
